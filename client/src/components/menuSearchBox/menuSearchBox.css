@@ -1,0 +1,62 @@
+
+.search-box-area { /* Search Box container area styling */
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+    height: 1.7rem;
+
+    position:relative;
+}
+
+#reset-search {
+    position: absolute; /* Absolute positon float above left of search text */
+    padding: 0; /* Removes padding around text area, helping center the '🗙' */
+
+    margin-left: 0.3rem; /* Position symbol correctly*/
+    margin-top: 0.15rem;
+
+    width:       1.3rem;   /* Fixed width */
+    height:      1.3rem;   /* Fixed height */
+    
+    line-height: 1.3rem;   /* Center the '🗙' symbol vertically in circle*/
+    text-align: center;    /* Center the symbol horizontally in circle */
+  
+    border-radius: 50%;    /* Style border as circle */
+    border: 1px solid  #cccccc;
+    
+    font-size: 1rem;  /* font-size of '🗙' */
+
+    cursor: pointer;
+}
+#reset-search:hover{ /* Style on hover */
+    color:beige;
+    background-color: #a5a5a5;
+    border: 1px solid  #808080;
+}
+#reset-search:active { /* style on press */
+    transform: scale(0.90);
+}
+
+
+.search-input-box {
+    border-radius: 1.5rem 0 0 1.5rem;
+    border: 1px solid  #cccccc; 
+    border-right: 0;
+    padding: 0 0 0 2rem;
+    width: 133px;
+}
+
+.search-input-box:focus{
+    outline: none;
+}
+
+#search-bttn {
+    border-radius: 0 1.5rem 1.5rem 0;
+    border: 1px solid  #cccccc; 
+    padding: 0 0.5rem 0.1rem 0.3rem;
+}
+
+#search-bttn:hover {
+    background-color: #a5a5a5;
+    cursor: pointer;
+}

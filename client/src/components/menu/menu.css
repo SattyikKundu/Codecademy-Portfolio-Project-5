@@ -1,0 +1,19 @@
+
+.header-menu { /* General header menu styles */
+
+    display: flex; /* menu items in row layout*/
+    flex-direction: row;
+    width: 100%; /* Menu takes screen width */
+
+    height: 50px;
+    background-color:beige;
+    box-shadow: 0px 1px 8px rgb(146, 146, 146); /* Shadow border under menu */
+}
+
+.logo-text {
+    margin: auto auto auto 10px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    height: fit-content;
+    font-size: 2rem;
+}
+

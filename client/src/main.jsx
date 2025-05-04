@@ -2,7 +2,7 @@
 
 import React from 'react'; // Gives access to React features like JSX, hooks, and component logic
 import { createRoot } from 'react-dom/client'; //  used to render the <App/> into the browser DOM
-import App from './App.jsx'; // main App component which is the root of UI
+import App from './App/App'; // main App component which is the root of UI
 
 const rootElement = document.getElementById('root'); // references <div id="root"> in index.html where app will be mounted
 const root = createRoot(rootElement); // Create a React root using DOM element — needed for React 18+

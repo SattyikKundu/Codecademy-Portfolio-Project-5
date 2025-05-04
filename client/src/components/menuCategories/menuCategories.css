@@ -1,0 +1,110 @@
+/************************************************************************************/
+/*********** Full Styling for dropdown menu (for mobile screen sizes) ***************/
+/************************************************************************************/
+
+.custom-dropdown { /* Styling for dropdown container */
+
+    display: flex;      /* drop-down components in column */
+    flex-direction: column;
+    position: relative; /* for later absolutely positioned item(s)*/
+
+    height: 1.5rem; /* dropdown menu container dimensions*/
+    width: 180px;
+    margin: auto;
+    left: 0.5rem;
+
+    font-size: 1.4rem; /* font styling inside dropdown*/
+    font-family: Arial, Helvetica, sans-serif;
+
+    border-radius: 10px; /* dropdown styling*/
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    background-color: white;
+
+    user-select: none; /* prevents text selection in container (prevent awkward highlights) */
+    cursor: pointer;
+}
+
+.dropdown-box { /* Styles visible category selection value and drop-down arrow */
+
+    display: flex; /* Selection and arrow in side-by-side display */
+    flex-direction: row;
+    width: 100%;
+
+    border-radius: 0 10px 10px 0;
+    overflow: hidden; /* hides overflow of background color around arrow*/
+}
+
+.dropdown-box .current-selection { /* Positions selection choice text */
+    padding-left: 1.35rem;
+    width: 145px;
+}
+.dropdown-box .toggle-arrow { /* styles and positions arrows*/
+    background-color: #d4d4d4;
+    padding: 0 4px 0 0;
+}
+
+.menu-options { /* styles dropdown options box*/
+    position:absolute;
+    top: 24.5px;
+    left: 10px;
+    width: 143px;
+    background-color: white;
+    cursor: pointer;
+    border-radius: 0 0 6px 6px;
+
+    box-shadow: /* shadows around dropdown option when opened*/
+    3px 3px 3px rgba(0, 0, 0, 0.05),  /* Bottom and right shadow */
+    -3px 3px 3px rgba(0, 0, 0, 0.05), /* Bottom and left shadow */
+    -3px 0 3px rgba(0, 0, 0, 0.05);   /* Left shadow */
+}
+
+.menu-options .option { /*positioning of each option */
+    margin: 0.1rem;
+    padding-left: 0.65rem;
+    border-radius: 4px;
+}
+
+.menu-options .option:hover { /* styling on hover. '!important' used to prevent override*/
+    color: #fff !important;
+    background-color: #136196 !important; /*#94d4ff !important; */
+}
+
+
+
+/************************************************************************************/
+/************ Full Styling for Buttons (on desktop screen size) *********************/
+/************************************************************************************/
+.buttons-container { /* contains the buttons */
+    display: flex; /* flex layout with item in row*/
+    flex-direction: row;
+    margin: auto; /* centering of container*/
+
+    flex-grow: 1; /* container grows to take available width */
+    justify-content: space-around; /* or space between*/
+}
+
+.button { /* button style*/
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight:600;
+
+    color: beige; /* text and button color */
+    background-color: #2394e0;
+
+    border: 1px solid #1d81c4;
+    box-shadow: 0 0 5px #18679cd0;
+
+    height: fit-content;
+    border-radius: 0.4rem;
+    padding: 0.5rem;
+
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #136196;
+    border: 1px solid #125e91;
+    box-shadow: 0 0 5px #125e91d0;
+}
+.button:active {
+    transform: scale(0.9);
+}
