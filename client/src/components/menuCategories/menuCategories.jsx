@@ -37,11 +37,24 @@ const CategoryButtons = () => {
         }
     },[]) // runs once on component mount
 
-    /* drop-down menu option styling colors */
+    /* drop-down menu option styling colors (for mobile screen sizes) */
     const selectedBG   = '#2394e0'; // background color of selected option 
     const unSelectedBG = 'transparent'; // background color of unselected option
     const selectedFG   = '#fff';        // text color (or 'foreground color') of selected option
     const unSelectedFG = '#000';        // text color of unselected option
+
+    /* Colors of category buttons (when selected/unselected) for desktop screen sizes */
+    //const selectedTxt   = '#2394e0'; // background color of selected option 
+    //const unSelectedTxt = 'f5f5dc'; // background color of unselected option
+    const textColor         = '#fff';
+    const selectBttnColor   = '#136196';         // text color (or 'foreground color') of selected option
+    const unSelectBttnColor = '#2394e0';        // text color of unselected option
+
+    /* Categories' names */
+    const category1 = 'All';
+    const category2 = 'Fishes';
+    const category3 = 'Invertebrates';
+    const category4 = 'Amphibians';
 
     return (
         <>
@@ -55,43 +68,43 @@ const CategoryButtons = () => {
                 <div className="menu-options">
                     <div 
                         className="option"
-                        onClick={()=>selectOption('All')} 
+                        onClick={()=>selectOption(`${category1}`)} 
                         style={{ // option's text and background color changes depending on selection (or not)
-                            backgroundColor: selected==='All' ? `${selectedBG}` : `${unSelectedBG}`,
-                                      color: selected==='All' ? `${selectedFG}` : `${unSelectedFG}`
+                            backgroundColor: selected===`${category1}` ? `${selectedBG}` : `${unSelectedBG}`,
+                                      color: selected===`${category1}` ? `${selectedFG}` : `${unSelectedFG}`
                         }}
                     >
-                        All
+                        {category1}
                     </div>
                     <div 
                         className="option"
-                        onClick={()=>selectOption('Category1')}
+                        onClick={()=>selectOption(`${category2}`)}
                         style={{
-                            backgroundColor: selected==='Category1' ? `${selectedBG}`: `${unSelectedBG}`,
-                                      color: selected==='Category1' ? `${selectedFG}`: `${unSelectedFG}`
+                            backgroundColor: selected===`${category2}` ? `${selectedBG}`: `${unSelectedBG}`,
+                                      color: selected===`${category2}` ? `${selectedFG}`: `${unSelectedFG}`
                         }}
                     >
-                        Category1
+                        {category2}
                     </div>
                     <div 
                         className="option"
-                        onClick={()=>selectOption('Category2')}
+                        onClick={()=>selectOption(`${category3}`)}
                         style={{
-                            backgroundColor: selected==='Category2' ? `${selectedBG}`: `${unSelectedBG}`,
-                                      color: selected==='Category2' ? `${selectedFG}`: `${unSelectedFG}`
+                            backgroundColor: selected===`${category3}` ? `${selectedBG}`: `${unSelectedBG}`,
+                                      color: selected===`${category3}` ? `${selectedFG}`: `${unSelectedFG}`
                         }}
                     >
-                        Category2
+                        {category3}
                     </div>
                     <div
                         className="option" 
-                        onClick={()=>selectOption('Category3')}
+                        onClick={()=>selectOption(`${category4}`)}
                         style={{
-                            backgroundColor: selected==='Category3' ? `${selectedBG}`: `${unSelectedBG}`,
-                                      color: selected==='Category3' ? `${selectedFG}`: `${unSelectedFG}`
+                            backgroundColor: selected===`${category4}` ? `${selectedBG}`: `${unSelectedBG}`,
+                                      color: selected===`${category4}` ? `${selectedFG}`: `${unSelectedFG}`
                         }}
                     >
-                        Category3
+                        {category4}
                     </div>
                 </div>
                 )
@@ -99,10 +112,34 @@ const CategoryButtons = () => {
         </div>
         {/* Categories button for desktop screen sizes */}
         <div className="buttons-container">
-            <div className="button">All</div>
-            <div className="button">Category1</div>
-            <div className="button">Category2</div>
-            <div className="button">Category3</div>
+            <div className="button" 
+                onClick={()=>selectOption(category1)}
+                style={{
+                    backgroundColor: selected===`${category1}` ? `${selectBttnColor}`: `${unSelectBttnColor}`,
+                              color: `${textColor}`
+                }}>
+                {category1}</div>
+            <div className="button" 
+                onClick={()=>selectOption(category2)}
+                style={{
+                    backgroundColor: selected===`${category2}` ? `${selectBttnColor}`: `${unSelectBttnColor}`,
+                              color: `${textColor}`
+                }}>
+                {category2}</div>
+            <div className="button" 
+                onClick={()=>selectOption(category3)}
+                style={{
+                    backgroundColor: selected===`${category3}` ? `${selectBttnColor}`: `${unSelectBttnColor}`,
+                              color: `${textColor}`
+                }}>
+                {category3}</div>
+            <div className="button" 
+                onClick={()=>selectOption(category4)}
+                style={{
+                    backgroundColor: selected===`${category4}` ? `${selectBttnColor}`: `${unSelectBttnColor}`,
+                              color: `${textColor}`
+                }}>
+                {category4}</div>
         </div>
         </>
     );

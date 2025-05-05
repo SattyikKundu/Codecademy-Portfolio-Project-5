@@ -1,19 +1,65 @@
+/*****************************************************************************/
+/********** General styling for header menu **********************************/
+/*****************************************************************************/
 
-.header-menu { /* General header menu styles */
-
+.header-menu {
     display: flex; /* menu items in row layout*/
     flex-direction: row;
     width: 100%; /* Menu takes screen width */
-
+    
     height: 50px;
     background-color:beige;
     box-shadow: 0px 1px 8px rgb(146, 146, 146); /* Shadow border under menu */
 }
 
-.logo-text {
-    margin: auto auto auto 10px;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-    height: fit-content;
-    font-size: 2rem;
+
+/*****************************************************************************/
+/********** Styling for logo *************************************************/
+/*****************************************************************************/
+
+.logo-container { /* overall styling for container of logo and text */
+    display: flex;
+    flex-direction: row;
+    align-self: center; /* vertical centering of button */
+} 
+
+.icon-container { /* container (and border) style of icon */
+    display: flex;
+    border: 2px solid #62719ca6; /* border styling of container */
+    background-color: #2394e0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.281);
+    width:  2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    overflow: hidden;
+
+    margin: auto 0.25rem;
 }
 
+.icon-container .fish-icon { /* styling of actual fish icon */
+    color: beige;
+    width: 1.9rem;
+    height: 1.9rem;
+    margin: auto;
+}
+
+#store-name {
+    align-self: center;
+    display: flex;
+    flex-direction: row;
+
+    font-family:sans-serif;
+    font-weight: 600;
+    margin-right: 0.5rem;
+}
+
+#store-name::after {
+    content: '\00a0 Buddies';
+    align-self: center;
+}
+
+@media screen and (max-width: 767px) {
+    #store-name {
+        display: none;
+    }
+}

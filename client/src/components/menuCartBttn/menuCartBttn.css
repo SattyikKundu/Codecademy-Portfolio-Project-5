@@ -1,0 +1,43 @@
+
+.cart-bttn-container {
+    display: flex; /* Flex display for easy centering */
+    align-self: center; /* vertical centering of flex bttn container */
+    margin: 0 auto;
+    
+
+    border: 1px solid #545c75c7; /* border styling of container */
+    border-radius: 30%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.281);
+
+    overflow: hidden; /* container content styling */
+    background-color: #2394e0;
+
+    width: 2.2rem; /* overall button dimensions*/
+    height: 2.2rem;
+
+    /* TEMP margins to remove later */
+   /* margin-right: 1rem; 
+    margin-left: 1rem; */
+
+    cursor: pointer;
+}
+
+.cart-icon { /* icon color & size styling */
+    color: beige;
+    margin: auto;
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+
+.cart-bttn-container:hover {  /* Profile button color change on hover*/
+    background-color: #136196; 
+}
+
+.cart-bttn-container:hover .user-icon { 
+    color: beige; 
+}
+
+.cart-bttn-container:active { /* Shrink button on press */
+    transform: scale(0.9);
+}

@@ -9,7 +9,7 @@ const App = () => {
     return (
         <div className="app-body">
             <Menu />
-            <h1>Googles Toodles...</h1>
+            <h1>To Be Added Later...</h1>
         </div>
     );
 }
