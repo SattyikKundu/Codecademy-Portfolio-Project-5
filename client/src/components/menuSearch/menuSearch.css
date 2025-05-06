@@ -1,0 +1,112 @@
+/**********************************************************************************/ 
+/******* Styling for Search Menu Toggle Button to show Overlay ********************/ 
+/**********************************************************************************/ 
+.search-toggle-container { /* button container styling*/
+
+    display: flex;      /* Flex display for easy centering of button */
+    align-self: center; /* vertical centering of button */
+    margin: 0 auto;     /* horizontal centering of button*/
+
+    border-radius: 30%; /* border styling of container */
+    border: 1px solid #545c75c7;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.281);
+
+    overflow: hidden;   /* container content styling */
+    background-color: #2394e0;
+
+    width: 2.2rem;      /* overall button dimensions */
+    height: 2.2rem;
+}
+
+.search-icon { /* icon styling within button */
+    color: beige;
+    align-self: center; /* vertical centering in parent's flex display */
+    margin: 0 auto;     /* hortizontal centering */
+
+    width: 1.5rem;      /* icon dimensions */
+    height: 1.5rem;
+}
+
+.search-toggle-container:hover {  /* Profile button color change on hover*/
+    background-color: #136196; 
+}
+
+.search-toggle-container:hover .search-icon { /* also change icon color on hover */
+    color: beige; 
+}
+
+.search-toggle-container:active { /* Shrink button on press */
+    transform: scale(0.9);
+}
+
+
+.text-box-wrapper { /* Cetners the wrapper holding the imported <SearchTextBox /> component*/
+    margin: auto;
+}
+
+/**********************************************************************************/ 
+/**************** Styling for the Search bar Overlay itself ***********************/ 
+/**********************************************************************************/ 
+
+.search-overlay-background { /* grey background around the overlay */
+
+    position: fixed; /* enables overall overlay to 'float' on top of content */
+    z-index: 10;
+
+    top: 0;         /* Ensures overlay background starts from top-left in order to expand and cover page*/
+    left: 0;
+
+    width: 100%;    /* overlay covers entire screen's content */
+    height: 100%;    
+
+    background: #afafaf83; /* grey background around overlay */
+
+    display: flex;           /* Ensures that main nested overlay is centered */
+    justify-content: center; /* Center horizontally */
+    align-items: center;     /* Center vertically */
+}
+
+.search-overlay-main { /* main overlay area where search box is*/
+
+    background-color: beige; /* color of search box holder */
+    border-radius: 1rem;       /* rounded corners*/
+
+    width: 80%;  /* main overlay area's width is 80% of parent, but won't grow past 380px */
+    max-width: 380px; 
+
+    padding: 2.5rem 0; /* padding to increase overlay area */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* box shadow around area for styling*/
+
+    display: flex;            /* Flex display to horizontally center search box */
+    justify-content: center;  /* Center horizontally */
+
+    position: relative /* overlay positioned relative so .close-overlay 
+                          button can be absolutely positioned */
+}
+
+.close-overlay { /* Styling for button that closes the overlay */
+    position: absolute;
+    border: none;
+    color: rgba(120, 120, 120, 0.750);
+    font-size: 1.5rem;
+    background: transparent;
+    right: 3px;
+    top:   3px;
+}
+
+/**********************************************************************************/ 
+/*** Modifies visibility of toggle button and search bar based on screen width ****/ 
+/**********************************************************************************/ 
+
+@media screen and (max-width: 659px) { /* menu search bar is visible for >=579px. This is done on the wrapper since 
+                                          the actual <SearchTextBox /> component MUST still be active on the overlay! */
+    .text-box-wrapper {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 660px) { /* search icon toggle is only visible for <580px */
+    .search-toggle-container {
+        display: none;
+    }
+}

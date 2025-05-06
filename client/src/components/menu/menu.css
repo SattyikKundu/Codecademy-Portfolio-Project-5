@@ -7,7 +7,7 @@
     flex-direction: row;
     width: 100%; /* Menu takes screen width */
     
-    height: 50px;
+    height: 60px;
     background-color:beige;
     box-shadow: 0px 1px 8px rgb(146, 146, 146); /* Shadow border under menu */
 }
@@ -17,48 +17,83 @@
 /********** Styling for logo *************************************************/
 /*****************************************************************************/
 
-.logo-container { /* overall styling for container of logo and text */
+.logo-container { /* general styling for container of logo and text */
     display: flex;
     flex-direction: row;
-    align-self: center; /* vertical centering of button */
 } 
 
 .icon-container { /* container (and border) style of icon */
     display: flex;
     border: 2px solid #62719ca6; /* border styling of container */
-    background-color: #2394e0;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.281);
-    width:  2.5rem;
+
+    background: linear-gradient( /* gradient coloring of background behind fish icon*/
+        0deg,
+        /* Tropical color spectrum */
+        #0052D4,   /* deep ocean blue */
+        #4364F7,   /* reef blue */
+        #6FB1FC,   /* tropical cyan */
+        #00C9A7,   /* seafoam green */
+        #FDC830,   /* sun yellow */
+        #F37335    /* coral orange */
+    );
+
+    
+    width:  2.5rem; /* Dimensions and styling of logo container */
     height: 2.5rem;
     border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.281);
     overflow: hidden;
 
-    margin: auto 0.25rem;
+    margin: auto 0.25rem; /* centering of store logo */
 }
 
-.icon-container .fish-icon { /* styling of actual fish icon */
-    color: beige;
+.icon-container .fish-icon { /* styles and centers actual fish icon in parent container */
+    color: rgb(0, 87, 128);
     width: 1.9rem;
     height: 1.9rem;
-    margin: auto;
+    margin: auto; 
 }
 
 #store-name {
-    align-self: center;
     display: flex;
     flex-direction: row;
+    align-self: center; /* vertically centers store */
 
-    font-family:sans-serif;
+    font-size: 2rem; /* Store name styling */
     font-weight: 600;
-    margin-right: 0.5rem;
+    font-family: "Permanent Marker", sans-serif;
+    padding-right: 0.5rem; /* right padding to make extra room for name */
+
+    background: linear-gradient( /* Gradient color for text */
+        270deg,
+        /* Morning ocean reef colors */
+        #007cf0,   /* reef blue */
+        #00c6ff,   /* tropical cyan */
+        #87f1ff,   /* light sky blue */
+        #a0f6d2,   /* minty seafoam green */
+        #e3fca3    /* soft reef-yellow (sunlit algae tone) */
+    );
+    -webkit-background-clip: text; /* contrains gradient to only text area (and not entire block) */
+    -webkit-text-fill-color: transparent; /* Needed for gradient to cover text */
+    text-shadow: 0 0 0px rgba(0, 0, 0, 0.35); /* Slight shadow over text to darken/contrast background */
 }
 
-#store-name::after {
+#store-name::after { /* Adds 'Buddies' after word 'Ocean' to get full store name*/
     content: '\00a0 Buddies';
-    align-self: center;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 1031px) { /* At <=1031px, put store name words in vertical column*/
+    #store-name {
+        flex-direction: column;
+        line-height: 1;
+        font-size: 1.8rem;
+    }
+    #store-name::after {
+        content: 'Buddies';
+    }
+}
+
+@media screen and (max-width: 500px) { /* at <=500px, remove store name to save space on mobile devices */
     #store-name {
         display: none;
     }

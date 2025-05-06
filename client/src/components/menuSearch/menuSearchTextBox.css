@@ -8,7 +8,8 @@
     position:relative;
 }
 
-#reset-search {
+#reset-search { /* styling for reset '🗙' button */
+
     position: absolute; /* Absolute positon float above left of search text */
     padding: 0; /* Removes padding around text area, helping center the '🗙' */
 
@@ -38,7 +39,7 @@
 }
 
 
-.search-input-box {
+.search-input-box { /* styles text box where user types in input */
     border-radius: 1.5rem 0 0 1.5rem;
     border: 1px solid  #cccccc; 
     border-right: 0;
@@ -46,17 +47,17 @@
     width: 133px;
 }
 
-.search-input-box:focus{
-    outline: none;
+.search-input-box:focus{ /* removes black outline when focusing into textbox */
+    outline: none; 
 }
 
-#search-bttn {
+#search-bttn { /* styles the search button next to text box */
     border-radius: 0 1.5rem 1.5rem 0;
     border: 1px solid  #cccccc; 
     padding: 0 0.5rem 0.1rem 0.3rem;
 }
 
-#search-bttn:hover {
+#search-bttn:hover { /* style on hover over search button */
     background-color: #a5a5a5;
     cursor: pointer;
 }

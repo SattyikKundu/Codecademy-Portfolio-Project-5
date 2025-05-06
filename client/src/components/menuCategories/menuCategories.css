@@ -7,11 +7,11 @@
     display: flex;      /* drop-down components in column */
     flex-direction: column;
     position: relative; /* for later absolutely positioned item(s)*/
+    align-items: center;
 
     height: 1.5rem; /* dropdown menu container dimensions*/
     width: 190px;
     margin: auto 0;
-    /*left: 0.5rem; */
 
     font-size: 1.4rem; /* font styling inside dropdown*/
     font-family: Arial, Helvetica, sans-serif;
@@ -78,49 +78,70 @@
     display: flex; /* flex layout with item in row*/
     flex-direction: row;
     align-self: center; /* vertical centering of container */
-    margin: 0 auto;     /* horizontal centering of container*/
-    width: 50%;
-    /*flex-grow: 1; /* container grows to take available width */
-    /*justify-content: space-around; /* or space between*/
+    margin: auto 0;     /* removes margins on left and right sides of container*/
+    flex-grow: 0.5; /* container grows to take available width */
 }
 
 .button { /* button style*/
+
+    font-weight:600; /* font styling of button text */
     font-family: Arial, Helvetica, sans-serif;
-    font-weight:600;
 
-    /* color: #f5f5dc; /* text and button color (modified in .jsx file) */
-    /* background-color: #2394e0; */
+    /* NOTE: button and text color set/modified in menuCategories.jsx file */
 
-    margin: auto;
+    margin: auto; /* centers buttons in parent container*/
 
-    border: 1px solid #1d81c4;
+    border: 1px solid #1d81c4; /* button border styling*/
     box-shadow: 0 0 5px #18679cd0;
-
-    height: fit-content;
     border-radius: 0.4rem;
-    padding: 0.5rem;
 
+    padding: 0.5rem; /* styles button shape and dimensions*/
+    height: fit-content;
+    
     cursor: pointer;
 }
 
-.button:hover {
+.button:hover { /* button style on hover */
     background-color: #136196;
     border: 1px solid #125e91;
     box-shadow: 0 0 5px #125e91d0;
 }
-.button:active {
+.button:active { /* button style on press */
     transform: scale(0.9);
 }
 
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 900px) { /* at <=900px, hide product category buttons 
+                                          and show categories dropdown menu */
     .buttons-container {
+        display: none;
+    }
+    .custom-dropdown { /* centers dropdown-menu in parent menu container */
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media screen and (min-width: 901px) { /* Hide product categories dropdown box past 900px */
+    .custom-dropdown {
         display: none;
     }
 }
 
-@media screen and (min-width: 901px) {
-    .custom-dropdown {
-        display: none;
+@media screen and (max-width: 399px) { /* Shrink down dropdown box to fit 320-400px screen width*/
+    .custom-dropdown { /* Shorten dropdown box width */
+        width: 130px;
+    }
+    .dropdown-box .current-selection { /* scale down current selection text in dropdown box */
+        line-height: 1.8rem;
+        font-size: 0.96rem;
+        padding-left: 0.7rem;
+    }
+    .menu-options { /* shrink width of toggled menu options box below */
+        width: 93px;
+    }  
+    .menu-options .option { /* menu box option */
+        font-size: 0.9rem;
+        padding-left: 0.2rem;
     }
 }

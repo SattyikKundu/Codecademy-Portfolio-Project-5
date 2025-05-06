@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // used to imp
 import { faFishFins } from '@fortawesome/free-solid-svg-icons';
 
 import CategoryButtons from '../menuCategories/menuCategories.jsx';
-import SearchBar from "../menuSearchBox/menuSearchBox.jsx";
+import MenuSearch from "../menuSearch/menuSearch.jsx";
 import ProfileButton from "../menuUserProfile/menuUserProfile.jsx";
 import CartButton from "../menuCartBttn/menuCartBttn.jsx";
 
@@ -17,10 +17,10 @@ const Menu = () => {
             <div className="icon-container">
               <FontAwesomeIcon icon={faFishFins} className="fish-icon" />
             </div>
-            <span id="store-name">Reef</span>
+            <span id="store-name">Ocean</span>
           </div>
           <CategoryButtons />
-          <SearchBar />
+          <MenuSearch />
           <ProfileButton />
           <CartButton />
         </div>

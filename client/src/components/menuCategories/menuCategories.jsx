@@ -44,11 +44,9 @@ const CategoryButtons = () => {
     const unSelectedFG = '#000';        // text color of unselected option
 
     /* Colors of category buttons (when selected/unselected) for desktop screen sizes */
-    //const selectedTxt   = '#2394e0'; // background color of selected option 
-    //const unSelectedTxt = 'f5f5dc'; // background color of unselected option
-    const textColor         = '#fff';
-    const selectBttnColor   = '#136196';         // text color (or 'foreground color') of selected option
-    const unSelectBttnColor = '#2394e0';        // text color of unselected option
+    const textColor         = '#fff';     // button text color (white)
+    const selectBttnColor   = '#136196';  // button color (or 'foreground color') when selected
+    const unSelectBttnColor = '#2394e0';  // button color when unselected
 
     /* Categories' names */
     const category1 = 'All';
@@ -115,6 +113,7 @@ const CategoryButtons = () => {
             <div className="button" 
                 onClick={()=>selectOption(category1)}
                 style={{
+                    // button color changes depending if selected or not (synchronized with dropdown box)
                     backgroundColor: selected===`${category1}` ? `${selectBttnColor}`: `${unSelectBttnColor}`,
                               color: `${textColor}`
                 }}>
