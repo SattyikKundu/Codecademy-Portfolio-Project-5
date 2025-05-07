@@ -3,12 +3,14 @@ import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 
 import './menuCartBttn.css';
 
-const CartButton = () => {
-
+const CartButton = ({toggleCart}) => {
+    console.log('Cart button rendered');
     return (
       <>
-        <div className='cart-bttn-container'>
-          <FontAwesomeIcon icon={faCartShopping} className='cart-icon' />
+        <div className='cart-bttn-container'
+        onClick={toggleCart}
+        >
+          <FontAwesomeIcon icon={faCartShopping} className='cart-icon'/>
         </div>
       </>
     );

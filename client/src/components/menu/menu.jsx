@@ -9,8 +9,8 @@ import CartButton from "../menuCartBttn/menuCartBttn.jsx";
 
 import './menu.css';
 
-const Menu = () => {
-    //console.log("Menu rendered");
+const Menu = ({toggleCart}) => {
+    console.log("Menu rendered");
     return (
         <div className="header-menu">
           <div className="logo-container">
@@ -22,7 +22,9 @@ const Menu = () => {
           <CategoryButtons />
           <MenuSearch />
           <ProfileButton />
-          <CartButton />
+          <CartButton
+          toggleCart={toggleCart}
+          />
         </div>
     );
 }

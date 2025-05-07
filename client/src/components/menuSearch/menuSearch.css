@@ -51,7 +51,7 @@
 .search-overlay-background { /* grey background around the overlay */
 
     position: fixed; /* enables overall overlay to 'float' on top of content */
-    z-index: 10;
+    z-index: 5;
 
     top: 0;         /* Ensures overlay background starts from top-left in order to expand and cover page*/
     left: 0;
@@ -92,6 +92,7 @@
     background: transparent;
     right: 3px;
     top:   3px;
+    cursor: pointer;
 }
 
 /**********************************************************************************/ 

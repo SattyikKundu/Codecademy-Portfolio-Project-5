@@ -1,0 +1,95 @@
+/*****************************************************************************/
+/********** Overlay styling  *************************************************/
+/*****************************************************************************/
+
+.cart-slider-overlay { 
+    position: fixed; /* enables overall overlay to 'float' on top of content */
+    z-index: 5;
+
+    top: 0;         /* Ensures overlay background starts from top-left in order to expand and cover page*/
+    left: 0;
+
+    width: 100%;    /* overlay covers entire screen's content */
+    height: 100%;    
+
+    background: #afafaf83; /* grey background around overlay */
+
+    display: flex;           /* Ensures that main nested overlay is centered */
+    justify-content: center; /* Center horizontally */
+    align-items: center;     /* Center vertically */
+
+    transform: translateX(100%); /* For smooth transition sliding (off-screen/closed by default) */
+    transition: transform 0.25s ease-in-out;
+}
+
+.cart-slider-overlay.active{ /* overlay slides into view (with cart slider) when cart button clicked */
+    transform: translateX(0);
+}
+
+/*****************************************************************************/
+/********** Cart slider sytling **********************************************/
+/*****************************************************************************/
+
+.cart-slider-wrapper { /* Wrapper for cart */
+
+    position: fixed; /* Fixed position ensures that slider opens/closes at right of screeen */
+    top: 0;
+    right:0;
+
+    width: 500px; /* Default cart slider dimensions */
+    height: 100vh; 
+
+    background-color: rgb(252, 254, 255);
+    z-index: 6; /* stays above overlay */
+
+    transform: translateX(100%); /* For smooth transition sliding (off-screen/closed by default) */
+    transition: transform 0.25s ease-in-out;
+}
+
+.cart-slider-wrapper.open { /* cart slides into view when .open class added */
+    transform: translateX(0);
+}
+
+
+@media screen and (max-width: 768px) { /* cart takes full width for tablet size and below */
+    .cart-slider-wrapper {
+        width: 100%;
+    }
+}
+
+.cart-slider-content { /* Holds main content of Cart slider */
+
+    display: flex; /* items in flex-column orientation */
+    flex-direction: column;
+    position: relative; /* Needed for absolute positioning of 'close cart' button */
+
+    width: 100%; /* size matches parent container */
+    height: 100%;
+}
+
+.cart-items { /* Area where items added to cart are displayed */
+    margin: 1rem;
+    width: auto;
+    height: 85%;
+    border: 1px solid black;
+}
+
+.cart-checkout-button-wrapper { /* button styling area */
+    border: 1px solid black;
+    margin: 1rem;
+    height: 15%;
+    width: 50%;
+    align-self: center;
+}
+
+.close-cart { /*styling for 'close cart' button */
+    position: absolute; /* keeps '🗙' button symbol on top-right of cart slider */
+    border: none;
+    color: rgba(120, 120, 120, 0.750);
+    font-size: 1.5rem;
+    background: transparent;
+    right: 20px;
+    top:   10px;
+    cursor: pointer;
+}
+
