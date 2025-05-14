@@ -35,8 +35,13 @@
 }
 
 .dropdown-box .current-selection { /* Positions selection choice text */
-    padding-left: 1.35rem;
+
+    padding-left: 1.35rem; /* position and dimensions of selected choice */
     width: 145px;
+    
+    white-space: nowrap; /* uses ellipsis it text too long */
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .dropdown-box .toggle-arrow { /* styles and positions arrows*/
     background-color: #d4d4d4;
@@ -62,7 +67,21 @@
     margin: 0.1rem;
     padding-left: 0.65rem;
     border-radius: 4px;
+    /*border-bottom: 2px solid rgba(216, 216, 216, 0.5); /* visual distinction of options */
 }
+
+.menu-options-divider {
+    width: 95%;
+    height: 1px;
+    border-radius: 50%;
+    background-color: rgba(216, 216, 216, 0.5);
+    margin: 0.05rem auto;
+}
+/*
+.menu-options .option:last-child {
+    border-bottom: none;
+}*/
+
 
 .menu-options .option:hover { /* styling on hover. '!important' used to prevent override*/
     color: #fff !important;

@@ -52,7 +52,7 @@ const CategoryButtons = () => {
     const category1 = 'All';
     const category2 = 'Fishes';
     const category3 = 'Invertebrates';
-    const category4 = 'Amphibians';
+    const category4 = 'Corals & Anemones';
 
     return (
         <>
@@ -74,6 +74,7 @@ const CategoryButtons = () => {
                     >
                         {category1}
                     </div>
+                    <div className="menu-options-divider" />
                     <div 
                         className="option"
                         onClick={()=>selectOption(`${category2}`)}
@@ -84,6 +85,7 @@ const CategoryButtons = () => {
                     >
                         {category2}
                     </div>
+                    <div className="menu-options-divider" />
                     <div 
                         className="option"
                         onClick={()=>selectOption(`${category3}`)}
@@ -94,6 +96,7 @@ const CategoryButtons = () => {
                     >
                         {category3}
                     </div>
+                    <div className="menu-options-divider" />
                     <div
                         className="option" 
                         onClick={()=>selectOption(`${category4}`)}
