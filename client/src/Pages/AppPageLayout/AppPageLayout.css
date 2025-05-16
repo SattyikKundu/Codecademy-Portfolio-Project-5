@@ -1,0 +1,7 @@
+.app-body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+
+    position: relative; /* Relative so Menu & Cart and 'float' via absolution positioning */
+}
