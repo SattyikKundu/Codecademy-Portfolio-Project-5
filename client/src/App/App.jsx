@@ -1,8 +1,8 @@
 import React, {useState} from "react";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import Menu from "../components/menu/menu.jsx";
-
-import CartSlider from "../components/cart/cart.jsx"; //...
+import Menu from "../PageComponents/menu/menu";
+import CartSlider from "../PageComponents/cart/cart"; //...
 
 import './App.css';
 
@@ -16,16 +16,17 @@ const App = () => {
 
     return (
         <div className="app-body">
+          {/* Menu and CarSlider is always constant across all pages */}
             <Menu
               toggleCart={toggleCart}//..
             />
             <h1>To Be Added Later...</h1>
-            {
             <CartSlider 
               toggleCart={toggleCart}
               cartSliderOpen={cartSliderOpen} 
             /> 
-            }
+          {/* Below Main content body changes due to routes */}
+
         </div>
     );
 }
