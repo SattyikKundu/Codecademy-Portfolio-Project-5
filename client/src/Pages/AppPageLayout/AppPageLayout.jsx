@@ -21,7 +21,7 @@ const AppPageLayout = () => {
               toggleCart={toggleCart}
               cartSliderOpen={cartSliderOpen} 
             /> 
-            {/* <Outlet /> is the main page body where content changes based on current route */}
+            {/* <Outlet /> is the main page body where content changes based on current route! */}
             <Outlet/>
         </div>
     );
