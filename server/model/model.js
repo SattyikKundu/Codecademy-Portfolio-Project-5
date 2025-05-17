@@ -23,4 +23,5 @@ const getProductsByCategory = async(category) => { // get products via products'
     }
 }
 
-export default productModel = {getAllProducts, getProductsByCategory}; // export productModel functions
+const productModel = {getAllProducts, getProductsByCategory};
+export default productModel; // = {getAllProducts, getProductsByCategory}; // export productModel functions

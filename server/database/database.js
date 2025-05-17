@@ -4,7 +4,7 @@
 import { Pool } from 'pg';                                
 
 // Create pool of database connections for PostgreSQL (later move this in an .env file, like in realworld App)
-export const pool = new Pool({
+const pool = new Pool({
     user:     'postgres',                       // your postgre database's username
     host:     'localhost',                      // since it works on my local computer
     database: 'PERN-Ecommerce-app-database',    // name of database
@@ -12,6 +12,7 @@ export const pool = new Pool({
     port:      5432                             // port where postgreSQL database is accessible 
 });
 
+export default pool;
 
 //module.exports = pool; // Export 'pool' object (which is the pg.Pool object that contains 
                        // all database conenction logic) to be used elsewhere

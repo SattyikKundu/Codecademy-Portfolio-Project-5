@@ -29,4 +29,6 @@ const getProductsByCategory = async(req, res) => { // controller function for ge
     }
 }
 
-export default productController = {getProducts, getProductsByCategory}; // export controller functions
+
+const productController = {getProducts, getProductsByCategory};
+export default productController ; // export controller functions
