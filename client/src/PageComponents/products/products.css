@@ -1,24 +1,35 @@
 
 .products-wrapper { /*Wrapper for products display grid*/
+
+    margin: auto;
     width:90%;
-    max-width: 1200px;
+    max-width: 900px;
 }
 
 .products-grid { /* Actual styling to enable grid display */
     display: grid;
 
-    /* 3-Column Grid
-     * Below:        "grid-template-columns: repeat(3, 1fr)" => "repeat 3 times 1fr ("1 fraction of available width")" 
-     * Alternative:  "grid-template-columns: 1fr, 1fr, 1fr;"
-     * Since there are 3 '1fr', that means each takes 1/3rd of total width , hence 3x3 gird
+    /* 4-Column Grid
+     * Below:        "grid-template-columns: repeat(4, 1fr)" => "repeat 4 times 1fr ("1 fraction of available width")" 
+     * Alternative:  "grid-template-columns: 1fr, 1fr, 1fr, 1fr;"
+     * Since there are 4 '1fr', that means each takes 1/4th of total width , hence 2x4 gird
      */
-    grid-template-columns: repeat(3, 1fr); 
+    grid-template-columns: repeat(4, 1fr); 
 
     gap: 20px;
 }
 
-@media (max-width: 800px) { /* For smaller screens, use 1 column instead of 3*/
-  .products-container {
-    grid-template-columns: repeat(1, 1fr); /* 1 column on small screens */
+@media (max-width: 800px) { /* For smaller screens, use 2 columns instead of 4*/
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 column on tablet0sized screens */
   }
 }
+
+@media (max-width: 480px) {
+    .products-grid {
+    grid-template-columns: 1fr; /* 1 column on mobile screens */
+  }
+}
+
+
+
