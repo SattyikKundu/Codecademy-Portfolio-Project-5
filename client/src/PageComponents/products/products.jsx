@@ -1,5 +1,6 @@
 import React from "react";
 import Product from "../productDetails/productDetails";
+import './products.css';
 
 const Products = ({products}) => { /* Presents products in grid format (like in actual E-commerece sites) */
 

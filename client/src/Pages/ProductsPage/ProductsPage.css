@@ -1,0 +1,29 @@
+/* COPY PASTED Styling. WILL MODIFY LATER*/
+
+/* Style the main container for the product page */
+.products-page {
+  padding: 20px;
+  text-align: center;
+  background-color: #f8f8f8;
+}
+
+/* Style the pagination buttons */
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.pagination-buttons button {
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.pagination-buttons button:hover {
+  background-color: #f0f0f0;
+}
