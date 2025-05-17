@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from "react";
 
 //import * from '../../../../server/public/images';
+import './productDetails.css';
 
-const ProductCard = ({product}) => {
+const Product = ({product}) => {
 
     const imgPath = `http://localhost:5000/images/${product.image_url}`; // file path for product image (must match port in server.js file)
 
@@ -52,5 +53,5 @@ const ProductCard = ({product}) => {
     );
 };
 
-export default ProductCard;
+export default Product;
 
