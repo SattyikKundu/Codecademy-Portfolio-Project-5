@@ -10,12 +10,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <style>
-        html { /* Enforces default font-size of 1rem=16px on any browser; (DO NOT CHANGE!!!)*/
-           font-size: 16px;
+        *, *::before, *::after {  /* Resets default margin and padding around all elements in browsers.
+                                     Especially needed to remove white area around both <html> and <body> */
+                margin: 0;
+                padding: 0; 
         }
-        body { /* Gets rid of awkward white 'border' around html <body>*/
-            margin: 0;
-            padding: 0;    
+
+        html {
+            font-size: 16px;  /* Enforces default font-size of 1rem=16px on any browser; (DO NOT CHANGE!!!)*/
+            height: 100%;    /* Ensure body takes full height */
         }
     </style>
 </head>

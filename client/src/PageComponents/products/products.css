@@ -18,7 +18,7 @@
     /* 4-Column Grid
      * Below:        "grid-template-columns: repeat(4, 1fr)" => "repeat 4 times 1fr ("1 fraction of available width")" 
      * Alternative:  "grid-template-columns: 1fr, 1fr, 1fr, 1fr;"
-     * Since there are 4 '1fr', that means each takes 1/4th of total width , hence 2x4 gird
+     * Since there are 4 '1fr', that means each grid-item in row takes 1/4th of total width
      */
     grid-template-columns: repeat(4, 1fr); 
 

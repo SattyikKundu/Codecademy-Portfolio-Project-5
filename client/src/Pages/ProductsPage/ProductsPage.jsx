@@ -8,7 +8,7 @@ const ProductsPage = () => { // will modify later to handle various categories
 
     const [products,   setProducts]   = useState([]);  // Stores all fetched products
     const [pageNumber, setPageNumber] = useState(1);   // Stores index of current page (start at page '1')
-    const productsPerPage             = 12;             // Nine products per page
+    const productsPerPage             = 8;             // 8 products per page
     const [loading,    setLoading]    = useState(false); // tracks loading state
     const [error,      setError]      = useState('');    // stores error message as error comes 
 

@@ -29,7 +29,6 @@
   justify-content: center;
   gap: 15px;
   margin-top: 20px;
-  margin-bottom: 20px;
 }
 
 .pagination-buttons button { /* Default styling of each pagination buttons*/
@@ -40,6 +39,9 @@
   font-weight: bold;
   transition: background-color 0.3s;
   outline: none;
+
+  margin-bottom: 20px; /* Due to unable to add margin-bottom for .pagination-buttons 
+                          (likely due to styling in index.html page), margin-bottom added here as work around.  */
 }
 
 .pagination-buttons .unselected-button { /* Color indicator showing that button is NOT on current page */
