@@ -1,29 +1,66 @@
-/* COPY PASTED Styling. WILL MODIFY LATER*/
+/******************************************************************************/
+/************** Styling of Main container of product page *********************/
+/******************************************************************************/
 
-/* Style the main container for the product page */
-.products-page {
-  padding: 20px;
+.products-page { /* Main container of product page */
+  padding-top: 4.5rem;
   text-align: center;
   background-color: #f8f8f8;
 }
 
-/* Style the pagination buttons */
-.pagination {
+@media screen and (max-width: 800px) {
+  .products-page{
+      padding-top: 3.5rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .products-page{
+      padding-top: 2rem;
+  }
+}
+
+/******************************************************************************/
+/********** Styling of Pagination button at bottom of product page ************/
+/******************************************************************************/
+
+.pagination-buttons { /* Pagination buttons container*/
   display: flex;
   justify-content: center;
   gap: 15px;
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 
-.pagination-buttons button {
+.pagination-buttons button { /* Default styling of each pagination buttons*/
   padding: 10px 20px;
-  border: 1px solid #ccc;
-  background-color: #fff;
+  border-radius: 5px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 1rem;
+  font-weight: bold;
   transition: background-color 0.3s;
+  outline: none;
 }
 
-.pagination-buttons button:hover {
-  background-color: #f0f0f0;
+.pagination-buttons .unselected-button { /* Color indicator showing that button is NOT on current page */
+    color: #3f3f3f;
+    background-color: #fff;
+    border: 1px solid #adadad;
+}
+.pagination-buttons .unselected-button:hover {
+    color: beige;
+    background-color: #808080;
+    border: 1px solid #505050;
+}
+
+.pagination-buttons .selected-button { /* Color indicator showing that button is on current page */
+  color:beige;
+  background-color: #9e9e9e;
+  border: 1px solid #505050;
+
+}
+
+.pagination-buttons button:active {
+  transition: 0.2s;
+  transform: scale(0.90);
 }

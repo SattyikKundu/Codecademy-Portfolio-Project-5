@@ -2,8 +2,14 @@
 .products-wrapper { /*Wrapper for products display grid*/
 
     margin: auto;
-    width:90%;
+    width: 90%;
     max-width: 900px;
+}
+
+@media screen and (max-width: 800px) {
+  .products-wrapper {
+    width: 85%;
+  }
 }
 
 .products-grid { /* Actual styling to enable grid display */
@@ -19,9 +25,16 @@
     gap: 20px;
 }
 
+@media screen and (max-width: 1080px) { /* For smaller screens, use 3 columns instead of 4*/
+  .products-grid {
+    grid-template-columns: repeat(3, 1fr); /* 3 column on between tablet- and desktop-sized screens */
+    gap: 25px;
+  }
+}
+
 @media (max-width: 800px) { /* For smaller screens, use 2 columns instead of 4*/
   .products-grid {
-    grid-template-columns: repeat(2, 1fr); /* 2 column on tablet0sized screens */
+    grid-template-columns: repeat(2, 1fr); /* 2 columns on tablet-sized screens */
   }
 }
 

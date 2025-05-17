@@ -1,15 +1,32 @@
+/******************************************************************************/
+/*******************General Product Card styling ******************************/
+/******************************************************************************/
 
 .product-card { /* Main Product Card container */
     display: flex;
     flex-direction: column;
+
+    border-radius: 5%; /* product card border */
+    border: 1px solid rgb(177, 177, 177);
 }
+
+.product-info-wrapper {
+    width: 100%;
+    height: auto;
+    cursor: pointer;
+}
+
+/******************************************************************************/
+/******************* Product Image & Name styling *****************************/
+/******************************************************************************/
 
 .image-wrapper { /* Image wrapper dimensions */
     width: 90%;
-    aspect-ratio: 1;
+    aspect-ratio: 1; /* Ensures wrapper has 'square' shape just like image */
     border: 1px solid grey;
-    border-radius: 3px;
-    overflow: hidden;
+    border-radius: 5%;
+    overflow: hidden; 
+    margin: 5%;
 }
 
 .product-image { /* Styling of product image itself */
@@ -19,31 +36,119 @@
 }
 
 .product-name { /* Link to description style*/
-    font-size: 1rem;
+
+    font-size: 1rem; /* name text styling*/
+    font-family:Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    width: 90%;
+    height: 2.5rem; /* Ensure <div> size for long names to wrap */
+
+    display: flex;
+    align-items: center; /* Vertical centering of text in flex display */
+    justify-content: center; /* Horizontal centering when flex display */
+    margin: auto;
 }
 
-.add-button-wrapper { /* wrapper for Add button */
+/******************************************************************************/
+/******************* Product Information styling ******************************/
+/******************************************************************************/
+
+/* wrapper for product information */
+/*.product-info { 
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}*/
+
+
+.price-and-stock { /* Price & stock left message in row*/
+
+    width: 100%;
+
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 5%;
+    cursor: default;
 }
 
-.add-button { /* styling for 'add to cart' button */
-    border: 1.5px solid black;
-    color: black;
-    background-color: #cfcfcf;
-    border-radius: 3px;
+#price { /* Prevents price from touching left border */
+    margin-left: 5%;
+    font-size: 1rem;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#stock { /* Prevents stock notice from touching right border*/
+    margin-right: 5%;
+    font-size: 1rem;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .stocked, .low, .none { /* general styling for 3 messages based on product's stock */
     font-size: 1rem;
+    font-family: Arial, Helvetica, sans-serif;
 }
-.stocked { color: green;}
-.low{ color: red;}
-.none{ color:#808080;}
+.stocked, .low { color: green;}
+.none{ color:red;}
 
+@media screen and (max-width: 1080px) { 
 
-@media screen and (max-width: 800px) { /* Change orientation of product info when on mobile screens*/
-    .product-info {
-        flex-direction: column-reverse;
+    .product-name {
+        font-size: clamp(0.5rem, 1.2rem, 1.5rem);
     }
+
+    #price, #stock {
+        font-size: clamp(0.5rem, 1.33rem, 1.5rem);
+    }
+}
+
+/******************************************************************************/
+/******************* Add To Cart button styling *******************************/
+/******************************************************************************/
+
+.add-button-wrapper {
+    display: flex;
+    height: 3rem;
+    width: 90%;
+    margin: 0 5% 5% 5%;
+}
+
+.add-button { /* styling for 'add to cart' button */
+
+    display: flex;
+    flex-direction: row;
+
+    width: 100%;
+
+    border: 1.5px solid black;
+    border-radius: 10px;
+
+    color: rgb(255, 255, 255);
+    background-color: #579aff;
+    transition: background-color 0.3s;
+    cursor: pointer;
+
+    position: relative;
+}
+
+.add-cart-icon {
+    margin: auto 0 auto 15px;
+    height: 2rem;
+}
+
+#button-text{
+    font-size: 1.2rem;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+
+    margin: auto;
+}
+
+.add-button:hover {
+    background-color: #a557ff;
+}
+
+.add-button:active {
+    transform: scale(0.9);
+    transition: 0.2s;
 }

@@ -63,8 +63,13 @@ const ProductsPage = () => { // will modify later to handle various categories
                 {Array.from( // Array.from() creates array based on iterable/arra-like object input
                     { length: Math.ceil(products.length / productsPerPage) }, // defines length of newly created array
                     (_, index) => ( // '_' is placeholder for current element & 'index' is current index value out of [0,length-1] indices
+
                     // Below is button created for each index (ex: If index=0, then index+1 means pageNumber=1)
-                    <button key={index + 1} onClick={() => setPageNumber(index + 1)}> 
+                    <button 
+                        key={index + 1}                          // unique key value for pagination button
+                        onClick={() => setPageNumber(index + 1)} // On click, get pagination page (with selected products slice)
+                        className={((index+1) === pageNumber) ? 'selected-button': 'unselected-button'}  // style pagination button if current
+                    > 
                         {index + 1}
                     </button>
                     ))

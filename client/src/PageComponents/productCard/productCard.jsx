@@ -1,5 +1,8 @@
 import {useEffect, useState} from "react";
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // used to import FontAwesomeIcons
+import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
+
 import './productCard.css';
 
 const Product = ({product}) => {
@@ -28,23 +31,37 @@ const Product = ({product}) => {
         }
     }
 
+   // useEffect(() => {
+   //     checkStockState();
+   // },[product, product.stock]); // function run on mount or when product (or product.stock) changes
+
     useEffect(() => {
         checkStockState();
-    },[product, product.stock]); // function run on mount or when product (or product.stock) changes
+    },[]);
 
     return (
       <>
         <div className="product-card">
-            <div className="image-wrapper">
-                <img src={imgPath} alt={product.display_name} className="product-image" />
+            <div className="product-info-wrapper">
+                <div className="image-wrapper">
+                    <img src={imgPath} alt={product.display_name} className="product-image" />
+                </div>
+                <div className='product-name'>
+                    {product.display_name}
+                </div>
             </div>
-            <div className='product-name'>{product.display_name}</div>
+            <div className="price-and-stock">
+                <div id='price'>
+                    ${product.price}
+                </div>
+                <div id='stock' className={`${stockState}`}>
+                    {stockMessage}
+                </div>
+            </div>
             <div className="add-button-wrapper">
                 <div className="add-button">
-                    Add to Cart
-                </div>
-                <div className={`${stockState}`}>
-                    {stockMessage}
+                    <FontAwesomeIcon icon={faCartPlus} className="add-cart-icon" />
+                    <div id='button-text'>Add to Cart</div>
                 </div>
             </div>
         </div>
