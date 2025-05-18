@@ -16,6 +16,11 @@
     cursor: pointer;
 }
 
+.no-link-style { /* Remove default style of <Link> component*/
+    color: inherit;
+    text-decoration: none;
+}
+
 /******************************************************************************/
 /******************* Product Image & Name styling *****************************/
 /******************************************************************************/
