@@ -15,7 +15,7 @@ const getAllProducts = async() => { // function returns all products
 const getProductsByCategory = async(category) => { // get products via products' category
     try {
         const products = await pool.query('SELECT * FROM products WHERE category=$1',[category]); // parametize query to limit SQL injection attack
-        return products.row;
+        return products.rows;
     }
     catch(error) {
         console.log(`Error fetching products for '${category}': `, error);
@@ -23,5 +23,16 @@ const getProductsByCategory = async(category) => { // get products via products'
     }
 }
 
-const productModel = {getAllProducts, getProductsByCategory};
-export default productModel; // = {getAllProducts, getProductsByCategory}; // export productModel functions
+const getProductById = async(id) => { // get product (and all its data) via product id
+    try {
+        const product = await pool.query('SELECT * FROM products WHERE id=$1',[id]);
+        return product.rows;
+    }
+    catch(error) {
+        console.log(`Error fetching product for id=${id}: `,error);
+        throw error;
+    }
+}
+
+const productModel = {getAllProducts, getProductsByCategory, getProductById};
+export default productModel; // export productModel functions

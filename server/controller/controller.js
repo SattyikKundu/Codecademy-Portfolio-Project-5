@@ -1,4 +1,5 @@
 
+import { response } from 'express';
 import productModel from '../model/model.js';
 
 const getProducts = async(req, res) => { // controller function for getting all products
@@ -29,6 +30,25 @@ const getProductsByCategory = async(req, res) => { // controller function for ge
     }
 }
 
+const getProductById = async(req, res) => { // controller function for getting all product data for 1 product (via product id)
+    const { id } = req.params; //  extract product 'id' from req.params
 
-const productController = {getProducts, getProductsByCategory};
+    try {
+        const product = await productModel.getProductById(id); // get product 
+        if (product.length === 1) { // there should ONLY be 1 product for the id
+            res.json(product); // converts product data into JSON response
+        }
+        else if (!product) {
+            return res.status(404).json({ error: 'Product not found in database.'});
+        }
+        else if (product.length>1) {
+            return res.status(500).json({ error: 'Duplicates of product found in database. This should not happen!'});
+        }
+    }
+    catch(error) {
+        res.status(500).json({error: `Issue retrieving product: ${error}`});
+    }
+}
+
+const productController = {getProducts, getProductsByCategory, getProductById};
 export default productController ; // export controller functions

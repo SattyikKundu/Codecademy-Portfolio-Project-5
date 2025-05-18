@@ -1,14 +1,19 @@
-
 import productController from '../controller/controller.js';
 import express from 'express';
 
-//const express = require('express'); // use express to create routes
 const router = express.Router(); // define router to group all routes related to interacting with products data
 
-
-router.get('/products', productController.getProducts); // Route to get all products
+/* Below route gets all products. In App.jsx, <Navigate> is used
+ *  to redirect other url routes like '/' and '/products to below route.
+ */
+router.get('/products/all', productController.getProducts);  
 
 router.get('/products/:category', productController.getProductsByCategory); // Route to get products by category
+
+
+router.get('/products/:id', productController.getProductById); // Routes to get product by id (regardless if category is given or not)
+router.get('/products/:category/:id', productController.getProductById);
+
 
 export default router; // export this router for server.js
 
