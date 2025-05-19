@@ -24,8 +24,10 @@ const App = () => {
             {/* Route for page with all */}
             <Route path='/products/all'    element={< ProductsPage />}  />
 
-            {/* Routes that show product details for a given product via id */}
-            <Route path='/products/:id' element={<ProductDetails />} />
+            {/* Route returns all products for specified category */}
+            <Route path='/products/:category' element={<ProductsPage />} />
+
+            {/* Route that show product details for a given product via id */}
             <Route path='/products/:category/:id' element={<ProductDetails />} />
 
           </Route>

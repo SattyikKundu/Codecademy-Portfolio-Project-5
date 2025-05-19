@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef} from "react";
+import { Link } from "react-router-dom";
 
 import './menuCategories.css';
 
 const CategoryButtons = () => {
-    //console.log("Category Buttons rendered");
 
     const [menuOpen, setMenuOpen] = useState(false); // tracks when dropdown menu is open or closed
     const [selected, setSelected] = useState('All'); // tracks selection choice from dropdown menu
@@ -54,6 +54,12 @@ const CategoryButtons = () => {
     const category3 = 'Invertebrates';
     const category4 = 'Corals & Anemones';
 
+    /* Link paths */
+    const link1 = 'products/all';
+    const link2 = 'products/fishes';
+    const link3 = 'products/invertebrates';
+    const link4 = 'products/corals_&_anemones'
+
     return (
         <>
         {/* Category selection drop-down menu for mobile screen sizes */}
@@ -72,7 +78,7 @@ const CategoryButtons = () => {
                                       color: selected===`${category1}` ? `${selectedFG}` : `${unSelectedFG}`
                         }}
                     >
-                        {category1}
+                     <Link class='no-link-style' to={link1}>{category1}</Link>
                     </div>
                     <div className="menu-options-divider" />
                     <div 
@@ -83,7 +89,7 @@ const CategoryButtons = () => {
                                       color: selected===`${category2}` ? `${selectedFG}`: `${unSelectedFG}`
                         }}
                     >
-                        {category2}
+                        <Link class='no-link-style' to={link2}>{category2}</Link>
                     </div>
                     <div className="menu-options-divider" />
                     <div 
@@ -94,7 +100,7 @@ const CategoryButtons = () => {
                                       color: selected===`${category3}` ? `${selectedFG}`: `${unSelectedFG}`
                         }}
                     >
-                        {category3}
+                        <Link class='no-link-style' to={link3}>{category3}</Link>
                     </div>
                     <div className="menu-options-divider" />
                     <div
@@ -105,7 +111,7 @@ const CategoryButtons = () => {
                                       color: selected===`${category4}` ? `${selectedFG}`: `${unSelectedFG}`
                         }}
                     >
-                        {category4}
+                        <Link class='no-link-style' to={link4}>{category4}</Link>
                     </div>
                 </div>
                 )
@@ -120,28 +126,32 @@ const CategoryButtons = () => {
                     backgroundColor: selected===`${category1}` ? `${selectBttnColor}`: `${unSelectBttnColor}`,
                               color: `${textColor}`
                 }}>
-                {category1}</div>
+                <Link class='no-link-style' to={link1}>{category1}</Link>
+            </div>
             <div className="button" 
                 onClick={()=>selectOption(category2)}
                 style={{
                     backgroundColor: selected===`${category2}` ? `${selectBttnColor}`: `${unSelectBttnColor}`,
                               color: `${textColor}`
                 }}>
-                {category2}</div>
+                <Link class='no-link-style' to={link2}>{category2}</Link>
+            </div>
             <div className="button" 
                 onClick={()=>selectOption(category3)}
                 style={{
                     backgroundColor: selected===`${category3}` ? `${selectBttnColor}`: `${unSelectBttnColor}`,
                               color: `${textColor}`
                 }}>
-                {category3}</div>
+                <Link class='no-link-style' to={link3}>{category3}</Link>
+            </div>
             <div className="button" 
                 onClick={()=>selectOption(category4)}
                 style={{
                     backgroundColor: selected===`${category4}` ? `${selectBttnColor}`: `${unSelectBttnColor}`,
                               color: `${textColor}`
                 }}>
-                {category4}</div>
+                <Link class='no-link-style' to={link4}>{category4}</Link>
+            </div>
         </div>
         </>
     );

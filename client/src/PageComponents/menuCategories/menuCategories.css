@@ -2,6 +2,11 @@
 /*********** Full Styling for dropdown menu (for mobile screen sizes) ***************/
 /************************************************************************************/
 
+.no-link-style { /* Removes default style of <Link> components */
+    color: inherit;
+    text-decoration: none;
+}
+
 .custom-dropdown { /* Styling for dropdown container */
 
     display: flex;      /* drop-down components in column */
