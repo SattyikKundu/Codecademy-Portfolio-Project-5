@@ -3,7 +3,7 @@ import express from 'express';
 
 const router = express.Router(); // define router to group all routes related to interacting with products data
 
-/* Below route gets all products. In App.jsx, <Navigate> is used
+/* Below route(s) gets all products. In App.jsx, <Navigate> is used
  *  to redirect other url routes like '/' and '/products to below route.
  */
 router.get('/', productController.getProducts); 
@@ -12,7 +12,7 @@ router.get('/products/all', productController.getProducts);
 
 router.get('/products/:category', productController.getProductsByCategory); // Route to get products by category
 
-router.get('/products/all/:id', productController.getProducts);  // Routes to get product by id 
+router.get('/products/all/:id', productController.getProductById);  // Routes to get product by id 
 router.get('/products/:category/:id', productController.getProductById); 
 
 
