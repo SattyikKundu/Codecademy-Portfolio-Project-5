@@ -126,7 +126,7 @@
 }
 
 .button:hover { /* button style on hover */
-    background-color: #136196;
+    background-color: #227ab4 !important; /* !important prevents override by front-end button color logic*/
     border: 1px solid #125e91;
     box-shadow: 0 0 5px #125e91d0;
 }

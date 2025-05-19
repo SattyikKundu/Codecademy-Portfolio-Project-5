@@ -1,5 +1,3 @@
-import React from "react";
-//import Product from "../productDetails/productDetails";
 import Product from "../productCard/productCard";
 import './products.css';
 
