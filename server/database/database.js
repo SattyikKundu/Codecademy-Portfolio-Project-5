@@ -13,6 +13,3 @@ const pool = new Pool({
 });
 
 export default pool;
-
-//module.exports = pool; // Export 'pool' object (which is the pg.Pool object that contains 
-                       // all database conenction logic) to be used elsewhere
