@@ -1,0 +1,116 @@
+/****************************************************************************/
+/********* Main container for image and all description fields **************/
+/****************************************************************************/
+
+.product-description-container {
+    width: 90%;
+    max-width: 860px;
+    display: flex;
+    flex-direction: column;
+
+    margin: 30px auto auto auto;
+
+    border: 1px solid rgba(185, 185, 185, 0.781);
+    border-radius: 2rem;
+}
+
+.divider-bar {
+    height: 0.05rem;
+    width: 93%;
+    border-radius: 5px;
+    background-color: rgba(185, 185, 185, 0.781);
+    margin: 0 auto 0.5rem auto;
+
+}
+
+/****************************************************************************/
+/****** Styling for image & desription (part1) - both in same <div> *********/
+/****************************************************************************/
+
+.image-and-data1-wrapper { /* Wrapper for both image and part1 of all product description data*/
+    width: 95%;
+    height: auto;
+    display: flex;
+    flex-direction: row; /* image and part-1 data is side-by-side */
+    margin: auto;
+}
+
+.image-full-wrapper { /* wrapper holds image*/
+    width: 45%;
+    aspect-ratio: 1; /* Ensures wrapper has 'square' shape just like image */
+    border: 1px solid grey;
+    border-radius: 5%;
+    overflow: hidden; 
+    margin: 3% 2% 3% 1%; 
+}
+
+.product-image { /* styling of image itself */
+    width: 100%;
+    aspect-ratio: 1;
+    height: auto;
+}
+
+.data-part-1 {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+
+.field-row {
+    display: flex;
+    flex-direction: row;
+    font-family: Arial, Helvetica, sans-serif;
+    border-bottom: 1px solid rgba(187, 187, 187, 0.76);
+    padding-bottom: 0.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.last-row  { border-bottom: none; } /**/
+
+.field-row .field {
+    font-weight: bold;
+    width: 45%;
+    
+}
+
+.field-row .info {
+    width: 55%;
+}
+
+/****************************************************************************/
+/****************************************************************************/
+/****** Styling for part 2 description (which varies a little ***************/
+/****** between fishes/invertebrates and corals and anemones) ***************/
+/****************************************************************************/
+/****************************************************************************/
+
+.data-part-2 {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin: auto;
+}
+
+.field-col {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.field-col .field {
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-bottom: 0.33rem;
+}
+
+.field-col .info {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/****************************************************************************/
+/****** Styling for price, stock notice, and 'Add to Cart' button ***********/
+/****************************************************************************/
+
