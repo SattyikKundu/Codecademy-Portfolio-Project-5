@@ -31,7 +31,7 @@ const Product = ({product}) => {
 
         if (category && product.id) { // If product has both id and category
             detailsLink = `/products/${category}/${product.id}`;
-            console.log('Final detail link path: ', detailsLink);
+            //console.log('Final detail link path: ', detailsLink);
             setProductDetailsLink(detailsLink);
         }
         else { // throw error if product id is unavailable
