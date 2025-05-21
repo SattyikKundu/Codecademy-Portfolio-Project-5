@@ -83,7 +83,6 @@ const ProductsPage = () => { // will modify later to handle various categories
      *                                             In practice, with 7 products left, its indices are 8-14.
      */
 
-
     return (
         <>
         <div className="products-page">

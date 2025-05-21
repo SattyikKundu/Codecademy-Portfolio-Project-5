@@ -7,7 +7,7 @@ import { BrowserRouter as Router,  // provides routing functionality via browser
 
 import AppPageLayout from '../PublicPages/AppPageLayout/AppPageLayout.jsx'; // Import page layout for entire App (very important!)
 import ProductsPage from '../PublicPages/ProductsPage/ProductsPage.jsx';    // imports <ProductsPage /> as home page route (shows all products)
-import ProductDetails from '../PublicPages/ProductDetailsPage/ProductDetailsPage.jsx';
+import ProductDetailsPage from '../PublicPages/ProductDetailsPage/ProductDetailsPage.jsx';
 
 const App = () => {
 
@@ -28,7 +28,7 @@ const App = () => {
             <Route path='/products/:category' element={<ProductsPage />} />
 
             {/* Routes that show product details for a given product via id */}
-            <Route path='/products/:category/:id' element={<ProductDetails />} />
+            <Route path='/products/:category/:id' element={<ProductDetailsPage />} />
             {/*<Route path='/products/all/:id' element={<ProductDetails />} /> */}
 
           </Route>
