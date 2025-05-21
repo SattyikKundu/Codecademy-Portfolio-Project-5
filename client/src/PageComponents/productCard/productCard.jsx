@@ -17,11 +17,9 @@ const Product = ({product}) => {
     const [stockMessage, setStockMessage] = useState('In Stock'); // Message on product's stock
     const [stockState, setStockState]     = useState('stocked');  // used to define style for <div> holding stockMessage
 
-    // Normalize category (used to create product )
+    // Normalize category (used to create product)
     const { category: rawCategory } = useParams();  // returns value of '/:category' parameter from url route 
     const category = rawCategory || 'all';         // if rawCategory is undefined, set to 'all' (which is supported in backend)
-
-    //const category = product.category || 'all'; // returns product category (or use placehodler 'all' if no category present)
 
     const [productDetailsLink, setProductDetailsLink]  = useState(''); // used to store the link to product details page
 
@@ -31,7 +29,6 @@ const Product = ({product}) => {
 
         if (category && product.id) { // If product has both id and category
             detailsLink = `/products/${category}/${product.id}`;
-            //console.log('Final detail link path: ', detailsLink);
             setProductDetailsLink(detailsLink);
         }
         else { // throw error if product id is unavailable
@@ -51,15 +48,15 @@ const Product = ({product}) => {
             setStockState('stocked');
         }
         else if (product.stock<=10 && product.stock>1) {
-            setStockMessage(`Only ${product.stock} left`);
+            setStockMessage(`Only ${product.stock} left!`);
             setStockState('low');
         }
-        else if (product.stock===0) {
+        else if (product.stock===0 || product.stock===null) {
             setStockMessage('Out of Stock');
             setStockState('none');
         }
         else { // throw error if stock value invalid/unavailable
-            console.error(`Unable to retrieve stock of ${stock.display_name}`);
+            console.error(`Unable to retrieve stock of ${product.display_name}`);
             throw error; 
         }
     }
@@ -78,14 +75,12 @@ const Product = ({product}) => {
       <>
         <div className="product-card">
             <div className="product-info-wrapper" onClick={()=>clickForDetails()}>
-                {/*<Link to={productDetailsLink} className="no-link-style">*/}
                 <div className="image-wrapper">
                     <img src={imgPath} alt={product.display_name} className="product-image" />
                 </div>
                 <div className='product-name'>
                     {product.display_name}
                 </div>
-                {/* </Link> */}
             </div>
             <div className="price-and-stock">
                 <div id='price'>

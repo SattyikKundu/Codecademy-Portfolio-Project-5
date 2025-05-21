@@ -2,62 +2,68 @@
 /********* Main container for image and all description fields **************/
 /****************************************************************************/
 
-.product-description-container {
+.product-description-container { /* Main container holding all product info and nested children */
     width: 90%;
-    max-width: 860px;
-    display: flex;
+    max-width: 860px; /* prevents container from being too wide */
+
+    display: flex; /* Nested children in column orientation */
     flex-direction: column;
 
-    margin: 30px auto auto auto;
+    margin: 30px auto auto auto; /* 30px margin from top (for space from menu) plus horizontal centering */
 
+    border-radius: 1.5rem; /* container border styling */
     border: 1px solid rgba(185, 185, 185, 0.781);
-    border-radius: 2rem;
 }
 
-.divider-bar {
-    height: 0.05rem;
-    width: 93%;
-    border-radius: 5px;
-    background-color: rgba(185, 185, 185, 0.781);
-    margin: 0 auto 0.5rem auto;
-
-}
 
 /****************************************************************************/
 /****** Styling for image & desription (part1) - both in same <div> *********/
 /****************************************************************************/
 
-.image-and-data1-wrapper { /* Wrapper for both image and part1 of all product description data*/
+.image-and-part-1-data-wrapper { /* Wrapper for both image and part1 of all product description data */
     width: 95%;
-    height: auto;
+    height: auto; 
     display: flex;
-    flex-direction: row; /* image and part-1 data is side-by-side */
+    flex-direction: row; /* .product-image and .part-1-data is side-by-side */
     margin: auto;
 }
 
-.image-full-wrapper { /* wrapper holds image*/
-    width: 45%;
-    aspect-ratio: 1; /* Ensures wrapper has 'square' shape just like image */
-    border: 1px solid grey;
-    border-radius: 5%;
-    overflow: hidden; 
-    margin: 3% 2% 3% 1%; 
+.product-image-wrapper { /* product image wrapper that holds image (placed on leftside of part-1 data) */
+
+    margin: 3% 2% 3% 1%; /* white space marging around image (wrapper) */
+    
+    width: 45%; /* space taken for image (whilst leaving space on right for part-1 data) */
+    max-width: 340px;
+    /*aspect-ratio: 1; /* Ensures wrapper has 'square' shape just like image */
+
+    border-radius: 1rem; /* border styling */
+    border: 1.5px solid rgb(99, 99, 99);
+    overflow: hidden; /* hides portions of nested <img> from overflowing past border */
+    
+    height: auto; /* container height grows and matches container */               
+    background-color: rgb(165, 165, 165); /* container background color around nested image for visual differentiation and contrast */
+    
+    /*fit-content; /**/
+
+    display: flex; /*Needed to vertically align <img> via align-items*/
+    align-items: center; /* vertically aligns nested image container as screen dimensions change */
+    /*justify-content: center;*/
 }
 
-.product-image { /* styling of image itself */
+
+.product-image { /* Nested product image matches width of parent container */
     width: 100%;
-    aspect-ratio: 1;
-    height: auto;
 }
 
-.data-part-1 {
+.part-1-data { /* container for part-1 product data */
     width: 50%;
     display: flex;
     flex-direction: column;
     margin: auto;
+    margin-top: 3%;
 }
 
-.field-row {
+.field-row { /* container for various data field labels and associated data */
     display: flex;
     flex-direction: row;
     font-family: Arial, Helvetica, sans-serif;
@@ -66,51 +72,289 @@
     margin-bottom: 0.5rem;
 }
 
-.last-row  { border-bottom: none; } /**/
+.last-row { border-bottom: none; } /* Removes border bottom in last data row in part-1 data */
 
-.field-row .field {
+.field-row .field { /* styling for field row data labels */
     font-weight: bold;
-    width: 45%;
-    
+    width: 42%;
+    margin-right: 5%;
 }
 
-.field-row .info {
-    width: 55%;
+.field-row .info { /* styling for field row data information*/ 
+    width: 53%;
+}
+
+@media screen and (max-width:599px) { /*Modify image and part-1 data orientation and styling for under 600px screen width */
+
+    .image-and-part-1-data-wrapper { /* Now, image and part-1 data in column orientation */
+       flex-direction: column;
+    }
+
+    .product-image-wrapper { /* With part-1 data underneath, ajust image (wrapper) dimensions */
+
+        height: fit-content; /* height now matches nested image (full 'square' container now)*/
+        max-width: 440px; /* Updated max-width of wrapper (hence image) */
+
+        margin: 8% auto 5% auto; /* Updated spacing around image (wrapper) and vertically centers image*/
+    }
+
+    .product-image-wrapper, .part-1-data { 
+        width: 95%; /* With now column orientation, width is 95% of parent wrapper container's width */
+    }
+
+    .part-1-data .field-row .field { /*In column orientation, adjust field label's width*/
+        width: 55%;
+    }
+    .part-1-data .field-row .info { /*In column orientation, adjust field data's width*/
+        width: 45%;
+    }
+}
+
+@media screen 
+    and (min-width: 600px) 
+    and (max-width: 767px) { /* Between 600-767px screen width, adjust part-1 data's font-size to better fit text*/
+
+        .part-1-data .field-row {
+            font-size: clamp(0.8rem, 0.95rem, 1rem);
+        }
 }
 
 /****************************************************************************/
+/****** Divider bar between (Image + part1 data) and part 2 data ************/
+/****************************************************************************/
+
+.divider-bar-1 { /* Seperate 'line' between part1 and part2 data */
+    height: 0.05rem;
+    width: 90%;
+    border-radius: 5px;
+    background-color: rgba(185, 185, 185, 0.781);
+    margin: 0 auto 0.5rem auto;
+}
+
 /****************************************************************************/
 /****** Styling for part 2 description (which varies a little ***************/
 /****** between fishes/invertebrates and corals and anemones) ***************/
 /****************************************************************************/
-/****************************************************************************/
 
-.data-part-2 {
+.data-part-2 { /* General container for part 2 data */
     display: flex;
     flex-direction: column;
-    width: 90%;
+    width: 93%;
     margin: auto;
 }
 
-.field-col {
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-    display: flex;
-    flex-direction: column;
-
+.data-part-2 .field-row { /* Ensures bottom margin & padding for .field-row in .part-2 marches those of .part-1 */
+    padding-bottom: 0.25rem !important; /* without !important, it's overrriden somehow... */
+    margin-bottom: 0.5rem !important;
 }
 
-.field-col .field {
+.data-part-2 .field-row .field { /* Field label width for >=600px*/
+    width: 60%;
+}
+.data-part-2 .field-row .info { /* Field data width for >=600px*/
+    width: 40%;
+}
+
+.field-col { /* Holds product description(about) and label*/
+    
+    margin-bottom: 0.5rem; /* Space below 'about' description */
+    padding-bottom: 0.5rem;
+
+    display: flex; /* Field label above 'About' description */
+    flex-direction: column;
+
+    border-bottom: 1px solid rgba(187, 187, 187, 0.76);
+}
+
+.field-col .field { /* 'About this Species:' label */
     font-weight: bold;
     font-family: Arial, Helvetica, sans-serif;
+    margin-top: 0 !important;
     margin-bottom: 0.33rem;
 }
 
-.field-col .info {
+.field-col .info { /* 'About this Species' long description */
     font-family: Arial, Helvetica, sans-serif;
+}
+
+@media screen and (max-width:599px) { /* With change in image and part-1 orientation from row to column, adjust part-2 data to match styling */
+
+    .data-part-2 .field-row { /* matches widths of data-part-1 container's field-row */
+        margin: auto;
+        width: 97%;
+    }
+
+    .data-part-2 .field-row .field {  /* matches .field width of data-part-1 */
+        width: 55%;
+    }
+
+    .data-part-2 .field-row .info {  /* matches .field width of data-part-2 */
+        width: 45%;
+    }
+
+    .field-col {    /* also matches widths of data-part-1 container's field-row */
+        width: 97%;
+        margin: auto;
+    }
+
+    .field-col .field { /* extra space above 'About this Species:' field label */
+        margin-top: 0.5rem;
+    }
 }
 
 /****************************************************************************/
 /****** Styling for price, stock notice, and 'Add to Cart' button ***********/
 /****************************************************************************/
+
+.price-stock-cart { /* Container for price, stock notice, and add-to-cart button */
+    display: flex;
+    flex-direction: row;
+    align-items: center;      /* vertically center items in flex */
+    justify-content: center;  /* horizontally center items in flex */
+    margin: auto;
+
+    width: 93%;
+}
+
+@media screen and (max-width:599px) {
+    .price-stock-cart {
+        flex-direction: column;
+    }
+} 
+
+/****************************************************************************/
+/************* Styling for price and stock notice ***************************/
+/****************************************************************************/
+
+.price-stock { /* subcontainer holding price and stock left notice*/
+
+    display: flex; /* 'price' and 'stock' in row orientation */
+    flex-direction: row;
+    flex-shrink: 1; /* 'price' and 'stock' comes closer when screen width narrows */
+
+    width: 60%; 
+    margin: 3% 3% 3% 0;
+}
+
+@media screen and (max-width: 599px) {
+    .price-stock{
+        width: 100%;
+        margin: 3%;
+    }
+}
+
+
+#price-notice { /* styling for price */
+
+    display: flex; /* horizontally centers 'price' text in container */
+    justify-content: center;
+    width: 50%;
+
+    font-size: 2rem;
+    font-weight:bold;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#stock-notice { /* styling for stock remaining message */
+    
+    display: flex; /* horizontally centers 'stock-notice' text in container */
+    justify-content: center;
+    width: 50%;
+
+    text-align: center;
+
+    font-size: 2rem;
+    font-weight:bold;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.stocked, .low, .none { /* general styling for 3 messages based on product's stock */
+    font-size: 1rem;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.stocked, .low { color: green; }
+.none{ color:red; }
+
+@media screen and (max-width: 599px) {
+    #stock-notice {
+        text-align: center;
+    }
+}
+
+/****************************************************************************/
+/****** Divider bar between (price + stock notice) and cart button *********/
+/****** This divider is active ONLY when screen width is <600px *************/
+/****************************************************************************/
+
+.divider-bar-2 { /* Seperate 'line' between (price + stock notice) and cart button */
+    display: none; /* not on display be default */
+    height: 0.05rem;
+    width: 97%;
+    border-radius: 5px;
+    background-color: rgba(185, 185, 185, 0.781);
+    margin: 0 auto 0.5rem auto;
+}
+
+@media screen and (max-width: 599px) { /* divider displayed ONLY when <600px width */
+    .divider-bar-2 {
+        display: block;
+    }
+}
+
+/****************************************************************************/
+/*************** Full styling for  'Add to Cart' button *********************/
+/****************************************************************************/
+
+.add-to-cart-button-wrapper { /* wrapper that holds button */
+    width: 40%;
+    display: flex;
+    justify-content: center; /* hortizontally centering of wrapper via flex*/
+    margin-right: 3%;
+}
+
+@media screen and (max-width: 599px) {
+    .add-to-cart-button-wrapper { 
+        width: 100%;
+        margin: 1.5% auto 3% auto;
+    }
+}
+
+.add-to-cart-button { /* styling for 'add to cart' button */
+
+    display: flex;
+    /*justify-content: center; /* horizontal centering via flex*/
+    /*align-items: center;/**/
+
+    width: 220px; /* button dimensions & border*/
+    height: 3rem;
+    border: 1.5px solid black;
+    border-radius: 10px;
+
+    color: rgb(255, 255, 255);
+    background-color: #579aff;
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
+
+.add-to-cart-icon { /* styling of button's nested add-to-cart icon */
+    margin: auto 0 auto 15px;
+    height: 2rem;
+}
+
+#add-button-text{ /* styling of text in button */
+    font-size: 1.4rem;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+
+    margin: auto; /*Center 'Add To Cart' text */
+}
+
+.add-to-cart-button:hover { /* button color on hover */
+    background-color: #a557ff;
+}
+
+.add-to-cart-button:active { /* button on press */
+    transform: scale(0.9);
+    transition: 0.2s;
+}
 

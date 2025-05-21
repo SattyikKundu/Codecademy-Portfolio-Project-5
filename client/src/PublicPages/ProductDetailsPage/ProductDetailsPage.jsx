@@ -18,6 +18,10 @@ const ProductDetails = () => {
     const [productData, setProductData] = useState(null); // holds product's data
     const [imagePath, setImagePath] = useState(null);     // holds file path to product image
 
+    const [stockMessage, setStockMessage] = useState('In Stock'); // Message on product's stock
+    const [stockState, setStockState]     = useState('stocked');  // used to define style for <div> holding stockMessage
+
+
     const [loading, setLoading] = useState(true); // tracks if page is loading
     const [error, setError] = useState(null); // tracks caught errors
 
@@ -51,6 +55,41 @@ const ProductDetails = () => {
         }
     }
 
+    const checkStockState = () => { // function checks products stock and return message
+        if(productData.stock > 10) {
+            setStockMessage('In Stock');
+            setStockState('stocked');
+        }
+        else if (productData.stock<=10 && productData.stock>1) {
+            setStockMessage(`Only ${productData.stock} left!`);
+            setStockState('low');
+        }
+        else if (productData.stock===0 || productData.stock===null) {
+            setStockMessage('Out of Stock');
+            setStockState('none');
+        }
+        else { // throw error if stock value invalid/unavailable
+            console.error(`Unable to retrieve stock of ${productData.display_name}`);
+            throw error; 
+        }
+    }
+
+    const setProductCategory = () => {
+        if (productData.category === 'fishes') {
+            setDisplayCategory('Fishes');
+        } 
+        else if (productData.category === 'invertebrates') {
+            setDisplayCategory('Invertebrates');
+        } 
+        else if (productData.category === 'corals_&_anemones') {
+            setDisplayCategory('Corals & Anemones');
+        }
+        else { // throw error if category value invalid/unavailable
+            console.error(`Invalid category for ${productData.display_name}: `,productData.category);
+            throw error; 
+        }
+    }
+
 
     useEffect(() => { // fetches product's details on mount
         fetchProductDetails();
@@ -63,13 +102,12 @@ const ProductDetails = () => {
         }
 
         if (productData && productData.category) { // changes category value formatting for display 
-            if (productData.category === 'fishes') {
-                setDisplayCategory('Fishes');
-            } else if (productData.category === 'invertebrates') {
-                setDisplayCategory('Invertebrates');
-            } else if (productData.category === 'corals_&_anemones') {
-                setDisplayCategory('Corals & Anemones');
-            }
+            setProductCategory();
+        }
+
+        /* Check if productData.stock has number, 0, or null before updating product's stock notice */
+        if (productData && (productData.stock === 0 || productData.stock || productData.stock === null)) { 
+            checkStockState();
         }
     }, [productData]); // triggers on productData change (especially for going from null)
 
@@ -79,11 +117,24 @@ const ProductDetails = () => {
         {
             (!loading && productData) && (
                 <div className="product-description-container">
-                    <div className="image-and-data1-wrapper">
-                        <div className="image-full-wrapper">
+                    <div className="image-and-part-1-data-wrapper">
+                        <div className="product-image-wrapper">
                             <img src={imagePath} alt={productData.display_name} className="product-image" />
                         </div>
-                        <div className="data-part-1">
+                        {/* Product Fields covered in Part 1 data (for all categories): 
+                          *   Product's display name:     productData.display_name
+                          *   Common alternative names:   productData.other_names 
+                          *   Scientific name:            productData.sci_name  
+                          *   Category:                   productData.category => converted via setDisplayCategory() => displayCategory
+                          *   Species type:               productData.species_type
+                          *   Tank roles:                 productData.tank_roles
+                          *   Temperament:                productData.temperament
+                          *   General care level needed:  productData.care_level
+                          * 
+                          *   NOTE: some field values are wrapped with <ReactMarkdown></ReactMarkdown> to 
+                          *         format text portions in PostgreSQL into italics(from *text*) or bold(from **text**).
+                          */}
+                        <div className="part-1-data">
                             <div className="field-row">
                                 <div className="field">Name: </div>
                                 <div className="info">{productData.display_name}</div>
@@ -120,17 +171,35 @@ const ProductDetails = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="divider-bar" />
+                    <div className="divider-bar-1" />
+                        {/* Product Fields covered in Part 2 data (for all or chosen categories): 
+                          * For Fish and Invertebrates:                 
+                          * Average Adult Size in Captivity:     productData.avg_adult_size
+                          * Reef Safe:                           productData.reef_safe
+                          *
+                          * For Corals & Anemones: 
+                          * Lighting needs:             productData.lighting_needs
+                          * Flow needs:                 productData.flow_needs
+                          * Placement Advice:           productData.placement_advice
+                          *        
+                          * For All:
+                          * About:                      productData.about
+                          * Stock:                      productData.stock ==> converted via checkStockState() ==> stockMessage
+                          * Price:                      productData.price
+                          *        
+                          * NOTE: Like before, some field values are wrapped in <ReactMarkdown></ReactMarkdown>
+                          *       to handle text bolding and italicization.
+                          */}
                     <div className="data-part-2">
-                        {(displayCategory===('Fishes' || 'Invertebrates')) 
+                        {(displayCategory===('Fishes') || displayCategory===('Invertebrates')) 
                         && (
                             <>
                             <div className="field-row">
-                                <div className="field text-mid">Average Adult Size in Captivity: </div>
+                                <div className="field">Average Adult Size in Captivity: </div>
                                 <div className="info">{productData.avg_adult_size}</div>
                             </div>
                             <div className="field-row">
-                                <div className="field text-mid">Reef Safe(Is species safe for corals?): </div>
+                                <div className="field">Reef Safe(Is species safe for corals?): </div>
                                 <div className="info">{productData.reef_safe}</div>
                             </div>
                             </>
@@ -140,15 +209,15 @@ const ProductDetails = () => {
                         && (
                             <>
                             <div className="field-row">
-                                <div className="field text-mid">Lighting Needs: </div>
+                                <div className="field">Lighting Needs: </div>
                                 <div className="info"><ReactMarkdown>{productData.lighting_needs}</ReactMarkdown></div>
                             </div>
                             <div className="field-row">
-                                <div className="field text-mid">Water Flow Needs: </div>
+                                <div className="field">Water Flow Needs: </div>
                                 <div className="info"><ReactMarkdown>{productData.flow_needs}</ReactMarkdown></div>
                             </div>
                             <div className="field-row">
-                                <div className="field text-mid">Placement Advice: </div>
+                                <div className="field">Placement Advice: </div>
                                 <div className="info"><ReactMarkdown>{productData.placement_advice}</ReactMarkdown></div>
                             </div>
                             </>
@@ -158,45 +227,23 @@ const ProductDetails = () => {
                             <div className="field">About this Species: </div>
                             <div className="info"><ReactMarkdown>{productData.about}</ReactMarkdown></div>
                         </div>
-                        {/*
-                            For fish/invert: 
-                            Average Adult Size in Captivity:
-                            Reef Safe(Is species safe for corals?): 
-                        
-                            For corals/anemones: 
-                            Lighting needs:
-                            Flow needs:
-                            Placement Advice:
-
-                            For All:
-                            About:
-
-                            Stock, price, add to cart button
-
-                        */}
                     </div>
                     <div className="price-stock-cart">
                         <div className="price-stock">
-                            <div className="price">
-                                {productData.price}
+                            <div id="price-notice">
+                                ${productData.price}
                             </div>
-                            <div className='stock'>
-                                To be added...
+                            <div id='stock-notice' className={`${stockState}`}>
+                                {stockMessage}
                             </div>
                         </div>
+                        <div className="divider-bar-2" />
                         <div className="add-to-cart-button-wrapper">
                             <div className="add-to-cart-button">
                                 <FontAwesomeIcon icon={faCartPlus} className="add-to-cart-icon" />
-                                <div id='add-button-text'>Add to Cart</div>
+                                <div id='add-button-text'>Add To Cart</div>
                             </div>
                         </div>
-                    {/*
-                    <div className="add-button-wrapper">
-                        <div className="add-button">
-                        <FontAwesomeIcon icon={faCartPlus} className="add-cart-icon" />
-                        <div id='button-text'>Add to Cart</div>
-                    </div>
-                */}
                     </div>
                 </div>
             )
@@ -206,3 +253,4 @@ const ProductDetails = () => {
 }
 
 export default ProductDetails;
+
