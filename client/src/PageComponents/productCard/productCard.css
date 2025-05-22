@@ -118,7 +118,7 @@
     margin: 0 5% 5% 5%;
 }
 
-.add-button { /* styling for 'add to cart' button */
+.add-button, .add-button-disabled { /* general styling for 'add to cart' button and it's disabled version */
 
     display: flex;
     flex-direction: row;
@@ -128,12 +128,35 @@
     border: 1.5px solid black;
     border-radius: 10px;
 
+    /*
     color: rgb(255, 255, 255);
     background-color: #579aff;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s; */
     cursor: pointer;
 
     position: relative;
+}
+
+.add-button { /* button style(s) when active */
+    color: rgb(255, 255, 255);
+    background-color: #579aff;
+    transition: background-color 0.3s;
+}
+
+.add-button:hover {
+    background-color: #a557ff;
+}
+
+.add-button:active {
+    transform: scale(0.9);
+    transition: 0.2s;
+}
+
+
+.add-button-disabled { /* button style when disabled*/
+    color: rgb(245, 245, 245);
+    background-color: #808080;
+    transition: background-color 0.3s;
 }
 
 .add-cart-icon {
@@ -149,11 +172,3 @@
     margin: auto;
 }
 
-.add-button:hover {
-    background-color: #a557ff;
-}
-
-.add-button:active {
-    transform: scale(0.9);
-    transition: 0.2s;
-}

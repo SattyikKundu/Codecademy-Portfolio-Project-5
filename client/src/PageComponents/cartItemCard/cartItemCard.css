@@ -1,0 +1,119 @@
+/***************************************************************/
+/**** General styling for cart item wrapper and content ********/
+/***************************************************************/
+
+.cart-item-wrapper { /* wrapper for cart item */
+    width: 100%;
+    height: 150px;
+    display: flex;
+    flex-direction: row;
+}
+
+.cart-item-content { /*content within wrapper*/
+    margin: 2%; /* margin around content from wrapper's edge */
+}
+
+/***************************************************************/
+/************ Styling for image and image wrapper **************/
+/***************************************************************/
+
+.cart-item-img-wrapper { /* image wrapper */
+    width: 100px;
+    height: 100px;
+    aspect-ratio: 1;
+    overflow: hidden;
+}
+
+.cart-item-image { /* styling of image itself*/
+    aspect-ratio: 1;
+    height: 100%;
+    width: auto;
+}
+
+/***************************************************************/
+/************ Styling for info and buttons container ***********/
+/***************************************************************/
+
+.cart-item-info-buttons { /* wrapper holds cart item data AND buttons*/
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.cart-item-info { /* wrapper for cart item info */
+    display: flex;
+    flex-direction: column;
+}
+
+#cart-item-name { /* cart item's name */
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+}
+
+#cart-item-price-total { /* cart item's total price fur current quantitiy */
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.5rem;
+}
+
+#cart-item-price-each { /* price for EACH cart item */
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.33rem;
+    color: grey;
+}
+
+/***************************************************************/
+/******* Styling for add and decrease quantity buttons *********/
+/***************************************************************/
+
+.cart-item-buttons { /* container for increase/decrease buttons 
+                        as well as current product quantitity */
+    display: flex;
+    flex-direction: row;
+}
+
+.decrease-by-one, 
+.increase-by-one,
+.diable-decrease,
+.diable-increase {  /* general styling for quantity increase and decrease
+                       buttons as well as for their disabled button counterparts */
+    
+    border-radius: 50%; /* make button have a 'circle' border for circle button */
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.4rem;
+}
+
+.decrease-by-one, 
+.increase-by-one { /* styling for increase and decrease buttons */
+    color: black;
+    border: 1px solid black;
+    background-color: antiquewhite;
+}
+.decrease-by-one:active, 
+.increase-by-one:active { /*decrease size on press*/
+    transform: scale(0.95);
+}
+
+.diable-decrease, 
+.diable-increase { /* styling for disabled increase and decrease button */
+    color: rgb(218, 218, 218);
+    border: 1px solid rgb(61, 61, 61);
+    background-color: rgb(83, 83, 83);
+}
+
+.cart-quantity { /*current cart quantity */
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.5rem;    
+}
+
+/***************************************************************/
+/******* Styling for button to delete item from cart ***********/
+/***************************************************************/
+
+.delete-item-button {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+    color: black;
+    background-color: grey;
+    border: 1px solid black;
+    border-radius: 3px;
+}

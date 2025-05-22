@@ -1,6 +1,4 @@
-import {createAsyncThunk, 
-        createSlice 
-        } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 
 const cartSlice = createSlice({
@@ -9,18 +7,25 @@ const cartSlice = createSlice({
         products: []
         /* 
          * Each 'product' in cart store is formatted with following fields:
-         *  [{ productId, imageFileName, name, quantity, priceEach, priceTotal, quantityLimit },....]
+         *  [{ productId, imageFilePath, name, quantity, priceEach, priceTotal, quantityLimit },....]
          * 
          * As an example:
-         *  { productId:'1', imageFileName:'diamond_goby.png' , name:'Diamond Goby', 
-         *    quantity:'5', priceEach:'40.00', priceTotal:'200.00', maxQuantity:'10' }
+         *  { 
+         *    productId:'1', 
+         *    imageFilePath:'http://localhost:5000/images/diamond_goby.png' , 
+         *    name:'Diamond Goby', 
+         *    quantity:'5', 
+         *    priceEach:'40.00', 
+         *    priceTotal:'200.00', 
+         *    maxQuantity:'10' 
+         *  }
          */
     },
     reducers: {
-        getAllProducts(state) { // returns all products for display in cart
-                return state.products
+        getAllCartItems(state) { // returns all products for display in cart
+                return state.products;
         },
-        addProduct(state, action) { // add product to cart
+        addToCart(state, action) { // add product to cart
 
             const newProduct = action.payload; // save added product
 
@@ -46,7 +51,7 @@ const cartSlice = createSlice({
                 })
             }
         },
-        deleteProduct(state, action) { // delete product from cart after clicking 'x' button
+        deleteFromCart(state, action) { // delete product from cart after clicking 'x' button
             const id = action.payload.productId;    // get product's id
 
             state.products = state.products.filter( // filter and return all product without matching id 
@@ -79,9 +84,22 @@ const cartSlice = createSlice({
     }
 });
 
-export const {getAllProducts,
-              addProduct, 
-              deleteProduct, 
+export const selectProductQuantityById = (state, id) => { // return quantity of specific item (by id)
+
+    const matchedProduct = state.cart.products.find( // find product with matching product id
+                            product => product.productId === id
+                           ); 
+                           
+    return (matchedProduct // return product quanitity (if product undefined/null, return 0 by default)
+            ? matchedProduct.quantity 
+            : 0
+        ); 
+}
+
+export const {
+              getAllCartItems,
+              addToCart, 
+              deleteFromCart, 
               increaseByOne, 
               decreaseByOne
             } = cartSlice.actions;
