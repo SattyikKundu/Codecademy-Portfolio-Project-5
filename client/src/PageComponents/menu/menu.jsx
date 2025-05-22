@@ -23,7 +23,7 @@ const Menu = ({toggleCart}) => {
           <MenuSearch />
           <ProfileButton />
           <CartButton
-          toggleCart={toggleCart}
+            toggleCart={toggleCart}
           />
         </div>
     );

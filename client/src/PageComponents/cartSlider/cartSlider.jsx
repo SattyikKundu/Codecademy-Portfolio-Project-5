@@ -1,6 +1,5 @@
-import React from "react";
 
-import "./cart.css";
+import "./cartSlider.css";
 
 const CartSlider = ({cartSliderOpen, toggleCart}) => { // cart slider shows when user clicks on cart button
 

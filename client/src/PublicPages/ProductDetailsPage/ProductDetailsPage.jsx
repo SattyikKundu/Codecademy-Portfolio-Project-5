@@ -109,7 +109,7 @@ const ProductDetailsPage = () => {
     return (
         <>
         {error && <h1>{error}</h1>}
-        {/* Need conditions below to prevent page from prematurely failing */}
+        {/* Need conditions below to prevent page from prematurely failing (being blank) */}
         {
             (!loading && productData) && (
             <ProductDetails 

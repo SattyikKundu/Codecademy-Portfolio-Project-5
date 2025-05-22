@@ -12,14 +12,15 @@
     width: 100%;    /* overlay covers entire screen's content */
     height: 100%;    
 
-    background: #afafaf83; /* grey background around overlay */
+    background: #47474783; /* grey background around overlay */
+    /*background: #707070; /* grey background around overlay */
 
     display: flex;           /* Ensures that main nested overlay is centered */
     justify-content: center; /* Center horizontally */
     align-items: center;     /* Center vertically */
 
     transform: translateX(100%); /* For smooth transition sliding (off-screen/closed by default) */
-    transition: transform 0.25s ease-in-out;
+    /*transition: transform 0.25s ease-in-out;/**/
 }
 
 .cart-slider-overlay.active{ /* overlay slides into view (with cart slider) when cart button clicked */
