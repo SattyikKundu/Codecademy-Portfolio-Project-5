@@ -1,16 +1,30 @@
+/****************************************************************************/
+/********** Main wrapper class for holding products *************************/
+/****************************************************************************/
 
-.products-wrapper { /*Wrapper for products display grid*/
-
-    margin: auto;
+.products-wrapper { /* Wrapper for products display grid */
+    margin: 30px auto auto auto;
     width: 90%;
     max-width: 900px;
 }
 
+ /* fixes scaled wrapper and top-margin for smaller screens for better visuals*/
 @media screen and (max-width: 800px) {
   .products-wrapper {
     width: 85%;
   }
 }
+@media screen and (max-width: 480px) {
+  .products-wrapper{
+    margin-top: 60px;
+  }
+}
+
+/****************************************************************************/
+/********** Various grids for product presentation **************************/
+/****************** across various screen sizes *****************************/
+/****************************************************************************/
+
 
 .products-grid { /* Actual styling to enable grid display */
     display: grid;

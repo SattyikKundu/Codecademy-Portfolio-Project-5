@@ -9,12 +9,18 @@
     display: flex; /* Nested children in column orientation */
     flex-direction: column;
 
-    margin: 30px auto auto auto; /* 30px margin from top (for space from menu) plus horizontal centering */
+    margin: 100px auto auto auto; /* 100px margin from top (accounts for (for space from menu) plus horizontal centering */
 
     border-radius: 1.5rem; /* container border styling */
     border: 1px solid rgba(185, 185, 185, 0.781);
 }
 
+@media screen and (max-width: 599px) { /* change top-margin and details width for table and smaller screen sizes */
+    .product-description-container { 
+        width: 80%;
+        margin-top: 90px;
+    }
+}
 
 /****************************************************************************/
 /****** Styling for image & desription (part1) - both in same <div> *********/
@@ -248,6 +254,7 @@
 
     display: flex; /* horizontally centers 'price' text in container */
     justify-content: center;
+    align-items: center; /* vertically centers text */
     width: 50%;
 
     font-size: 2rem;
