@@ -11,6 +11,7 @@
     background-color:beige;
     box-shadow: 0px 1px 8px rgb(146, 146, 146); /* Shadow border under menu */
 
+    top: 0;
     position: fixed; /*enables menu to 'float' at top of viewport (for better user experience) */
 }
 
