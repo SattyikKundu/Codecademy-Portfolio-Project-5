@@ -3,7 +3,7 @@
 /*****************************************************************************/
 
 .cart-slider-overlay { 
-    position: fixed; /* enables overall overlay to 'float' on top of content */
+    /*position: fixed; /* enables overall overlay to 'float' on top of content */
     z-index: 5;
 
     top: 0;         /* Ensures overlay background starts from top-left in order to expand and cover page*/
@@ -114,6 +114,25 @@
         font-size: 1.75rem;
     }
 }
+
+@media screen and (max-width: 460px) {  /* Shrinks text due to being too large for smaller screens*/
+    #empty-cart-notice {
+        font-size: 1.66rem;
+    }
+}
+
+@media screen and (max-width: 370px) {  /* Shrinks text due to being too large for smaller screens*/
+    #empty-cart-notice {
+        font-size: 1.47rem;
+    }
+}
+@media screen and (max-width: 350px) {  /* Shrinks text due to being too large for smaller screens*/
+    #empty-cart-notice {
+        font-size: 1.25rem;
+    }
+}
+
+
 
 /*****************************************************************************/
 /********** Checkout button area styling *************************************/

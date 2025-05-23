@@ -47,7 +47,7 @@ const CartSlider = ({cartSliderOpen, toggleCart}) => { // cart slider shows when
             <div className="cart-header">
               { (products && products.length>0) ?
                 (`Your Cart (${totalQuantity})`):
-                ('Your Cart is Empty')
+                (<span id='empty-cart-notice'>Your Cart is Empty</span>)
               }
             </div>
             {/* Add close cart slider */}
@@ -72,7 +72,7 @@ const CartSlider = ({cartSliderOpen, toggleCart}) => { // cart slider shows when
                 }
               </div>
             </div>
-            {/* Initial Order Summary in Cart (slider) */}
+            {/* "Initial" Order Summary in Cart (slider) */}
             <div className='order-summary'>
               <div id='order-summary-header'>Order Summary</div>
               <div className='label-and-value'>

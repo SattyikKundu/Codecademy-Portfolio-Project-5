@@ -19,7 +19,7 @@ const AppPageLayout = () => {
         <div className="app-body">
             {console.log('Inside "return" of UniversalPageLayout ')}
             <Menu
-              toggleCart={toggleCart}//..
+              toggleCart={toggleCart}
             />
             <CartSlider 
               toggleCart={toggleCart}
