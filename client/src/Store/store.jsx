@@ -15,7 +15,7 @@ const loadFromLocalStorage = () => { // loads cart state from local storage (if 
             return undefined;
         } 
         else { // otherwise return stores cart state
-            JSON.parse(cartState);
+            return JSON.parse(cartState);
         }
     }
     catch(error) {
@@ -27,7 +27,7 @@ const loadFromLocalStorage = () => { // loads cart state from local storage (if 
 const saveToLocalStorage = (state) => { // save cart state to localStorage
     try {
         const cartState = JSON.stringify(state); // stringify state prior to storage
-        localStorage.setItem('cartState', serialized);
+        localStorage.setItem('cartState', cartState);
     }
     catch(error) {
         console.warn('Failed to save in localStorage', error);

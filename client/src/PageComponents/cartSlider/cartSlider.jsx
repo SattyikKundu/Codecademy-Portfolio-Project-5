@@ -6,12 +6,12 @@ import {
          useSelector  // reads values from store states and subscribes states to updates
         } from 'react-redux';
 
-import cartItemCard from "../cartItemCard/cartItemCard";
+import CartItemCard from "../cartItemCard/cartItemCard";
 
 const CartSlider = ({cartSliderOpen, toggleCart}) => { // cart slider shows when user clicks on cart button
 
   const dispatch = useDispatch();  // initilize dispatch to use 'cart' reducer methods
-  const products = useSelector((state) => state.cartSlice.products);
+  const products = useSelector((state) => state.cart.products);
 
   return (
       <>
@@ -19,10 +19,10 @@ const CartSlider = ({cartSliderOpen, toggleCart}) => { // cart slider shows when
         <div className={`cart-slider-wrapper ${cartSliderOpen && 'open'}`}>
           <div className="cart-slider-content">
             <div className="cart-items">
-              { (products && products.length>1) ? 
+              { (products && products.length>0) ? 
                 (
                  products.map((product) => ( // populate product cards based on products [] in cart state
-                  <cartItemCard product={product} />
+                  <CartItemCard product={product} key={product.productId} />
                  ))
                 ):(
                   <h1>Cart is Empty. Shop to Add Products....</h1>

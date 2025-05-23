@@ -7,7 +7,7 @@ const cartSlice = createSlice({
         products: []
         /* 
          * Each 'product' in cart store is formatted with following fields:
-         *  [{ productId, imageFilePath, name, quantity, priceEach, priceTotal, quantityLimit },....]
+         *  [{ productId, imageFilePath, name, quantity, unitPrice, totalPrice, quantityLimit },....]
          * 
          * As an example:
          *  { 
@@ -15,9 +15,9 @@ const cartSlice = createSlice({
          *    imageFilePath:'http://localhost:5000/images/diamond_goby.png' , 
          *    name:'Diamond Goby', 
          *    quantity:'5', 
-         *    priceEach:'40.00', 
-         *    priceTotal:'200.00', 
-         *    maxQuantity:'10' 
+         *    unitPrice:'40.00', 
+         *    totalPrice:'200.00', 
+         *    quantityLimit:'10' 
          *  }
          */
     },
@@ -38,7 +38,7 @@ const cartSlice = createSlice({
                     existingProduct.quantity += 1; // increment by one!
 
                     // After incrementing, update priceTotal
-                    existingProduct.priceTotal = (existingProduct.quantity * parseFloat(existingProduct.priceEach)).toFixed(2);
+                    existingProduct.totalPrice = (existingProduct.quantity * parseFloat(existingProduct.unitPrice)).toFixed(2);
                 }
             }
             else { // if product NOT in cart yet...
@@ -46,13 +46,13 @@ const cartSlice = createSlice({
                     ...newProduct, // add new product
                     quantity: 1,   // sets product.quantity to 1 
                                    // (overwrites existing 'quantity' value in 'newProduct') 
-                    priceTotal: parseFloat(newProduct.priceEach).toFixed(2) // sets product.priceTotal equal to priceEach 
+                    totalPrice: parseFloat(newProduct.unitPrice).toFixed(2) // sets product.priceTotal equal to priceEach 
                                                                 // (overwrites existing 'priceTotal' value in 'newProduct')  
                 })
             }
         },
-        deleteFromCart(state, action) { // delete product from cart after clicking 'x' button
-            const id = action.payload.productId;    // get product's id
+        deleteFromCart(state, action) { // delete product from cart after clicking 'x' button 
+            const id = action.payload.productId || action.payload; // get product's id (with a fallback)
 
             state.products = state.products.filter( // filter and return all product without matching id 
                         // (this leaves out the product with matching id, hence 'deleting' the product).
@@ -67,7 +67,7 @@ const cartSlice = createSlice({
 
             if (product && product.quantity < product.quantityLimit) { // then check if quantity is under the limit
                 product.quantity += 1; // finally update quantity and update priceTotal
-                product.priceTotal = (product.quantity * parseFloat(product.priceEach)).toFixed(2);
+                product.totalPrice = (product.quantity * parseFloat(product.unitPrice)).toFixed(2);
             }
         },
         decreaseByOne(state, action) {
@@ -78,7 +78,7 @@ const cartSlice = createSlice({
 
             if (product && product.quantity > 1) { // Only decrease if existing quanitity >1
                 product.quantity -= 1; // decrease and update priceTotal
-                product.priceTotal = (product.quantity * parseFloat(product.priceEach)).toFixed(2);
+                product.totalPrice = (product.quantity * parseFloat(product.unitPrice)).toFixed(2);
             }
         }
     }

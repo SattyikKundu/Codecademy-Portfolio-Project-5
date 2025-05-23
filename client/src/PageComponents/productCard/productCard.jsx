@@ -50,9 +50,9 @@ const Product = ({product}) => {
         'imageFilePath': imgPath, 
         'name':          product.display_name, 
         'quantity':      1, // default quantity amount added upon 'Add to Cart' click
-        'priceEach':     product.price,  
-        'priceTotal':    product.price, // initial placeholder (will be updated in cartSlice) 
-        'maxQuantity':   purchaseLimit
+        'unitPrice':     product.price,  
+        'totalPrice':    product.price, // initial placeholder (will be updated in cartSlice) 
+        'quantityLimit':   purchaseLimit
     }
 
     const handleAddToCart = () => { 
@@ -126,10 +126,12 @@ const Product = ({product}) => {
                 </div>
             </div>
             <div className="add-button-wrapper" onClick={ !disableAdd && (()=>handleAddToCart()) }>
-                {/* <div className={`add-button ${(disableAdd) ? "button-disabled": ""}`}> */}
-                <div className={(!disableAdd) ? "add-button" : "button-disabled"}>
+                {/*<div className={(!disableAdd) ? "add-button" : "button-disabled"}>*/}
+                <div className={`add-button ${(disableAdd) && 'button-disabled'}`}>
                     <FontAwesomeIcon icon={faCartPlus} className="add-cart-icon" />
-                    <div id='button-text'>Add to Cart</div>
+                    <div id='button-text'>
+                       { (!disableAdd) ? ('Add to Cart') : ("Can't Add More")} 
+                    </div>
                 </div>
             </div>
         </div>

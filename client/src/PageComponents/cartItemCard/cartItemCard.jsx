@@ -6,6 +6,7 @@ import {
 
 import { increaseByOne, 
          decreaseByOne,
+         deleteFromCart,
          selectProductQuantityById // selector method for finding products current quantity in cart
         } from '../../Slices/cartSlice.jsx';
 
@@ -20,27 +21,27 @@ const cartItemCard = ({product}) => {
         imageFilePath, 
         name, 
         quantity, 
-        priceEach, 
-        priceTotal, 
-        maxQuantity
+        unitPrice, 
+        totalPrice, 
+        quantityLimit
     } = product;
 
     const dispatch = useDispatch();  // initilize dispatch to use 'cart' reducer methods
     
     const handleIncrease = () => {
-        if(quantity < maxQuantity) {
-            dispatch(increaseByOne(productId));
+        if(quantity < quantityLimit) {
+            dispatch(increaseByOne({productId}));
         }
     }
 
     const handleDecrease = () => {
         if (quantity > 1) {
-            dispatch(decreaseByOne(productId));
+            dispatch(decreaseByOne({productId}));
         }
     }
 
     const handleDelete = () => {
-        dispatch(deleteFromCart(productId));
+        dispatch(deleteFromCart({productId})); //?? revie later...
     }
 
     return (
@@ -57,20 +58,20 @@ const cartItemCard = ({product}) => {
                 <div className='cart-item-info-buttons'>
                     <div className='cart-item-info'>
                         <div id='cart-item-name'>{name}</div>
-                        <div id='cart-item-price-total'>${priceTotal}</div>
-                        <div id='cart-item-price-each'>${priceEach}/item</div>
+                        <div id='cart-item-price-total'>${totalPrice}</div>
+                        <div id='cart-item-price-each'>${unitPrice}/item</div>
                     </div>
                     <div className='cart-item-buttons'>
                         <div 
-                            className={`decrease-by-one ${(quantity > 1) 
+                            className={`decrease-by-one ${(quantity <= 1) 
                                         ? "disable-decrease" 
                                         : "" }`
                                       }
                             onClick={()=>handleDecrease()}
-                        >—</div>
+                        >–</div>
                         <div className='cart-quantity'>{quantity}</div>
                         <div 
-                            className={`increase-by-one ${(quantity < maxQuantity) 
+                            className={`increase-by-one ${(quantity >= quantityLimit) 
                                         ? "disable-increase" 
                                         : "" }`
                                       }
