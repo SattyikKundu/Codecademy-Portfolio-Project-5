@@ -5,10 +5,10 @@ import { BrowserRouter as Router,  // provides routing functionality via browser
         } from 'react-router-dom'; // router library for creating and managing routes
 
 
-import AppPageLayout from '../PublicPages/AppPageLayout/AppPageLayout.jsx'; // Import page layout for entire App (very important!)
-import ProductsPage from '../PublicPages/ProductsPage/ProductsPage.jsx';    // imports <ProductsPage /> as home page route (shows all products)
+import AppPageLayout      from '../PublicPages/AppPageLayout/AppPageLayout.jsx'; // import page layout for entire App (very important!)
+import ProductsPage       from '../PublicPages/ProductsPage/ProductsPage.jsx';    // imports <ProductsPage /> as home page route (shows all products)
 import ProductDetailsPage from '../PublicPages/ProductDetailsPage/ProductDetailsPage.jsx';
-import CartPage from '../PublicPages/CartPage/CartPage.jsx';
+import CartPage           from '../PublicPages/CartPage/CartPage.jsx';
 
 const App = () => {
 

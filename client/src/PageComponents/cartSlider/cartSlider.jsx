@@ -59,7 +59,7 @@ const CartSlider = ({cartSliderOpen, toggleCart}) => { // cart slider shows when
                 { (products && products.length>0) ? 
                   (
                   products.map((product) => ( // populate product cards based on products [] in cart state
-                    <CartItemCard product={product} key={product.productId} />
+                    <CartSilderItemCard product={product} key={product.productId} />
                   ))
                   ):(
                     <h2
