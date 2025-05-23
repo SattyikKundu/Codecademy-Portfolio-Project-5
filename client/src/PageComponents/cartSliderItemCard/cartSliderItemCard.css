@@ -1,0 +1,246 @@
+/***************************************************************/
+/**** General styling for cart item wrapper and content ********/
+/***************************************************************/
+
+.cart-item-wrapper { /* wrapper for cart item */
+
+    display: flex; /* items in row orientation */
+    flex-direction: row;
+    justify-content: center;
+
+    width: 96%; /* cart item dimensions */
+    height: 150px;
+
+    background-color: rgb(188, 188, 255);
+    border: 1px solid transparent;/*rgba(105, 105, 105, 0.747);*/
+    box-shadow: 0px 0px 6px rgba(121, 121, 121, 0.5);
+    border-radius: 12px;
+    margin: 2% auto 2% auto;
+
+}
+
+.cart-item-content { /*content within wrapper*/
+    margin: 1px; /* margin around content from wrapper's edge */
+
+    border-radius: 12px;
+
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+
+    background-color: rgb(251, 252, 255);
+}
+
+/***************************************************************/
+/************ Styling for image and image wrapper **************/
+/***************************************************************/
+
+.cart-item-img-wrapper { /* image wrapper */
+    width: 25%;
+    max-width: 120px;
+    aspect-ratio: 1;
+    overflow: hidden;
+    border: 2px solid grey;
+    border-radius: 6px;
+    margin: auto 2% auto 2%;
+    box-shadow: 0px 0px 10px rgb(85, 85, 85);
+}
+
+.cart-item-image { /* styling of image itself*/
+    aspect-ratio: 1;
+    height: 100%;
+    width: auto;
+}
+
+@media screen and (max-width: 540px) { /* more space for image in smaller screens*/
+    .cart-item-img-wrapper {
+        width: 40%;
+    }
+}
+
+/***************************************************************/
+/************ Styling for info and buttons container ***********/
+/***************************************************************/
+
+.cart-item-info-buttons { /* wrapper holds cart item data AND buttons*/
+    display: flex;
+    flex-direction: column;
+    height: 80%;
+    width: 55%;
+    margin: auto 2% auto 2%;
+}
+
+.cart-item-info { /* wrapper for cart item info */
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+#cart-item-name { /* cart item's name */
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 1.5%;
+}
+
+
+#cart-item-price-total { /* cart item's total price fur current quantitiy */
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 2%;
+}
+
+#cart-item-price-each { /* price for EACH cart item */
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.9rem;
+    color: grey;
+    margin-bottom: 2%;
+}
+
+@media screen and (max-width: 610px) { /* Reduce font-soze to fit cart-item 
+                                          data on table screen size*/
+    #cart-item-name {
+        font-size: 1.05rem;
+    }
+    #cart-item-price-total {
+        font-size: 0.95rem;
+    }
+    #cart-item-price-each{
+        font-size: 0.8rem;
+    }
+}
+
+@media screen and (max-width: 360px) { /* Reduce font-soze to fit cart-item 
+                                          data on mobile screen size*/
+    #cart-item-name {
+        font-size: 0.95rem;
+    }
+    #cart-item-price-total {
+        font-size: 0.85rem;
+    }
+    #cart-item-price-each{
+        font-size: 0.8rem;
+    }
+}
+
+/***************************************************************/
+/******* Styling for add and decrease quantity buttons *********/
+/***************************************************************/
+
+.cart-item-buttons { /* container for increase/decrease buttons 
+                        as well as current product quantitity */
+    display: flex;
+    flex-direction: row;
+
+    height: 100%;
+    align-items: center; /* aligns buttons vertically */
+    margin-left: 0.5rem;
+
+     user-select: none; /* prevents (accidental) highlighting of text */
+    -webkit-user-select: none; /* For Safari */
+    -ms-user-select: none;     /* For IE10+ */
+}
+
+@media screen and (max-width: 420px) {
+    .cart-item-buttons {
+        margin-top: 0.5rem;
+    }
+}
+
+.decrease-by-one, 
+.increase-by-one,
+.disable-decrease, 
+.disable-increase {  /* general styling for quantity increase and decrease
+                       buttons as well as for their disabled button counterparts */
+    
+    border-radius: 25%; /* make button have a 'circle' border for circle button */
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.4rem;
+    font-weight: bold;
+
+    /*box-shadow: 0px 0px 4px grey;/*rgba(56, 131, 243, 0.842);*/
+
+
+    width: 1.4rem; /* button dimensions */
+    height: 1.4rem;
+    text-align: center; /* horizontally align buttons */
+
+    cursor: pointer;
+}
+
+.decrease-by-one, 
+.increase-by-one { /* styling for increase/decrease quantity buttons when active */
+
+    color: rgb(0, 0, 0); /* button's text and color styling */
+    border: 1px solid rgb(80, 80, 80);
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 0px 4px rgba(119, 119, 119, 0.801);
+}
+
+.disable-decrease, 
+.disable-increase { /* styling for increase/decrease quantity 
+                       buttons when inactive (or disabled) */
+
+    color: rgb(255, 255, 255);
+    border: 1px solid rgb(46, 46, 46);
+    background-color: rgba(85, 85, 85, 0.74);
+    box-shadow: 0px 0px 4px rgba(119, 119, 119, 0.801);
+
+    pointer-events: none;
+}
+
+.decrease-by-one:active, 
+.increase-by-one:active { /*decrease size on press*/
+    transform: scale(0.9);
+}
+
+
+.cart-quantity { /*current cart quantity */
+    font-family: Arial, Helvetica, sans-serif;
+    width: 30px;
+    text-align: center;
+    font-size: 1.4rem;    
+}
+
+/***************************************************************/
+/******* Styling for button to delete item from cart ***********/
+/***************************************************************/
+
+.delete-item-button {
+
+    height: 2.5rem; /* button dimensions and shape */    
+    aspect-ratio: 1;
+    border-radius: 20%;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2rem; /* font styling */
+
+    border: 1px solid black; /* border, text, and background color */
+    color: rgba(0, 0, 0, 0.637);
+    background-color: rgb(196, 196, 196);
+
+    display: flex; /* display and positioning styling */
+    margin: auto 3% auto 0;
+    justify-content: center; /* horizontally align text in flex*/
+    align-items: center;     /* vertically align text in flex*/
+
+    cursor: pointer;
+}
+
+.delete-item-button:hover { /* highlight delete button on hover */
+    color: rgba(230, 230, 230, 0.89);
+    background-color: rgb(94, 94, 94);
+}
+
+.delete-item-button:active { /* shrink button effect on press */
+    transform: scale(0.9);
+}
+
+@media screen and (max-width: 420px) { /* shrink delete button on smaller screen size*/
+    .delete-item-button {
+        height: 2rem;
+        font-size: 1.5rem;
+    }
+}
+

@@ -12,15 +12,14 @@
     width: 100%;    /* overlay covers entire screen's content */
     height: 100%;    
 
-    background: #47474783; /* grey background around overlay */
-    /*background: #707070; /* grey background around overlay */
+    background: #272727c9; /* grey background around overlay */
 
     display: flex;           /* Ensures that main nested overlay is centered */
     justify-content: center; /* Center horizontally */
     align-items: center;     /* Center vertically */
 
     transform: translateX(100%); /* For smooth transition sliding (off-screen/closed by default) */
-    /*transition: transform 0.25s ease-in-out;/**/
+    transition: transform 0.25s ease-in-out;/**/
 }
 
 .cart-slider-overlay.active{ /* overlay slides into view (with cart slider) when cart button clicked */
@@ -28,7 +27,7 @@
 }
 
 /*****************************************************************************/
-/********** Cart slider sytling **********************************************/
+/********** Cart slider styling **********************************************/
 /*****************************************************************************/
 
 .cart-slider-wrapper { /* Wrapper for cart */
@@ -60,21 +59,65 @@
 
 .cart-slider-content { /* Holds main content of Cart slider */
 
-    display: flex; /* items in flex-column orientation */
+    display: flex;      /* items in flex-column orientation */
     flex-direction: column;
-    position: relative; /* Needed for absolute positioning of 'close cart' button */
+    position: relative; /* Needed for absolute positioning of 'close cart' button (and the cart header) */
 
     width: 100%; /* size matches parent container */
     height: 100%;
 }
 
-.cart-items { /* Area where items added to cart are displayed */
-    margin: 3rem 1rem 0rem 1rem;
+.cart-items-wrapper { /* holds the .cart-items container for cart-item cards*/
+    
+    margin: 11% 1rem 0rem 1rem; /*cart items container dimensions */
     width: auto;
-    height: 85%;
-    border: 1px solid black;
-    overflow-y: scroll;
+    height: auto;/* Necessary to scale correctly for various (responsive) 
+                    screen heights and not have anything cut off */
+
+    border-radius: 10px; /* border styling */
+    border: 1px solid rgba(0, 0, 0, 0.45);
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.45);
+
+    overflow: hidden; /* MAIN reason for wrapper class: used to 'clip' vertical scroller 
+                         in .cart-item at the rounded corners */
 }
+
+.cart-items { /* Area where items added to cart are displayed */
+    width: 100%;
+    height: 100%;
+    overflow-y: auto; /* scroll triggers only when cart items exceed container size*/
+}
+
+
+@media screen and (max-width: 768px) { /* Fix top margin to make space for cart header */
+    .cart-items-wrapper {
+        margin-top: 56px;
+    }
+}
+
+/*****************************************************************************/
+/********** Cart Header styling **********************************************/
+/*****************************************************************************/
+
+.cart-header { /* Cart header styling */
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+@media screen and (max-width: 360px) { /* Resize cart header for smaller screen */
+    .cart-header{
+        top: 13px;
+        font-size: 1.75rem;
+    }
+}
+
+/*****************************************************************************/
+/********** Checkout button area styling *************************************/
+/*****************************************************************************/
 
 .cart-checkout-button-wrapper { /* button styling area */
     border: 1px solid black;
@@ -84,14 +127,112 @@
     align-self: center;
 }
 
+/*****************************************************************************/
+/********** Close cart button styling ****************************************/
+/*****************************************************************************/
+
 .close-cart { /*styling for 'close cart' button */
+
     position: absolute; /* keeps '🗙' button symbol on top-right of cart slider */
-    border: none;
-    color: rgba(120, 120, 120, 0.750);
+    right: 15px;
+    top:   10px;
+
+    padding: 0 4px 1.5px 4px; /* styles border and dimensions of close button */
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.45);
+    border-radius: 10px;
+
+    color: beige; /* text styling and background color */
+    background-color: rgba(120, 120, 120, 0.750) !important;
     font-size: 1.5rem;
-    background: transparent;
-    right: 10px;
-    top:   5px;
+
     cursor: pointer;
 }
 
+.close-cart span { /* prevents '🗙' from being too low*/
+    vertical-align: 1px;
+}
+
+.close-cart:hover { /* 'close cart' on hover */
+    background-color: rgba(75, 75, 75, 0.75) !important;
+    color: beige;
+}
+
+.close-cart:active { /* 'close cart' on press */
+    transform: scale(0.9);
+    transition: 0.3ms;
+}
+
+@media screen and (max-width: 460px) { /* Reduce font-size to better fit 
+                                          close-button on smaller screen */
+    .close-cart {
+        font-size: 1.4rem;
+    }
+}
+
+/*****************************************************************************/
+/***** Additional styling for the scroll bar of added cart items *************/
+/*****************************************************************************/
+
+.cart-items::-webkit-scrollbar { /* Width of the vertical scrollbar */
+  width: 10px; 
+}
+
+.cart-items::-webkit-scrollbar-track { /* Style the track (background) */
+  background: #f1f1f1;
+}
+
+.cart-items::-webkit-scrollbar-thumb { /* Style the thumb (the draggable part) */
+  background: #888;
+  border-radius: 6px;
+
+  border: 3px solid transparent; /* helps 'narrow' the scroll thumb by creating 'space' around thumb */
+  background-clip: padding-box; /*  ensures background doesn't cover border */
+}
+
+.cart-items::-webkit-scrollbar-thumb:hover { /* Style the thumb on hover */
+  background: #555;
+  border-radius: 6px;
+
+  border: 3px solid transparent; /* 'narrows' scroll thumb by creating 'space' around thumb */
+  background-clip: padding-box; /*  ensures background doesn't cover border */
+}
+
+/*****************************************************************************/
+/***** Styling of intial order summary in cart *******************************/
+/*****************************************************************************/
+
+.order-summary { /* general styling for order summary */
+    
+    display: flex; /* column orientation */
+    flex-direction: column;
+
+    width: 90%; /* sizing and margins */
+    margin: 3% auto 1rem auto;
+
+    font-family: Arial, Helvetica, sans-serif;/* font-family */
+}
+
+#order-summary-header { /* order summary header*/
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-bottom: 1px solid grey;
+}
+
+.order-summary .label-and-value { /* general styling for field labels and field values */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 1%;
+    font-size: 1.1rem;
+}
+
+.order-summary .label-and-value #label{ /* field labels are bolded */
+    font-weight: bold;
+}
+
+@media screen and (max-width: 360px) { /* re-size font to make order summary fit in smaller screen*/
+    .order-summary .label-and-value {
+        font-size: 0.95rem;
+    }
+}

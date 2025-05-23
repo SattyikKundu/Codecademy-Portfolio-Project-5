@@ -34,7 +34,7 @@ const saveToLocalStorage = (state) => { // save cart state to localStorage
     }
 }
 
-const store = configureStore({ // created store
+const store = configureStore({ // CREATED store
     reducer: {
         cart: cartReducer,
     },

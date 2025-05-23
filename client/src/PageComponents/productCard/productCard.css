@@ -96,12 +96,12 @@
 .stocked, .low { color: green;}
 .none{ color:red;}
 
-@media screen and (max-width: 1080px) { 
 
+@media screen and (max-width: 1080px) { /* resize font due to changing from 4-col 
+                                           to 3-col grid for products */
     .product-name {
         font-size: clamp(0.5rem, 1.2rem, 1.5rem);
     }
-
     #price, #stock {
         font-size: clamp(0.5rem, 1.33rem, 1.5rem);
     }
@@ -111,7 +111,7 @@
 /******************* Add To Cart button styling *******************************/
 /******************************************************************************/
 
-.add-button-wrapper {
+.add-button-wrapper { /* Add to Cart button wrapper default style */
     display: flex;
     height: 3rem;
     width: 90%;
@@ -128,10 +128,6 @@
     border: 1.5px solid black;
     border-radius: 10px;
 
-    /*
-    color: rgb(255, 255, 255);
-    background-color: #579aff;
-    transition: background-color 0.3s; */
     cursor: pointer;
 
     position: relative;
@@ -143,15 +139,14 @@
     transition: background-color 0.3s;
 }
 
-.add-button:hover {
+.add-button:hover { /* button on hover */
     background-color: #a557ff;
 }
 
-.add-button:active {
+.add-button:active { /* button on press */
     transform: scale(0.9);
     transition: 0.2s;
 }
-
 
 .button-disabled { /* button style when disabled*/
     color: rgb(245, 245, 245);
@@ -162,16 +157,15 @@
     opacity: 0.6;
 }
 
-.add-cart-icon {
+.add-cart-icon { /* 'Add Cart' icon (in button) styling */
     margin: auto 0 auto 15px;
     height: 2rem;
 }
 
-#button-text{
+#button-text{ /* styling of text in button*/
     font-size: 1.2rem;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
-
     margin: auto;
 }
 

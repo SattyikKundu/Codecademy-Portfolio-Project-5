@@ -10,11 +10,11 @@ import { increaseByOne,
          selectProductQuantityById // selector method for finding products current quantity in cart
         } from '../../Slices/cartSlice.jsx';
 
-import './cartItemCard.css';
+import './cartSliderItemCard.css';
 
 
 
-const cartItemCard = ({product}) => {
+const cartSliderItemCard = ({product}) => {
 
     const {  // props needed for cartItem card
         productId,  
@@ -63,20 +63,20 @@ const cartItemCard = ({product}) => {
                     </div>
                     <div className='cart-item-buttons'>
                         <div 
-                            className={`decrease-by-one ${(quantity <= 1) 
+                            className={(quantity <= 1) 
                                         ? "disable-decrease" 
-                                        : "" }`
+                                        : "decrease-by-one" 
                                       }
                             onClick={()=>handleDecrease()}
-                        >–</div>
+                        ><span>–</span></div>
                         <div className='cart-quantity'>{quantity}</div>
                         <div 
-                            className={`increase-by-one ${(quantity >= quantityLimit) 
+                            className={(quantity >= quantityLimit) 
                                         ? "disable-increase" 
-                                        : "" }`
+                                        : "increase-by-one" 
                                       }
                             onClick={()=>handleIncrease()}
-                        >+</div>
+                        ><span>+</span></div>
                     </div>
                 </div>
 
@@ -93,4 +93,4 @@ const cartItemCard = ({product}) => {
     );
 }
 
-export default cartItemCard;
+export default cartSliderItemCard;
