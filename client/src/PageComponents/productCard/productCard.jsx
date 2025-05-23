@@ -126,7 +126,6 @@ const Product = ({product}) => {
                 </div>
             </div>
             <div className="add-button-wrapper" onClick={ !disableAdd && (()=>handleAddToCart()) }>
-                {/*<div className={(!disableAdd) ? "add-button" : "button-disabled"}>*/}
                 <div className={`add-button ${(disableAdd) && 'button-disabled'}`}>
                     <FontAwesomeIcon icon={faCartPlus} className="add-cart-icon" />
                     <div id='button-text'>

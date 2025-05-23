@@ -4,6 +4,16 @@ import ReactMarkdown from "react-markdown"; // Used to handle markup language fr
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; // used to import FontAwesomeIcons
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
 
+import { 
+         useDispatch, // hook used to dispatch a slice/reducer's actions
+         useSelector  // reads values from store states and subscribes states to updates
+        } from 'react-redux';
+
+import { 
+        addToCart,                  // slice method for adding product to cart
+        selectProductQuantityById   // selector method for finding product's current quantity in cart
+       } from '../../Slices/cartSlice.jsx'; 
+
 import './productDetails.css'; // styling for Product details display
 
 /* Below <ProductDetails /> component is nested within the <ProductDetailsPage /> component of ProductDetailsPage.jsx.
@@ -13,6 +23,31 @@ import './productDetails.css'; // styling for Product details display
  */
 
 const ProductDetails = ({ imagePath, productData, displayCategory, stockState, stockMessage }) => {
+
+    const dispatch = useDispatch();  // initilize dispatch to use 'cart' reducer methods
+    //const products = useSelector((state) => state.cartSlice.products); //extract values from store for 'cart' reducer
+
+    const currentQuantity = useSelector( // get current quantity of product in store (if product NOT in cart store, returns 0)
+        (state) => selectProductQuantityById(state, productData.id)
+    );  
+    const purchaseLimit = (productData.stock < 10) ? productData.stock : 10; // define purchase limit of up to 10 (or less if stock under 10)
+    const disableAdd = (productData.stock===0 ||(currentQuantity === purchaseLimit)) ? true : false; // If stock empty (or hit purchase limit)
+
+    const itemToAdd = {   // product data for adding product to cart state in store!
+        'productId':     productData.id, 
+        'imageFilePath': imagePath, 
+        'name':          productData.display_name, 
+        'quantity':      1, // default quantity amount added upon 'Add to Cart' click
+        'unitPrice':     productData.price,  
+        'totalPrice':    productData.price, // initial placeholder (will be updated in cartSlice) 
+        'quantityLimit':  purchaseLimit
+    }
+
+    const handleAddToCart = () => { 
+        dispatch(addToCart(itemToAdd)); 
+    }
+
+
 
     return (
         <div className="product-description-container">
@@ -129,10 +164,14 @@ const ProductDetails = ({ imagePath, productData, displayCategory, stockState, s
                     <div id='stock-notice' className={`${stockState}`}>{stockMessage}</div>
                 </div>
                 <div className="divider-bar-2" />
-                <div className="add-to-cart-button-wrapper">
-                    <div className="add-to-cart-button">
+                {/* Button adds product to cart */}
+                <div className="add-to-cart-button-wrapper" onClick={ !disableAdd && (()=>handleAddToCart())}>
+                    {/* Button style changes when active or disabled */}
+                    <div className={`add-to-cart-button ${(disableAdd) && 'button-disabled'}`} >
                         <FontAwesomeIcon icon={faCartPlus} className="add-to-cart-icon" />
-                        <div id='add-button-text'>Add To Cart</div>
+                        <div id='add-button-text'>
+                            { (!disableAdd) ? ('Add to Cart') : ("Can't Add More")} 
+                        </div>
                     </div>
                 </div>
             </div>

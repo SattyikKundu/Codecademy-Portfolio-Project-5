@@ -118,7 +118,8 @@
     margin: 0 5% 5% 5%;
 }
 
-.add-button, .add-button-disabled { /* general styling for 'add to cart' button and it's disabled version */
+
+.add-button{ /* general styling for 'add to cart' button and it's disabled version */
 
     display: flex;
     flex-direction: row;

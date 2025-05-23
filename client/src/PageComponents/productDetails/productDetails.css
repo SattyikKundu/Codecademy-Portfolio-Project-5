@@ -317,28 +317,37 @@
     margin-right: 3%;
 }
 
-@media screen and (max-width: 599px) {
+@media screen and (max-width: 599px) { /* Alters product details margins for smaller screens */
     .add-to-cart-button-wrapper { 
         width: 100%;
         margin: 1.5% auto 3% auto;
     }
 }
 
-.add-to-cart-button { /* styling for 'add to cart' button */
+.add-to-cart-button, .button-disabled { /* general styling for 'add to cart' button and disabled counterpart */
 
     display: flex;
-    /*justify-content: center; /* horizontal centering via flex*/
-    /*align-items: center;/**/
 
     width: 220px; /* button dimensions & border*/
     height: 3rem;
     border: 1.5px solid black;
     border-radius: 10px;
-
-    color: rgb(255, 255, 255);
-    background-color: #579aff;
     transition: background-color 0.3s;
     cursor: pointer;
+}
+
+.add-to-cart-button { /* button style when active */
+    color: rgb(255, 255, 255);
+    background-color: #579aff;
+    
+}
+
+.button-disabled { /* button style when disabled*/
+    color: rgb(245, 245, 245);
+    background-color: #808080;
+
+    pointer-events: none;
+    opacity: 0.6;
 }
 
 .add-to-cart-icon { /* styling of button's nested add-to-cart icon */
@@ -347,7 +356,7 @@
 }
 
 #add-button-text{ /* styling of text in button */
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
 
