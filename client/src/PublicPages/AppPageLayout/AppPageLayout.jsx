@@ -16,6 +16,7 @@ const AppPageLayout = () => {
 
 
     return (
+      <>
         <div className="app-body">
             {console.log('Inside "return" of UniversalPageLayout ')}
             <Menu
@@ -28,6 +29,7 @@ const AppPageLayout = () => {
             {/* <Outlet /> is the main page body where content changes based on current route! */}
             <Outlet/>
         </div>
+        </>
     );
 }
 

@@ -4,6 +4,7 @@
 
 .products-page { /* Main container of product page */
   padding-top: 4.5rem;
+  /*padding-bottom: 2rem; /* Need to revist the missing */
   text-align: center;
   background-color: #f8f8f8;
 }
@@ -40,7 +41,7 @@
   transition: background-color 0.3s;
   outline: none;
 
-  margin-bottom: 20px; /* Due to unable to add margin-bottom for .pagination-buttons 
+  /*margin-bottom: 20px; /* Due to unable to add margin-bottom for .pagination-buttons 
                           (likely due to styling in index.html page), margin-bottom added here as work around.  */
 }
 
