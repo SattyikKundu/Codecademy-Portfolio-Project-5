@@ -13,6 +13,8 @@
 
     top: 0;
     position: fixed; /*enables menu to 'float' at top of viewport (for better user experience) */
+
+    z-index: 4;
 }
 
 

@@ -32,9 +32,8 @@ const App = () => {
             <Route path='/products/:category/:id' element={<ProductDetailsPage />} />
             {/*<Route path='/products/all/:id' element={<ProductDetails />} /> */}
 
-            {/* Dedicated cart page (only for small screens (<=480px width)) */}
+            {/* Dedicated cart page (fallback route for the main 'Cart Slider' overlay) */}
             <Route path='/cart' element={<CartPage />} />
-
           </Route>
         </Routes>
       </Router>

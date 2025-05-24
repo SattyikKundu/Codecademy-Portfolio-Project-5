@@ -85,7 +85,7 @@ const CartSlider = ({cartSliderOpen, toggleCart}) => { // cart slider shows when
               </div> 
               <div className='label-and-value'>
                 <div id='label'>Estimated Tax: </div>
-                <div id='value'>Calculated at Checkout</div>
+                <div id='value'>Calculated at checkout</div>
               </div> 
             </div>
           </div>

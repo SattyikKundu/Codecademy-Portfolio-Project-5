@@ -331,7 +331,7 @@
     }
 }
 
-.add-to-cart-button, .button-disabled { /* general styling for 'add to cart' button and disabled counterpart */
+.add-to-cart-button, .add-button-disabled { /* general styling for 'add to cart' button and disabled counterpart */
 
     display: flex;
 
@@ -349,7 +349,7 @@
     
 }
 
-.button-disabled { /* button style when disabled*/
+.add-button-disabled { /* button style when disabled*/
     color: rgb(245, 245, 245);
     background-color: #808080;
 
@@ -362,7 +362,7 @@
     height: 2rem;
 }
 
-#add-button-text{ /* styling of text in button */
+#add-to-cart-button-text{ /* styling of text in button */
     font-size: 1.3rem;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;

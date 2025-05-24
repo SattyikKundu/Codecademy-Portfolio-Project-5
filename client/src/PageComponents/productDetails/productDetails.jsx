@@ -167,9 +167,9 @@ const ProductDetails = ({ imagePath, productData, displayCategory, stockState, s
                 {/* Button adds product to cart */}
                 <div className="add-to-cart-button-wrapper" onClick={ !disableAdd && (()=>handleAddToCart())}>
                     {/* Button style changes when active or disabled */}
-                    <div className={`add-to-cart-button ${(disableAdd) && 'button-disabled'}`} >
+                    <div className={`add-to-cart-button ${(disableAdd) && 'add-button-disabled'}`} >
                         <FontAwesomeIcon icon={faCartPlus} className="add-to-cart-icon" />
-                        <div id='add-button-text'>
+                        <div id='add-to-cart-button-text'>
                             { (!disableAdd) ? ('Add to Cart') : ("Can't Add More")} 
                         </div>
                     </div>

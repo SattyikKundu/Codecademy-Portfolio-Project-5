@@ -10,11 +10,11 @@ import { increaseByOne,
          selectProductQuantityById // selector method for finding products current quantity in cart
         } from '../../Slices/cartSlice.jsx';
 
-import './cartSliderItemCard.css';
+import './cartPageItemCard.css';
 
 
 
-const CartSliderItemCard = ({product}) => {
+const CartPageItemCard = ({product}) => {
 
     const {  // props needed for cartItem card
         productId,  
@@ -28,62 +28,63 @@ const CartSliderItemCard = ({product}) => {
 
     const dispatch = useDispatch();  // initilize dispatch to use 'cart' reducer methods
     
-    const handleIncrease = () => {
+    const handleItemIncrease = () => {
         if(quantity < quantityLimit) {
             dispatch(increaseByOne({productId}));
         }
     }
 
-    const handleDecrease = () => {
+    const handleItemDecrease = () => {
         if (quantity > 1) {
             dispatch(decreaseByOne({productId}));
         }
     }
 
-    const handleDelete = () => {
+    const handleItemDelete = () => {
         dispatch(deleteFromCart({productId})); //?? revie later...
     }
 
+
     return (
         <>
-        <div className="cart-slider-item-wrapper">
-            <div className="cart-slider-item-content">
+        <div className="cart-page-item-wrapper">
+            <div className="cart-page-item-content">
 
                 {/* Holds product image for visual reference */}
-                <div className='cart-slider-item-img-wrapper'>
-                    <img src={imageFilePath} alt={name} className='cart-slider-item-image' />
+                <div className='cart-page-item-img-wrapper'>
+                    <img src={imageFilePath} alt={name} className='cart-page-item-image' />
                 </div>
 
                 {/* Hold cart item info as well as increase/decrease item quantity buttons */ }
-                <div className='cart-slider-item-info-buttons'>
-                    <div className='cart-slider-item-info'>
-                        <div id='cart-item-name'>{name}</div>
-                        <div id='cart-item-price-total'>${totalPrice}</div>
-                        <div id='cart-item-price-each'>${unitPrice}/item</div>
+                <div className='cart-page-item-info-buttons'>
+                    <div className='cart-page-item-info'>
+                        <div id='cart-page-item-name'>{name}</div>
+                        <div id='cart-page-item-price-total'>${totalPrice}</div>
+                        <div id='cart-page-item-price-each'>${unitPrice}/item</div>
                     </div>
-                    <div className='cart-slider-item-buttons'>
+                    <div className='cart-page-item-buttons'>
                         <div 
                             className={(quantity <= 1) 
                                         ? "disable-decrease" 
                                         : "decrease-by-one" 
                                       }
-                            onClick={()=>handleDecrease()}
+                            onClick={()=>handleItemDecrease()}
                         ><span>–</span></div>
-                        <div className='cart-quantity'>{quantity}</div>
+                        <div className='cart-page-quantity'>{quantity}</div>
                         <div 
                             className={(quantity >= quantityLimit) 
                                         ? "disable-increase" 
                                         : "increase-by-one" 
                                       }
-                            onClick={()=>handleIncrease()}
+                            onClick={()=>handleItemIncrease()}
                         ><span>+</span></div>
                     </div>
                 </div>
 
                 {/* button to delete item from cart */}
                 <div 
-                    className='delete-item-button'
-                    onClick={()=>handleDelete()}
+                    className='cart-page-delete-item-button'
+                    onClick={()=>handleItemDelete()}
                 >
                 ✖
                 </div>
@@ -93,4 +94,4 @@ const CartSliderItemCard = ({product}) => {
     );
 }
 
-export default CartSliderItemCard;
+export default CartPageItemCard;
