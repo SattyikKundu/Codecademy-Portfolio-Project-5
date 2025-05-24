@@ -20,6 +20,8 @@ const AppPageLayout = () => {
     const [toastPosition, setToastPosition] = useState('top-right');
     toast.limit = 2; // allow most 2 'toasts' to stack at once
 
+    /* Note: see "../PageComponents/.../productCard.jsx" and "../utils/"" for custom toast functions */
+
     return (
       <>
         <div className="app-body">
