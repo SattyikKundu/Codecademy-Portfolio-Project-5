@@ -17,6 +17,8 @@ import {
         selectProductQuantityById   // selector method for finding product's current quantity in cart
        } from '../../Slices/cartSlice.jsx'; 
 
+import { showCartToast } from "../../utils/toastUtilityFunctions.jsx"; // toast function when product added to cart
+
 import './productCard.css';
 
 const Product = ({product}) => {
@@ -57,6 +59,7 @@ const Product = ({product}) => {
 
     const handleAddToCart = () => { 
         dispatch(addToCart(itemToAdd)); 
+        showCartToast();
     }
 
     const createProductDetailsLink = () => { // function creates the product details url link for the page

@@ -25,7 +25,7 @@ const CartSlider = ({cartSliderOpen, toggleCart}) => { // cart slider shows when
     setTotalQuantity(quantity);
   };
 
-  const getSubTotalCost = () => {
+  const getSubTotalCost = () => { /* Get total subcosts of product in cart via reducer */
     const subTotalCost = products.reduce(
       (subTotal, product) => (subTotal + parseFloat(product.totalPrice)),
       0);
@@ -33,7 +33,7 @@ const CartSlider = ({cartSliderOpen, toggleCart}) => { // cart slider shows when
     setSubTotal(subTotalCost.toFixed(2));
   }
 
-  useEffect(() => {
+  useEffect(() => { /* Update total quantity and total subcost when 'products' change */
     getTotalQuantity();
     getSubTotalCost();
   },[products])
