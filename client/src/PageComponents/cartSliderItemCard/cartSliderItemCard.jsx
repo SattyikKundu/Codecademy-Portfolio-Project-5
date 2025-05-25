@@ -10,8 +10,9 @@ import { increaseByOne,
          selectProductQuantityById // selector method for finding products current quantity in cart
         } from '../../Slices/cartSlice.jsx';
 
-import './cartSliderItemCard.css';
+//import { motion, AnimatePresence } from 'framer-motion'; // used to animate cart item cards as they're added/removed from cart
 
+import './cartSliderItemCard.css';
 
 
 const CartSliderItemCard = ({product}) => {

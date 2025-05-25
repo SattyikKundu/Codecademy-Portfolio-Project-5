@@ -1,6 +1,6 @@
 import toast from 'react-hot-toast';
 
-export const showCartToast = () => {
+export const addedToCartToast = () => {
     toast.success('Added to Cart', {
         style: { // general style of toast message
             borderRadius: '10px',        // rounded message corners

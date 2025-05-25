@@ -17,7 +17,7 @@ import {
         selectProductQuantityById   // selector method for finding product's current quantity in cart
        } from '../../Slices/cartSlice.jsx'; 
 
-import { showCartToast } from "../../utils/toastUtilityFunctions.jsx"; // toast function when product added to cart
+import { addedToCartToast } from "../../utils/utilityFunctions.jsx"; // toast function when product added to cart
 
 import './productCard.css';
 
@@ -39,7 +39,6 @@ const Product = ({product}) => {
 
 
     const dispatch = useDispatch();  // initilize dispatch to use 'cart' reducer methods
-    //const products = useSelector((state) => state.cartSlice.products); //extract values from store for 'cart' reducer
 
     const currentQuantity = useSelector( // get current quantity of product in store (if product NOT in cart store, returns 0)
         (state) => selectProductQuantityById(state, product.id)
@@ -59,7 +58,7 @@ const Product = ({product}) => {
 
     const handleAddToCart = () => { 
         dispatch(addToCart(itemToAdd)); 
-        showCartToast();
+        addedToCartToast();
     }
 
     const createProductDetailsLink = () => { // function creates the product details url link for the page

@@ -8,6 +8,7 @@ import {
         } from 'react-redux';
 
 import CartSilderItemCard from "../cartSliderItemCard/cartSliderItemCard";
+import ShopNowButton from "../cartShopNowButton/cartShopNowButton";
 
 const CartSlider = ({cartSliderOpen, toggleCart}) => { // cart slider shows when user clicks on cart button
 
@@ -57,17 +58,11 @@ const CartSlider = ({cartSliderOpen, toggleCart}) => { // cart slider shows when
             <div className="cart-items-wrapper">
               <div className="cart-items">
                 { (products && products.length>0) ? 
-                  (
-                  products.map((product) => ( // populate product cards based on products [] in cart state
+                  (products.map((product) => ( // populate product cards based on products [] in cart state                    
                     <CartSilderItemCard product={product} key={product.productId} />
                   ))
                   ):(
-                    <h2
-                     style={{
-                      fontFamily: 'Arial',
-                      margin: '20%',
-                     }}
-                    >Your cart is empty. Shop to add products...</h2>
+                    <ShopNowButton toggleCart={toggleCart} />
                   )
                 }
               </div>

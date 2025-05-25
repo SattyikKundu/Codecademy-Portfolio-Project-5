@@ -71,8 +71,9 @@
     
     margin: 11% 1rem 0rem 1rem; /*cart items container dimensions */
     width: auto;
-    height: auto;/* Necessary to scale correctly for various (responsive) 
-                    screen heights and not have anything cut off */
+    min-height: 350px;  /* minimum cart-items space holds 2 item cards */
+    height: auto;       /* Necessary to scale correctly for various (responsive) 
+                           screen heights and not have anything cut off */
 
     border-radius: 5px; /* border styling */
     border: 1px solid rgba(0, 0, 0, 0.45);

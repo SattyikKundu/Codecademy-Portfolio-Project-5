@@ -58,13 +58,6 @@
 /******************* Product Information styling ******************************/
 /******************************************************************************/
 
-/* wrapper for product information */
-/*.product-info { 
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}*/
-
 
 .price-and-stock { /* Price & stock left message in row*/
 

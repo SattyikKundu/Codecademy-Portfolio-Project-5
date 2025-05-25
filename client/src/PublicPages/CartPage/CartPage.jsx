@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux'; // reads values from store states and
 import './CartPage.css';
 
 import CartPageItemCard from "../../PageComponents/cartPageItemCard/cartPageItemCard.jsx";
+import ShopNowButton from "../../PageComponents/cartShopNowButton/cartShopNowButton.jsx";
 
 const CartPage = () => { /* Fallback Cart Page outside of main 'Slider Cart' */
 
@@ -54,12 +55,7 @@ const CartPage = () => { /* Fallback Cart Page outside of main 'Slider Cart' */
                     <CartPageItemCard product={cartProduct} key={cartProduct.productId} />
                   ))
                   ):(
-                    <h2
-                     style={{
-                      fontFamily: 'Arial',
-                      margin: '20%',
-                     }}
-                    >Your cart is empty. Shop to add products...</h2>
+                    <ShopNowButton />
                   )
                 }
               </div>

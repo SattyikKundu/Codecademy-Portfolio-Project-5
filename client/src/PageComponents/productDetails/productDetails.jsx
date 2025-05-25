@@ -14,6 +14,8 @@ import {
         selectProductQuantityById   // selector method for finding product's current quantity in cart
        } from '../../Slices/cartSlice.jsx'; 
 
+import {addedToCartToast } from "../../utils/utilityFunctions.jsx";
+
 import './productDetails.css'; // styling for Product details display
 
 /* Below <ProductDetails /> component is nested within the <ProductDetailsPage /> component of ProductDetailsPage.jsx.
@@ -45,6 +47,7 @@ const ProductDetails = ({ imagePath, productData, displayCategory, stockState, s
 
     const handleAddToCart = () => { 
         dispatch(addToCart(itemToAdd)); 
+        addedToCartToast();
     }
 
 
