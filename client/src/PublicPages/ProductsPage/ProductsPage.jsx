@@ -25,6 +25,7 @@ const ProductsPage = () => { // will modify later to handle various categories
     const [loading,     setLoading] = useState(true);  // Track if data is being loaded
 
     const fetchAllProducts = async () => { // fetches all products from backend
+        //if (products.length) return; // prevent re-fetch
         setLoading(true);
         try {
             const response = await axios.get("http://localhost:5000/products");
