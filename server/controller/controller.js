@@ -1,4 +1,3 @@
-import { response } from 'express';
 import productModel from '../model/model.js';
 
 const getProducts = async(req, res) => { // controller function for getting all products
