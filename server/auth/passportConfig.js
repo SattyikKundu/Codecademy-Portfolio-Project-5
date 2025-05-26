@@ -54,12 +54,12 @@ passport.use(new GoogleStrategy({
     async(accessToken, refreshToken, profile, done) => {
     try {
         const res = await pool.query('SELECT * FROM users WHERE google_id = $1', [profile.id]); // Check if user already exists
-
+                                                                                // same as findUserByGoogleId() from authModel.js
         if (res.rows.length > 0) { // user exists on login, pass it to Passport
             return done(null, res.rows[0]); 
         }
 
-        // Otherwise, register new user into DB
+        // Otherwise, register new user into DB (this is same as createUser() from authModel.js)
         const newUser = await pool.query(
             "INSERT INTO users (username, email, google_id) VALUES ($1, $2, $3) RETURNING *",
            [profile.displayName.replace(/\s+/g, ''), // use display name (no spaces) as username

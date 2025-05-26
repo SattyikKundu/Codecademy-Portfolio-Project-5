@@ -1,4 +1,4 @@
-import productModel from '../model/productModel.jsodel.js';
+import productModel from '../model/productModel.js';
 
 const getProducts = async(req, res) => { // controller function for getting all products
     try {
