@@ -1,4 +1,4 @@
-import productController from '../controller/controller.js';
+import productController from '../controller/productController.js';
 import express from 'express';
 
 const router = express.Router(); // define router to group all routes related to interacting with products data
