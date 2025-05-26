@@ -17,6 +17,11 @@ import productRoutes from './routes/productRoutes.js'; // import default export 
 import authRoutes from './routes/authRoutes.js';       // Authentication-related routes (e.g. /auth/login, /auth/google)
 
 
+import dotenv from 'dotenv'; // loads .env variables into process.env 
+                             // so they can be accessed anywhere in server code
+dotenv.config();
+
+
 // ==============================================================================
 // Create Express App
 // ==============================================================================
@@ -79,11 +84,14 @@ app.use('/images', express.static('public/images')); // Serves product images in
 // ==============================================================================
 // Routes Mounting
 // ==============================================================================
-app.use('/', productRoutes);     // Mount all routes for handling product-related requests (e.g. '/products' , '/products/fishes')
-//app.use('/', authRoutes);        // Mount all routes for handling authentication-related routes (e.g., '/auth/login', '/auth/google')
+app.use('/', productRoutes);   // Mount all routes for handling product-related requests (e.g. '/products' , '/products/fishes')     
 
-app.use('/auth', authRoutes); // Use '/auth' instead of '/' for grouping 
-                              // (optional, but recommended for clarity and scalability)
+app.use('/auth', authRoutes); /* Mount all routes for handling authentication-related 
+                               * routes (e.g., '/auth/login', '/auth/google').
+                               * Use '/auth' instead of '/' for grouping.
+                               * While '/auth' instead of '/' is optional, former is recommended for clarity and scalability
+                               * and helps prevent route collisions!
+                               */
 
 
 // Default route for any other requests (Optional, for catch-all error handling)

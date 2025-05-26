@@ -3,7 +3,7 @@ import passport from 'passport';                            // import Passport c
 import { Strategy as LocalStrategy } from 'passport-local'; // Strategy for username/password login
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20'; // Strategy for Google OAuth login 
 import bcrypt from 'bcryptjs';                              // for securly comparing hashed passwords
-import pool from '../database/database';                    // import PostgreSQL database connection pool
+import pool from '../database/database.js';                    // import PostgreSQL database connection pool
 
 /* NOTE: The done() callback in Passport strategies signals result of an
  *       authentication attempt. It's signature typically: 
