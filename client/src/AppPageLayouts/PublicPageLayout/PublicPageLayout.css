@@ -10,5 +10,5 @@
     min-height: 100vh !important;        /* ✅ Ensures it stretches full viewport height */
     box-sizing: border-box !important;   /* ✅ Includes padding in height calculation */
 
-    position: relative; /* Relative so Menu & Cart can 'float' via absolution positioning */
+    position: relative; /* Relative so Menu & Cart can 'float' via absolute positioning */
 }

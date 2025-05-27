@@ -5,8 +5,8 @@ import { BrowserRouter as Router,  // provides routing functionality via browser
         } from 'react-router-dom'; // router library for creating and managing routes
 
 
-import AppPageLayout      from '../AppPageLayout/AppPageLayout.jsx'; // import page layout for entire App (very important!)
-import ProductsPage       from '../PublicPages/ProductsPage/ProductsPage.jsx';    // imports <ProductsPage /> as home page route (shows all products)
+import PublicPageLayout   from '../AppPageLayouts/PublicPageLayout/PublicPageLayout.jsx'; // import page layout for entire App (very important!)
+import ProductsPage       from '../PublicPages/ProductsPage/ProductsPage.jsx';            // imports <ProductsPage /> as home page route (shows all products)
 import ProductDetailsPage from '../PublicPages/ProductDetailsPage/ProductDetailsPage.jsx';
 import CartPage           from '../PublicPages/CartPage/CartPage.jsx';
 
@@ -16,7 +16,7 @@ const App = () => {
       <Router>
         <Routes>
           {/* Main layout route that wraps all pages. '/' is start (and index) of all routes */}
-          <Route path='/'   element={<AppPageLayout/>} >
+          <Route path='/'   element={<PublicPageLayout/>} >
 
             {/* Redirect '/' and '/products' to '/products/all' */}
             <Route index            element={<Navigate to='/products/all'/>} />
