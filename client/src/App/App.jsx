@@ -5,7 +5,7 @@ import { BrowserRouter as Router,  // provides routing functionality via browser
         } from 'react-router-dom'; // router library for creating and managing routes
 
 
-import PublicPageLayout   from '../AppPageLayouts/PublicPageLayout/PublicPageLayout.jsx'; // import page layout for entire App (very important!)
+import PublicPageLayout   from '../AppPageLayouts/PublicPageLayout.jsx'; // import page layout for entire App (very important!)
 import ProductsPage       from '../PublicPages/ProductsPage/ProductsPage.jsx';            // imports <ProductsPage /> as home page route (shows all products)
 import ProductDetailsPage from '../PublicPages/ProductDetailsPage/ProductDetailsPage.jsx';
 import CartPage           from '../PublicPages/CartPage/CartPage.jsx';
