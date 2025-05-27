@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'; // method for configuring redux store
 import cartReducer from '../Slices/cartSlice.jsx'; // import reducer for cart
+import authReducer from '../Slices/authSlice.jsx'; // import reducer for authState
 
 /* A MAJOR feature of many E-commerce app sites is that
  * cart states are frequently stored in localStorage when user leaves the site. 
@@ -37,14 +38,15 @@ const saveToLocalStorage = (state) => { // save cart state to localStorage
 const store = configureStore({ // CREATED store
     reducer: {
         cart: cartReducer,
+        auth: authReducer
     },
     preloadedState: { 
-        cart: loadFromLocalStorage(), // at store mounting, preload cartState
+        cartState: loadFromLocalStorage(), // at store mounting, preload cartState
     }
 });
 
 store.subscribe(() => {
-  saveToLocalStorage(store.getState().cart); // Subscribe cart changes to local storage
+  saveToLocalStorage(store.getState().cartState); // Subscribe cart changes to local storage
 });
 
 export default store;
