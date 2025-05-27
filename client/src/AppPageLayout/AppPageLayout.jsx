@@ -6,8 +6,8 @@ import { Outlet, // <Outlet> injects content based on active route
 
 import { Toaster, toast } from 'react-hot-toast'; // enable toast messaages to open in app page
 
-import Menu from "../../PageComponents/menu/menu";
-import CartSlider from "../../PageComponents/cartSlider/cartSlider";
+import Menu from "../PageComponents/menu/menu";
+import CartSlider from "../PageComponents/cartSlider/cartSlider";
 
 import './AppPageLayout.css';
 
