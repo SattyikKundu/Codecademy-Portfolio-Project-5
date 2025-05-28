@@ -86,13 +86,14 @@ app.use('/images', express.static('public/images')); // Serves product images in
 // ==============================================================================
 app.use('/', productRoutes);   // Mount all routes for handling product-related requests (e.g. '/products' , '/products/fishes')     
 
-app.use('/auth', authRoutes); /* Mount all routes for handling authentication-related 
-                               * routes (e.g., '/auth/login', '/auth/google').
-                               * Use '/auth' instead of '/' for grouping.
-                               * While '/auth' instead of '/' is optional, former is recommended for clarity and scalability
-                               * and helps prevent route collisions!
-                               */
-
+app.use('/', authRoutes); /* Mount all routes for handling authentication-related 
+                           * routes (e.g., '/auth/login', '/auth/google').
+                           * '/auth' could be used instead of '/' for grouping and clarity,
+                           * However, since all auth routes already have '/auth' in their routes (in authRoutes.js),
+                           * Adding '/auth' here would yield routes like ('/auth/auth/login') which is undesired.
+                           * IF I wanted, I could get rid of '/auth' from routes in order to add '/auth' here.
+                           * This would make it scalable and easier to "swap" routes around if needed.
+                           */
 
 // Default route for any other requests (Optional, for catch-all error handling)
 //app.use('*', (req, res) => {

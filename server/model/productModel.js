@@ -7,7 +7,7 @@ const getAllProducts = async() => { // function returns all products
         return products.rows;
     }
     catch (error) {
-        console.error('Error fetching products: ',error);
+        console.log('Error fetching products: ',error);
         throw error; // when error occurs, this raises exception and stops program execution.
     }
 }

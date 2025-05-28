@@ -3,25 +3,40 @@
 import pool from '../database/database.js'; // Connects to PostgreSQL
 
 export const findUserByUsername = async (username) => { // Find user by username (for local login)
-  const res = await pool.query('SELECT * FROM users WHERE username = $1', [username]);
 
-  return res.rows[0]; // Returns 1st value from 'rows'. There SHOULD only be 1
-                      // matching 'username' since 'username' is enforced as UNIQUE in database.
+  try {
+      const res = await pool.query('SELECT * FROM users WHERE username = $1', [username]);
+      return res.rows[0]; // Returns 1st value from 'rows'. There SHOULD only be 1
+                          // matching 'username' since 'username' is enforced as UNIQUE in database.
+  }
+  catch(error) { // return error message
+    console.log(`Unable to find user '${username}': `,error);
+  }
+
 };
 
 export const findUserByGoogleId = async (googleId) => { // Find user by Google ID (logic ALREADY in passportConfig.js)
 
-  const res = await pool.query('SELECT * FROM users WHERE google_id = $1', [googleId]);
-
-  return res.rows[0]; // Returns 1st value from 'rows'. There SHOULD only be 1
-                      // matching 'google_id' since 'google_id' is enforced as UNIQUE in database.
+  try {
+    const res = await pool.query('SELECT * FROM users WHERE google_id = $1', [googleId]);
+    return res.rows[0]; // Returns 1st value from 'rows'. There SHOULD only be 1
+                        // matching 'google_id' since 'google_id' is enforced as UNIQUE in database.
+  }
+  catch (error) {
+    console.log(`Unable to find user for GoogleId '${googleId}': `, error);
+  }                  
 };
 
 
 export const findUserByEmail = async (email) => { // Find user by email (optional helper)
-  const res = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
-  return res.rows[0]; // Returns 1st value from 'rows'. There SHOULD only be 1
-                     // matching 'email' since 'email' is enforced as UNIQUE in database.
+  try {
+      const res = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
+      return res.rows[0]; // Returns 1st value from 'rows'. There SHOULD only be 1
+                          // matching 'email' since 'email' is enforced as UNIQUE in database.
+  }
+  catch(error) {
+        console.log(`Unable to find user for Email '${email}': `, error);
+  }
 };
 
 // Finally, create new user locally or via Google (logic already mostly used in Google OAuth passportConfig.js)
