@@ -1,0 +1,89 @@
+/**********************************************************************/
+/********** Login Container general stylings ***************************/
+/**********************************************************************/
+
+.login-form-box { /* Main container box holding for login form*/
+
+  max-width: 400px; /* container dimensions */
+  margin: 100px auto;
+  padding: 2rem;
+
+  border-radius: 8px; /* border styling */
+  border: 1px solid #ddd;
+  box-shadow: 0 0 5px 4px rgba(0, 0, 0, 0.1);
+  
+  background: #fff; /* background and front styling */
+  font-family: Arial, sans-serif;
+}
+
+.login-form-box h2 { /* styling of login box header */
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+/**********************************************************************/
+/********** Label and input box stylings ******************************/
+/**********************************************************************/
+
+.login-form-box label { /* styling of label*/
+  display: block;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.login-form-box input { /* styling of input fields */
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.25rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none; /* removes black outline when focusing on field */
+  box-sizing: border-box; /* Adds border padding as part of total width
+                             Leads to text input space that smaller to fit. */
+}
+
+/**********************************************************************/
+/********** Login submit button stylings ******************************/
+/**********************************************************************/
+
+.login-button { /* Styling for local and google login button */
+
+  width: 100%; /* button dimensions */
+  padding: 0.6rem;
+  margin-top: 1rem;
+
+  color: white; /* text and background color */
+  background-color:#2394e0; /*#007bff;*/
+
+  text-align: center; /* text styling including horiz. centered text*/
+  font-weight:600;
+  font-size: 1rem;
+
+  border: 1px solid #1d81c4; /* button border styling*/
+  box-shadow: 0 0 5px #18679cd0;
+  border-radius: 4px;
+
+  box-sizing: border-box; /*includes padding in width calculation */
+  cursor: pointer;
+}
+
+.login-button:hover { /* buttons' style on hover */
+    background-color: #227ab4; /* !important prevents override by front-end button color logic*/
+    border: 1px solid #125e91;
+    box-shadow: 0 0 5px #125e91d0;   
+}
+
+.login-button:active { /* buttons' style on press */
+    transform: scale(0.96);
+}
+
+
+.login-button:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+.login-form-box p { /* 'red' error when login fails */
+  text-align: center;
+  margin-top: 1rem;
+}

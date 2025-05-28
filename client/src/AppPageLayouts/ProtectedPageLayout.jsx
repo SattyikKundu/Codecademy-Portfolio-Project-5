@@ -56,6 +56,7 @@ const ProtectedPageLayout = () => {
 
     return ( // If successfully authenticated, reder the layout + any nested protected routes
         <BasePageLayout>
+            {/* Renders whichever protected route is matched inside <Routes> */}
             <Outlet />
         </BasePageLayout>
     );

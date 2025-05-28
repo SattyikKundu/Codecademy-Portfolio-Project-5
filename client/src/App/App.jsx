@@ -4,11 +4,12 @@ import { BrowserRouter as Router,  // provides routing functionality via browser
          Navigate   // used to handle redirection between routes
         } from 'react-router-dom'; // router library for creating and managing routes
 
-
-import PublicPageLayout   from '../AppPageLayouts/PublicPageLayout.jsx'; // import page layout for entire App (very important!)
+import ProtectedPageLayout from '../AppPageLayouts/ProtectedPageLayout.jsx'; // page layout for protected pages
+import PublicPageLayout   from '../AppPageLayouts/PublicPageLayout.jsx';    // page layout for entire App (very important!)
 import ProductsPage       from '../PublicPages/ProductsPage/ProductsPage.jsx';            // imports <ProductsPage /> as home page route (shows all products)
 import ProductDetailsPage from '../PublicPages/ProductDetailsPage/ProductDetailsPage.jsx';
 import CartPage           from '../PublicPages/CartPage/CartPage.jsx';
+import LoginPage from '../PublicPages/LoginPage/LoginPage.jsx';
 
 const App = () => {
 
@@ -34,6 +35,11 @@ const App = () => {
 
             {/* Dedicated cart page (fallback route for the main 'Cart Slider' overlay) */}
             <Route path='/cart' element={<CartPage />} />
+
+            {/* Dedicated User Login page */}
+            <Route path='/auth/login' element={<Navigate to='/login'/>} />
+            <Route path='/login' element={<LoginPage/>} />
+
           </Route>
         </Routes>
       </Router>

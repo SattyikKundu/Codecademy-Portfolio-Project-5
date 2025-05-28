@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // used to imp
 //import { faUserLarge } from '@fortawesome/free-solid-svg-icons';
 import { faRightToBracket } from '@fortawesome/free-solid-svg-icons';
 
-// <FontAwesomeIcon icon={faUserLarge} className='user-icon' />  for profile (logged in)
+// <FontAwesomeIcon icon={faUserLarge} className='user-icon' />  for profile (after logged in)
 // <FontAwesomeIcon icon={faRightFromBracket} /> for signout
 
 import './menuUserProfile.css';
