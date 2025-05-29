@@ -1,16 +1,19 @@
-import { useState } from "react"; // react hook to track form input
+import { useState } from "react";               // react hook to track form input
 import { useNavigate } from "react-router-dom"; // hook for redirecting user after login
-import { useDispatch } from "react-redux"; // Redux hook to update auth statement
-import axios from 'axios'; // for making HTTP requests to backend
+import { useDispatch } from "react-redux";      // Redux hook to update auth statement
+import { useLocation } from "react-router-dom"; // hook for managing location object properties
+import axios from 'axios';                      // for making HTTP requests to backend
+import { LoginSuccessToast, LoginFailedToast } from "../../utils/utilityFunctions"; // toast when login fails/succeed
 
 import { setUser } from "../../Slices/authSlice"; // redux action to store data
 
 import './LoginPage.css';
 
-const LoginPage = ({loginHeader="Log In Here"}) => { // login component with default login header message
+const LoginPage = () => { // login component with default login header message
 
     const dispatch = useDispatch(); // used to execute redux actions
     const navigate = useNavigate(); // used to progammatrically redirect user
+    const location = useLocation(); // use to handle location 'state' passed via url
 
     const [username, setUsername] = useState(''); // stores and track 'username' from form field and into local state
     const [password, setPassword] = useState(''); // stores and track 'passowrd' from form field and into local state
@@ -18,7 +21,9 @@ const LoginPage = ({loginHeader="Log In Here"}) => { // login component with def
     const [error, setError]     = useState(''); // tracks login errors 
     const [loading, setLoading] = useState(''); // tracks loading state
 
-    const handleLocalSubmit = async (event) => {
+    const loginHeader = location.state?.loginHeader || "Log In Here"; // fallback if not passed
+
+    const handleLocalSubmit = async (event) => { // function for submitting login credentials locally
 
         event.preventDefault(); // prevents page reload on submit
         setLoading(true);
@@ -37,14 +42,20 @@ const LoginPage = ({loginHeader="Log In Here"}) => { // login component with def
             );
 
             dispatch(setUser(response.data.user)); // On success, dispatch user info to redux
+            LoginSuccessToast();
             navigate("/profile"); // now navigate to designated protected route after login
         }
         catch(error) { // handle error returned from backend (like invalid username or password)
             setError(error.response?.data?.error || 'Login failed.');
+            LoginFailedToast(error);
         }
         finally {
             setLoading(false); // turn off loading state at the end
         }
+    }
+
+    const clickToRegisterPage = () => { // navigate to 'register' account
+        navigate('/register');
     }
 
     return (
@@ -58,44 +69,51 @@ const LoginPage = ({loginHeader="Log In Here"}) => { // login component with def
             <label>
                 Username: 
                 <input
-                    type='text'         // set input type
-                    value={username}    // holds 'username' value
-                    onChange={          // changes 'username' as typed
-                        (event) => setUsername(event.target.value)
-                    }
-                    required            // mandatory field
+                    type='text'                    // set input type
+                    value={username}               // holds 'username' value
+                    placeholder="Enter username"   // instruction text
+                    onChange={(event) => setUsername(event.target.value)} // changes 'username' as typed
+                    required                       // mandatory field
                 />
             </label>
             <br />
             <label>
                 Password:
                 <input
-                    type='text'             // set input type
-                    value={password}        // set field value
-                    onChange={              // change password value on typing
-                        (event) => setPassword(event.target.value)
-                    }
-                    required                // makes field required
+                    type='text'                  // set input type
+                    value={password}             // set field value
+                    placeholder="Enter password" // instruction text
+                    onChange={(event) => setPassword(event.target.value)}  // change password value on typing
+                    required                     // makes field required
                 />
             </label>            
             <br />
-            <div 
+            <button
                 className="login-button"
                 type='submit'      // state button is 'submit' type
                 disabled={loading} // disabled whilst loading
-                onClick={()=>handleLocalSubmit()}
+                onClick={handleLocalSubmit}
             >
                 {loading ? "Logging in..." : "Login"}
-            </div>
+            </button>
 
             {/* Show error when login fails */}
             {error && <p style={{color:"red"}}>{error}</p>}
 
             {/* Google OAuth button placeholder (will update later!) */}
-            <div className="login-button">
-                Login with Google
-            </div>
-            <p>New User? Sign Up here</p>
+            <div className="login-button">Login with Google</div>
+
+            {/* Link for new users who need to register for an account */}
+            <p style={{cursor:'default'}}>New User? <span
+                    onClick={()=>clickToRegisterPage()}
+                    style={{
+                        fontWeight:'bold',
+                        cursor:'pointer'
+                    }}
+                >
+                Sign Up here
+                </span>
+            </p>
 
                 {/*     
                     <button onClick={() => window.location.href = "http://localhost:5000/auth/google"}>
@@ -104,6 +122,7 @@ const LoginPage = ({loginHeader="Log In Here"}) => { // login component with def
                     <p>(Google login not functional yet — backend config pending)</p> 
                 */}
         </div>
+
         </>
     );
 }

@@ -4,12 +4,13 @@ import { BrowserRouter as Router,  // provides routing functionality via browser
          Navigate   // used to handle redirection between routes
         } from 'react-router-dom'; // router library for creating and managing routes
 
-import ProtectedPageLayout from '../AppPageLayouts/ProtectedPageLayout.jsx'; // page layout for protected pages
-import PublicPageLayout   from '../AppPageLayouts/PublicPageLayout.jsx';    // page layout for entire App (very important!)
-import ProductsPage       from '../PublicPages/ProductsPage/ProductsPage.jsx';            // imports <ProductsPage /> as home page route (shows all products)
-import ProductDetailsPage from '../PublicPages/ProductDetailsPage/ProductDetailsPage.jsx';
-import CartPage           from '../PublicPages/CartPage/CartPage.jsx';
-import LoginPage from '../PublicPages/LoginPage/LoginPage.jsx';
+import ProtectedPageLayout from '../AppPageLayouts/ProtectedPageLayout.jsx';            // page layout for protected pages
+import PublicPageLayout    from '../AppPageLayouts/PublicPageLayout.jsx';               // page layout for entire App (very important!)
+import ProductsPage        from '../PublicPages/ProductsPage/ProductsPage.jsx';            // imports <ProductsPage /> as home page route (shows all products)
+import ProductDetailsPage  from '../PublicPages/ProductDetailsPage/ProductDetailsPage.jsx';
+import CartPage            from '../PublicPages/CartPage/CartPage.jsx';
+import LoginPage           from '../PublicPages/LoginPage/LoginPage.jsx';
+import RegisterPage from '../PublicPages/RegisterPage/RegisterPage.jsx';
 
 const App = () => {
 
@@ -40,6 +41,10 @@ const App = () => {
             <Route path='/auth/login' element={<Navigate to='/login'/>} />
             <Route path='/login' element={<LoginPage/>} />
 
+            {/* Dedicated User account Registration page */}
+            <Route path='/auth/register' element={<Navigate to='/register'/>} />
+            <Route path='/register' element={<RegisterPage/>} />
+            
           </Route>
         </Routes>
       </Router>

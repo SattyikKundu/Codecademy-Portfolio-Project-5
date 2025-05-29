@@ -1,5 +1,5 @@
-import { useState } from "react"; // import React library
-import { Toaster, toast } from 'react-hot-toast'; // enable toast messaages to open in app page
+import { useState, useEffect } from "react"; // import React library
+import { Toaster, toast, useToasterStore } from 'react-hot-toast'; // enable toast messaages to open in app page
 
 import Menu from "../../PageComponents/menu/menu";
 import CartSlider from "../../PageComponents/cartSlider/cartSlider";
@@ -14,11 +14,21 @@ import CartSlider from "../../PageComponents/cartSlider/cartSlider";
 const BasePageLayout = ({ children }) => {
 
     const [cartSliderOpen, setCartSliderOpen] = useState(false); // tracks when cart slider opens
-    const toggleCart = () => { setCartSliderOpen(prev => !prev); }
 
-    const [toastOffset,   setToastOffset]   = useState({ top: 70, right: 10 }); // states to handle offsets of toast
-    const [toastPosition, setToastPosition] = useState('top-right');
-    toast.limit = 2; // allow most 2 'toasts' to stack at once
+    const toggleCart = () => { // toggles opening and closing of the cart slider
+        setCartSliderOpen(prev => !prev); 
+    }
+
+    const { toasts } = useToasterStore(); // used to manage toast State
+    const TOAST_LIMIT = 1;                // Limits to 1 toast per sandwich
+
+    useEffect(() => { // useEffect() that dismisses last toast when added new toast exceeds TOAST_LIMIT.
+                      // essentially prevent too many toasts on sandiwich due to rapid clicks.
+        toasts
+            .filter((selectedToast) => selectedToast.visible)           // Only consider visible toasts
+            .filter((_, index) => index >= TOAST_LIMIT)                 // Is toast index over limit?
+            .forEach((currentToast) => toast.dismiss(currentToast.id)); // Dismiss
+    }, [toasts]);
 
     return (
         <div className="app-body">
@@ -31,8 +41,9 @@ const BasePageLayout = ({ children }) => {
 
             {children}
 
-            {/* Create <Toaster /> for toast messages with  */}
-            <Toaster position={toastPosition} containerStyle={toastOffset} />
+            {/* Default <Toaster /> for toast messages */}
+            <Toaster position={'top-right'} containerStyle={{ top: 70, right: 10}} 
+            />
         </div>
     );
 }
