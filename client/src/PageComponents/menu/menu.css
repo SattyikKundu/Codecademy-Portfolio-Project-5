@@ -15,6 +15,12 @@
     position: fixed; /*enables menu to 'float' at top of viewport (for better user experience) */
 
     z-index: 4;
+
+    min-width: 100vw; /* Ensures consistent sizing on route transitions. More importantly, 
+                       * this prevents (or at least limits) the intermittent 'widening'/shifting 
+                       * of header menu's width due to layout reflows triggered by 
+                       * Dyanamic DOM or style changes during re-render.
+                       */
 }
 
 

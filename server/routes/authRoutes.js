@@ -4,7 +4,7 @@ import verifyJWT from '../middleware/verifyJWT.js'; // Import verifyJWT auth mid
 
 import { loginUser,             // local login controller
          logoutUser,            // logout controller
-         registerUser,   // local registration controller
+         registerUser,          // local registration controller
          handleGoogleCallback   // Google OAuth callback controller
        } from '../controller/authController.js';
 
@@ -32,7 +32,8 @@ router.get('/auth/me',            // Define GET route at '/auth/me'
                                    * However, if token is invalid, the next() inside verifyJWT() 
                                    * won't be called. This prevents Express from proceeding to the callback function.
                                    */
-  (req, res) => {                 // Callback function runs if token is valid
+  (req, res) => {                 
+                                  // Callback function runs if token is valid
                                   // At this point, verifyJWT has decoded the JWT and attached user data to req.user
     res.json({ user: req.user }); // Send the user info back to the frontend as JSON
   }

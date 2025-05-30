@@ -15,7 +15,7 @@ const RegisterPage = () => {
         password:""
     });
 
-    const [registering, setRegistering] = useState(''); // tracks if registering is ongoing
+    const [registering, setRegistering] = useState(false); // tracks if registering is ongoing
     const [error, setError]             = useState(''); // track any backend error messages
 
     const handleChange = (event) => { // tracks form state (for all fields) as user types
@@ -68,8 +68,9 @@ const RegisterPage = () => {
                 <input
                     type='text'                       // set input type
                     placeholder="Enter your username" // instruction text
+                    name='username'
                     value={formData.username}         // holds 'username' value
-                    onChange={()=>handleChange()}     // changes 'username' as typed
+                    onChange={handleChange}     // changes 'username' as typed
                     required                          // mandatory field
                 />
             </label>
@@ -79,8 +80,9 @@ const RegisterPage = () => {
                 <input
                     type='text'                    // set input type
                     placeholder="Enter your email" // instruction text
+                    name='email'
                     value={formData.email}         // holds 'username' value
-                    onChange={()=>handleChange()}  // change password value on typing
+                    onChange={handleChange}    // change password value on typing
                     required                       // makes field required
                 />
             </label>            
@@ -90,8 +92,9 @@ const RegisterPage = () => {
                 <input
                     type='text'                       // set input type
                     placeholder="Enter your password" // instruction text
+                    name='password'
                     value={formData.password}         // holds 'password' value
-                    onChange={()=>handleChange()}     // change password value on typing
+                    onChange={handleChange}       // change password value on typing
                     required                          // makes field required
                 />
             </label>            

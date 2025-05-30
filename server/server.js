@@ -70,8 +70,8 @@ app.use(passport.session());     // Allow persistent login sessions (required fo
 // ==============================================================================
 // CSRF Protection (Optional but Recommended)
 // ==============================================================================
-const csrfProtection = csrf({ cookie: true }); // Enable/Disable if CSRF is needed
-app.use(csrfProtection);
+//const csrfProtection = csrf({ cookie: true }); // Enable/Disable if CSRF is needed
+//app.use(csrfProtection);
 
 
 

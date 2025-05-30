@@ -9,7 +9,11 @@ import {
     } from "react-router-dom"; 
 
 import axios from "axios"; // sends HTTP client requests to backend
-import { useDispatch } from "react-redux"; // hook for dispatching redux actions
+
+import { 
+        useDispatch, // hook for dispatching redux actions
+        useSelector  // hook for 
+        } from "react-redux"; 
 
 import {setUserFromToken, clearUser} from '../Slices/authSlice'; // redux action to track/update user state
 
@@ -18,23 +22,22 @@ import BasePageLayout from "./BasePageLayout/BasePageLayout"; // shared layout w
 const ProtectedPageLayout = () => {
 
     const [checkingAuth, setCheckingAuth] = useState(true); // Tracks if still verifying user status
-    const [authorized, setAuthorized] = useState(false);    // Tracks if user is authenticated
     const dispatch = useDispatch();                         // used to call redux actions
+
+    const isAuthenticated = useSelector((state) =>  state.auth.isAuthenticated); // checks if user is authenticated
 
     const checkUserAuth = async () => {
         try {
-            // Send GET request to '/auth/me' to verify JWT in cookie
-            const response = await axios.get(
+            const response = await axios.get( // Send GET request to '/auth/me' to verify JWT in cookie
                 'http://localhost:5000/auth/me',
                  { withCredentials: true } // Ensure cookie is sent with request
             );
-            dispatch(setUserFromToken(response.data.user)); // If successful, dispatch user data to Redux store
-
-            setAuthorized(true); // set user as authorized
+            if (response.data.user) {
+                dispatch(setUserFromToken(response.data.user)); // If successful, dispatch user data to Redux store
+            }
         } 
-        catch(error) {             // If token fails (i.e. expired token)...
-            dispatch(clearUser()); // clear redux auth state
-            setAuthorized(false);  //  and deny authorization
+        catch(error) {  // If token fails (i.e. expired token), clear user from redux
+            dispatch(clearUser()); 
         }
         finally {
             setCheckingAuth(false); // mark that checking authentication is finished
@@ -48,16 +51,15 @@ const ProtectedPageLayout = () => {
     if(checkingAuth) { // Set to 'Loading..' if user auth is being checked
         return (<h1>Loading....</h1>);
     }
-    if(!authorized) { // If user is unauthorized, navigate to login page 
 
+    if(!isAuthenticated) { // If user is unauthorized, redirect to login page 
         return (<Navigate to='/login' replace />); // Since user is unauthorized, 'replace' keyword prevents user from navigating back 
                                                    // to a protected page after redirect (since unauthorized user shouldn't be allowed to access it)
     }
 
     return ( // If successfully authenticated, reder the layout + any nested protected routes
         <BasePageLayout>
-            {/* Renders whichever protected route is matched inside <Routes> */}
-            <Outlet />
+            <Outlet /> {/* Renders whichever protected route is matched inside <Routes> */}
         </BasePageLayout>
     );
 }

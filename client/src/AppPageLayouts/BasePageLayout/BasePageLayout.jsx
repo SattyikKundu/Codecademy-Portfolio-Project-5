@@ -3,6 +3,7 @@ import { Toaster, toast, useToasterStore } from 'react-hot-toast'; // enable toa
 
 import Menu from "../../PageComponents/menu/menu";
 import CartSlider from "../../PageComponents/cartSlider/cartSlider";
+import { Outlet } from "react-router-dom";
 
 
 /* <BasePageLayout> serves as a "wrapper" that provides 
@@ -11,7 +12,9 @@ import CartSlider from "../../PageComponents/cartSlider/cartSlider";
  * and the <ProtectedPageLayout>. For there, any specializations
  * for the respective page layout can then be added.
  */
-const BasePageLayout = ({ children }) => {
+//const BasePageLayout = ({ children }) => {
+
+const BasePageLayout = () => {
 
     const [cartSliderOpen, setCartSliderOpen] = useState(false); // tracks when cart slider opens
 
@@ -39,7 +42,8 @@ const BasePageLayout = ({ children }) => {
             {/* Cart Slider that user can access to track cart */}
             <CartSlider toggleCart={toggleCart} cartSliderOpen={cartSliderOpen} />
 
-            {children}
+            {/*{children}*/}
+            <Outlet />
 
             {/* Default <Toaster /> for toast messages */}
             <Toaster position={'top-right'} containerStyle={{ top: 70, right: 10}} 

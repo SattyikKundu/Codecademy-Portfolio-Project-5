@@ -4,7 +4,9 @@ import jwt from 'jsonwebtoken';                             // Used to create JW
 import bcrypt from 'bcryptjs';                              // used to hash and compare passwords securely 
 import { setAuthCookie } from '../utils/setAuthCookie.js';  // method to set authentication cookie via JWT token
 
-import { createUser, findUserByUsername } from '../model/authModel.js'; // methods for finding and creating/registing user in database
+import { createUser, 
+         findUserByUsername,
+         findUserByEmail } from '../model/authModel.js'; // methods for finding and creating/registing user in database
 // NOTE: 'findUserByGoogleId' and 'createUser' aren't used, only stored in authModel.js currently
 
 
