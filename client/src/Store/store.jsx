@@ -16,7 +16,7 @@ const loadFromLocalStorage = () => { // loads cart state from local storage (if 
             return undefined;
         } 
         else { // otherwise return stores cart state
-            return JSON.parse(cartState);
+            return { cart: JSON.parse(cartState)}; // important: wrap in {cart: ...} to get state for 'cart'
         }
     }
     catch(error) {
@@ -27,7 +27,7 @@ const loadFromLocalStorage = () => { // loads cart state from local storage (if 
 
 const saveToLocalStorage = (state) => { // save cart state to localStorage
     try {
-        const cartState = JSON.stringify(state); // stringify state prior to storage
+        const cartState = JSON.stringify(state.cart); // stringify state (get ONLY cart state) prior to storage
         localStorage.setItem('cartState', cartState);
     }
     catch(error) {
@@ -40,13 +40,12 @@ const store = configureStore({ // CREATED store
         cart: cartReducer,
         auth: authReducer
     },
-    preloadedState: { 
-        cartState: loadFromLocalStorage(), // at store mounting, preload cartState
-    }
+    preloadedState: loadFromLocalStorage() // at store mounting, preload cart state
 });
 
 store.subscribe(() => {
-  saveToLocalStorage(store.getState().cartState); // Subscribe cart changes to local storage
+  saveToLocalStorage(store.getState()); // saves whole 'store' state, but saveToLocalStorage() 
+                                        // only saves the cart state
 });
 
 export default store;
