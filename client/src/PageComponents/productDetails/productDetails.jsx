@@ -14,7 +14,7 @@ import {
         selectProductQuantityById   // selector method for finding product's current quantity in cart
        } from '../../Slices/cartSlice.jsx'; 
 
-import {addedToCartToast } from "../../utils/utilityFunctions.jsx";
+import {addedToCartToast } from "../../utils/utilityFunctions.js";
 
 import './productDetails.css'; // styling for Product details display
 

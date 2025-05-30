@@ -12,8 +12,6 @@ import { Outlet } from "react-router-dom";
  * and the <ProtectedPageLayout>. For there, any specializations
  * for the respective page layout can then be added.
  */
-//const BasePageLayout = ({ children }) => {
-
 const BasePageLayout = () => {
 
     const [cartSliderOpen, setCartSliderOpen] = useState(false); // tracks when cart slider opens
@@ -42,7 +40,7 @@ const BasePageLayout = () => {
             {/* Cart Slider that user can access to track cart */}
             <CartSlider toggleCart={toggleCart} cartSliderOpen={cartSliderOpen} />
 
-            {/*{children}*/}
+            {/* <Outlet/> where content is injected based on chosen route */}
             <Outlet />
 
             {/* Default <Toaster /> for toast messages */}

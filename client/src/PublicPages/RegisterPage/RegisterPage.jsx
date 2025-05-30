@@ -1,5 +1,5 @@
 
-import React, {useState} from "react"; // track local states
+import {useState} from "react"; // track local states
 import axios from "axios";             // used to send HTTP requests to backend
 import { useNavigate } from "react-router-dom"; // used to progammatically redirecting routes
 
