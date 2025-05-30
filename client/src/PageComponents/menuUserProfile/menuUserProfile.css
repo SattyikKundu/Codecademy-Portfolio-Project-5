@@ -2,27 +2,39 @@
 /************** General design stylings for profile button **********************/
 /********************************************************************************/
 
-.profile-bttn-container {
+.profile-button-dropdown-wrapper { /* When user is authenticated, this wrapper 
+                                      holds both button and drop-down menu */ 
+
+  display: flex; /* Flex display for easy centering of button */
+  align-self: center; /* vertical centering of button */
+  position: relative;
+  margin: 0 auto;
+}
+
+.profile-bttn-container { /* container that holds and styles button */
+
     display: flex; /* Flex display for easy centering of button */
     align-self: center; /* vertical centering of button */
     margin: 0 auto;
 
-    border: 1px solid #545c75c7; /* border styling of container */
-    border-radius: 30%;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.281);
+    /*border: 1px solid #545c75c7; /* border styling of container */
+    /*box-shadow: 0 2px 6px rgba(0, 0, 0, 0.281);*/
+    border: 1px solid #1d81c4; /* button border styling*/
+    box-shadow: 0 0 5px #18679cd0;
 
-    overflow: visible;/*hidden; /* container content styling */
+    border-radius: 30%;
+
     background-color: #2394e0;
 
     width: 2.2rem; /* overall button dimensions*/
     height: 2.2rem;
 
-    /* TEMP margins to remove later */
-   /* margin-right: 1rem; 
-    margin-left: 1rem;*/
-
-    position: relative;
+    position: relative; /* needed for drop-down menu to have 'absolute' positioning */
     cursor: pointer;
+}
+
+.profile-bttn-container.active { /* darken button to show dropdown menu is active */
+  background-color: #136196;
 }
 
 .user-icon { /* icon color & size styling */
@@ -35,10 +47,13 @@
 
 
 .profile-bttn-container:hover {  /* Profile button color change on hover*/
-    background-color: #136196; 
+    background-color: #227ab4;
+    /*background-color: #227ab4 !important; /* !important prevents override by front-end button color logic*/
+    border: 1px solid #125e91;
+    box-shadow: 0 0 5px #125e91d0;
 }
 
-.profile-bttn-container:hover .user-icon { 
+.profile-bttn-container:hover .user-icon { /* color of user-icons from FontAwesome */
     color: beige; 
 }
 
@@ -47,36 +62,84 @@
 }
 
 /********************************************************************************/
-/************** Stylings for dropdown menu once logged in ***********************/
+/*********** Wrapper for button AND dropdown menu WHEN logged in ****************/
 /********************************************************************************/
 
-.dropdown-menu {
-  position: absolute;
-  top: 2.5rem;
+.profile-dropdown-bttn-wrapper { /* wrapper that holds BOTH 
+                                  * profile button and drop-down menu.
+                                  * Styling also ensurs that 'profile' button is in 
+                                  * exact same place as the 'login' button was.
+                                  */
+
+  display: flex;      /* Flex display for easy centering of button */
+  align-self: center; /* vertical centering of button in flex parent */
+  position: relative; /* ensures that drop down menu shows below (via absolute position)*/
+  margin: 0 auto;     /* ensures */
+}
+
+.item-divider { /* a dark pseudo-line object that acts a a 'border' or 'boundary' between items */
+  background-color: #dadada;
+  height: 1px;
+  width: 94%;
+  margin: 0 auto;
+}
+
+/********************************************************************************/
+/******** Styling for Dropdown menu (which is only active after styling) ********/
+/********************************************************************************/
+
+.dropdown-menu { /* Drop-down menu */
+
+  position: absolute; /* for positioning */
+  top: 49px;
   right: 0;
-  background: white;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  
   min-width: 140px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  background: white;
+
+  border: 1px solid #ddd; /* border styling */
+  border-radius: 3px 3px 9px 9px;
+  
+  box-shadow: 0px 0px 4px 4px rgba(0,0,0,0.15); /* box-shadow styling */
+  clip-path: inset(0px -10px -10px -10px);
+
+  opacity: 0; /* fade/slider styling when toggling menu */
+  pointer-events: none;
+  transform: translateY(-5px);
+  transition: opacity 150ms ease-in-out, transform 150ms ease-in-out;
   z-index: 10;
 }
 
-.dropdown-item {
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  font-size: 0.9rem;
-  border-bottom: 1px solid #eee;
+.dropdown-menu.active { /* Part of fade/slider styling when toggling menu */
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.dropdown-item { /* Each item in dropdown menu */
+
+  font-family: Arial, Helvetica, sans-serif; /* text style in drop-down item */
+  font-weight: bold;
+  font-size: 1rem;
+
+  padding: 0.4rem 0.6rem; /* padding, margin, and dimension of drop-down item */
+  margin: 0.4rem;
+  border-radius: 9px;
 
   user-select: none;
-  transition: background-color 0.2s;
+  cursor: default;
+
+  transition: background-color 0.2s; /* transition for color change when hovering*/
 
 }
 
-.dropdown-item:hover {
-  background-color: #f1f1f1;
+.dropdown-item:hover:first-child { /* Since 1st item is just user profile name, 
+                                      style it so user knows not to click on it */
+  background-color: inherit;
+  cursor: default;
 }
 
-.dropdown-item:last-child {
-  border-bottom: none;
+.dropdown-item:hover { /* highlight clickable item on hover */
+  background-color: #cfcfcf;
+    cursor: pointer;
 }

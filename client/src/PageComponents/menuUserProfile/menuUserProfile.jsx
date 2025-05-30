@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -10,7 +10,8 @@ import { clearUser } from "../../Slices/authSlice";
 
 import './menuUserProfile.css';
 
-const ProfileButton = () => {
+const ProfileButton = () => { /* Button that toggles between default 'Login' button 
+                                 OR the 'Profile' button if logged in */
 
     const user = useSelector((state) => state.auth.user); // Get existing user from redux
     const isAuthenticated = useSelector((state) =>  state.auth.isAuthenticated); // checks if user is authenticated
@@ -18,12 +19,12 @@ const ProfileButton = () => {
     const navigate = useNavigate(); // initialize for route navigation
 
     const [showDropDown, setShowDropDown] = useState(false);// toggles dropdown depending on login
-    const [loggingOut, setLoggingOut] = useState(false); // tracks if app is logging out
+    //const [loggingOut, setLoggingOut] = useState(false); // tracks if app is logging out
     const [error, setError] = useState(''); // tracks error
 
     const handleLogout = async () => {
 
-      setLoggingOut(true);
+      //setLoggingOut(true);
       setError('');
 
       try {
@@ -41,13 +42,37 @@ const ProfileButton = () => {
         console.log('Error while logging out: ', error);
       }
       finally {
-        setLoggingOut(false);
+        //setLoggingOut(false);
       }
     }
 
     const toggleDropDown = () => { // toggles dropdown menu
       setShowDropDown(prev => !prev);
     }
+
+    const dropDownRef= useRef(null); // used for reference to dropdown menu when detecting 
+                                     // clicks outside of dropdown menu via useEffect()
+
+    useEffect(()=>{ // useEffect closes drop-down menu if clicked outside of drop-down menu while opened.
+
+      if (!showDropDown) return;
+
+      const handleClickingOutside = (event) => {
+
+        // Below condition checks if referred dropdown <div> exists, and if it contains click event (target).
+        // Negation(!) makes it so the condition is that the click takes place outside of selected dropDownRef.
+        if(dropDownRef.current && !dropDownRef.current.contains(event.target)) {
+           setShowDropDown(false); // close menu
+          };
+      }
+
+      document.addEventListener('mousedown', handleClickingOutside); // attaches method of 'mousedown' (or click) event
+    
+      return () => { // Cleans up event listener when component remounts or dismounts
+        document.removeEventListener('mousedown', handleClickingOutside);
+      }
+    },[showDropDown]) // runs when 'showDropDown' changes
+    
 
 
     if(!isAuthenticated) { // if unauthenticated, button links to login page
@@ -63,27 +88,49 @@ const ProfileButton = () => {
       );
     }
 
+
     if(isAuthenticated) { // otherwise, if authenticated...   
       return (
-        <div className="profile-bttn-container">
-          <div onClick={toggleDropDown}>
+        // Wrapper that holds BOTH profile button and dropdown menu
+        <div className="profile-button-dropdown-wrapper">
+
+          {/* Profile button */}
+          <div className={`profile-bttn-container ${showDropDown ? 'active' : ''}`} 
+              onClick={toggleDropDown} 
+              role='button'
+              tabIndex={0}  
+          >
             <FontAwesomeIcon icon={faUserLarge} className='user-icon' />
           </div>
-          {showDropDown && (
-            <div className="dropdown-menu">
-              <div className="dropdown-item"><strong>{user.username}</strong></div>
-              <div 
-                className="dropdown-item" 
-                onClick={() => {
-                    setShowDropDown(false); 
-                    navigate("/profile");
-                    }}
-                >Profile</div>
-              <div className="dropdown-item" onClick={handleLogout}>
-                <FontAwesomeIcon icon={faRightFromBracket} /> Logout
-              </div>
+
+          {/* Dropdown menu that shows when use clicks on 'Profile' button */}
+          <div className={`dropdown-menu ${showDropDown ? 'active' : ''}`} ref={dropDownRef}>
+
+            <div className="dropdown-item" style={{color: '#7E7E7E'}}>@{user.username}</div>
+
+            <div className="item-divider" />
+
+            <div 
+              className="dropdown-item" 
+              onClick={() => {
+                  setShowDropDown(false); 
+                  navigate("/profile");
+              }}
+            >
+              Profile
             </div>
-          )}
+
+            <div className="item-divider" />
+
+            <div 
+              className="dropdown-item" 
+              onClick={handleLogout}
+              //style={{backgroundColor: `${loggingOut ? '#cfcfcf':'' }`}}  
+            >
+              <FontAwesomeIcon icon={faRightFromBracket} /> Logout
+            </div>
+
+          </div>
         </div>
       );
     }

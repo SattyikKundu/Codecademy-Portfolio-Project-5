@@ -84,7 +84,7 @@
         #a0f6d2,   /* minty seafoam green */
         #e3fca3    /* soft reef-yellow (sunlit algae tone) */
     );
-    -webkit-background-clip: text; /* contrains gradient to only text area (and not entire block) */
+    -webkit-background-clip: text;        /* contrains gradient to only text area (and not entire block) */
     -webkit-text-fill-color: transparent; /* Needed for gradient to cover text */
     text-shadow: 0 0 0px rgba(0, 0, 0, 0.35); /* Slight shadow over text to darken/contrast background */
 }
