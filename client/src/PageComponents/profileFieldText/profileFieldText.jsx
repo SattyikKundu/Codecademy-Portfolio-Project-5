@@ -1,0 +1,75 @@
+import { useState, useEffect } from "react";
+import './profileFieldText.css';
+
+const ProfileFieldText = ({ label, value, original, onSave, propStyle={} }) => { // props for profile field-value 
+                                                                                 // component ('propsStyle' optional)
+
+  const [editing, setEditing] = useState(false); // tracks if field is in 'editing' mode or not
+  const [draft, setDraft] = useState(value);     // holds edited value as 'draft'
+
+  useEffect(() => { // Keep 'draft' in sync with parent value (especially needed for )
+    setDraft(value);
+  }, [value]);
+
+  const handleRevert = () => { /* If value edited, can be reverted to original value from database */
+    setDraft(original);
+  };
+
+  const handleSave = () => { /* Enables saving of edited/orginal back via onSave prop function */
+    setEditing(false);
+    if (value !== draft && draft.trim().length > 0) {
+      onSave(draft);
+    }
+  };
+
+  const handleCancel = () => { /* Can cancel in middle of field value editing */
+    setEditing(false);
+    setDraft(value);
+  };
+
+  const handleEdit = () => { /* toggles editing of field value */
+    setEditing(true);
+  };
+
+  return (
+    // Field & value wrapper with optional style prop
+    <div className='field-wrapper' style={propStyle}>
+
+      {/* Holds field label (i.e. username, email, first name, etc.) */}
+      <div className="field-label">{label}</div>
+
+      {/* Holds displayed field value as well as editing buttons */}
+      <div className="field-value-buttons-wrapper">
+        {editing ? (
+          <>
+            {/* If in 'editing' mode, user can edit in <input> as well 
+                as save edited value and cancel editing midway */}
+            <input
+              className='field-input-box'
+              value={draft}
+              onChange={e => setDraft(e.target.value)}
+            />
+            <div className="edit-buttons">
+              <button type="button" onClick={handleSave}>Save</button>
+              <button type="button" onClick={handleCancel}>✖</button>
+            </div>
+          </>
+        ) : (
+          <>
+            {/* If in 'display' mode, can click 'Edit' button to switch to 'editing' mode
+                as well as click 'Undo' to revert edited value back to original field value. */}
+            <div className="field-value">{draft}</div>
+            <div className="edit-buttons">
+              <button type="button" onClick={handleEdit}>Edit</button>
+              {draft !== original && (
+                <button type="button" onClick={handleRevert}>Undo</button>
+              )}
+            </div>
+          </>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default ProfileFieldText;

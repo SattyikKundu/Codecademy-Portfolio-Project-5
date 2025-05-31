@@ -1,0 +1,106 @@
+.field-wrapper { /* Main wrapper for entire field */
+
+    display: flex; /* Flex items in row*/
+    flex-direction: row;
+    width: 100%;    /* matches parent element */
+}
+
+.field-label { /* styling for field label */
+
+    flex-basis: 30%; /* Fixed width for label with flex parent */
+
+    padding: 0.75rem 0.3rem; /* background and container shape */
+
+    font-weight: bold; /* label font styling*/
+    font-family: Arial, Helvetica, sans-serif; 
+    text-align: left;
+
+    white-space: nowrap; /* Add ellipsis(...) for overflowing text */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.field-value-buttons-wrapper { /* wrapper holds input field and value (both original and editable) */
+  display: flex; /* flex items in row*/
+  flex-direction: row;
+  flex: 1;      /* ensures item wrapper takes up any remaining space, 
+                   espcially since label uses 30% width of parent container. */
+
+  min-width: 0; /* Prevents overflow growth */
+}
+
+.field-value,
+.field-input-box {  /* General styling for both input box and displayed field value */
+
+  flex: 1; /* Ensures input box and displayed field value uses available width.
+            * This applies as long as current OR parent element uses 'display:flex'.
+            * Also, display flex is avoided since it conflicts with text overflow ellipsis.
+            */
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  white-space: nowrap; /* Add ellipsis(...) for overflowing text */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.field-value { /* specified padding around field values */
+    padding: 0.9rem 0.4rem;
+}
+
+
+.field-input-box { /* specific styling for input box */
+  min-width: 0%; /* enables <input> box to scale down 
+                    past built-in default min-width*/
+
+  padding: 0.5rem; /* text box area styling */
+  border-radius: 12px;
+  text-indent: 3px;
+
+  background-color: rgb(230, 230, 230); /* grey highlighted background 
+                                             showing text box active */
+  background-clip: content-box; /* prevents background-color as part of padding */
+}
+
+input{ /* gets rid of default outline when focusing in an <input> box  */
+    outline: none;
+    border: none;
+}
+
+.edit-buttons { /* wrapper holds value-editing options buttons */
+
+    display: flex; /* buttons are in row for flex display */
+    flex-direction: row;
+
+    align-items: center;     /* horizontal centering of flex items (also somehow 
+                                prevents buttons' padding from vertically growing) */
+
+    justify-content: center; /* vertical centering of flex items */
+    
+    flex-basis: 86px; /* Fixed button wrapper width for flex object */
+    gap: 4px;         /* gap space between buttons */
+    padding: 0 4px;   /* padding on left and right of wrapper */
+}
+
+.edit-buttons button { /* pads area inside each button to make button bigger */
+    padding: 0.2rem;
+}
+
+@media screen and (max-width: 480px) { /* adjust styling for mobile screens */
+    .edit-buttons button {
+        padding: 0.05rem;
+    }
+    .field-label { 
+        font-size: 0.8rem;
+        text-indent: 5px;
+        text-align: center;
+        flex-basis: 25%;
+        line-height: 1.2rem; /*vertically centers text without flex (which removes ...)*/
+    }
+    .field-value{
+        text-align: center;
+        font-size: 0.8rem;
+        text-indent: 5px;
+    }
+}
+

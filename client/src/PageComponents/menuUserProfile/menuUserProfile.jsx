@@ -92,7 +92,7 @@ const ProfileButton = () => { /* Button that toggles between default 'Login' but
     if(isAuthenticated) { // otherwise, if authenticated...   
       return (
         // Wrapper that holds BOTH profile button and dropdown menu
-        <div className="profile-button-dropdown-wrapper">
+        <div className="profile-button-dropdown-wrapper" ref={dropDownRef}>
 
           {/* Profile button */}
           <div className={`profile-bttn-container ${showDropDown ? 'active' : ''}`} 
@@ -104,7 +104,7 @@ const ProfileButton = () => { /* Button that toggles between default 'Login' but
           </div>
 
           {/* Dropdown menu that shows when use clicks on 'Profile' button */}
-          <div className={`dropdown-menu ${showDropDown ? 'active' : ''}`} ref={dropDownRef}>
+          <div className={`dropdown-menu ${showDropDown ? 'active' : ''}`}>
 
             <div className="dropdown-item" style={{color: '#7E7E7E'}}>@{user.username}</div>
 
