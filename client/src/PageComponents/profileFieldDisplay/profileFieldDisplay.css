@@ -21,7 +21,7 @@
     white-space: normal; /* enables wrapping of text in container */
 }
 
-.field-value-buttons-wrapper { /* wrapper holds input field and value (both original and editable) */
+.field-value-display-wrapper { /* wrapper holds input field and value (both original and editable) */
   display: flex; /* flex items in row*/
   flex-direction: row;
   flex: 1;      /* ensures item wrapper takes up any remaining space, 
@@ -32,8 +32,7 @@
   min-width: 0; /* Prevents overflow growth */
 }
 
-.field-value,
-.field-input-box {  /* General styling for both input box and displayed field value */
+.field-value-display {  /* General styling for both input box and displayed field value */
 
   flex: 1 1 0; /* Ensures input box and displayed field value grows/shrinks using available width.
                 * This applies as long as current OR parent element uses 'display:flex'.
@@ -43,70 +42,24 @@
   font-family: Arial, Helvetica, sans-serif;
   font-size: 0.85rem;
   line-height: 1.5rem; /* This vertically 'pseudo-centers' the text without using display:flex */
-
+  padding: 0.9rem 0.4rem;
 
   white-space: nowrap; /* Add ellipsis(...) for overflowing text */
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.field-value { /* specified padding around field values */
-    padding: 0.9rem 0.4rem;
+
+.empty-buttons { /* wrapper holds value-editing options buttons */
+    display: block;
+    width: 86px;
 }
-
-
-.field-input-box { /* specific styling for input box */
-  min-width: 0%; /* enables <input> box to scale down 
-                    past built-in default min-width*/
-
-  padding:0.5rem 0.5rem 0.5rem 0; /* text box area styling */
-  border-radius: 12px;
-  text-indent: 6px;
-
-  background-color: rgb(230, 230, 230); /* grey highlighted background 
-                                             showing text box active */
-  background-clip: content-box; /* prevents background-color as part of padding */
-}
-
-input { /* gets rid of default outline when focusing in an <input> box  */
-    outline: none;
-    border: none;
-}
-
-.edit-buttons { /* wrapper holds value-editing options buttons */
-
-    display: flex; /* buttons are in row for flex display */
-    flex-direction: row;
-
-    align-items: center;     /* horizontal centering of flex items (also somehow 
-                                prevents buttons' padding from vertically growing) */
-
-    justify-content: center; /* vertical centering of flex items */
-    
-    flex-basis: 86px; /* Fixed button wrapper width for flex object */
-    gap: 4px;         /* gap space between buttons */
-    padding: 0 4px;   /* padding on left and right of wrapper */
-}
-
-.edit-buttons button { /* pads area inside each button to make button bigger */
-    padding: 0.2rem;
-}
-
 
 
 @media screen and (max-width: 480px) { /* adjust styling for mobile screens */
 
-    .field-value-buttons-wrapper { /* vertically centers items in wrapper */
+    .field-value-display-wrapper { /* vertically centers items in wrapper */
         align-items: center;
-    }
-
-    .edit-buttons { /* reduce padding for smaller screens */
-        padding: 0px 1px;
-    }
-
-    .edit-buttons button { /* adjust button padding for smaller screen*/
-        padding: 0.05rem;
-        font-size: 0.75rem;
     }
 
     .field-label { /* adjust field label for smaller screen size */
@@ -118,7 +71,7 @@ input { /* gets rid of default outline when focusing in an <input> box  */
         line-height: 1.2rem; /*vertically centers text without flex (which removes ...)*/
         padding: 0.75rem 0.3rem
     }
-    .field-value{
+    .field-value-display{
         text-align: center;
         font-size: 0.75rem;
         text-indent: 5px;

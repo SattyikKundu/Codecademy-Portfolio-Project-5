@@ -1,0 +1,249 @@
+/**************************************************************************************/
+/************** Wrapper for entire component ******************************************/
+/**************************************************************************************/
+
+.state-field-wrapper { /* Main wrapper for entire field */
+    display: flex; /* Flex items in row*/
+    flex-direction: row;
+    width: 100%;    /* matches parent element */
+}
+
+
+/**************************************************************************************/
+/************ Field label name (ex: First Name, Zip code, etc.) ***********************/
+/**************************************************************************************/
+
+.state-field-label { /* styling for field label */
+
+    display: flex;
+    flex-basis: 30%;     /* Fixed width for label with flex parent */
+    align-items: center; /*vertically center text in flex*/
+
+    padding: 0.75rem 0 0.75rem 1rem; /* background and container shape */
+
+    font-weight: bold; /* label font styling*/
+    font-family: Arial, Helvetica, sans-serif; 
+    font-size: 0.85rem;
+    text-align: left;
+
+    white-space: normal; /* enables wrapping of text in container */
+}
+
+/**************************************************************************************/
+/***** Wrapper holding display value, editable input field, and editing buttons *******/
+/**************************************************************************************/
+
+.field-value-buttons-wrapper { /* wrapper holds input field and value (both original and editable) */
+  display: flex; /* flex items in row*/
+  flex-direction: row;
+  flex: 1;      /* ensures item wrapper takes up any remaining space, 
+                   espcially since label uses 30% width of parent container. 
+                   Also needed to work with the 'flex:1' used in the field-value and field-dropdown-container.
+                   */
+  min-width: 0; /* Prevents overflow growth */
+
+}
+
+/**************************************************************************************/
+/***** Field's displayed value (original value or value after selection) **************/
+/**************************************************************************************/
+
+.state-field-value {  /* General styling for displayed field value */
+
+  flex: 1 1 0; /* Ensures input box and displayed field value grows/shrinks using available width.
+                * This applies as long as current OR parent element uses 'display:flex'.
+                * Also, 'display:flex' is avoided since it conflicts with text overflow ellipsis.
+                */
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.85rem;
+  line-height: 1.5rem; /* This vertically 'pseudo-centers' the text without using display:flex */
+  padding: 0.65rem 0.4rem;
+
+  white-space: nowrap; /* Add ellipsis(...) for overflowing text */
+  overflow: hidden; 
+  text-overflow: ellipsis;
+}
+
+/**************************************************************************************/
+/***** Styling for various classes and nested container for dropdown menu *************/
+/**************************************************************************************/
+
+.field-dropdown-container { /* main dropdown container wrapper */
+
+  min-width: 0%; /* enables <input> box to scale down 
+                    past built-in default min-width*/
+
+  flex: 1 1 0; /* ensures space between field-label and buttons is fully filled */
+
+  padding:0.5rem 0; /* text box area styling */
+  border-radius: 12px;
+  text-indent: 6px;
+
+  background-color: transparent;/*rgb(230, 230, 230); /* grey highlighted background 
+                                             showing text box active */
+  background-clip: content-box; /* prevents background-color as part of padding */
+
+  position: relative; /* ensures later absolute positioning for opened dropdown options box */
+}
+
+.field-dropdown-display { /* main container for dropdown list that displays current selection */
+
+  display: flex; 
+  justify-content: space-between; /* space between text and arrow in flex*/
+  align-items: center;            /* vertically centers text and arrow in flex*/
+
+
+  max-width: 220px;                       /* dropdown container max-width */
+  background-color: rgb(230, 230, 230); /* background color in dropdown containr */
+
+  border: 1px solid #ccc;               /* border styling */
+  border-radius: 4px;
+  padding: 0.4rem 0.1rem;
+
+  font-size: 0.85rem;                     /* font styling */
+  font-family: Arial, Helvetica, sans-serif;
+
+  cursor: pointer;
+}
+
+.selected-state-value { /* contains current selected state in dropdown container*/
+  flex: 1;
+}
+
+.arrow { /* styling of dropdown arrow */
+  margin-left: 4px;
+  font-size: 0.75rem;
+}
+
+.field-dropdown-list { /* styling for dropdown options box */
+  position: absolute;   /* list outside container and under dropdown selection box */
+  max-width: 220px;     /* max-width of dropdown list  */
+  max-height: 150px;    /* control dropdown height     */
+  overflow-y: auto;     /* allows vertical scrolling   */
+  background: white;  /* background color in dropdown list */
+
+  border: 1px solid #adadad; /* border styling */
+  border-radius: 0 0 6px 6px; 
+}
+
+.state-dropdown-group { /* Padding around each options group */
+  padding: 4px 6px 4px 4px;
+}
+
+.state-group-label { /* styles the options group's label in list */
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.85rem;
+  color: #666;
+  padding: 2px 0px;
+}
+
+.state-dropdown-option { /* styling for each option in the list */
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.8rem;
+  padding: 4px 0px;
+  cursor: pointer;
+}
+
+.state-dropdown-option:hover { /* list option on hover */
+  background-color: #e6e6e6;
+}
+
+/* .custom-dropdown-option.selected { background-color: #d0eaff; } */
+/**************************************************************************************/
+/******************** Styling of scroller in dropdown box *****************************/
+/**************************************************************************************/
+
+.field-dropdown-list::-webkit-scrollbar { /* scrollbar width */
+  width: 7px; 
+}
+
+.field-dropdown-list::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.4); /* thumb color */
+  border-radius: 4px;                  /* rounded corners */
+}
+
+.field-dropdown-list::-webkit-scrollbar-thumb:hover {  /* color when hovering */
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.field-dropdown-list::-webkit-scrollbar-track { /* track color */
+  background-color: #f0f0f0; 
+}
+
+/**************************************************************************************/
+/******************** Styling of various editing buttons ******************************/
+/**************************************************************************************/
+
+.edit-buttons { /* wrapper holds value-editing options buttons */
+
+    display: flex; /* buttons are in row for flex display */
+    flex-direction: row;
+
+    align-items: center;     /* horizontal centering of flex items (also somehow 
+                                prevents buttons' padding from vertically growing) */
+
+    justify-content: center; /* vertical centering of flex items */
+    
+    flex-basis: 86px; /* Fixed button wrapper width for flex object */
+    gap: 4px;         /* gap space between buttons */
+    padding: 0 4px;   /* padding on left and right of wrapper */
+}
+
+.edit-buttons button { /* pads area inside each button to make button bigger */
+    padding: 0.2rem;
+}
+
+/**************************************************************************************/
+/************ All respnsive styling for states dropdown menu component ****************/
+/**************************************************************************************/
+
+@media screen and (max-width: 480px) { /* adjust styling for mobile screens */
+
+    .field-value-buttons-wrapper { /* vertically centers items in wrapper */
+        align-items: center;
+    }
+
+    .field-dropdown-display{ /* text displays in center for <480px */
+      padding-left: 2px;
+      padding-right: 2px;
+      text-align: center;
+      font-size: 0.7rem;
+      justify-content: center;
+    }
+
+    .state-group-label {
+      font-size: 0.8rem;
+    }
+    .state-dropdown-option {
+      font-size: 0.715rem;
+
+      text-indent: 0px;
+      padding-left: 7px; /* Indent AND left padding used together 
+                        to ensure wrapped line visually aligns left*/
+    }    
+
+    .edit-buttons { /* reduce padding for smaller screens */
+        padding: 0px 1px;
+    }
+
+    .edit-buttons button { /* adjust button padding for smaller screen*/
+        padding: 0.05rem;
+        font-size: 0.75rem;
+    }
+
+    .state-field-label { /* adjust field label for smaller screen size */
+        font-size: 0.75rem;
+        text-indent: 5px;
+        justify-content: center; /*horizontally center text in flex*/
+        text-align: center;
+        flex-basis: 25%;
+        line-height: 1.2rem; /*vertically centers text without flex (which removes ...)*/
+        padding: 0.75rem 0.3rem
+    }
+    .state-field-value {
+        text-align: center;
+        font-size: 0.75rem;
+        text-indent: 5px;
+    }
+}
