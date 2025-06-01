@@ -2,6 +2,7 @@ import { useState } from "react";
 import ProfileFieldText from "../../PageComponents/profileFieldText/profileFieldText";
 import ProfileFieldDisplay from "../../PageComponents/profileFieldDisplay/profileFieldDisplay";
 import ProfileFieldStateMenu from "../../PageComponents/profileFieldStateMenu/profileFieldStateMenu";
+import { formatTimestampToMDY } from "../../utils/utilityFunctions";
 
 import './ProfilePage.css';
 
@@ -11,7 +12,7 @@ const initialProfile = {
   username: "Jsmithy",
   email: "BeanDippySkippy@example.com",
   phone: "703-456-4235",
-  created: "01-25-2014",
+  created: 1706570245780, // From unix timestamp in (ms), this is 1-29-2024
   // Profile stuff above (delivery stuff below)
   address1: "24446 Momo Drive",
   address2: "suite 245",
@@ -145,7 +146,7 @@ const ProfilePage = () => {
       />
       <ProfileFieldDisplay
         label="Account creation date"
-        original={originalProfile.created}
+        original={formatTimestampToMDY(originalProfile.created)}
         propStyle={{backgroundColor: '#e9f0f2'}}
       />
       <div id="profile-header-2">
