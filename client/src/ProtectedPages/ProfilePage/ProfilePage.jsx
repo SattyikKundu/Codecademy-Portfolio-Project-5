@@ -76,7 +76,7 @@ const ProfilePage = () => {
         propStyle={{backgroundColor: '#e9f0f2'}}
       />
       <div id="profile-header-2">
-        Your Current Shipping Address
+        Home Address for Shipping
       </div>
       <ProfileFieldText
         label="Street Address"

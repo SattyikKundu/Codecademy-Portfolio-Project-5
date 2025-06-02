@@ -5,6 +5,7 @@ import Menu from "../../PageComponents/menu/menu";
 import CartSlider from "../../PageComponents/cartSlider/cartSlider";
 import { Outlet } from "react-router-dom";
 
+import './BasePageLayout.css';
 
 /* <BasePageLayout> serves as a "wrapper" that provides 
  * the necessary common functions & features like Toasts messages, 
@@ -12,6 +13,8 @@ import { Outlet } from "react-router-dom";
  * and the <ProtectedPageLayout>. For there, any specializations
  * for the respective page layout can then be added.
  */
+
+
 const BasePageLayout = () => {
 
     const [cartSliderOpen, setCartSliderOpen] = useState(false); // tracks when cart slider opens
