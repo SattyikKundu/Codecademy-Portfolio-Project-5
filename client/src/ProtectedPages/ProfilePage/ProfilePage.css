@@ -40,8 +40,31 @@
     font-size: 1rem;
 }
 
-#profile-submit {
-    margin: 5rem auto;
-    padding: 0.25rem;
+#profile-submit { /* Styling submit button */
+
+    font-size: 1.25rem; /* Button text styling*/
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgba(255, 255, 255, 0.87);
+
+    border: 1px solid rgb(177, 94, 255); /* border styling */
+    border-radius: 10px;
+    box-shadow: 0px 0px 3px 2px rgba(155, 85, 221, 0.6);
+
+    margin: 4rem auto; /* button dimensions*/
+    padding: 0.5rem;
+    
+    background-color: rgb(117, 41, 189); /*button color*/
+
     cursor: pointer;
+}
+
+#profile-submit:hover {
+    background-color: rgb(94, 26, 158);
+    border: 1px solid rgb(110, 29, 185); 
+    box-shadow: 0px 0px 3px 2px rgba(155, 85, 221, 0.75);
+}
+
+#profile-submit:active{
+    transform: scale(0.9);
 }

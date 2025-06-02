@@ -72,7 +72,9 @@ const ProfileFieldText = ({ label, value, original, onSave, propStyle={} }) => {
           <>
             {/* If in 'display' mode, can click 'Edit' button to switch to 'editing' mode
                 as well as click 'Undo' to revert edited value back to original field value. */}
-            <div className="field-value">{draft}</div>
+            <div className="field-value">
+              <span>{draft}</span>
+            </div>
             <div className="edit-buttons">
               <button type="button" onClick={handleEdit}>Edit</button>
               {draft !== original && (
