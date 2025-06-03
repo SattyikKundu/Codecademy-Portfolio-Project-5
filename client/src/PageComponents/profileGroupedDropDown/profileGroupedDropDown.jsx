@@ -85,6 +85,7 @@ const ProfileGroupedDropDownMenu = ({ label, value, original, onSave, options, p
   const handleSelect = (value) => { // handles selection from open dropdown menu
     setDraft(value);
     setDropdownOpen(false);
+    onSave(value); // to save saved value into parent component
   };
 
   const findLabel = (value) => { // retrieve display label for the current 'draft' value

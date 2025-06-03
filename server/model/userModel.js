@@ -1,4 +1,4 @@
-import pool from "../database/database";
+import pool from "../database/database.js";
 
 /* uses userId to return user profile data (as an object, not a promise) */
 export const getUserProfileById = async (userId) => {

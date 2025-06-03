@@ -1,11 +1,9 @@
 import express from 'express';  // Imported framework for defining routes
+import verifyJWT from '../middleware/verifyJWT.js'; // Import verifyJWT auth middleware
 
 import { getProfile, 
          updateProfile 
         } from '../controller/userController.js'; // import controller functions
-
-import verifyJWT from '../middleware/verifyJWT.js'; // Import verifyJWT auth middleware
-
 
 const router = express.Router();
 

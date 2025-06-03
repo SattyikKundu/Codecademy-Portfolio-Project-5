@@ -4,7 +4,7 @@ import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import './menuCartBttn.css';
 
 const CartButton = ({toggleCart}) => {
-    console.log('Cart button rendered');
+    //console.log('Cart button rendered');
     return (
       <>
         <div className='cart-bttn-container'

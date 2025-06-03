@@ -10,7 +10,7 @@ import CartButton from "../menuCartBttn/menuCartBttn.jsx";
 import './menu.css';
 
 const Menu = ({toggleCart}) => {
-    console.log("Menu rendered");
+    //console.log("Menu rendered");
     return (
         <div className="header-menu">
           <div className="logo-container">
