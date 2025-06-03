@@ -98,7 +98,8 @@
 
   border: 1px solid #ccc;               /* border styling */
   border-radius: 4px;
-  padding: 0.4rem 0.1rem;
+  padding: 0.37rem 0.1rem; /* 0.37rem ensures that 'shift' between display and editing mode
+                              doesn't distrub field height can cause the 'grid' to visibly shift. */
 
   font-size: 0.85rem;                     /* font styling */
   font-family: Arial, Helvetica, sans-serif;
@@ -129,7 +130,6 @@
 
   border: 1px solid #adadad; /* border styling */
   border-radius: 0 0 6px 6px; 
-
 }
 
 .dropdown-options-group { /* Padding around each options group */
