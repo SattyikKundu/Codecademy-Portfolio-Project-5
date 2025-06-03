@@ -18,24 +18,25 @@ const LoginPage = () => { // login component with default login header message
     const [username, setUsername] = useState(''); // stores and track 'username' from form field and into local state
     const [password, setPassword] = useState(''); // stores and track 'passowrd' from form field and into local state
 
-    const [loginError, setLoginError] = useState(''); // tracks login errors 
-    const [loading,       setLoading] = useState(false); // tracks loading state
 
-    const loginHeader = location.state?.loginHeader || "Log In Here"; // fallback if not passed
-    const loginErrorMsg = location.state?.loginErrorMsg || ""; // used if login failed
+    const [loading, setLoading] = useState(false);                                             // tracks loading state
+    const [error,   setError] = useState(() => location.state?.loginErrorMsg || "");           // tracks error ('()=>' gets default value on mount)
+    const [header,  setHeader] = useState(() => location.state?.loginHeader || "Log In Here"); // tracks header ('()=>' gets default value on mount)
 
-    
-    useEffect(() => { // Used to clear 'Red Error' portion if manually reloading page
+
+
+    useEffect(() => { // used to clear 'red error' message from login header on page reload
     if (location.state?.loginErrorMsg || location.state?.loginHeader) {
         navigate(location.pathname, { replace: true }); // Clear the state after rendering once
     }
-    }, []); // use [] only on reload
+    }, [location, navigate]); 
+
 
     const handleLocalSubmit = async (event) => { // function for submitting login credentials locally
 
         event.preventDefault(); // prevents page reload on submit
         setLoading(true);
-        setLoginError('');
+        setError('');
 
         try {
             const response = await axios.post(
@@ -55,14 +56,9 @@ const LoginPage = () => { // login component with default login header message
         }
         catch(error) { // handle error returned from backend (like invalid username or password)
             const errorMsg = error.response?.data?.error || 'Login failed.';
-            setLoginError(errorMsg);
+            setError(errorMsg);
+            setHeader('Try again or register.');
             ErrorMessageToast(errorMsg, 2500, 'top-center');  // toast message with login error
-            navigate('/login', { 
-                state: { 
-                    loginErrorMsg: errorMsg,  // error portion only
-                    loginHeader: 'Try again or register.' // remainder portion
-                } 
-            });
         }
         finally {
             setLoading(false); // turn off loading state at the end
@@ -79,8 +75,8 @@ const LoginPage = () => { // login component with default login header message
 
             {/* Login form header */}
             <h2>
-              {loginErrorMsg && <span style={{ color: 'red', fontWeight: 'bold' }}>{loginErrorMsg}. </span>}
-              {loginHeader}
+              {error && <span style={{ color: 'red', fontWeight: 'bold' }}>{error}. </span>}
+              {header}
             </h2>
 
             {/* start of login form */}

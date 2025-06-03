@@ -1,7 +1,9 @@
 
-import {useState} from "react"; // track local states
-import axios from "axios";             // used to send HTTP requests to backend
+import {useState} from "react";      // track local states
+import axios from "axios";                      // used to send HTTP requests to backend
 import { useNavigate } from "react-router-dom"; // used to progammatically redirecting routes
+
+import { ErrorMessageToast } from "../../utils/utilityFunctions";
 
 import './RegisterPage.css';
 
@@ -16,7 +18,9 @@ const RegisterPage = () => {
     });
 
     const [registering, setRegistering] = useState(false); // tracks if registering is ongoing
+    const [header, setHeader]           = useState('Create Account'); // default header
     const [error, setError]             = useState(''); // track any backend error messages
+
 
     const handleChange = (event) => { // tracks form state (for all fields) as user types
         setFormData(prev => ({
@@ -24,9 +28,9 @@ const RegisterPage = () => {
             [event.target.name]: event.target.value
         }));
     }
+    
+    const handleRegisterSubmit = async (event) => {// Handle registration form submission
 
-    // Handle registration form submission
-    const handleRegisterSubmit = async (event) => {
         event.preventDefault(); // prevent page reload on submission
         setRegistering(true);   // registering starts now
         setError('');           // keep error empty
@@ -38,13 +42,16 @@ const RegisterPage = () => {
                 {withCredentials: true}                // if httpOnly cookie (with JWT) exists, send to backend
             );
 
-            // redirect to '/login' route after successful registration
-            navigate('/login', {state: {loginHeader: "Registration successful! You can login now!"} });
+            navigate(  // redirect to '/login' route after successful registration
+                '/login', {state: {loginHeader: "Registration successful! You can login now!"} 
+            });
             
         }
         catch (error) { // Handle registration failure
-            setError(error.response?.data?.error || 'Registration failed. Please try again.');
-            
+            const errorMsg = error.response?.data?.error || 'Registration failed.';
+            setError(errorMsg);
+            setHeader('Try again.');  
+            ErrorMessageToast(errorMsg, 2500, 'top-center');
         }
         finally { // end of registering
             setRegistering(false);;
@@ -60,7 +67,10 @@ const RegisterPage = () => {
         <div className="registration-form">
 
             {/* Register form header */}
-            <h2>Create Account</h2>
+            <h2>
+              {error && <span style={{ color: 'red', fontWeight: 'bold' }}>{error}. </span>}
+              {header}
+            </h2>
 
             {/* start of account registration form fields*/}
             <label>
@@ -70,7 +80,7 @@ const RegisterPage = () => {
                     placeholder="Enter your username" // instruction text
                     name='username'
                     value={formData.username}         // holds 'username' value
-                    onChange={handleChange}     // changes 'username' as typed
+                    onChange={handleChange}           // changes 'username' as typed
                     required                          // mandatory field
                 />
             </label>
@@ -94,7 +104,7 @@ const RegisterPage = () => {
                     placeholder="Enter your password" // instruction text
                     name='password'
                     value={formData.password}         // holds 'password' value
-                    onChange={handleChange}       // change password value on typing
+                    onChange={handleChange}           // change password value on typing
                     required                          // makes field required
                 />
             </label>            
@@ -107,9 +117,6 @@ const RegisterPage = () => {
             >
                 {registering ? "Registering account..." : "Register"}
             </button>
-
-            {/* Show error if account registration fails */}
-            {error && <p style={{color:"red"}}>{error}</p>}
 
             {/* Google OAuth button placeholder (will update later!) */}
             <div className="register-button">Register/Login with Google</div>

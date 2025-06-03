@@ -83,7 +83,7 @@
     transform: scale(0.96);
 }
 
-.register-button :disabled {
+.register-button:disabled { /* register button disabled whilst loading */
   background-color: #aaa;
   cursor: not-allowed;
 }
