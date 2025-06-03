@@ -1,9 +1,9 @@
-import { useState } from "react";               // react hook to track form input
+import { useState, useEffect } from "react";               // react hook to track form input
 import { useNavigate } from "react-router-dom"; // hook for redirecting user after login
 import { useDispatch } from "react-redux";      // Redux hook to update auth statement
 import { useLocation } from "react-router-dom"; // hook for managing location object properties
 import axios from 'axios';                      // for making HTTP requests to backend
-import { LoginSuccessToast, LoginFailedToast } from "../../utils/utilityFunctions"; // toast when login fails/succeed
+import { ErrorMessageToast } from "../../utils/utilityFunctions"; // toast when login fails/succeed
 
 import { setUser } from "../../Slices/authSlice"; // redux action to store data
 
@@ -18,16 +18,24 @@ const LoginPage = () => { // login component with default login header message
     const [username, setUsername] = useState(''); // stores and track 'username' from form field and into local state
     const [password, setPassword] = useState(''); // stores and track 'passowrd' from form field and into local state
 
-    const [error, setError]     = useState(''); // tracks login errors 
-    const [loading, setLoading] = useState(''); // tracks loading state
+    const [loginError, setLoginError] = useState(''); // tracks login errors 
+    const [loading,       setLoading] = useState(false); // tracks loading state
 
     const loginHeader = location.state?.loginHeader || "Log In Here"; // fallback if not passed
+    const loginErrorMsg = location.state?.loginErrorMsg || ""; // used if login failed
+
+    
+    useEffect(() => { // Used to clear 'Red Error' portion if manually reloading page
+    if (location.state?.loginErrorMsg || location.state?.loginHeader) {
+        navigate(location.pathname, { replace: true }); // Clear the state after rendering once
+    }
+    }, []); // use [] only on reload
 
     const handleLocalSubmit = async (event) => { // function for submitting login credentials locally
 
         event.preventDefault(); // prevents page reload on submit
         setLoading(true);
-        setError('');
+        setLoginError('');
 
         try {
             const response = await axios.post(
@@ -42,12 +50,19 @@ const LoginPage = () => { // login component with default login header message
             );
 
             dispatch(setUser(response.data.user)); // On success, dispatch user info to redux
-            LoginSuccessToast();
-            navigate("/profile"); // now navigate to designated protected route after login
+            navigate("/profile", { state: { loginSuccess: true } }); // now navigate to designated 
+                                                                     // protected route after login
         }
         catch(error) { // handle error returned from backend (like invalid username or password)
-            setError(error.response?.data?.error || 'Login failed.');
-            LoginFailedToast(error);
+            const errorMsg = error.response?.data?.error || 'Login failed.';
+            setLoginError(errorMsg);
+            ErrorMessageToast(errorMsg, 2500, 'top-center');  // toast message with login error
+            navigate('/login', { 
+                state: { 
+                    loginErrorMsg: errorMsg,  // error portion only
+                    loginHeader: 'Try again or register.' // remainder portion
+                } 
+            });
         }
         finally {
             setLoading(false); // turn off loading state at the end
@@ -63,7 +78,10 @@ const LoginPage = () => { // login component with default login header message
         <div className="login-form-box">
 
             {/* Login form header */}
-            <h2>{loginHeader}</h2>
+            <h2>
+              {loginErrorMsg && <span style={{ color: 'red', fontWeight: 'bold' }}>{loginErrorMsg}. </span>}
+              {loginHeader}
+            </h2>
 
             {/* start of login form */}
             <label>
@@ -80,7 +98,7 @@ const LoginPage = () => { // login component with default login header message
             <label>
                 Password:
                 <input
-                    type='text'                  // set input type
+                    type='text'                  // set input type (needs to be 'password' in real-world apps to mask field!)
                     value={password}             // set field value
                     placeholder="Enter password" // instruction text
                     onChange={(event) => setPassword(event.target.value)}  // change password value on typing
@@ -96,9 +114,6 @@ const LoginPage = () => { // login component with default login header message
             >
                 {loading ? "Logging in..." : "Login"}
             </button>
-
-            {/* Show error when login fails */}
-            {error && <p style={{color:"red"}}>{error}</p>}
 
             {/* Google OAuth button placeholder (will update later!) */}
             <div className="login-button">Login with Google</div>

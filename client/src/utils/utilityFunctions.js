@@ -19,68 +19,9 @@ export const addedToCartToast = () => { // toast for successful adding of produc
     });
 }
 
-export const LoginSuccessToast = () => { // toast for successful login
-    toast.success('Successfully Login', {
-        style: { // general style of toast message
-            borderRadius: '10px',       // rounded message corners
-            background: '#fff',         // white background
-            border: '1px solid black',  // black border
-            color: '#000',              // black text
-            fontFamily: 'Arial',        // font-family of notification text
-            fontWeight: 'Bold',         // font text bolded
-        },
-        duration: 2000,        // toast lasts 3 second
-        position: 'top-center'  // place in general top-center area
-    });
-}
 
-export const LoginFailedToast = (error = 'Login failed.') => { // toast for failed login attempt
-    toast.error(error, {
-        style: { // general style of toast message
-            borderRadius: '10px',       // rounded message corners
-            background: '#fff',         // white background
-            border: '1px solid black',  // black border
-            color: '#000',              // black text
-            fontFamily: 'Arial',        // font-family of notification text
-            fontWeight: 'Bold',         // font text bolded
-        },
-        duration: 2000,        // toast lasts 3 second
-        position: 'top-center'  // place in general top-center area
-    });
-}
 
-export const PhoneNumberErrorToast = () => { // toast for incorrect phone # format
-    toast.error('Invalid phone number format.\nUse: XXX-XXX-XXXX.', {
-        style: { // general style of toast message
-            borderRadius: '10px',       // rounded message corners
-            background: '#fff',         // white background
-            border: '1px solid black',  // black border
-            color: '#000',              // black text
-            fontFamily: 'Arial',        // font-family of notification text
-            fontWeight: 'Bold',         // font text bolded
-            textAlign:'center'
-        },
-        duration: 2000,        // toast lasts 3 second
-        position: 'top-center'  // place in general top-center area
-    });
-}
-
-export const ErrorMessageToast = (error) => { // toast for returned error message
-    toast.error(error, {
-        style: { // general style of toast message
-            borderRadius: '10px',       // rounded message corners
-            background: '#fff',         // white background
-            border: '1px solid black',  // black border
-            color: '#000',              // black text
-            fontFamily: 'Arial',        // font-family of notification text
-            fontWeight: 'Bold',         // font text bolded
-        },
-        duration: 2000,        // toast lasts 3 second
-        position: 'top-center'  // place in general top-center area
-    });
-}
-
-export const SuccessMessageToast = (message) => { // toast for returned successf message
+export const SuccessMessageToast = (message, time=2000, place='top-center') => { // toast for returned success message
     toast.success(message, {
         style: { // general style of toast message
             borderRadius: '10px',       // rounded message corners
@@ -92,6 +33,22 @@ export const SuccessMessageToast = (message) => { // toast for returned successf
         },
         duration: 2000,        // toast lasts 3 second
         position: 'top-center'  // place in general top-center area
+    });
+}
+
+export const ErrorMessageToast = (error, time=2000, place='top-center') => { // toast for returned error message
+    toast.error(error, {
+        style: { // general style of toast message
+            borderRadius: '10px',       // rounded message corners
+            background: '#fff',         // white background
+            border: '1px solid black',  // black border
+            textAlign: 'center',        // centers text
+            color: '#000',              // black text
+            fontFamily: 'Arial',        // font-family of notification text
+            fontWeight: 'Bold',         // font text bolded
+        },
+        duration: time,  // toast lasts 3 second
+        position: place  // place in general top-center area
     });
 }
 

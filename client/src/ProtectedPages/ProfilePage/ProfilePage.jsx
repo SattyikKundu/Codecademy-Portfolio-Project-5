@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import axios from "axios";
 
 import ProfileFieldText from "../../PageComponents/profileFieldText/profileFieldText";
@@ -11,33 +12,24 @@ import { ErrorMessageToast, SuccessMessageToast } from "../../utils/utilityFunct
 
 import './ProfilePage.css';
 
-/*
-const initialProfile = {
-  firstName: "Jim",
-  lastName: "Smith",
-  username: "Jsmithy",
-  email: "BeanDippySkippy@example.com",
-  phone: "703-456-4235",
-  created: 1706570245780, // From unix timestamp in (ms), this is 1-29-2024
-  // Profile stuff above (delivery stuff below)
-  address1: "24446 Momo Drive",
-  address2: "suite 245",
-  city: "Dunham",
-  zip: "20166",
-  state: "VA",
-}; */
-
 
 const ProfilePage = () => {
   
-  //const [profile, setProfile] = useState(initialProfile); // State for current profile data
-  //const [originalProfile] = useState(initialProfile); // Immutable original snapshot (does not change)
-
   const [profile, setProfile] = useState(null);                 // Initial state as null until data loads
   const [originalProfile, setOriginalProfile] = useState(null); // Original inital state stored as snapshot 
                                                                 // for 'Undo' features
   const [loading, setLoading] = useState(true); // tracks loading state
-    
+  
+  const location = useLocation(); // initiazlie useLocation reference
+
+  useEffect(() => { // returns login toast ONLY when user comes to Profile page upon succesful login
+    if (location.state?.loginSuccess) {
+      setTimeout(() => {
+        SuccessMessageToast('Successful Login'); // Or whatever message you want
+      }, 300);
+    }
+  }, [location.state]);
+
   const fetchProfile = async () => { // async function for fetching user's profile data
     setLoading(true);
     try {

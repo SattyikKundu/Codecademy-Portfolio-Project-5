@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import { PhoneNumberErrorToast } from "../../utils/utilityFunctions";
+import { ErrorMessageToast } from "../../utils/utilityFunctions";
 import './profileFieldText.css';
 
 const ProfileFieldText = ({ label, value, original, onSave, propStyle={} }) => { // props for profile field-value 
@@ -20,7 +20,7 @@ const ProfileFieldText = ({ label, value, original, onSave, propStyle={} }) => {
   const handleSave = () => { /* Enables saving of edited/orginal back via onSave prop function */
     setEditing(false);
     if (label === "Phone" && !isValidPhone(draft)) {  // Only validate phone format if using 'Phone' field
-      PhoneNumberErrorToast();
+      ErrorMessageToast('Invalid phone number format.\nUse: XXX-XXX-XXXX.');
       setDraft(value); // revert to original if invalid
       return;
     }
