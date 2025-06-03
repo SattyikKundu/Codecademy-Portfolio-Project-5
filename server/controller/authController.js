@@ -73,13 +73,15 @@ export const registerUser = async (req, res, next) => { // Registers a new user 
     const newUser = await createUser({ username, email, passwordHash }); // Create ad insert new user into database
 
 
-    const token = jwt.sign(                     // Issue a JWT token for new user
-        { id: newUser.id, username: newUser.username }, // JWT payload (without sensitive info)
-        process.env.JWT_SECRET,                         // JWT secret key from environment config (in .env) 
-        { expiresIn: '24h' }                            // Token expires in 24 hours
-    );
-
-    setAuthCookie(res, token); // Set token in secure, httpOnly cookie
+    // NOTE: below snippet commented out to prevent new user from being logged in
+    //       prior to new user logging in in the LoginPage normally.
+      
+    //const token = jwt.sign(                             // Issue a JWT token for new user
+    //    { id: newUser.id, username: newUser.username }, // JWT payload (without sensitive info)
+    //    process.env.JWT_SECRET,                         // JWT secret key from environment config (in .env) 
+    //    { expiresIn: '24h' }                            // Token expires in 24 hours
+    //);
+    //setAuthCookie(res, token); // Set token in secure, httpOnly cookie
 
     res.status(201).json({  // Upon successful registration, return new user on login
         message: 'Registration successful', 
