@@ -12,10 +12,14 @@ import csrf from 'csurf';                 // middleware import for CSRF (Cross-S
 //import redis from 'redis';     // Used to cache 'products' data in order to reduce load and requests to database. 
 
 import './auth/passportConfig.js';  // Loads and registers passport strategies globally (MUST come before routes!)
-import productRoutes from './routes/productRoutes.js'; // import default export 'router' as 'productRoutes'
-                                                       // handles product-related routes (e.g. '/products/:category')
+
 import authRoutes from './routes/authRoutes.js';       // Authentication-related routes (e.g. /auth/login, /auth/google)
 
+import productRoutes from './routes/productRoutes.js'; // import default export 'router' as 'productRoutes'
+                                                       // handles product-related routes (e.g. '/products/:category')
+
+import userRoutes from './routes/userRoutes.js'; // imports default export 'router' as 'userRoutes'
+                                                 // handles retrieval and editing of user-data
 
 import dotenv from 'dotenv'; // loads .env variables into process.env 
                              // so they can be accessed anywhere in server code
@@ -95,6 +99,10 @@ app.use('/', authRoutes); /* Mount all routes for handling authentication-relate
                            * This would make it scalable and easier to "swap" routes around if needed.
                            */
 
+app.use('/', userRoutes); /* Mount all routes for handling user-related 
+                             requests (e.g., /profile GET and PATCH) */
+
+                             
 // Default route for any other requests (Optional, for catch-all error handling)
 //app.use('*', (req, res) => {
 //  res.status(404).json({ error: 'Route not found' });

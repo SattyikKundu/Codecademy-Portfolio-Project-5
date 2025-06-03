@@ -27,7 +27,7 @@ export const updateProfile = async (req, res) => { // controller function to upd
 
     const updatedUser = await updateUserProfile(userId, updatedFields); // execute updating to database
 
-    res.status(200).json({ // return success message and updated profile data as JSON object under key 'user' to frontend
+    res.status(200).json({ // return success message and updated profile data as 'user' to frontend
       message: 'Profile updated successfully',
       user: updatedUser
     });
