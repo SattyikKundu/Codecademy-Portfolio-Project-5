@@ -11,7 +11,7 @@
     flex-basis: 30%;     /* Fixed width for label with flex parent */
     align-items: center; /*vertically center text in flex*/
 
-    padding: 0.75rem 0 0.75rem 1rem; /* background and container shape */
+    padding: 0.73rem 0 0.73rem 1rem; /* background and container shape */
 
     font-weight: bold; /* label font styling*/
     font-family: Arial, Helvetica, sans-serif; 
@@ -42,7 +42,7 @@
   font-family: Arial, Helvetica, sans-serif;
   font-size: 0.85rem;
   line-height: 1.5rem; /* This vertically 'pseudo-centers' the text without using display:flex */
-  padding: 0.9rem 0.4rem;
+  padding: 0.5rem 0.4rem;
 
   white-space: nowrap; /* Add ellipsis(...) for overflowing text */
   overflow: hidden;

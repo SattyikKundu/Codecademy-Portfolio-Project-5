@@ -20,7 +20,7 @@ const ProfilePage = () => {
                                                                 // for 'Undo' features
   const [loading, setLoading] = useState(true); // tracks loading state
   
-  const location = useLocation(); // initiazlie useLocation reference
+  const location = useLocation(); // initialize useLocation reference
 
   useEffect(() => { // returns login toast ONLY when user comes to Profile page upon succesful login
     if (location.state?.loginSuccess) {
@@ -73,22 +73,23 @@ const ProfilePage = () => {
       }
     } 
     catch (error) { // otherwise catch and notify error
-      console.console('Error updating profile:', error);
-      ErrorMessageToast('Failed to update profile.');
+      console.error('Error updating profile:', error);
+      const errorMsg = error.response?.data?.error || 'Failed to update profile.';
+      ErrorMessageToast(errorMsg);
     }
   };
 
-  // If data is still loading, show loading state
-  if (loading) {
+
+  if (loading) {   // If data is still loading, show loading state
     return <h2 style={{ margin: 'auto' }}>Loading profile...</h2>;
   }
 
-  if (!profile) {
+  if (!profile) { // If no profile, show notice.
     return <h2 style={{ margin: 'auto' }}>Profile not found.</h2>;
   }
+
   if(!loading){
   return (
-    //<form className='profile-info-grid' onSubmit={e => { e.preventDefault(); alert("Profile saved!"); }}> 
     <form className='profile-info-grid' onSubmit={handleSubmit}>
       <h2 id="profile-header-1">
         Profile Information
