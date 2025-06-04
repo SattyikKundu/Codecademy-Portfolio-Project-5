@@ -24,9 +24,7 @@ const ProfilePage = () => {
 
   useEffect(() => { // returns login toast ONLY when user comes to Profile page upon succesful login
     if (location.state?.loginSuccess) {
-      setTimeout(() => {
-        SuccessMessageToast('Successful Login'); // Or whatever message you want
-      }, 300);
+      setTimeout(function() {SuccessMessageToast('Successful Login!');}, 400);
     }
   }, [location.state]);
 

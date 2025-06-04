@@ -19,7 +19,9 @@ export const addedToCartToast = () => { // toast for successful adding of produc
     });
 }
 
-
+/* NOTE: If passing a 'prop' from an old page to trigger a toast on the new page (via redirect),
+ *       this can lead to an issue where the it looks like there 2 simultaneous overlapping props.
+ */
 
 export const SuccessMessageToast = (message, time=2000, place='top-center') => { // toast for returned success message
     toast.success(message, {
@@ -31,8 +33,8 @@ export const SuccessMessageToast = (message, time=2000, place='top-center') => {
             fontFamily: 'Arial',        // font-family of notification text
             fontWeight: 'Bold',         // font text bolded
         },
-        duration: 2000,        // toast lasts 3 second
-        position: 'top-center'  // place in general top-center area
+        duration: time,    // toast lasts 3 second
+        position: place    // place in general top-center area
     });
 }
 

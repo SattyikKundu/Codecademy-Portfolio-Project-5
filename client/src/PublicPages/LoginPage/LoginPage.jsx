@@ -3,9 +3,10 @@ import { useNavigate } from "react-router-dom"; // hook for redirecting user aft
 import { useDispatch } from "react-redux";      // Redux hook to update auth statement
 import { useLocation } from "react-router-dom"; // hook for managing location object properties
 import axios from 'axios';                      // for making HTTP requests to backend
-import { ErrorMessageToast } from "../../utils/utilityFunctions"; // toast when login fails/succeed
+import { ErrorMessageToast, SuccessMessageToast } from "../../utils/utilityFunctions"; // toast when login fails/succeed
 
 import { setUser } from "../../Slices/authSlice"; // redux action to store data
+
 
 import './LoginPage.css';
 
@@ -15,28 +16,52 @@ const LoginPage = () => { // login component with default login header message
     const navigate = useNavigate(); // used to progammatrically redirect user
     const location = useLocation(); // use to handle location 'state' passed via url
 
-    const [username, setUsername] = useState(''); // stores and track 'username' from form field and into local state
-    const [password, setPassword] = useState(''); // stores and track 'passowrd' from form field and into local state
+    const [username, setUsername] = useState('');  // stores and track 'username' from form field and into local state
+    const [password, setPassword] = useState('');  // stores and track 'passowrd' from form field and into local state
+    const [loading, setLoading] = useState(false); // tracks loading state
 
 
-    const [loading, setLoading] = useState(false);                                             // tracks loading state
-    const [error,   setError] = useState(() => location.state?.loginErrorMsg || "");           // tracks error ('()=>' gets default value on mount)
-    const [header,  setHeader] = useState(() => location.state?.loginHeader || "Log In Here"); // tracks header ('()=>' gets default value on mount)
+    const [header, setHeader] = useState(() => { // Set header on mount with below nested logic. Since all logic 
+                                                 // is done in this useState(), text synchronization issues are prevented!
+
+      const errorMsg    = location.state?.loginErrorMsg; // error message on login
+      const successMsg  = location.state?.successMsg;    // notice of successful registration (redirect after regsitering on <RegisterPage />)
+      const loginHeader = location.state?.loginHeader || "Log In Here."; // login header message (with default)
+
+      if (errorMsg) { // if error message, set this header...
+        return ( 
+            <>
+            <span style={{ color: 'red' }}>{errorMsg} </span>
+            {loginHeader}
+            </>
+        );
+      } 
+      else if (successMsg) { // if success message, use this header...
+        setTimeout(function() { SuccessMessageToast(successMsg, 1100, 'top-center')}, 400); // delay by 400ms
+        return (
+            <>
+            <span style={{ color: 'green' }}>{successMsg} </span>
+            {loginHeader}
+            </>
+        );
+      } 
+      else { // otherwise, return default header
+        return loginHeader;
+      }
+    });
 
 
-
-    useEffect(() => { // used to clear 'red error' message from login header on page reload
-    if (location.state?.loginErrorMsg || location.state?.loginHeader) {
-        navigate(location.pathname, { replace: true }); // Clear the state after rendering once
-    }
+    useEffect(() => { // used to clear location.state on initial render (removes success/error messages)
+        if(location.state){
+            navigate(location.pathname, { replace: true }); // Clear the state after rendering once
+        }
     }, [location, navigate]); 
 
-
+    
     const handleLocalSubmit = async (event) => { // function for submitting login credentials locally
 
         event.preventDefault(); // prevents page reload on submit
-        setLoading(true);
-        setError('');
+        setLoading(true);       // start tracking loading
 
         try {
             const response = await axios.post(
@@ -53,12 +78,17 @@ const LoginPage = () => { // login component with default login header message
             dispatch(setUser(response.data.user)); // On success, dispatch user info to redux
             navigate("/profile", { state: { loginSuccess: true } }); // now navigate to designated 
                                                                      // protected route after login
+                                                                     // 'loginSuccess' triggers toast in new page
         }
         catch(error) { // handle error returned from backend (like invalid username or password)
             const errorMsg = error.response?.data?.error || 'Login failed.';
-            setError(errorMsg);
-            setHeader('Try again or register.');
-            ErrorMessageToast(errorMsg, 2500, 'top-center');  // toast message with login error
+
+            setHeader( // Directly set error message INTO header
+              <>
+                <span style={{ color: 'red' }}>{errorMsg} </span> Try again or register.
+              </>
+            );
+            ErrorMessageToast(errorMsg, 1100, 'top-center');  // toast message with login error
         }
         finally {
             setLoading(false); // turn off loading state at the end
@@ -74,10 +104,7 @@ const LoginPage = () => { // login component with default login header message
         <div className="login-form-box">
 
             {/* Login form header */}
-            <h2>
-              {error && <span style={{ color: 'red', fontWeight: 'bold' }}>{error}. </span>}
-              {header}
-            </h2>
+            <h2>{header}</h2>
 
             {/* start of login form */}
             <label>

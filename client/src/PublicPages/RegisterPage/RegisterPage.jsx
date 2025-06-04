@@ -17,9 +17,8 @@ const RegisterPage = () => {
         password:""
     });
 
-    const [registering, setRegistering] = useState(false); // tracks if registering is ongoing
-    const [header, setHeader]           = useState('Create Account'); // default header
-    const [error, setError]             = useState(''); // track any backend error messages
+    const [registering, setRegistering] = useState(false);            // tracks if registering is ongoing
+    const [header, setHeader]           = useState('Create Account'); // tracks header
 
 
     const handleChange = (event) => { // tracks form state (for all fields) as user types
@@ -33,25 +32,40 @@ const RegisterPage = () => {
 
         event.preventDefault(); // prevent page reload on submission
         setRegistering(true);   // registering starts now
-        setError('');           // keep error empty
 
         try {
             const response = await axios.post(
                 'http://localhost:5000/auth/register', // register route path
                 formData,                              // form data sent to '/auth/register/' route in backend
-                {withCredentials: true}                // if httpOnly cookie (with JWT) exists, send to backend
+                {
+                    withCredentials: true,                // if httpOnly cookie (with JWT) exists, send to backend
+                    validateStatus: (status) => status >= 200 && status < 300 // default for Axios (ensures that successful
+                                                                              //  message won't enter the catch block)
+                }
             );
 
-            navigate(  // redirect to '/login' route after successful registration
-                '/login', {state: {loginHeader: "Registration successful! You can login now!"} 
-            });
+            navigate( // redirect to '/login' route after successful registration
+                '/login', 
+                 { state: { successMsg: 'Registration successful!', loginHeader: "You can log in now!" }}
+            );
             
         }
         catch (error) { // Handle registration failure
-            const errorMsg = error.response?.data?.error || 'Registration failed.';
-            setError(errorMsg);
-            setHeader('Try again.');  
-            ErrorMessageToast(errorMsg, 2500, 'top-center');
+
+            // error messages come from registerUser() from 'authController.js' in /server backend
+            const errorMessage = error.response?.data?.error || 'Registration failed.'; 
+
+            /* Below modifies header message to show error (NOTE: holding entire updated header 
+             * in useState() helps PREVENT synchronization issues that would otherwise show 
+             * if using ternary operators OR holding seprarate sentence parts in separate useStates.)
+             */
+            setHeader( 
+              <span>
+                <span style={{ color: 'red'}}>{errorMessage} </span> Try again.
+              </span>
+            );
+
+            ErrorMessageToast(errorMessage, 1100, 'top-center'); // error toast
         }
         finally { // end of registering
             setRegistering(false);;
@@ -67,10 +81,7 @@ const RegisterPage = () => {
         <div className="registration-form">
 
             {/* Register form header */}
-            <h2>
-              {error && <span style={{ color: 'red', fontWeight: 'bold' }}>{error}. </span>}
-              {header}
-            </h2>
+            <h2>{header}</h2>
 
             {/* start of account registration form fields*/}
             <label>
@@ -92,7 +103,7 @@ const RegisterPage = () => {
                     placeholder="Enter your email" // instruction text
                     name='email'
                     value={formData.email}         // holds 'username' value
-                    onChange={handleChange}    // change password value on typing
+                    onChange={handleChange}        // change password value on typing
                     required                       // makes field required
                 />
             </label>            

@@ -14,17 +14,21 @@ export const loginUser = async (req, res, next) => { // Local login controller
   try {
     const { username, password } = req.body; // get username + password when user logs in (via req.body)
 
+    if (!username?.trim() || !password?.trim()) { // Check for empty/missing fields (trim() for whitespace-only cases)
+      return res.status(400).json({ error: 'One or both fields are empty.' });
+    }
+
     const user = await findUserByUsername(username); // attempt to find user with matching username
 
     if (!user){ // If user is not found for username, return error message
-        return res.status(401).json({ error: 'Invalid username' });
+        return res.status(401).json({ error: 'Invalid username.' });
     } 
 
     const isMatch = await bcrypt.compare(password, user.password_hash); // checks is stored hased password matches 
                                                                         // hash of user provided password
                                                                         
     if (!isMatch){ // If password doesn't match, return 'invalid' message
-        return res.status(401).json({ error: 'Invalid password' });
+        return res.status(401).json({ error: 'Invalid password.' });
     } 
 
     const token = jwt.sign( //Otherwise, if login is successful, create JWT payload with user info (customizable)
@@ -49,7 +53,7 @@ export const loginUser = async (req, res, next) => { // Local login controller
 export const logoutUser = (req, res) => { // Logout controller
   res.clearCookie('token');               // remove JWT cookie from browser
   req.logout(() => {                      // Passport logout/cleanup hook (used with sessions, but safe to include)
-    res.json({ message: 'Logged out successfully' }); // Respond with Logout confirmation
+    res.json({ message: 'Logged out successfully!' }); // Respond with Logout confirmation
   });
 };
 
@@ -58,14 +62,19 @@ export const registerUser = async (req, res, next) => { // Registers a new user 
   try {
     const { username, email, password } = req.body; // extracts username, email, password from request body
 
+    // Check for empty or missing fields (trim to handle whitespace-only cases)
+    if (!username?.trim() || !email?.trim() || !password?.trim()) {
+      return res.status(400).json({ error: 'One or more fields are empty.' });
+    }
+
     const existingUser = await findUserByUsername(username); // Check if username already exists in database
     if (existingUser) { 
-         return res.status(409).json({ error: 'Username already taken' }); // respond with conflict error 
+         return res.status(409).json({ error: 'Username already taken.' }); // respond with conflict error 
     }
 
     const duplicateEmail = await findUserByEmail(email); // Check if email already exists in database  
     if (duplicateEmail) { 
-         return res.status(409).json({ error: 'Email already registered' }); // respond with conflict error
+         return res.status(409).json({ error: 'Email already registered.' }); // respond with conflict error
     }
 
     const passwordHash = await bcrypt.hash(password, 10); // Securely hash the password with salt rounds = 10
@@ -74,14 +83,14 @@ export const registerUser = async (req, res, next) => { // Registers a new user 
 
 
     // NOTE: below snippet commented out to prevent new user from being logged in
-    //       prior to new user logging in in the LoginPage normally.
+    //       before the new user actually logs into the LoginPage normally.
       
-    //const token = jwt.sign(                             // Issue a JWT token for new user
-    //    { id: newUser.id, username: newUser.username }, // JWT payload (without sensitive info)
-    //    process.env.JWT_SECRET,                         // JWT secret key from environment config (in .env) 
-    //    { expiresIn: '24h' }                            // Token expires in 24 hours
-    //);
-    //setAuthCookie(res, token); // Set token in secure, httpOnly cookie
+    // const token = jwt.sign(                             // Issue a JWT token for new user
+    //     { id: newUser.id, username: newUser.username }, // JWT payload (without sensitive info)
+    //     process.env.JWT_SECRET,                         // JWT secret key from environment config (in .env) 
+    //     { expiresIn: '24h' }                            // Token expires in 24 hours
+    // );
+    // setAuthCookie(res, token); // Set token in secure, httpOnly cookie 
 
     res.status(201).json({  // Upon successful registration, return new user on login
         message: 'Registration successful', 
