@@ -21,9 +21,6 @@ import productRoutes from './routes/productRoutes.js'; // import default export 
 import userRoutes from './routes/userRoutes.js'; // imports default export 'router' as 'userRoutes'
                                                  // handles retrieval and editing of user-data
 
-import cartRoutes from './routes/cartRoutes.js'; //  import default export 'router' as 'cartRoutes'
-                                                 //  handles storing,retrieval,and editing of cart items 
-                                                 //  in database for logged in users.
 
 import dotenv from 'dotenv'; // loads .env variables into process.env 
                              // so they can be accessed anywhere in server code
@@ -105,10 +102,6 @@ app.use('/', authRoutes); /* Mount all routes for handling authentication-relate
 
 app.use('/', userRoutes); /* Mount all routes for handling user-related 
                              requests (e.g., /profile GET and PATCH) */
-
-
-app.use('/', cartRoutes); /* Mount cart routes for handling cart 
-                            items stored database for logged in users */
                             
                             
 // Default route for any other requests (Optional, for catch-all error handling)

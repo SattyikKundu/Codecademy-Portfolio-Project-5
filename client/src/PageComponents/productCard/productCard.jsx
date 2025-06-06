@@ -48,7 +48,7 @@ const Product = ({product}) => {
 
     const itemToAdd = {   // product data for adding product to cart state in store!
         'productId':     product.id, 
-        'imageFilePath': imgPath, 
+        'imageFileName': product.image_url,
         'name':          product.display_name, 
         'quantity':      1, // default quantity amount added upon 'Add to Cart' click
         'unitPrice':     product.price,  

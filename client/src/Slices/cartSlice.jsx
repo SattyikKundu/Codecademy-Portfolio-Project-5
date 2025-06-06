@@ -101,7 +101,8 @@ export const {
               addToCart, 
               deleteFromCart, 
               increaseByOne, 
-              decreaseByOne
+              decreaseByOne,
+              loadCartFromServer
             } = cartSlice.actions;
 
 export default cartSlice.reducer;

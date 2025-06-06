@@ -18,7 +18,7 @@ const CartPageItemCard = ({product}) => {
 
     const {  // props needed for cartItem card
         productId,  
-        imageFilePath, 
+        imageFileName, 
         name, 
         quantity, 
         unitPrice, 
@@ -52,7 +52,9 @@ const CartPageItemCard = ({product}) => {
 
                 {/* Holds product image for visual reference */}
                 <div className='cart-page-item-img-wrapper'>
-                    <img src={imageFilePath} alt={name} className='cart-page-item-image' />
+                    <img src={`http://localhost:5000/images/${imageFileName}`} 
+                         alt={name} 
+                         className='cart-page-item-image' />   
                 </div>
 
                 {/* Hold cart item info as well as increase/decrease item quantity buttons */ }

@@ -10,16 +10,13 @@ import { increaseByOne,
          selectProductQuantityById // selector method for finding products current quantity in cart
         } from '../../Slices/cartSlice.jsx';
 
-//import { motion, AnimatePresence } from 'framer-motion'; // used to animate cart item cards as they're added/removed from cart
-
 import './cartSliderItemCard.css';
-
 
 const CartSliderItemCard = ({product}) => {
 
     const {  // props needed for cartItem card
         productId,  
-        imageFilePath, 
+        imageFileName, 
         name, 
         quantity, 
         unitPrice, 
@@ -52,7 +49,9 @@ const CartSliderItemCard = ({product}) => {
 
                 {/* Holds product image for visual reference */}
                 <div className='cart-slider-item-img-wrapper'>
-                    <img src={imageFilePath} alt={name} className='cart-slider-item-image' />
+                    <img src={`http://localhost:5000/images/${imageFileName}`} 
+                         alt={name} 
+                         className='cart-slider-item-image' />
                 </div>
 
                 {/* Hold cart item info as well as increase/decrease item quantity buttons */ }

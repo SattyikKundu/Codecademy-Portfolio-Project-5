@@ -17,9 +17,9 @@ const CartPage = () => { /* Fallback Cart Page outside of main 'Slider Cart' */
 
     const getTotalQuantity = () => { /* Get total quanity of products in cart */
         const quantity = cartProducts.reduce(          // 1st: use reduce() to get sum of quantities
-        (totalItemsInCart, cartProduct) =>           // 2nd: define accumulator ('totalItemsInCart') and product (each 'item' in products)
+        (totalItemsInCart, cartProduct) =>             // 2nd: define accumulator ('totalItemsInCart') and product (each 'item' in products)
             (totalItemsInCart + cartProduct.quantity), // 3rd: add each product's quanity to accumulator 
-        0.00);                                   // 4th: initial value of accumulator/sum
+        0.00);                                         // 4th: initial value of accumulator/sum
 
         setTotalQuantity(quantity);
     };

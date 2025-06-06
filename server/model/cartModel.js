@@ -1,68 +1,70 @@
-import pool from '../database/database.js'; // imports database connection pool to execute queries
 
-export const getCartItem = async (userId, productId) => { // gets existing cart item for specific user and product
- 
-  const query = `SELECT * FROM cart_items WHERE user_id = $1 AND product_id = $2`;  // query for cart item for given user and product
-
-  const res = await pool.query(query, [userId, productId]); // executes query with userId and productId as parameters
-
-  return res.rows[0]; // returns the first row if found, otherwise undefined
-};
+import pool from "../database/database"; // import database connection pool to execute queries
 
 
-export const insertCartItem = async (userId, productId, quantity) => { // inserts new cart item for a user
-  
-  /* SQL query inserts new cart item row into 'cart_items' table */
+export const getCartItem = async (userId, productId) => { // gets item details from user's cart
+
+  const query = `SELECT * FROM cart_items WHERE 
+                 user_id=$1 AND product_id-$2`; // query for cart item using product and user ids
+
+  const response = await pool.query(query, [userId, productId]);
+  return response.rows[0]; // return result from 1st row IF defined, otherwise return undefined
+}
+
+export const addCartItem = async (userId, productId, quantity) => { // adds item to cart (quantity checking done in cartController.js)
+
   const query = `INSERT INTO cart_items (user_id, product_id, quantity) 
-                  VALUES ($1, $2, $3)
-                  RETURNING *`; // returns inserted row for verification
+                 VALUES ($1, $2, $3) RETURNING *`; // "RETURNING *" returns inserted row for verification
 
-  const res = await pool.query(query, [userId, productId, quantity]); // executes query with given userId, productId, and quantity
+  const response = await pool.query(query, [userId, productId, quantity]);
+  return response.rows[0]; // returns inserted row
+}
 
-  return res.rows[0]; // Return the inserted cart item row
-};
+export const updateCartItem = async (userId, productId, quantity) => { // update cart item's quantity
 
-
-export const updateCartItemQuantity = async (userId, productId, quantity) => { // updates quantity of an existing cart item
-
-  /* SQL query updates quantity field of a cart item */
   const query = `UPDATE cart_items
-                  SET quantity = $1
-                  WHERE user_id = $2 AND product_id = $3
-                  RETURNING *`; // returns updated row for verification
-
-  const res = await pool.query(query, [quantity, userId, productId]); // executes query with the new quantity, userId, and productId
-
-  return res.rows[0]; // returns updated cart item from row[0]
-};
+                 SET quantity=$3
+                 WHERE user_id=$1
+                 and product_id=$2
+                 RETURNING *`; // updates cart item quanity and returns updated row
 
 
-export const getProductStock = async (productId) => { // Gets stock quantity of a product
+  const response = await pool.query(query, [userId, productId, quantity]);
+  return response.rows[0]; // returns resulting updated row
+}
 
-  const query = `SELECT stock FROM products WHERE id = $1`; // SQL query retrieves stock for specific product
+export const deleteCartItem = async (userId, productId) => { // delete single cart item for user
 
-  const res = await pool.query(query, [productId]); // Execute query using productId
+  const query = `DELETE * FROM cart_items 
+                 WHERE user_id=$1 AND product_id=$2`; // deletes 1 row due to WHERE condition(s).
 
-  return res.rows[0]?.stock; // Return stock value (or undefined if product not found)
-};
+  const response = await pool.query(query, [userId, productId]);
+  return response.rows[0]; // returns deleted row
+}
 
-export const getCartItemsForUser = async (userId) => { // returns all cart items for a user (along with product details)
+export const deleteCart = async (userId) => { // delete user's entire cart (delete all cart_item)
+                                       // (not needed currently, but can be useful later)
 
-  /* Below SQL query joins 'cart_items' with 'products' for detailed cart info */
-  const query = `
-    SELECT 
-      ci.product_id AS productId,       -- product ID in the cart
-      ci.quantity,                      -- quantity of the product in cart
-      p.display_name AS name,           -- product name
-      p.price AS unitPrice,             -- unit price of product
-      p.image_url AS imageFilePath,     -- image URL of the product
-      p.stock AS quantityLimit          -- maximum quantity allowed (stock-based)
-    FROM cart_items ci
-    JOIN products p ON ci.product_id = p.id
-    WHERE ci.user_id = $1               -- filter for specific user
-  `;
+  const query = `DELETE * FROM cart_items 
+                 WHERE user_id=$1`; // deletes all cart item rows due under user.
 
-  const res = await pool.query(query, [userId]); // Execute query using userId
+  const response = await pool.query(query, [userId]);
+  return response.rows[0]; // returns deleted rows
+}
 
-  return res.rows; // Return the list of cart items
-};
+export const getProductStock = async (productId) => { // check stock of product 
+                                                      // (used to validate user's cart quantity limit)
+
+  const query = `SELECT stock FROM products WHERE product_id=$1`; // return products stock
+
+  const response = await pool.query(query, [productId]);
+  return response.rows[0]; //returns deleted rows
+}
+
+export const getCartItemsForUser = async (userId) => { // returns all current cart items for user
+
+  const query = `SELECT * FROM cart_items WHERE user_id=$1`; // returns full user's cart
+
+  const response = await pool.query(query, [userId]);
+  return response.rows[0]; // returns deleted rows
+} 

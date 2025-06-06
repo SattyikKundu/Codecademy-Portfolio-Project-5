@@ -16,5 +16,3 @@ root.render( // Renders React app in <React.StrictMode> (which helps detect issu
     </Provider>
   </React.StrictMode>
 ); 
-
-

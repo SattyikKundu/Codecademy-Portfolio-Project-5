@@ -1,13 +1,15 @@
+
 import { configureStore } from '@reduxjs/toolkit'; // method for configuring redux store
 import cartReducer from '../Slices/cartSlice.jsx'; // import reducer for cart
 import authReducer from '../Slices/authSlice.jsx'; // import reducer for authState
 
-/* A MAJOR feature of many E-commerce app sites is that
- * cart states are frequently stored in localStorage when user leaves the site. 
- * At a later time, when the user returns, the stored cart state from last
- * session becomes visible in the cart of the new session. The below functions
- * together with 'store' achives this data-persistence and IMPROVES user experience.
- */
+
+// A MAJOR feature of many E-commerce app sites is that
+// cart states are frequently stored in localStorage when user leaves the site. 
+// At a later time, when the user returns, the stored cart state from last
+// session becomes visible in the cart of the new session. The below functions
+// together with 'store' achives this data-persistence and IMPROVES user experience.
+//
 
 const loadFromLocalStorage = () => { // loads cart state from local storage (if it exists)
     try {

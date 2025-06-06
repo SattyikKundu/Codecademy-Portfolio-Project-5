@@ -2,9 +2,12 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { setUser } from "../Slices/authSlice";
+import { loadCartFromServer } from "../Slices/cartSlice.jsx"; // Redux action to replace cart with backend cart
+
 
 import { Outlet, useLocation, useNavigate } from "react-router-dom"; // <Outlet> injects content based on active route
 import BasePageLayout from './BasePageLayout/BasePageLayout'; // imports 'wrapper' layout for common page features
+
 
 const PublicPageLayout = () => {
 
@@ -23,8 +26,17 @@ const PublicPageLayout = () => {
                                          // logged in (via checking for httpOnly cookie with JWT token)
         {withCredentials: true}          // ensures cookie is sent with request
       );
+
       if(response.data.user) { // if user data found/obtained
-        dispatch(setUser(response.data.user));
+
+        //console.log(" (public) User recognized, syncing local cart now...");
+        dispatch(setUser(response.data.user)); // store user data onto redux
+  
+        //console.log('(public) Syncing local cart to server...');
+        //await syncLocalCartToServer();      // syncs localStorage cart to backend (if exists) -- function at bottom of code file
+  
+        //console.log('(public) Fetching server cart...');
+        //await fetchServerCart(dispatch);    // fetch latest backend cart to replace Redux cart -- function at bottom of code file
       }
     }
     catch(error) { // log error

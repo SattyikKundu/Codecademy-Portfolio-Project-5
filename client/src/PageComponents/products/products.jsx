@@ -17,4 +17,3 @@ const Products = ({products}) => { /* Presents products in grid format (like in 
 }
 
 export default Products;
-

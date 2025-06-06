@@ -17,6 +17,9 @@ import {
 
 import {setUserFromToken, clearUser} from '../Slices/authSlice'; // redux action to track/update user state
 
+import { loadCartFromServer } from "../Slices/cartSlice.jsx"; // Redux action to replace cart with backend cart
+
+
 import BasePageLayout from "./BasePageLayout/BasePageLayout"; // shared layout with header menu, cart slider, and toast messages
 
 const ProtectedPageLayout = () => {
@@ -27,13 +30,24 @@ const ProtectedPageLayout = () => {
     const isAuthenticated = useSelector((state) =>  state.auth.isAuthenticated); // checks if user is authenticated
 
     const checkUserAuth = async () => {
-        try {
+        try { // verify is user is authenticated
             const response = await axios.get( // Send GET request to '/auth/me' to verify JWT in cookie
                 'http://localhost:5000/auth/me',
                  { withCredentials: true } // Ensure cookie is sent with request
             );
+
             if (response.data.user) {
                 dispatch(setUserFromToken(response.data.user)); // If successful, dispatch user data to Redux store
+
+                // 🚀 Sync local cart to backend in case user opens directly on protected page
+                //console.log('(protected) syncing local cart to backend')
+                //await syncLocalCartToServer();
+
+                /* Fetch latest backend cart for this user */
+                //console.log('(protected) Fetch backend to fronend redux cart...');
+                //const cartResponse = await axios.get('http://localhost:5000/cart', { withCredentials: true });
+
+                //dispatch(loadCartFromServer(cartResponse.data)); // store backend cart to front-end cart via redux
             }
         } 
         catch(error) {  // If token fails (i.e. expired token), clear user from redux
