@@ -6,7 +6,7 @@ import axios from 'axios';                      // for making HTTP requests to b
 import { ErrorMessageToast, SuccessMessageToast } from "../../utils/utilityFunctions"; // toast when login fails/succeed
 
 import { setUser } from "../../Slices/authSlice"; // redux action to store data
-
+import { loadCartFromServer } from "../../Slices/cartSlice";
 
 import './LoginPage.css';
 
@@ -18,7 +18,7 @@ const LoginPage = () => { // login component with default login header message
 
     const [username, setUsername] = useState('');  // stores and track 'username' from form field and into local state
     const [password, setPassword] = useState('');  // stores and track 'passowrd' from form field and into local state
-    const [loading, setLoading] = useState(false); // tracks loading state
+    const [loading,   setLoading] = useState(false); // tracks loading state
 
 
     const [header, setHeader] = useState(() => { // Set header on mount with below nested logic. Since all logic 
@@ -76,6 +76,29 @@ const LoginPage = () => { // login component with default login header message
             );
 
             dispatch(setUser(response.data.user)); // On success, dispatch user info to redux
+
+
+            /****** sync cart on localStorage with the logged in user's cart in database ******/
+            const localCart = JSON.parse(localStorage.getItem('cartState')) || { products: [] }; // get local Cart (or use 
+                                                                                                 // placeholder if local cart empty)
+            await axios.post( 
+                'http://localhost:5000/cart/sync',
+                localCart.products, // Sends localCart's 'products' array as part of req.body to backend.
+                                    // Hence, the 'products' array is used as part of syncCartWithReduxState() in route.
+                { withCredentials: true } // if cookie found in browser(frontend), it gets send to backend to be handled
+            );
+
+            localStorage.removeItem('cartState'); // clear 'cartState' from localStorage after syncing
+
+            const cartResponse = await axios.get( // Now retrieve updated cart from database for logged in user
+                'http://localhost:5000/cart',
+                { withCredentials: true }
+            );
+            const backendCart = cartResponse.data.cartState.products;
+            dispatch(loadCartFromServer(backendCart)); // dispatch updated cart to 'cart' redux store
+
+            /*********** END of syncing cart on localStorage user's cart in database ***************/
+
             navigate("/profile", { state: { loginSuccess: true } }); // now navigate to designated 
                                                                      // protected route after login
                                                                      // 'loginSuccess' triggers toast in new page

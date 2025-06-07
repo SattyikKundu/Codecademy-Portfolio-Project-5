@@ -80,6 +80,9 @@ const cartSlice = createSlice({
                 product.quantity -= 1; // decrease and update priceTotal
                 product.totalPrice = (product.quantity * parseFloat(product.unitPrice)).toFixed(2);
             }
+        },
+        loadCartFromServer(state, action) { // Used to load cart stored in backend and save it to this redux state
+            state.products = action.payload;
         }
     }
 });

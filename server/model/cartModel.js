@@ -1,5 +1,5 @@
 
-import pool from "../database/database"; // import database connection pool to execute queries
+import pool from "../database/database.js"; // import database connection pool to execute queries
 
 
 export const getCartItem = async (userId, productId) => { // gets item details from user's cart

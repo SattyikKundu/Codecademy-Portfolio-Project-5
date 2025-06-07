@@ -7,8 +7,9 @@ import {
     deleteCart,
     getProductStock,
     getCartItemsForUser
-} from '../model/cartModel'; // import all functions from cartModel.js
+} from '../model/cartModel.js'; // import all functions from cartModel.js
 
+//import pool from '../database/database.js';
 
 export const syncCartWithReduxState = async (req, res) => { // Syncs 'products' array (from of 'cart' redux state) 
                                                             // with user's cart in database after login.
@@ -26,10 +27,10 @@ export const syncCartWithReduxState = async (req, res) => { // Syncs 'products' 
             return res.status(400).json({ error: 'Invalid cart data. Expected an array of items.' });   
         }
 
-        await pool.query('BEGIN'); /* Starts a database transaction to ensure that either all
+        /*await pool.query('BEGIN'); /* Starts a database transaction to ensure that either all
                                     * operations are completed OR there's a rollback of all operations
                                     * if one or more operations fail for whatever reasons.
-                                    * This PREVENTS any partial failures from being commited to database.
+                                    * This PREVENTS any partial successes/failures from being commited to database.
                                     */
 
         for (const item of incomingCartItems) { // iterate through 'incomingCartItems' via for-loop
@@ -66,13 +67,13 @@ export const syncCartWithReduxState = async (req, res) => { // Syncs 'products' 
             }
         } //end of loop
 
-        await pool.query('COMMIT'); // End of database transaction (see pool.query('COMMIT') from before loop)
+        //await pool.query('COMMIT'); // End of database transaction (see pool.query('COMMIT') from before loop)
 
         res.status(200).json({ message: 'Cart items synced successfully!' }); // success message response after syncing all items
     }
     catch(error) { // if error occurs, log and respond with 500 error
         console.error('Error syncing cart items:', error);
-        await pool.query('ROLLBACK'); // undo any partial inserts/updates from earlier transction 
+        //await pool.query('ROLLBACK'); // undo any partial inserts/updates from earlier transction 
                                       // will later test and review if these transactions are necessary.
         res.status(500).json({ error: 'Failed to sync cart items.' }); 
     }
@@ -95,7 +96,7 @@ export const getCartItemsFromBackend = async (req,res) => { // retrieves all car
         else { // if 'useCart' from backend if empty/falsy...
             res.status(200).json({
                 message: 'No cart items found.',
-                cartState: { products: [] } // sent consistent 'cartState' even if empty
+                cartState: { products: [] } // send consistent 'cartState' even if empty
             });
         }
     }
