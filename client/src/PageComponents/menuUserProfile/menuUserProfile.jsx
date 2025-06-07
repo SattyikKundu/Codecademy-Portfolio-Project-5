@@ -14,22 +14,31 @@ import './menuUserProfile.css';
 const ProfileButton = () => { /* Button that toggles between default 'Login' button 
                                  OR the 'Profile' button if logged in */
 
-    const user = useSelector((state) => state.auth.user); // Get existing user from redux
+    const user            = useSelector((state) => state.auth.user); // Get existing user from redux
     const isAuthenticated = useSelector((state) =>  state.auth.isAuthenticated); // checks if user is authenticated
+    const products        = useSelector((state) => state.cart.products); // extracts products from 'cart' state
+
     const dispatch = useDispatch(); // initialize dispatch of redux actions
     const navigate = useNavigate(); // initialize for route navigation
 
     const [showDropDown, setShowDropDown] = useState(false);// toggles dropdown depending on login
-    //const [loggingOut, setLoggingOut] = useState(false); // tracks if app is logging out
     const [error, setError] = useState(''); // tracks error
 
     const handleLogout = async () => {
 
-      //setLoggingOut(true);
       setError('');
-
       try {
-        const response = await axios.get( 
+
+        if (products && products.length > 0) { // update backend cart with last cart state 
+                                               // from redux slice before logout  
+          await axios.post(
+            'http://localhost:5000/cart/update', 
+            products,
+            { withCredentials: true }
+          );
+        }
+
+        await axios.get( 
           'http://localhost:5000/auth/logout', // logout endpoint (get)
           {withCredentials: true} // tell browser that if there's a cookie (httpOnly cookie with JWT),
                                   // add to request header when sending any HTTP request to backend.
@@ -44,9 +53,6 @@ const ProfileButton = () => { /* Button that toggles between default 'Login' but
       catch(err) { // catch error if issue while logging out
         setError(err);
         console.log('Error while logging out: ', error);
-      }
-      finally {
-        //setLoggingOut(false);
       }
     }
 

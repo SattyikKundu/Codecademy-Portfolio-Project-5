@@ -15,11 +15,7 @@ export const syncCartWithReduxState = async (req, res) => { // Syncs 'products' 
                                                             // with user's cart in database after login.
     try {
         const userId = req.user.id; // get user's id first (stored in JWT token)
-        console.log('User id: ', userId);
-
         const incomingCartItems = req.body;    // extract incoming cart items from request body (should be in an array)
-        console.log('Incoming items for cart: ', incomingCartItems);
-
 
         if(!Array.isArray(incomingCartItems)) { // checks if incoming cart items is an array...
                                                 // NOTE: array should be from {"products":[...]} object from localStorage
@@ -81,6 +77,46 @@ export const syncCartWithReduxState = async (req, res) => { // Syncs 'products' 
         res.status(500).json({ error: 'Failed to sync cart items.' }); 
     }
 }
+
+export const overwriteCartWithReduxState = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const incomingCartItems = req.body;
+
+    if (!Array.isArray(incomingCartItems)) { // checks if 'incomingCartItems' is an array (products: [...])
+      return res.status(400).json({ error: 'Invalid cart data. Expected an array of items.' });
+    }
+
+    await deleteCart(userId); // delete logged in user's backend cart in database PRIOR to overwriting it
+
+     
+    for (const item of incomingCartItems) { // Add each item from frontend’s final cart to backend cart
+
+      const { productId, quantity } = item;            // destructure values from each item
+      const parsedQuantity = parseInt(quantity, 10);   // turn string value into integer (with radix/base-value 10)
+      if (!productId || isNaN(parsedQuantity) || parsedQuantity <= 0) { // skip for-loop iteration if invalid value(s)
+        continue;
+      }
+        
+      const productStockResult  = await getProductStock(productId);           // get stock of item
+      const productStock = productStockResult ? productStockResult.stock : 0; // get its integer value (ex: {stock: 30})
+      if (!productStock || productStock <= 0) { // skip for-loop iteration if invalid stock number
+        continue;
+      }
+
+      const finalQuantity = Math.min(parsedQuantity, productStock, 10); // get final product quantity
+      await addCartItem(userId, productId, finalQuantity);  // add item to cart
+
+    } // end of for-loop
+
+    res.status(200).json({ message: 'Cart overwritten successfully!' });
+  } 
+  catch (error) { // error handling
+    console.error('Error overwriting cart:', error);
+    res.status(500).json({ error: 'Failed to overwrite cart.' });
+  }
+};
+
 
 export const getCartItemsFromBackend = async (req,res) => { // retrieves all cart items from current user's stored cart
 
