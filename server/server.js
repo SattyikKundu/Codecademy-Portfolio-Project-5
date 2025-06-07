@@ -7,7 +7,7 @@ import cors from 'cors';       // CORS middleware allows frontend (HTML/JS) to a
 import cookieParser from 'cookie-parser'; // middleware import used to read cookies (for JWT and CSRF)
 import session from 'express-session';    // required by passport (even when JWT is used, Google OAuth needs session temporarily)
 import passport from 'passport';          // Core authentication framework
-import csrf from 'csurf';                 // middleware import for CSRF (Cross-Site Request Forgery) protection
+//import csrf from 'csurf';               // middleware import for CSRF (Cross-Site Request Forgery) protection
 
 //import redis from 'redis';     // Used to cache 'products' data in order to reduce load and requests to database. 
 
@@ -21,6 +21,9 @@ import productRoutes from './routes/productRoutes.js'; // import default export 
 import userRoutes from './routes/userRoutes.js'; // imports default export 'router' as 'userRoutes'
                                                  // handles retrieval and editing of user-data
 
+import cartRoutes from './routes/cartRoutes.js'; //  import default export 'router' as 'cartRoutes'
+                                                 //  handles storing,retrieval,and editing of cart items 
+                                                 //  in database for logged in users.
 
 import dotenv from 'dotenv'; // loads .env variables into process.env 
                              // so they can be accessed anywhere in server code
@@ -101,8 +104,12 @@ app.use('/', authRoutes); /* Mount all routes for handling authentication-relate
                            */
 
 app.use('/', userRoutes); /* Mount all routes for handling user-related 
-                             requests (e.g., /profile GET and PATCH) */
+                           * requests (e.g., /profile GET and PATCH). 
+                           */
                             
+app.use('/', cartRoutes); /* Mount cart routes for handling cart 
+                           * items stored database for logged in users. 
+                           */
                             
 // Default route for any other requests (Optional, for catch-all error handling)
 //app.use('*', (req, res) => {

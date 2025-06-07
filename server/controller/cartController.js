@@ -78,7 +78,7 @@ export const syncCartWithReduxState = async (req, res) => { // Syncs 'products' 
     }
 }
 
-export const getAllItemsFromBackendCart = async (req,res) => { // retrieves all cart items from current user's stored cart
+export const getCartItemsFromBackend = async (req,res) => { // retrieves all cart items from current user's stored cart
 
     try {
         const userId = req.user.id; // get user's id first (stored in JWT token)
