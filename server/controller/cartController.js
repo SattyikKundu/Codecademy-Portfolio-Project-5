@@ -37,11 +37,14 @@ export const syncCartWithReduxState = async (req, res) => { // Syncs 'products' 
 
             const { productId, quantity } = item; // destructure to get product id and its quantity in cart
 
-            if (!productId || !quantity || quantity <=0) { // if invalid values provided..
-                continue; // skip & end current for-loop iteration and go to next one
-            }
+            const parsedQuantity = parseInt(quantity, 10); // turn any string quantity (ex: '2') into integer
 
-            const productStock = await getProductStock(productId); // get stock of current item
+            if (!productId || isNaN(parsedQuantity) || parsedQuantity <= 0) { // if invalid values provided..
+                continue; // skip & end current for-loop iteration and go to next one
+            } 
+
+            const productStockResult = await getProductStock(productId); // get stock of current item (ex: {stock: 30})
+            const productStock = productStockResult ? productStockResult.stock : 0; // get its integer value
 
             if (!productStock || productStock <=0) { // if 'productStock' is invalid
                 continue; // skip & end current for-loop iteration and go to next one
@@ -54,14 +57,14 @@ export const syncCartWithReduxState = async (req, res) => { // Syncs 'products' 
 
                 /* Take sum of frontend quantity and add to cart item's quantity in backend
                    but can't exceed stock amount or cart limit 10 */
-                const finalQuantity = Math.min(productStock,(existingCartItem.quantity+quantity), 10); 
+                const finalQuantity = Math.min(productStock,(existingCartItem.quantity+parsedQuantity), 10); 
 
                 await updateCartItem(userId, productId, finalQuantity); // final update for cart item for 
                                                                         // backend cart (no return needed)
             }
             else { // otherwise cart item doesn't already exist in database
 
-                const finalQuantity = Math.min(productStock, quantity, 10); 
+                const finalQuantity = Math.min(productStock, parsedQuantity, 10); 
                 await addCartItem(userId, productId, finalQuantity); // add cart item and its quantity to backend
 
             }

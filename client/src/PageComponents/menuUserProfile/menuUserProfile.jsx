@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // used to imp
 import { faRightToBracket, faUserLarge, faRightFromBracket  } from '@fortawesome/free-solid-svg-icons';
 
 import { clearUser } from "../../Slices/authSlice";
+import { clearCart } from "../../Slices/cartSlice";
 
 import './menuUserProfile.css';
 
@@ -35,6 +36,9 @@ const ProfileButton = () => { /* Button that toggles between default 'Login' but
         );
 
         dispatch(clearUser()); // clear user from redux state
+        dispatch(clearCart()); // clears cart from redux state
+        localStorage.removeItem('cartState'); // as precaution, also clear 'cartState' from localStorage
+
         navigate('/login');    // navigate back to login
       }
       catch(err) { // catch error if issue while logging out

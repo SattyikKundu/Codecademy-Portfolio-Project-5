@@ -83,6 +83,10 @@ const cartSlice = createSlice({
         },
         loadCartFromServer(state, action) { // Used to load cart stored in backend and save it to this redux state
             state.products = action.payload;
+        },
+        clearCart(state) { // Clear cart state (used when user logs out). Since cart is empty by logout, 
+                           // 'cartState' should be empty in localStroage after logout.
+            state.products = []
         }
     }
 });
@@ -105,7 +109,8 @@ export const {
               deleteFromCart, 
               increaseByOne, 
               decreaseByOne,
-              loadCartFromServer
+              loadCartFromServer,
+              clearCart
             } = cartSlice.actions;
 
 export default cartSlice.reducer;
