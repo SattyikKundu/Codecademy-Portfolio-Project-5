@@ -14,7 +14,11 @@ import {
         selectProductQuantityById   // selector method for finding product's current quantity in cart
        } from '../../Slices/cartSlice.jsx'; 
 
+import axios from "axios"; // used to make HTTP request to backend
+
 import {addedToCartToast } from "../../utils/utilityFunctions.js";
+
+import { useParams } from 'react-router-dom';
 
 import './productDetails.css'; // styling for Product details display
 
@@ -24,20 +28,24 @@ import './productDetails.css'; // styling for Product details display
  * Ultimately, this separation of the output handling from the ProductDetailsPage.jsx file improves modularization.
  */
 
-const ProductDetails = ({ imagePath, productData, displayCategory, stockState, stockMessage }) => {
+//const ProductDetails = ({ imagePath, productData, displayCategory, stockState, stockMessage }) => {
+const ProductDetails = ({ imageFileName, productData, displayCategory, stockState, stockMessage }) => {
 
     const dispatch = useDispatch();  // initilize dispatch to use 'cart' reducer methods
-    //const products = useSelector((state) => state.cartSlice.products); //extract values from store for 'cart' reducer
 
-    const currentQuantity = useSelector( // get current quantity of product in store (if product NOT in cart store, returns 0)
-        (state) => selectProductQuantityById(state, productData.id)
-    );  
+    /* get current quantity of product in store (if product NOT in cart store, returns 0) */
+    const currentQuantity = useSelector((state) => selectProductQuantityById(state, productData.id));  
+
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated); // checks if user is logged in
+
+
     const purchaseLimit = (productData.stock < 10) ? productData.stock : 10; // define purchase limit of up to 10 (or less if stock under 10)
     const disableAdd = (productData.stock===0 ||(currentQuantity === purchaseLimit)) ? true : false; // If stock empty (or hit purchase limit)
 
     const itemToAdd = {   // product data for adding product to cart state in store!
         'productId':     productData.id, 
-        'imageFilePath': imagePath, 
+        //'imageFilePath': imagePath, 
+        'imageFileName': imageFileName,
         'name':          productData.display_name, 
         'quantity':      1, // default quantity amount added upon 'Add to Cart' click
         'unitPrice':     productData.price,  
@@ -45,18 +53,32 @@ const ProductDetails = ({ imagePath, productData, displayCategory, stockState, s
         'quantityLimit':  purchaseLimit
     }
 
-    const handleAddToCart = () => { 
-        dispatch(addToCart(itemToAdd)); 
-        addedToCartToast();
+    const {id} = useParams(); // product id from url params
+
+    const handleAddToCart = async() => {         
+      if (isAuthenticated) { // if user logged in, add cart item to backend
+        try{
+          //console.log("productData.id =",productData.id);
+          console.log('product id from URL is: ',id);
+          await axios.post(
+            `http://localhost:5000/cart/${id}/add`,
+            {},
+            {withCredentials: true}  
+          );
+        }
+        catch(error) {
+            console.log('handleAddToCart() error is: ',error);
+        }
+      }
+      dispatch(addToCart(itemToAdd)); 
+      addedToCartToast();
     }
-
-
 
     return (
         <div className="product-description-container">
             <div className="image-and-part-1-data-wrapper">
                 <div className="product-image-wrapper">
-                    <img src={imagePath} alt={productData.display_name} className="product-image" />
+                    <img src={`http://localhost:5000/images/${imageFileName}`} alt={productData.display_name} className="product-image" />
                 </div>
                 {/* Product Fields covered in Part 1 data (for all categories): 
                   *   Product's display name:     productData.display_name

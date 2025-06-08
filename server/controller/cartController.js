@@ -9,6 +9,7 @@ import {
     getCartItemsForUser
 } from '../model/cartModel.js'; // import all functions from cartModel.js
 
+import pool from '../database/database.js';
 
 export const syncCartWithReduxState = async (req, res) => { // Syncs 'products' array (from of 'cart' redux state) 
                                                             // with user's cart in database after login.
@@ -21,6 +22,14 @@ export const syncCartWithReduxState = async (req, res) => { // Syncs 'products' 
 
             return res.status(400).json({ error: 'Invalid cart data. Expected an array of items.' });   
         }
+
+        await pool.query('BEGIN'); /* Due to the below for-loop adding/updating several items at once,
+                                    * there's the risk of partial success and failures. To avoid this,
+                                    * all database transactions after 'BEGIN' gets treated as a
+                                    * single transaction. Then if any errors occur after 'COMMIT',
+                                    * 'ROLLBACK' will undo the entire transaction.
+                                    * ( Still deciding if this transaction safety/control is needed..)
+                                    */
 
         for (const item of incomingCartItems) { // iterate through 'incomingCartItems' via for-loop
 
@@ -54,53 +63,16 @@ export const syncCartWithReduxState = async (req, res) => { // Syncs 'products' 
             }
         } //end of loop
 
+        await pool.query('COMMIT'); // end of single large transaction after 'BEGIN'
+
         res.status(200).json({ message: 'Cart items synced successfully!' }); // success message response after syncing all items
     }
     catch(error) { // if error occurs, log and respond with 500 error
+        await pool.query('ROLLBACK'); // if any error, rollback the entire transaction
         console.error('Error syncing cart items:', error);
         res.status(500).json({ error: 'Failed to sync cart items.' }); 
     }
 }
-
-export const overwriteCartWithReduxState = async (req, res) => { // overwrite backend cart with frontend cart (especially for logout)
-  try {
-    const userId = req.user.id;
-    const incomingCartItems = req.body;
-
-    if (!Array.isArray(incomingCartItems)) { // checks if 'incomingCartItems' is an array (products: [...])
-      return res.status(400).json({ error: 'Invalid cart data. Expected an array of items.' });
-    }
-
-    await deleteCart(userId); // delete logged in user's backend cart in database PRIOR to overwriting it
-
-     
-    for (const item of incomingCartItems) { // Add each item from frontend’s final cart to backend cart
-
-      const { productId, quantity } = item;            // destructure values from each item
-      const parsedQuantity = parseInt(quantity, 10);   // turn string value into integer (with radix/base-value 10)
-      if (!productId || isNaN(parsedQuantity) || parsedQuantity <= 0) { // skip for-loop iteration if invalid value(s)
-        continue;
-      }
-        
-      const productStockResult  = await getProductStock(productId);           // get stock of item
-      const productStock = productStockResult ? productStockResult.stock : 0; // get its integer value (ex: {stock: 30})
-      if (!productStock || productStock <= 0) { // skip for-loop iteration if invalid stock number
-        continue;
-      }
-
-      const finalQuantity = Math.min(parsedQuantity, productStock, 10); // get final product quantity
-      await addCartItem(userId, productId, finalQuantity);  // add item to cart
-
-    } // end of for-loop
-
-    res.status(200).json({ message: 'Cart overwritten successfully!' });
-  } 
-  catch (error) { // error handling
-    console.error('Error overwriting cart:', error);
-    res.status(500).json({ error: 'Failed to overwrite cart.' });
-  }
-};
-
 
 export const getCartItemsFromBackend = async (req,res) => { // retrieves all cart items from current user's stored cart
 
@@ -130,12 +102,14 @@ export const getCartItemsFromBackend = async (req,res) => { // retrieves all car
 
 /*******************************************************************************************************/
 /*******************************************************************************************************/
-/* Below controller functions are used to add product to cart, increase/decrease quantity 
+/* 
+ * Below controller functions are used to add product to cart, increase/decrease quantity 
  * of cart item, and drop item from cart. 
  * 
  * These are used in sync with the relevant 'Add to Cart' buttons (products pages), and the 
  * increase/decrease and 'X' (drop items) buttons found in the cartSlider and cart pages;
  * the routes with these controllers function are only valid when user if logged in and NOT in 'guest' mode.
+ * 
  */
 /*******************************************************************************************************/
 /*******************************************************************************************************/
@@ -143,8 +117,8 @@ export const getCartItemsFromBackend = async (req,res) => { // retrieves all car
 export const addItemToCart = async (req, res) => { // Add item to cart (or increase by 1 if already exists)
 
   try {
-    const userId = req.user.id;     // logged in user's id
-    const { productId } = req.body; // product id from request body
+    const userId = req.user.id;       // logged in user's id
+    const { productId } = req.params; // product id from request body
 
     const productStockResult = await getProductStock(productId);            // get stock of current item (ex: {stock: 30})
     const productStock = productStockResult ? productStockResult.stock : 0; // get its integer value
@@ -154,9 +128,10 @@ export const addItemToCart = async (req, res) => { // Add item to cart (or incre
 
     const existingCartItem = await getCartItem(userId, productId); // get item from cart (if it exists)
 
-    let finalQuantity = 1; // placeholder for quantity
-    if (existingCartItem) { // if item already exists in cart...
-      finalQuantity = Math.min(existingCartItem.quantity + 1, productStock.stock, 10); // prevent going over quantity limit
+    let finalQuantity = 1;   // placeholder for quantity
+
+    if (existingCartItem) {  // if item already exists in cart...
+      finalQuantity = Math.min(existingCartItem.quantity + 1, productStock, 10); // prevent going over quantity limit
       await updateCartItem(userId, productId, finalQuantity); // update item in cart
     } 
     else { // other add new item to cart with quantity one
@@ -190,7 +165,8 @@ export const increaseCartItem = async (req, res) => { // Increase quantity by 1
       return res.status(404).json({ error: "Cart item not found." });
     }
 
-    const finalQuantity = Math.min(existingCartItem.quantity + 1, productStock.stock, 10);
+    const finalQuantity = Math.min(existingCartItem.quantity + 1, productStock, 10);
+
     await updateCartItem(userId, productId, finalQuantity); // get final quantity, and then update cart
 
     res.status(200).json({ message: "Cart item quantity increased." }); // success message

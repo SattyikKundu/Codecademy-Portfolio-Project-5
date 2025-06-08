@@ -13,6 +13,7 @@ const ProductDetailsPage = () => {
 
     const [productData, setProductData] = useState(null); // holds product's data
     const [imagePath, setImagePath] = useState(null);     // holds file path to product image
+    const [imageFileName, setImageFileName] = useState(null);
 
     const [stockMessage, setStockMessage] = useState('In Stock'); // Message on product's stock
     const [stockState, setStockState]     = useState('stocked');  // used to define style for <div> holding stockMessage
@@ -92,8 +93,9 @@ const ProductDetailsPage = () => {
 
     useEffect(() => {
         if(productData && productData.image_url) { // if image_url exists, create image file path
-            const imageFilePath = `http://localhost:5000/images/${productData.image_url}`;
-            setImagePath(imageFilePath);
+            //const imageFilePath = `http://localhost:5000/images/${productData.image_url}`;
+            //setImagePath(imageFilePath);
+            setImageFileName(productData.image_url);
         }
 
         if (productData && productData.category) { // changes category value formatting for display 
@@ -113,7 +115,8 @@ const ProductDetailsPage = () => {
         {
             (!loading && productData) && (
             <ProductDetails 
-                imagePath       ={imagePath}
+                //imagePath       ={imagePath}
+                imageFileName   ={imageFileName}
                 productData     ={productData} 
                 displayCategory ={displayCategory}
                 stockState      ={stockState} 

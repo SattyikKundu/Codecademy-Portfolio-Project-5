@@ -10,9 +10,9 @@ import { increaseByOne,
          selectProductQuantityById // selector method for finding products current quantity in cart
         } from '../../Slices/cartSlice.jsx';
 
+import axios from "axios"; // used to make HTTP request to backend
+
 import './cartPageItemCard.css';
-
-
 
 const CartPageItemCard = ({product}) => {
 
@@ -28,20 +28,57 @@ const CartPageItemCard = ({product}) => {
 
     const dispatch = useDispatch();  // initilize dispatch to use 'cart' reducer methods
     
-    const handleItemIncrease = () => {
-        if(quantity < quantityLimit) {
-            dispatch(increaseByOne({productId}));
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated); // tracks if user is logged in
+
+    const handleItemIncrease = async() => {
+      if(quantity < quantityLimit) {
+        if (isAuthenticated) { // if logged in, cart item increased in backend database
+          try {
+            await axios.patch(
+              `http://localhost:5000/cart/${productId}/increase`,
+              {},
+              {withCredentials: true}
+            );
+          }
+          catch(error) {
+            console.log('handleItemIncrease() error is: ', error);
+          }
         }
+        dispatch(increaseByOne({productId}));
+      }
     }
 
-    const handleItemDecrease = () => {
-        if (quantity > 1) {
-            dispatch(decreaseByOne({productId}));
+    const handleItemDecrease = async () => {
+      if (quantity > 1) {
+        if (isAuthenticated) { // if logged in, cart item increased in backend database
+          try {
+            await axios.patch(
+              `http://localhost:5000/cart/${productId}/decrease`,
+              {},
+              {withCredentials: true}
+            );
+          }
+          catch(error) {
+            console.log('handleItemDecrease() error is: ',error);
+          }
         }
+        dispatch(decreaseByOne({productId}));
+      }
     }
 
-    const handleItemDelete = () => {
-        dispatch(deleteFromCart({productId})); //?? revie later...
+    const handleItemDelete = async() => {
+      if (isAuthenticated) { // if logged in, cart item increased in backend database
+        try {
+          await axios.delete(
+            `http://localhost:5000/cart/${productId}`,
+            {withCredentials: true}
+          );
+        }
+        catch(error) {
+             console.log('handleItemDelete() error is: ',error);
+        }
+      }
+      dispatch(deleteFromCart({productId})); 
     }
 
 

@@ -15,7 +15,7 @@ const ProfileButton = () => { /* Button that toggles between default 'Login' but
                                  OR the 'Profile' button if logged in */
 
     const user            = useSelector((state) => state.auth.user); // Get existing user from redux
-    const isAuthenticated = useSelector((state) =>  state.auth.isAuthenticated); // checks if user is authenticated
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated); // checks if user is authenticated
     const products        = useSelector((state) => state.cart.products); // extracts products from 'cart' state
 
     const dispatch = useDispatch(); // initialize dispatch of redux actions
@@ -28,15 +28,6 @@ const ProfileButton = () => { /* Button that toggles between default 'Login' but
 
       setError('');
       try {
-
-        if (products && products.length > 0) { // update backend cart with last cart state 
-                                               // from redux slice before logout  
-          await axios.post(
-            'http://localhost:5000/cart/update', 
-            products,
-            { withCredentials: true }
-          );
-        }
 
         await axios.get( 
           'http://localhost:5000/auth/logout', // logout endpoint (get)

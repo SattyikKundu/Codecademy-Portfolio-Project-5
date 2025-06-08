@@ -1,4 +1,5 @@
 import {useEffect, useState} from "react";
+import axios from "axios"; // used to make HTTP request to backend
 
 import { useParams,    // extract parameter values from route's url
          useNavigate   // used to handle url routes programatically
@@ -25,10 +26,11 @@ const Product = ({product}) => {
 
     const navigate = useNavigate(); // initialize to enable route navigation
 
-    const [stockMessage, setStockMessage] = useState('In Stock'); // Message on product's stock
-    const [stockState, setStockState]     = useState('stocked');  // define style for <div> holding stockMessage
+    const [stockMessage,      setStockMessage] = useState('In Stock'); // Message on product's stock
+    const [stockState,       setStockState]    = useState('stocked');  // define style for <div> holding stockMessage
     const [productDetailsLink, setProductDetailsLink]  = useState(''); // store link to product details page
 
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated); // checks user authentication    
 
     // Normalize category (used to create product)
     const { category: rawCategory } = useParams();  // returns value of '/:category' parameter from url route 
@@ -56,9 +58,22 @@ const Product = ({product}) => {
         'quantityLimit':   purchaseLimit
     }
 
-    const handleAddToCart = () => { 
-        dispatch(addToCart(itemToAdd)); 
-        addedToCartToast();
+    const handleAddToCart = async () => { 
+
+      if (isAuthenticated) { // if user logged in, add cart item to backend
+        try{
+          await axios.post(
+            `http://localhost:5000/cart/${product.id}/add`,
+            {},
+            {withCredentials: true}  
+          );
+        }
+        catch(error) {
+          console.log('handleAddToCart() error is: ',error);
+        }
+      }
+      dispatch(addToCart(itemToAdd)); 
+      addedToCartToast();
     }
 
     const createProductDetailsLink = () => { // function creates the product details url link for the page
