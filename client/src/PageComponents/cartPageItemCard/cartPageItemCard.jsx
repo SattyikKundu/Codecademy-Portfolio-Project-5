@@ -11,6 +11,8 @@ import { increaseByOne,
         } from '../../Slices/cartSlice.jsx';
 
 import axios from "axios"; // used to make HTTP request to backend
+import { throttle } from 'lodash';
+import { useMemo } from 'react';
 
 import './cartPageItemCard.css';
 
@@ -30,49 +32,58 @@ const CartPageItemCard = ({product}) => {
     
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated); // tracks if user is logged in
 
-    const handleItemIncrease = async() => {
-      if(quantity < quantityLimit) {
-        if (isAuthenticated) { // if logged in, cart item increased in backend database
-          try {
-            await axios.patch(
-              `http://localhost:5000/cart/${productId}/increase`,
-              {},
-              {withCredentials: true}
-            );
+
+    const throttleHandleItemIncrease = useMemo(() => { // throttles item increase to prevent rapid clicks
+
+      // Use useMemo() to ensure throttled function is only rendered/created once (retains internal state)
+      // 'throttle' keeps internal timing; useMemo prevents re-creating it on each render (preserving behavior)
+      return throttle( async (quantity, quantityLimit, productId, isAuthenticated) => {
+        if(quantity < quantityLimit) {
+          if (isAuthenticated) { // if logged in, cart item increased in backend database
+            try {
+              await axios.patch(`http://localhost:5000/cart/${productId}/increase`, {}, {withCredentials: true});
+            }
+            catch(error) {
+              console.log('handleItemIncrease() error is: ', error);
+            }
           }
-          catch(error) {
-            console.log('handleItemIncrease() error is: ', error);
-          }
-        }
         dispatch(increaseByOne({productId}));
-      }
-    }
-
-    const handleItemDecrease = async () => {
-      if (quantity > 1) {
-        if (isAuthenticated) { // if logged in, cart item increased in backend database
-          try {
-            await axios.patch(
-              `http://localhost:5000/cart/${productId}/decrease`,
-              {},
-              {withCredentials: true}
-            );
-          }
-          catch(error) {
-            console.log('handleItemDecrease() error is: ',error);
-          }
         }
-        dispatch(decreaseByOne({productId}));
-      }
+      }, 250);  // 250ms throttle delay (regardless of being logged in or logged out ('guest' mode))
+    },[dispatch]); // Only recreate if dispatch changes (a placeholder since dispatch never changes)
+
+    const handleItemIncrease = () => {
+      throttleHandleItemIncrease(quantity, quantityLimit, productId, isAuthenticated);
     }
 
-    const handleItemDelete = async() => {
+
+    const throttleHandleItemDecrease = useMemo(() => { // throttles item increase to prevent rapid clicks
+
+      // Use useMemo() to ensure throttled function is only rendered/created once (retains internal state)
+      // 'throttle' keeps internal timing; useMemo prevents re-creating it on each render (preserving behavior)
+      return throttle( async (quantity, productId, isAuthenticated) => {
+        if(quantity > 1) {
+          if (isAuthenticated) { // if logged in, cart item increased in backend database
+            try {
+              await axios.patch(`http://localhost:5000/cart/${productId}/decrease`, {}, {withCredentials: true});
+            }
+            catch(error) {
+              console.log('handleItemDecrease() error is: ', error);
+            }
+          }
+        dispatch(decreaseByOne({productId}));
+        }
+      }, 250);  // 250ms throttle delay (regardless of being logged in or logged out ('guest' mode))
+    },[dispatch]); // Only recreate if dispatch changes (a placeholder since dispatch never changes)
+
+    const handleItemDecrease = () => {
+      throttleHandleItemDecrease(quantity, productId, isAuthenticated);
+    }
+
+    const handleItemDelete = async() => { // useMemo() and throttle not needed here
       if (isAuthenticated) { // if logged in, cart item increased in backend database
         try {
-          await axios.delete(
-            `http://localhost:5000/cart/${productId}`,
-            {withCredentials: true}
-          );
+          await axios.delete(`http://localhost:5000/cart/${productId}`,{withCredentials: true});
         }
         catch(error) {
              console.log('handleItemDelete() error is: ',error);

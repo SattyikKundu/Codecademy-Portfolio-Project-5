@@ -11,9 +11,8 @@ const ProductDetailsPage = () => {
     const category  = rawCategory || 'all';                 // Get product's category, or use 'all' placeholder
     const [displayCategory, setDisplayCategory] = useState('All'); // Contains reformatted product category name for display
 
-    const [productData, setProductData] = useState(null); // holds product's data
-    const [imagePath, setImagePath] = useState(null);     // holds file path to product image
-    const [imageFileName, setImageFileName] = useState(null);
+    const [productData,     setProductData] = useState(null); // holds product's data
+    const [imageFileName, setImageFileName] = useState(null); // holds image file name for product image
 
     const [stockMessage, setStockMessage] = useState('In Stock'); // Message on product's stock
     const [stockState, setStockState]     = useState('stocked');  // used to define style for <div> holding stockMessage
@@ -93,8 +92,6 @@ const ProductDetailsPage = () => {
 
     useEffect(() => {
         if(productData && productData.image_url) { // if image_url exists, create image file path
-            //const imageFilePath = `http://localhost:5000/images/${productData.image_url}`;
-            //setImagePath(imageFilePath);
             setImageFileName(productData.image_url);
         }
 

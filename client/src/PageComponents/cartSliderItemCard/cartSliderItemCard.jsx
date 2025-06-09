@@ -11,6 +11,8 @@ import { increaseByOne,
         } from '../../Slices/cartSlice.jsx';
 
 import axios from "axios"; // used to make HTTP request to backend
+import { throttle } from 'lodash';
+import { useMemo } from 'react';
 
 import './cartSliderItemCard.css';
 
@@ -29,44 +31,59 @@ const CartSliderItemCard = ({product}) => {
     const dispatch = useDispatch();  // initilize dispatch to use 'cart' reducer methods
 
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated); // tracks if user is logged in
-    
-    const handleIncrease = async() => {
-      if(quantity < quantityLimit) {
-        if (isAuthenticated) { // if logged in, cart item increased in backend database
-          try {
-            await axios.patch(
-              `http://localhost:5000/cart/${productId}/increase`,
-              {},
-              {withCredentials: true}
-            );
+
+
+    const throttleHandleIncrease = useMemo(() => { // throttles item increase to prevent rapid clicks
+
+      // Use useMemo() to ensure throttled function is only rendered/created once (retains internal state)
+      // 'throttle' keeps internal timing; useMemo prevents re-creating it on each render (preserving behavior)
+      return throttle( async (quantity, quantityLimit, productId, isAuthenticated) => {
+        if(quantity < quantityLimit) {
+          if (isAuthenticated) { // if logged in, cart item increased in backend database
+            try {
+              await axios.patch(`http://localhost:5000/cart/${productId}/increase`, {}, {withCredentials: true});
+            }
+            catch(error) {
+              console.log('handleItemIncrease() error is: ', error);
+            }
           }
-          catch(error) {
-            console.log('handleIncrease() error is: ',error);
-          }
-        }
         dispatch(increaseByOne({productId}));
-      }
-    }
-
-    const handleDecrease = async() => {
-      if (quantity > 1) {
-        if (isAuthenticated) { // if logged in, cart item increased in backend database
-          try {
-            await axios.patch(
-              `http://localhost:5000/cart/${productId}/decrease`,
-              {},
-              {withCredentials: true}
-            );
-          }
-          catch(error) {
-            console.log('handleDecrease() error is: ',error);
-          }
         }
-        dispatch(decreaseByOne({productId}));
-      }
+      }, 250);  // 250ms throttle delay (regardless of being logged in or logged out ('guest' mode))
+    },[dispatch]); // Only recreate if dispatch changes (a placeholder since dispatch never changes)
+
+
+    const handleIncrease = () => {
+      throttleHandleIncrease(quantity, quantityLimit, productId, isAuthenticated);
     }
 
-    const handleDelete = async() => {
+
+    const throttleHandleDecrease = useMemo(() => { // throttles item increase to prevent rapid clicks
+
+      // Use useMemo() to ensure throttled function is only rendered/created once (retains internal state)
+      // 'throttle' keeps internal timing; useMemo prevents re-creating it on each render (preserving behavior)
+      return throttle( async (quantity, productId, isAuthenticated) => {
+        if(quantity > 1) {
+          if (isAuthenticated) { // if logged in, cart item increased in backend database
+            try {
+              await axios.patch(`http://localhost:5000/cart/${productId}/decrease`, {}, {withCredentials: true});
+            }
+            catch(error) {
+              console.log('handleItemDecrease() error is: ', error);
+            }
+          }
+        dispatch(decreaseByOne({productId}));
+        }
+      }, 250);  // 250ms throttle delay (regardless of being logged in or logged out ('guest' mode))
+    },[dispatch]); // Only recreate if dispatch changes (a placeholder since dispatch never changes)
+
+
+    const handleDecrease = () => {
+      throttleHandleDecrease(quantity, productId, isAuthenticated);
+    }
+
+
+    const handleDelete = async() => { // useMemo() and throttle not needed here
       if (isAuthenticated) { // if logged in, cart item increased in backend database
         try {
           await axios.delete(

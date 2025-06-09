@@ -20,6 +20,9 @@ import {
 
 import { addedToCartToast } from "../../utils/utilityFunctions.js"; // toast function when product added to cart
 
+import { throttle } from "lodash";
+import { useMemo } from "react";
+
 import './productCard.css';
 
 const Product = ({product}) => {
@@ -58,23 +61,28 @@ const Product = ({product}) => {
         'quantityLimit':   purchaseLimit
     }
 
-    const handleAddToCart = async () => { 
+    const throttledAddToCart = useMemo(() => { // throttles 'Add to Cart' to prevent rapid clicks
 
-      if (isAuthenticated) { // if user logged in, add cart item to backend
-        try{
-          await axios.post(
-            `http://localhost:5000/cart/${product.id}/add`,
-            {},
-            {withCredentials: true}  
-          );
+      // Use useMemo() to ensure throttled function is only rendered/created once (retains internal state)
+      // 'throttle' keeps internal timing; useMemo prevents re-creating it on each render (preserving behavior)
+      return throttle(async (productId, itemToAdd, isAuthenticated) => { 
+        if (isAuthenticated) { // if logged in, add product to backend cart
+          try {
+            await axios.post(`http://localhost:5000/cart/${productId}/add`, {}, {withCredentials:true});
+          } 
+          catch (error) {
+            console.error('handleAddToCart() error:', error);
+          }
         }
-        catch(error) {
-          console.log('handleAddToCart() error is: ',error);
-        }
-      }
-      dispatch(addToCart(itemToAdd)); 
-      addedToCartToast();
-    }
+        dispatch(addToCart(itemToAdd)); // dispatch adding cart items to redux as normal
+        addedToCartToast();
+      }, 250);     // 250ms throttle delay (regardless of being logged in or logged out ('guest' mode))
+    }, [dispatch]); // Only recreate if dispatch changes (a placeholder since dispatch never changes)
+
+    const handleAddToCart = () => { // button linked-function for adding to cart
+      throttledAddToCart(product.id, itemToAdd, isAuthenticated);
+    };
+
 
     const createProductDetailsLink = () => { // function creates the product details url link for the page
         let detailsLink = ''; // placeholder to store final url route

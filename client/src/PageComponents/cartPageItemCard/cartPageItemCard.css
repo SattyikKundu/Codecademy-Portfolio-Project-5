@@ -140,13 +140,11 @@
     width: 40%;
     align-items: center; /* aligns buttons vertically */
     justify-content: center;
-    /*margin-left: 0.5rem;*/
 
     user-select: none;         /* prevents (accidental) highlighting of text */
     -webkit-user-select: none; /* For Safari */
     -ms-user-select: none;     /* For IE10+ */
 }
-
 
 
 @media screen and (max-width: 540px) {
@@ -163,11 +161,11 @@
     
     border-radius: 25%; /* make button have a 'circle' border for circle button */
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 2rem;
+    font-size: 1.9rem;
     font-weight: bold;
 
-    width: 2rem; /* button dimensions */
-    height: 2rem;
+    width: 1.9rem; /* button dimensions */
+    height: 1.9rem;
     text-align: center; /* horizontally align buttons */
 
     cursor: pointer;
@@ -201,9 +199,9 @@
 
 .cart-page-quantity { /*current cart quantity */
     font-family: Arial, Helvetica, sans-serif;
-    width: 30px;
+    width: 40px;
     text-align: center;
-    font-size: 2rem;    
+    font-size: 1.9rem;    
 }
 
 @media screen and (max-width: 599px) {

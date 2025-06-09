@@ -20,6 +20,10 @@ import {addedToCartToast } from "../../utils/utilityFunctions.js";
 
 import { useParams } from 'react-router-dom';
 
+
+import { throttle } from 'lodash';
+import { useMemo } from "react";
+
 import './productDetails.css'; // styling for Product details display
 
 /* Below <ProductDetails /> component is nested within the <ProductDetailsPage /> component of ProductDetailsPage.jsx.
@@ -28,7 +32,6 @@ import './productDetails.css'; // styling for Product details display
  * Ultimately, this separation of the output handling from the ProductDetailsPage.jsx file improves modularization.
  */
 
-//const ProductDetails = ({ imagePath, productData, displayCategory, stockState, stockMessage }) => {
 const ProductDetails = ({ imageFileName, productData, displayCategory, stockState, stockMessage }) => {
 
     const dispatch = useDispatch();  // initilize dispatch to use 'cart' reducer methods
@@ -37,48 +40,52 @@ const ProductDetails = ({ imageFileName, productData, displayCategory, stockStat
     const currentQuantity = useSelector((state) => selectProductQuantityById(state, productData.id));  
 
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated); // checks if user is logged in
-
-
-    const purchaseLimit = (productData.stock < 10) ? productData.stock : 10; // define purchase limit of up to 10 (or less if stock under 10)
+    const purchaseLimit = (productData.stock < 10) ? productData.stock : 10;    // define purchase limit of up to 10 (or less if stock under 10)
     const disableAdd = (productData.stock===0 ||(currentQuantity === purchaseLimit)) ? true : false; // If stock empty (or hit purchase limit)
+    const {id} = useParams(); // gets product id from url params ('/products/:category/:id')
 
     const itemToAdd = {   // product data for adding product to cart state in store!
         'productId':     productData.id, 
-        //'imageFilePath': imagePath, 
         'imageFileName': imageFileName,
         'name':          productData.display_name, 
-        'quantity':      1, // default quantity amount added upon 'Add to Cart' click
+        'quantity':      1, // default quantity increase upon 'Add to Cart' click
         'unitPrice':     productData.price,  
         'totalPrice':    productData.price, // initial placeholder (will be updated in cartSlice) 
         'quantityLimit':  purchaseLimit
     }
 
-    const {id} = useParams(); // product id from url params
 
-    const handleAddToCart = async() => {         
-      if (isAuthenticated) { // if user logged in, add cart item to backend
-        try{
-          //console.log("productData.id =",productData.id);
-          console.log('product id from URL is: ',id);
-          await axios.post(
-            `http://localhost:5000/cart/${id}/add`,
-            {},
-            {withCredentials: true}  
-          );
+    const throttledAddToCart = useMemo(() => { // throttles 'Add to Cart' to prevent rapid clicks
+
+      // Use useMemo() to ensure throttled function is only rendered/created once (retains internal state)
+      // 'throttle' keeps internal timing; useMemo prevents re-creating it on each render (preserving behavior)
+      return throttle(async (productId, itemToAdd, isAuthenticated) => {
+        if (isAuthenticated) { // if logged in, add product to backend cart
+          try {
+            await axios.post(`http://localhost:5000/cart/${productId}/add`, {}, {withCredentials:true});
+          } 
+          catch (error) {
+            console.error('handleAddToCart() error:', error);
+          }
         }
-        catch(error) {
-            console.log('handleAddToCart() error is: ',error);
-        }
-      }
-      dispatch(addToCart(itemToAdd)); 
-      addedToCartToast();
-    }
+        dispatch(addToCart(itemToAdd)); // dispatch adding cart items to redux as normal
+        addedToCartToast();
+      }, 250); // 250ms throttle delay (regardless of being logged in or logged out ('guest' mode))
+    }, [dispatch]); // Only recreate if dispatch changes (a placeholder since dispatch never changes)
+
+    const handleAddToCart = () => { // button-linked function for adding to cart
+      throttledAddToCart(id, itemToAdd, isAuthenticated);
+    };
 
     return (
         <div className="product-description-container">
             <div className="image-and-part-1-data-wrapper">
                 <div className="product-image-wrapper">
-                    <img src={`http://localhost:5000/images/${imageFileName}`} alt={productData.display_name} className="product-image" />
+                    <img 
+                        src={`http://localhost:5000/images/${imageFileName}`} 
+                        alt={productData.display_name} 
+                        className="product-image" 
+                    />
                 </div>
                 {/* Product Fields covered in Part 1 data (for all categories): 
                   *   Product's display name:     productData.display_name
