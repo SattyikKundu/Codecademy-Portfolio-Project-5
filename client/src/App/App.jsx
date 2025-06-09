@@ -7,16 +7,19 @@ import { BrowserRouter as Router,  // provides routing functionality via browser
 import BasePageLayout from '../AppPageLayouts/BasePageLayout/BasePageLayout.jsx';   // Base Page Layout with common features for ALL pages
 import PublicPageLayout    from '../AppPageLayouts/PublicPageLayout.jsx';           // page layout for public pages
 import ProtectedPageLayout from '../AppPageLayouts/ProtectedPageLayout.jsx';        // page layout for protected pages
+import CheckoutPageLayout from '../AppPageLayouts/CheckoutPageLayout/CheckoutPageLayout.jsx'; // specific layout for checkout process/page(s)
 
 // All public pages
 import ProductsPage        from '../PublicPages/ProductsPage/ProductsPage.jsx';     // 'home' page with all products
 import ProductDetailsPage  from '../PublicPages/ProductDetailsPage/ProductDetailsPage.jsx'; // give product details for specific product by id
 import CartPage            from '../PublicPages/CartPage/CartPage.jsx';             // dedicated cart page (fallback for slider cart, which is main)
 import LoginPage           from '../PublicPages/LoginPage/LoginPage.jsx';           // login page for users to access protected pages
-import RegisterPage from '../PublicPages/RegisterPage/RegisterPage.jsx';            // registration page for new users
+import RegisterPage        from '../PublicPages/RegisterPage/RegisterPage.jsx';     // registration page for new users
 
 // All protected pages
 import ProfilePage from '../ProtectedPages/ProfilePage/ProfilePage.jsx'; // user profile page (only accessible after login)
+import CheckoutPage from '../ProtectedPages/CheckoutPage/CheckoutPage.jsx'; // checkout page for the checkout process
+
 
 const App = () => {
 
@@ -61,6 +64,11 @@ const App = () => {
               <Route path='/profile' element={<ProfilePage />} />
             </Route>
 
+          </Route>
+
+          {/* Layout  for Checkout Process/Page(s) (considered a 'protected' page */}
+          <Route element={<CheckoutPageLayout />}>
+            <Route path='/checkout' element={<CheckoutPage />} />
           </Route>
 
         </Routes>

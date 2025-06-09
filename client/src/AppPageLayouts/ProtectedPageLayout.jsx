@@ -1,24 +1,10 @@
-import { 
-    useEffect, // react hook for side effects
-    useState   // react hook for state tracking
-    } from "react"; 
-
-import { 
-    Outlet,  // <Outlet> is used to render nested child routes
-    Navigate // Navigate programatically redirects routes
-    } from "react-router-dom"; 
+import { useEffect, useState } from "react"; 
+import {Outlet, Navigate} from "react-router-dom"; // <Outlet> is used to render nested child routes
+                                                   // Navigate programatically redirects routes
 
 import axios from "axios"; // sends HTTP client requests to backend
-
-import { 
-        useDispatch, // hook for dispatching redux actions
-        useSelector  // hook for 
-        } from "react-redux"; 
-
+import {useDispatch, useSelector} from "react-redux"; // used for dispatching redux actions and tracking redux data
 import {setUserFromToken, clearUser} from '../Slices/authSlice'; // redux action to track/update user state
-
-import { loadCartFromServer } from "../Slices/cartSlice.jsx"; // Redux action to replace cart with backend cart
-
 
 import BasePageLayout from "./BasePageLayout/BasePageLayout"; // shared layout with header menu, cart slider, and toast messages
 
@@ -38,16 +24,6 @@ const ProtectedPageLayout = () => {
 
             if (response.data.user) {
                 dispatch(setUserFromToken(response.data.user)); // If successful, dispatch user data to Redux store
-
-                // 🚀 Sync local cart to backend in case user opens directly on protected page
-                //console.log('(protected) syncing local cart to backend')
-                //await syncLocalCartToServer();
-
-                /* Fetch latest backend cart for this user */
-                //console.log('(protected) Fetch backend to fronend redux cart...');
-                //const cartResponse = await axios.get('http://localhost:5000/cart', { withCredentials: true });
-
-                //dispatch(loadCartFromServer(cartResponse.data)); // store backend cart to front-end cart via redux
             }
         } 
         catch(error) {  // If token fails (i.e. expired token), clear user from redux

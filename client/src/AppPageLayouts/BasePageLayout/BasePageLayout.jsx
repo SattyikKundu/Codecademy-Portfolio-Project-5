@@ -27,7 +27,7 @@ const BasePageLayout = () => {
     const TOAST_LIMIT = 1;                // Limits to 1 toast per sandwich
 
     useEffect(() => { // useEffect() that dismisses last toast when added new toast exceeds TOAST_LIMIT.
-                      // essentially prevent too many toasts on sandiwich due to rapid clicks.
+                      // essentially prevent too many toasts to 'sandiwich' due to rapid clicks.
         toasts
             .filter((selectedToast) => selectedToast.visible)           // Only consider visible toasts
             .filter((_, index) => index >= TOAST_LIMIT)                 // Is toast index over limit?
