@@ -1,6 +1,6 @@
 /** Checkout Page component **/
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {groupedStateOptions} from '../../utils/statesOfAmericaData';
 
@@ -13,11 +13,48 @@ const CheckoutPage = () => {
 
     const dispatch = useDispatch();
     const cartProducts = useSelector((state) => state.cart.products);
-    const [cartQuantity, setCartQuantity] = useState(null);
-    const [cartSubTotal, setCartSubtotal] = useState(0.00);
+
+    const [cartQuantity,   setCartQuantity] = useState(null);
+    const [cartSubTotal,   setCartSubtotal] = useState(0.00);
+    const [shippingCost,   setShippingCost] = useState(0.00);
+    const [salesTax,           setSalesTax] = useState(0.00);
+    const [orderTotal,       setOrderTotal] = useState(0.00);
+    const [selectedState, setSelectedState] = useState('');
 
 
-    const [selectedSet, setSelectedState] = useState('');
+    useEffect(() => { // when selected state changes, update shipping cost calculation
+
+      const shippingCalc = (selectedState) => {
+        const highShippingCostStates = ['AK','HI','AS','GU','MP','PR','VI'];
+        if (highShippingCostStates.includes(selectedState)) {
+          setShippingCost(15.00);
+        }
+        else {
+          setShippingCost(8.00);
+      }
+    }
+      shippingCalc(selectedState);     
+
+    },[selectedState]);
+
+
+    useEffect(()=> { // calculate sales tax in response to changing cart subtotal
+      const salesTaxCalc = (subTotal) => {
+        const tax = (subTotal * 0.06); // .toFixed() turns number to string, use parseFloat next
+        setSalesTax(tax);
+      }
+      salesTaxCalc(cartSubTotal);
+    },[cartSubTotal]);
+
+    useEffect(() => { // returns full order total based on all 3 dependencies
+      console.log('Subtotal is: ',cartSubTotal);
+      const orderTotalCalc = (subTotal, shipping, sales) => {
+        const total = parseFloat(subTotal) + parseFloat(shipping) + parseFloat(sales);
+        setOrderTotal(total);
+      }
+      orderTotalCalc(cartSubTotal, shippingCost, salesTax);
+    },[cartSubTotal, shippingCost, salesTax]);
+
 
     return (
       <>
@@ -88,37 +125,45 @@ const CheckoutPage = () => {
         <div className='checkout-label-and-input'>
           <div className='checkout-label'>U.S. State/Territory*</div>
           <div className='checkout-input' id='state-dropdown-input'>
-            <CheckoutStateDropDown options={groupedStateOptions} value={selectedSet} onSelect={setSelectedState} />
+            <CheckoutStateDropDown options={groupedStateOptions} value={selectedState} onSelect={setSelectedState} />
           </div>
         </div>
         <div className='checkout-label-and-input'>
           <div className='checkout-label'>Postal/ZIP Code*</div>
           <div className='checkout-input'><input type='text' name='postal-code' maxlength='255' required/></div>
         </div>
+        {/* using htmlFor connect label to input (can now click on label to toggle checkbox) */}
         <div className='update-profile-data'>
-            <input type='checkbox' name='update-profile' />
-             <label>Save Delivery/Home Address to Profile</label>
+            <input type='checkbox' name='update-profile' id='updateProfileCheckbox'/>
+             <label htmlFor='updateProfileCheckbox'>Save Delivery/Home Address to Profile</label>
         </div>
       </div>
 
-      {/* Section 3: Order summary, VISA payment, and submit button */}
-      <div className='checkout-order-summary-payment-container'>
-
-        <div className='checkout-order-summary-payment-header'>3. ORDER SUMMARY & PAYMENT</div>
-
+      {/* Section 3: Order summary */}
+      <div className='checkout-order-summary-container'>
+        <div className='checkout-order-summary-header'>3. ORDER SUMMARY</div>
         <div className='checkout-divider' id='div1' />
-
-        <div className='checkout-order-summary-header'>Order Summary</div>
         <div className='checkout-order-summary'>
           <div className='checkout-subtotal'>
-           <div id='checkout-subtotal-label'>Subtotal</div>
-           <div id='checkout-subtotal-field'>${cartSubTotal}</div>
+            <div id='checkout-subtotal-label'>Subtotal</div>
+            <div id='checkout-subtotal-field'>${cartSubTotal}</div>
           </div>
-
-
+          <div className='checkout-shipping-cost'>
+            <div id='checkout-shipping-cost-label'>Shipping Cost</div>
+            <div id='checkout-shipping-cost-field'>${shippingCost.toFixed(2)}</div>
+          </div>
+          <div className='checkout-sales-tax'>
+            <div id='checkout-sales-tax-label'>Sales Tax</div>
+            <div id='checkout-sales-tax-field'>${salesTax.toFixed(2)}</div>
+          </div>
+          <div className='checkout-order-total'>
+            <div id='checkout-order-total-label'>Order Total</div>
+            <div id='checkout-order-total-field'>${orderTotal.toFixed(2)}</div>
+          </div>
         </div>
-
       </div>
+
+      {/* Section 4: Payment method */}
       </>
     );
 }

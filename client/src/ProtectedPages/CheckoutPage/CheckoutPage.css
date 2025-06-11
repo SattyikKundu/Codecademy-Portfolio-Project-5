@@ -1,8 +1,8 @@
-/**************************************************************************************/
-/**************************************************************************************/
-/******************* 'Secure Checkout' Page Title *************************************/
-/**************************************************************************************/
-/**************************************************************************************/
+/************************************************************************************************************************************************************/
+/************************************************************************************************************************************************************/
+/************************************************* 'Secure Checkout' Page Title *****************************************************************************/
+/************************************************************************************************************************************************************/
+/************************************************************************************************************************************************************/
 
 .empty-header{ /* "empty" text area to get background element to cover all the way to top */
     background-color: #f1f1f1;
@@ -20,11 +20,17 @@
     margin-bottom: 1.6rem;
 }
 
-/**************************************************************************************/
-/**************************************************************************************/
-/******************* Dividers (used to divide content) styling ************************/
-/**************************************************************************************/
-/**************************************************************************************/
+@media screen and (max-width: 430px) {
+    .page-title {
+        font-size: 1.8rem;
+    }
+}
+
+/************************************************************************************************************************************************************/
+/************************************************************************************************************************************************************/
+/************************************************ Dividers (used to divide content) styling *****************************************************************/
+/************************************************************************************************************************************************************/
+/************************************************************************************************************************************************************/
 
 .checkout-divider {
     background-color: #505050;
@@ -35,11 +41,11 @@
 #div1 { margin: 0.3rem auto 1rem auto; }
 #div2 { margin: 1rem auto; }
 
-/**************************************************************************************/
-/**************************************************************************************/
-/*************** (SECTION 1) Checkout Cart Container Styling **************************/
-/**************************************************************************************/
-/**************************************************************************************/
+/************************************************************************************************************************************************************/
+/************************************************************************************************************************************************************/
+/**************************************************** (SECTION 1) Checkout Cart Container Styling ***********************************************************/
+/************************************************************************************************************************************************************/
+/************************************************************************************************************************************************************/
 
 .checkout-cart-container { /* Main container holding all final 
                             * checkout procedured prior to purchase!
@@ -56,12 +62,19 @@
     
     padding: 12px;
     margin: auto;
-    width: 96%;                     /* Example width */
+    width: 84%;                     /* Example width */
     max-width: 560px;
     height: auto;
 
     font-family: Arial, Helvetica, sans-serif; /* default front for nested components*/
 }
+
+
+@media screen and (max-width: 430px) {
+    .checkout-cart-container {
+        padding: 6px;
+    }
+} 
 
 .checkout-cart-header { /* Title of checkout cart section */
     width: 96%;
@@ -83,19 +96,19 @@
 }
 
 
-/**************************************************************************************/
-/**************************************************************************************/
-/************** (SECTION 2) Shipping Address Container Styling ************************/
-/**************************************************************************************/
-/**************************************************************************************/
+/************************************************************************************************************************************************************/
+/************************************************************************************************************************************************************/
+/********************************************** (SECTION 2) Shipping Address Container Styling **************************************************************/
+/************************************************************************************************************************************************************/
+/************************************************************************************************************************************************************/
 
 .checkout-address-container { /* Entire container for shipping address form */
     display: flex;
     flex-direction: column;
     align-items: center; /* horiztonally centers nested items in flex*/
 
-    background: #ffffff;               /* Classic grey background */
-    border: 2px solid #000;            /* Strong black border */
+    background: #ffffff;             /* Classic grey background */
+    border: 2px solid #000;          /* Strong black border */
     border-radius: 0;                  /* Sharp corners */
     box-shadow: 4px 4px 0 #808080,
                 -4px 4px 0 #808080;     /* Hard shadow for depth */
@@ -103,7 +116,7 @@
     padding: 12px;
     margin: 4rem auto auto auto;
     max-width: 560px;
-    width: 94%;                     
+    width: 84%;                     
     height: auto;
 
     font-family: Arial, Helvetica, sans-serif; /* default front for nested components*/   
@@ -149,7 +162,6 @@
 
 .required-fields-notice #upload-profile-data { /* contains button */
     width: 300px;
-    justify-content: left;
 }
 
 #upload-profile-data button { /* button to upload profile data to address from */
@@ -160,6 +172,16 @@
     font-size: 0.96rem;
     padding: 0.25rem;
     cursor: pointer;
+}
+
+@media screen and (max-width: 550px) { /* Set wrapper of 'upload profile' button
+                                        * to width auto. This will "cause" the 
+                                        * button to be pushed right due to parent
+                                        * wrapper using 'justify-content: space-evenly'. 
+                                        */
+     #upload-profile-data  {
+        width: auto !important;
+    }
 }
 
 #upload-profile-data button:hover{
@@ -198,10 +220,43 @@
     text-indent: 0.5rem;
 }
 
+@media screen and (max-width: 550px) {
+
+    .checkout-input input {
+        width: 220px;
+    }
+
+    .checkout-label {
+        width: auto;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .checkout-label-and-input {
+        align-items: baseline;
+        flex-direction: column;
+        text-align: left;
+    }
+    .checkout-input {
+        width: 100%;
+    }
+    .checkout-input input {
+         width: 100%;
+    }
+}
+
+
 #state-dropdown-input { /* wrapper for state dropdown menu component */
     width: 300px;
     height: 30px;
 }
+
+@media screen and (max-width: 550px) {
+    #state-dropdown-input { 
+        width: 220px;
+    }
+}
+
 
 .update-profile-data { /* styling for checkbox to save 
                           shipping/home adddress to profile. */
@@ -214,6 +269,7 @@
 .update-profile-data input {
     width: 0.96rem;
     height: 0.96rem;
+    cursor: pointer;
 }
 
 .update-profile-data label {
@@ -221,15 +277,16 @@
     font-weight: bold;
     font-size: 0.96rem;
     color: #707070;
+    cursor: pointer;
 }
 
-/**************************************************************************************/
-/**************************************************************************************/
-/********* (SECTION 3) Order Summary, Visa Payment, and 'Pay' button ******************/
-/**************************************************************************************/
-/**************************************************************************************/
+/************************************************************************************************************************************************************/
+/************************************************************************************************************************************************************/
+/***************************************** (SECTION 3) Order Summary information section ********************************************************************/
+/************************************************************************************************************************************************************/
+/************************************************************************************************************************************************************/
 
-.checkout-order-summary-payment-container {
+.checkout-order-summary-container { /* Container holds entire order summary section */
     display: flex;
     flex-direction: column;
     align-items: center; /* horiztonally centers nested items in flex*/
@@ -249,38 +306,99 @@
     font-family: Arial, Helvetica, sans-serif; /* default front for nested components*/   
 }
 
-.checkout-order-summary-payment-header { /* section header */
-    width: 96%;
-    text-align: left;
-    font-size: 1.6rem;  
-    display: flex;
-    flex-grow: 1;
-}
 
 .checkout-order-summary-header { /* subheader title for order summary */
     text-align: left;
     width: 96%;
-    font-weight: bold;
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-    color: #4b4b4b;
+    font-size: 1.6rem;
 }
 
-.checkout-order-summary {
-    width: 96%;
+.checkout-order-summary { /* wrapper for order summary fields and values */
+    width: 100%;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    overflow: hidden;
 }
 
-.checkout-subtotal {
+.checkout-subtotal { /* Order summary subtotal and label */
     display: flex;
     flex-direction: row;
-    width: 100%;
     justify-content: space-between;
-
-    font-size: 1.6rem;
+    width: 96%;
+    font-size: 1.4rem;
 }
 #checkout-subtotal-label {
     font-weight: bold;
 }
 
+.checkout-shipping-cost { /* Order summary shipping cost and label*/
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 96%;
+    margin-top: 1rem;
+    font-size: 1.4rem;
+}
+
+#checkout-shipping-cost-label {
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+}
+
+#checkout-shipping-cost-label::after { /* Shipping cost description UNDER shipping cost label */
+    content:'For overseas states and territories (ex: Alaska, Hawaii, Guam, etc.), shipping is $15.00. Otherwise, shipping in all mainland states (ex: California, Florida, Washington D.C., etc.) costs $8.00.';
+    font-size: 0.95rem;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 400;
+    width: 65%;
+}
+
+.checkout-sales-tax{ /* Order summary sales tax and label */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 96%;
+    margin-top: 1rem;
+    font-size: 1.4rem;
+}
+
+#checkout-sales-tax-label {
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+}
+
+#checkout-sales-tax-label::after { /* explanation of sales tax calculation */ 
+    content:'Currently 6% tax for all sales.';
+    font-size: 0.95rem;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 400;
+    width: 65%;
+}
+
+.checkout-order-total { /* Total/Final cost in order summary (and label) */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 96%;
+
+    margin-top: 1rem;
+    padding: 1rem 3rem;
+    font-size: 1.4rem;
+
+    background-color: #505050;
+    color: #ffffff;
+
+}
+
+#checkout-order-total-label {
+        font-weight: bold;
+}
+
+/*****************************************************************************************************************************/
+/*****************************************************************************************************************************/
+/*************************** (SECTION 4) Payment Method (VISA, etc.) and button **********************************************/
+/*****************************************************************************************************************************/
+/*****************************************************************************************************************************/

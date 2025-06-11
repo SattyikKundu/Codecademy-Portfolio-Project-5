@@ -13,7 +13,8 @@
 
     /* border and margin stylings */
     border: 1px solid rgba(34, 34, 34, 0.85);
-    box-shadow: -3px 3px 0 #8f8f8f;     /* Hard shadow for depth */
+    box-shadow: 3px 3px 0 #8f8f8f,
+                -3px 3px 0 #8f8f8f;     /* Hard shadow for depth */
     border-radius: 0px;
     margin: 7px auto;
 
@@ -30,7 +31,7 @@
 @media screen and (max-width: 480px) { /* update cart item dimensions for mobile screen sizes */
     .checkout-cart-item-wrapper {
         width: 96%; 
-        height: 140px;
+        height: 110px;
     }
 }
 
@@ -48,7 +49,8 @@
     border: 1px solid rgba(34, 34, 34, 0.85); /* border and margin stylings */
     border-radius: 0px;
 
-    box-shadow: -2px 2px 0 #8f8f8f;     /* Hard shadow for depth */
+    box-shadow: 2px 2px #8f8f8f,
+                -2px 2px #8f8f8f;     /* Hard shadow for depth */
     border-radius: 0px;
     overflow: hidden;
 }
@@ -84,6 +86,18 @@
 }
 
 @media screen and (max-width: 540px) { 
+    .checkout-cart-item-info-buttons { /* make column orientation to fit product info and quantity buttons */
+        flex-direction: row;
+    }
+    .checkout-cart-item-info { /* widen info field for visibility */
+        align-items: center; 
+        text-align: center;
+        width: 65%;
+        gap: 3px;
+    }
+}
+
+@media screen and (max-width: 480px) { 
     .checkout-cart-item-info-buttons { /* make column orientation to fit product info and quantity buttons */
         flex-direction: column;
     }
@@ -150,7 +164,7 @@
 }
 
 
-@media screen and (max-width: 540px) {
+@media screen and (max-width: 480px) {
     .checkout-cart-item-buttons {
        width: 100%
     }
@@ -259,13 +273,6 @@
 }
 
 @media screen and (max-width: 599px) { /* shrink delete button on smaller screen size*/
-    .checkout-cart-delete-item-button {
-        height: 2.1rem;
-        font-size: 1.5rem;
-    }
-}
-
-@media screen and (max-width: 420px) { /* shrink delete button on smaller screen size*/
     .checkout-cart-delete-item-button {
         height: 1.6rem;
         font-size: 1.2rem;
