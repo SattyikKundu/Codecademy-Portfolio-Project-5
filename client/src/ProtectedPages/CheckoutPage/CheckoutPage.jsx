@@ -66,9 +66,7 @@ const CheckoutPage = () => {
 
       {/* Section 1: Final Cart at Checkout */}
       <div className='checkout-cart-container'>
-        <div className='checkout-cart-header'>
-            1. REVIEW YOUR ORDER ({cartQuantity} items)
-        </div>
+        <div className='checkout-cart-header'>1. REVIEW YOUR ORDER ({cartQuantity} items)</div>
         <div className='checkout-divider' id='div1' />
          <CheckoutCartFinal 
             cartProducts={cartProducts} 
@@ -86,7 +84,7 @@ const CheckoutPage = () => {
       <div className='checkout-address-container'>
         <div className='checkout-address-header'>2. DELIVERY ADDRESS</div>
 
-        <div className='checkout-divider' id='div1' />
+        <div className='checkout-divider' id='div3' />
 
         <div className='required-fields-notice'>
           <div id='notice-label'>All required fields*</div>
@@ -142,7 +140,7 @@ const CheckoutPage = () => {
       {/* Section 3: Order summary */}
       <div className='checkout-order-summary-container'>
         <div className='checkout-order-summary-header'>3. ORDER SUMMARY</div>
-        <div className='checkout-divider' id='div1' />
+        <div className='checkout-divider' id='div3' />
         <div className='checkout-order-summary'>
           <div className='checkout-subtotal'>
             <div id='checkout-subtotal-label'>Subtotal</div>

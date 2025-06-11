@@ -32,6 +32,8 @@
     .checkout-cart-item-wrapper {
         width: 96%; 
         height: 110px;
+        box-shadow: 1.5px 1.5px 0 #8f8f8f,
+                -1.5px 1.5px 0 #8f8f8f;
     }
 }
 
@@ -65,6 +67,14 @@
     .checkout-cart-item-img-wrapper { width: 50%; }
 }
 
+@media screen and (max-width: 480px) {
+    .checkout-cart-item-img-wrapper { 
+        width: auto;
+        max-width: 90px;
+        aspect-ratio: 1; 
+    }
+}
+
 /***************************************************************/
 /************ Styling for info and buttons container ***********/
 /***************************************************************/
@@ -86,25 +96,29 @@
 }
 
 @media screen and (max-width: 540px) { 
-    .checkout-cart-item-info-buttons { /* make column orientation to fit product info and quantity buttons */
-        flex-direction: row;
-    }
+
     .checkout-cart-item-info { /* widen info field for visibility */
-        align-items: center; 
-        text-align: center;
-        width: 65%;
-        gap: 3px;
+        width: 55%;
+        gap: auto;/*3px;*/
     }
 }
 
 @media screen and (max-width: 480px) { 
     .checkout-cart-item-info-buttons { /* make column orientation to fit product info and quantity buttons */
         flex-direction: column;
+        justify-self: center;
     }
     .checkout-cart-item-info { /* widen info field for visibility */
+        margin-top: -0.4rem; 
         align-items: center; 
         text-align: center;
         width: 100%;
+    }
+}
+
+@media screen and (max-width: 380px) { 
+    .checkout-cart-item-info { /* widen info field for visibility */
+        margin-top: -0.6rem;
     }
 }
 
@@ -137,9 +151,16 @@
     #checkout-cart-item-price-each{ font-size: 0.8rem; }
 }
 
+@media screen and (max-width: 428px) { 
+    #checkout-cart-item-name { font-size: 0.90rem; }
+    #checkout-cart-item-price-total { font-size: 0.9rem; }
+    #checkout-cart-item-price-each{ font-size: 0.8rem; }
+
+}
+
 @media screen and (max-width: 360px) { /* Reduce font-size AGAIN to fit cart-item 
                                           data on mobile screen size*/
-    #checkout-cart-item-name { font-size: 0.95rem; }
+    #checkout-cart-item-name { font-size: 0.85rem; }
     #checkout-cart-item-price-total { font-size: 0.85rem; }
     #checkout-cart-item-price-each{ font-size: 0.8rem; }
 }

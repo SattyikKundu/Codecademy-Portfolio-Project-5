@@ -41,6 +41,17 @@
 #div1 { margin: 0.3rem auto 1rem auto; }
 #div2 { margin: 1rem auto; }
 
+@media screen and (max-width: 550px) {
+    .checkout-divider {
+        width: 98%;
+    }
+    #div1 { margin: 0.3rem auto; }
+    #div2 { margin: 0.3rem auto; }
+}
+
+#div3 { margin: 0.3rem auto 1rem auto; }
+#div4 { margin: 1rem auto; }
+
 /************************************************************************************************************************************************************/
 /************************************************************************************************************************************************************/
 /**************************************************** (SECTION 1) Checkout Cart Container Styling ***********************************************************/
@@ -60,7 +71,7 @@
     box-shadow: 4px  4px 0 #808080,
                 -4px 4px 0 #808080;  /* Hard shadow for depth */
     
-    padding: 12px;
+    padding: 10px;
     margin: auto;
     width: 84%;                     /* Example width */
     max-width: 560px;
@@ -69,17 +80,22 @@
     font-family: Arial, Helvetica, sans-serif; /* default front for nested components*/
 }
 
-
-@media screen and (max-width: 430px) {
-    .checkout-cart-container {
-        padding: 6px;
-    }
-} 
-
 .checkout-cart-header { /* Title of checkout cart section */
     width: 96%;
-    text-align: left;
+
     font-size: 1.6rem;
+    display: flex;
+    flex-direction: row;
+}
+
+@media screen and (max-width: 550px) {/* make header text scale responsively for small screens */
+
+   .checkout-cart-header  { 
+        font-size: clamp(0.9rem, 4.5vw, 1.6rem);
+        text-indent: -0.2rem;
+        font-weight: bold;
+        white-space: nowrap;
+    }
 }
 
 .checkout-cart-subtotal { /* Styling of subtotal label and value */
@@ -130,6 +146,7 @@
     flex-direction: column;  
 }
 
+
 .checkout-address-header::after { /* note under header */
     content: 'NOTE: Shipping is currently only available in U.S. states & territories.';
     color: #505050;
@@ -138,11 +155,27 @@
     font-weight: bold;
 
     text-indent: -54px; /* First line indents -54px left */
-    padding-left: 54px  /* Overall padding of text is 54px left. 
+    padding-left: 54px;  /* Overall padding of text is 54px left. 
                          * Together, this cause 2nd line to look 'indented'
                          * and align after the 'NOTE:' word.
                          */
 
+}
+
+@media screen and (max-width: 352px) {/* make header text scale responsively for small screens */
+
+   .checkout-address-header  { 
+        font-size: clamp(0.9rem, 7.5vw, 1.6rem);
+        margin-left: -0.2rem;
+        white-space: nowrap;
+    }
+    .checkout-address-header::after{
+        font-size: 0.825rem;
+        text-indent: -45px;
+        padding-left: 45px;
+        margin-left: 0.1rem;
+        white-space: wrap;
+    }
 }
 
 .required-fields-notice { /* holds required fields notice and 'upload profile data' button */
@@ -154,10 +187,24 @@
     margin: 0 auto 0.5rem auto;
 }
 
+
 .required-fields-notice #notice-label { /* required fields notice */
     font-family: Arial, Helvetica, sans-serif;
     font-size: 1rem;
     width: 30%;
+}
+
+@media screen and (max-width: 420px) {
+    .required-fields-notice {
+        flex-direction: column;
+        align-items: baseline;
+    }
+
+    .required-fields-notice #notice-label {
+        width: 100%;
+        margin-bottom: 0.4rem;
+    }
+
 }
 
 .required-fields-notice #upload-profile-data { /* contains button */
@@ -300,10 +347,10 @@
     padding: 12px;
     margin: 4rem auto auto auto;
     max-width: 560px;
-    width: 94%;                     
+    width: 84%;                     
     height: auto;
 
-    font-family: Arial, Helvetica, sans-serif; /* default front for nested components*/   
+    font-family: Arial, Helvetica, sans-serif; /* default front for nested components*/    
 }
 
 
@@ -312,6 +359,7 @@
     width: 96%;
     font-size: 1.6rem;
 }
+
 
 .checkout-order-summary { /* wrapper for order summary fields and values */
     width: 100%;
@@ -332,6 +380,7 @@
     font-weight: bold;
 }
 
+
 .checkout-shipping-cost { /* Order summary shipping cost and label*/
     display: flex;
     flex-direction: row;
@@ -348,11 +397,18 @@
 }
 
 #checkout-shipping-cost-label::after { /* Shipping cost description UNDER shipping cost label */
-    content:'For overseas states and territories (ex: Alaska, Hawaii, Guam, etc.), shipping is $15.00. Otherwise, shipping in all mainland states (ex: California, Florida, Washington D.C., etc.) costs $8.00.';
+    content:'For overseas states and territories (Alaska, Hawaii, Guam, etc.), shipping is $15.00. Otherwise, shipping in all mainland states (California, Florida, Washington D.C., etc.) costs $8.00.';
     font-size: 0.95rem;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 400;
     width: 65%;
+}
+
+@media screen and (max-width:468px) {
+    #checkout-shipping-cost-label::after { 
+        width: 75%;
+        font-size: 0.8rem;
+    }
 }
 
 .checkout-sales-tax{ /* Order summary sales tax and label */
@@ -375,8 +431,23 @@
     font-size: 0.95rem;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 400;
-    width: 65%;
+    width: 100%;
 }
+
+
+@media screen and (max-width:468px) {
+    #checkout-sales-tax-label::after { 
+        width: 100%;
+        font-size: 0.8rem;
+    }
+}
+@media screen and (max-width:356px) {
+    #checkout-sales-tax-label::after { 
+        width: 90%;
+        font-size: 0.8rem;
+    }
+}
+
 
 .checkout-order-total { /* Total/Final cost in order summary (and label) */
     display: flex;
@@ -395,6 +466,25 @@
 
 #checkout-order-total-label {
         font-weight: bold;
+}
+
+@media screen and (max-width: 400px) {
+    .checkout-order-summary-header { 
+        font-size: clamp(0.9rem , 6.5vw, 1.6rem);
+    }
+
+    .checkout-subtotal,
+    .checkout-shipping-cost,
+    .checkout-sales-tax,
+    .checkout-order-total {
+        font-size: clamp(0.9rem, 5.8vw, 1.4rem);
+    }
+
+    /*
+    #checkout-shipping-cost-label::after,
+    #checkout-sales-tax-label::after { 
+        font-size: clamp(0.7rem, 5.8vw, 0.8rem);;
+    }*/
 }
 
 /*****************************************************************************************************************************/
