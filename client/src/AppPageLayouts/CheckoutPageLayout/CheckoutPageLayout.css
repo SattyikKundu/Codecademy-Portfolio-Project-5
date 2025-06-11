@@ -1,5 +1,6 @@
 .checkout-body {
-    width: 100%;
+    /*width: 100%; */
+    min-width: 100vw !important;
     
     margin-top: 0;
     padding: 0 0 2rem 0; /* Due to bottom-most page components touching screen bottom,

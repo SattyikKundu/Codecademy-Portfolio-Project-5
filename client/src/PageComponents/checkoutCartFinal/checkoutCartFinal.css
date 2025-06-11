@@ -2,60 +2,25 @@
 /************ Checkout's Final Cart Section styling **************************/
 /*****************************************************************************/
 
-.checkout-cart-container { /* Holds main content of Final Cart in Checkout */
+.cart-checkout-container { /* Holds main content of Final Cart in Checkout */
 
     display: flex;      /* items in flex-column orientation */
     flex-direction: column;
     position: relative; /* Needed for absolute positioning of 'close cart' button (and the cart header) */
 
-    width: 98%; /* size matches parent container */
+    width: 100%; /* size matches parent container */
     max-width: 800px;
 
     margin: 0.5rem auto;
 }
 
 /*****************************************************************************/
-/********** Cart Header styling **********************************************/
-/*****************************************************************************/
-
-.checkout-cartheader { /* Cart header styling */
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 2rem;
-    font-weight: bold;
-    margin: 0.5rem auto;
-}
-
-@media screen and (max-width: 360px) { /* Resize cart header for smaller screen */
-    .checkout-cartheader{
-        top: 13px;
-        font-size: 1.75rem;
-    }
-}
-
-@media screen and (max-width: 460px) {  /* Shrinks text due to being too large for smaller screens*/
-    #empty-checkout-cart-notice {
-        font-size: 1.66rem;
-    }
-}
-
-@media screen and (max-width: 370px) {  /* Shrinks text due to being too large for smaller screens*/
-    #empty-checkout-cart-notice {
-        font-size: 1.47rem;
-    }
-}
-@media screen and (max-width: 350px) {  /* Shrinks text due to being too large for smaller screens*/
-    #empty-checkout-cart-notice {
-        font-size: 1.25rem;
-    }
-}
-
-/*****************************************************************************/
 /************* Checkout Cart items container's styling ***********************/
 /*****************************************************************************/
 
-.checkout-cart-items-wrapper { /* holds the .cart-items container for cart-item cards */
+.cart-checkout-items-wrapper { /* holds the .cart-items container for cart-item cards */
     
-    margin: 0rem 1rem; /*cart items container dimensions */
+    margin: 0rem 0.85rem; /*cart items container dimensions */
     width: auto;
 
     height: 404px;/*  Necessary to scale correctly for various (responsive) 
@@ -76,7 +41,7 @@
                          in .cart-item at the rounded corners */
 }
 
-.checkout-cart-items { /* Area where items added to cart are displayed */
+.cart-checkout-items { /* Area where items added to cart are displayed */
     width: 100%;
     height: 100%;
     overflow-y: auto; /* scroll triggers only when cart items exceed container size*/
@@ -84,7 +49,7 @@
 }
 
 @media screen and (max-width: 480px) { /* width items container width for a bit more space */
-    .checkout-cart-items-wrapper {
+    .cart-checkout-items-wrapper {
         margin: 0 0.5rem;
     }
 }

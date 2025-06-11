@@ -39,16 +39,9 @@ const CheckoutCartFinal = ({cartProducts, setCartQuantity, setCartSubtotal}) => 
 
   return (
     <>
-    <div className="checkout-cart-container">
-      {/*
-      <div className="checkout-cartheader">
-        { (cartProducts && cartProducts.length>0) ?
-          (`Your Cart (${totalQuantity})`):
-          (<span id='empty-checkout-cart-notice'>Your Cart is Empty</span>)
-        }
-      </div>*/}
-      <div className="checkout-cart-items-wrapper">
-        <div className="checkout-cart-items">
+    <div className="cart-checkout-container">
+      <div className="cart-checkout-items-wrapper">
+        <div className="cart-checkout-items">
           {(cartProducts && cartProducts.length>0) ? 
            (
              cartProducts.map((cartProduct) => ( // populate product cards based on products [] in cart state

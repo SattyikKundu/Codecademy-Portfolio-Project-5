@@ -14,10 +14,10 @@
     display: flex;
     justify-self: center;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 3rem;
+    font-size: 2.4rem;
     font-weight: bold;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    margin-top: 1.6rem;
+    margin-bottom: 1.6rem;
 }
 
 /**************************************************************************************/
@@ -37,12 +37,59 @@
 
 /**************************************************************************************/
 /**************************************************************************************/
-/******************* Checkout Cart Container Styling **********************************/
+/*************** (SECTION 1) Checkout Cart Container Styling **************************/
 /**************************************************************************************/
 /**************************************************************************************/
 
 .checkout-cart-container { /* Main container holding all final 
-                         checkout procedured prior to purchase!*/
+                            * checkout procedured prior to purchase!
+                            */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* horiztonally centers nested items in flex */
+
+    background: #ffffff;             /* Classic grey background */
+    border: 2px solid #000;          /* Strong black border */
+    border-radius: 0;                  /* Sharp corners */
+    box-shadow: 4px  4px 0 #808080,
+                -4px 4px 0 #808080;  /* Hard shadow for depth */
+    
+    padding: 12px;
+    margin: auto;
+    width: 96%;                     /* Example width */
+    max-width: 560px;
+    height: auto;
+
+    font-family: Arial, Helvetica, sans-serif; /* default front for nested components*/
+}
+
+.checkout-cart-header { /* Title of checkout cart section */
+    width: 96%;
+    text-align: left;
+    font-size: 1.6rem;
+}
+
+.checkout-cart-subtotal { /* Styling of subtotal label and value */
+    display: flex;
+    flex-direction: row;
+    font-size: 1.6rem;
+    width: 96%;
+    justify-content: space-between;
+    margin-top: 1%;
+}
+
+#checkout-cart-label{ /* subtotal label bolded */
+    font-weight: bold;
+}
+
+
+/**************************************************************************************/
+/**************************************************************************************/
+/************** (SECTION 2) Shipping Address Container Styling ************************/
+/**************************************************************************************/
+/**************************************************************************************/
+
+.checkout-address-container { /* Entire container for shipping address form */
     display: flex;
     flex-direction: column;
     align-items: center; /* horiztonally centers nested items in flex*/
@@ -53,43 +100,187 @@
     box-shadow: 4px 4px 0 #808080,
                 -4px 4px 0 #808080;     /* Hard shadow for depth */
     
-    padding: 16px;
-    margin: auto;
-    width: 90%;                     /* Example width */
-    max-width: 800px;
+    padding: 12px;
+    margin: 4rem auto auto auto;
+    max-width: 560px;
+    width: 94%;                     
     height: auto;
 
-    font-family: Arial, Helvetica, sans-serif; /* default front for nested components*/
+    font-family: Arial, Helvetica, sans-serif; /* default front for nested components*/   
 }
 
-.checkout-cart-header {
+.checkout-address-header { /* Header title for shipping address form section */
     width: 96%;
     text-align: left;
-    font-size: 2rem;
+    font-size: 1.6rem;  
+    display: flex;
+    flex-direction: column;  
 }
 
+.checkout-address-header::after { /* note under header */
+    content: 'NOTE: Shipping is currently only available in U.S. states & territories.';
+    color: #505050;
+    font-size: 0.96rem;
+    margin-top: 0.96rem;
+    font-weight: bold;
 
-/************************************************************************/
+    text-indent: -54px; /* First line indents -54px left */
+    padding-left: 54px  /* Overall padding of text is 54px left. 
+                         * Together, this cause 2nd line to look 'indented'
+                         * and align after the 'NOTE:' word.
+                         */
 
-.checkout-cart-subtotal, 
-.checkout-cart-shipping {
+}
+
+.required-fields-notice { /* holds required fields notice and 'upload profile data' button */
     display: flex;
     flex-direction: row;
     width: 96%;
+    align-items: center;
     justify-content: space-between;
-    margin-top: 1%;
+    margin: 0 auto 0.5rem auto;
 }
 
-.checkout-cart-subtotal { font-size: 2rem; }
+.required-fields-notice #notice-label { /* required fields notice */
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+    width: 30%;
+}
 
-.checkout-cart-shipping { font-size: 1.5rem; }
+.required-fields-notice #upload-profile-data { /* contains button */
+    width: 300px;
+    justify-content: left;
+}
 
-#checkout-cart-label{ /* field labels are bolded */
+#upload-profile-data button { /* button to upload profile data to address from */
+    border-radius: 6px;
+    border: 1px solid #858585;
+    box-shadow: 0px 0px 3px 1px #858585;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.96rem;
+    padding: 0.25rem;
+    cursor: pointer;
+}
+
+#upload-profile-data button:hover{
+    background-color: #c7c7c7;
+    box-shadow: 0px 0px 3px 1px rgb(112, 112, 112);
+}
+
+#upload-profile-data button:active{ transform: scale(0.95); }
+
+
+
+
+.checkout-label-and-input { /* General wrapper with field label and input textbox, dropdown, etc. */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    justify-content: space-between;
+    width: 96%;
+    margin: 1rem auto;
+}
+
+.checkout-label { /* shipping address input field label */
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.96rem;
+    width: 30%;
+}
+
+.checkout-input input { /* input for shipping address field label */
+    width: 300px;
+    height: 28px;
+    border-radius: 4px;
+    background-color: #e9e9e9;
+    font-size: 0.8rem;
+    font-family: Arial, Helvetica, sans-serif;
+    text-indent: 0.5rem;
+}
+
+#state-dropdown-input { /* wrapper for state dropdown menu component */
+    width: 300px;
+    height: 30px;
+}
+
+.update-profile-data { /* styling for checkbox to save 
+                          shipping/home adddress to profile. */
+    margin-top: 1rem;
+    width: 96%;
+    display: flex;
+    gap: 7px;
+}
+
+.update-profile-data input {
+    width: 0.96rem;
+    height: 0.96rem;
+}
+
+.update-profile-data label {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 0.96rem;
+    color: #707070;
+}
+
+/**************************************************************************************/
+/**************************************************************************************/
+/********* (SECTION 3) Order Summary, Visa Payment, and 'Pay' button ******************/
+/**************************************************************************************/
+/**************************************************************************************/
+
+.checkout-order-summary-payment-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* horiztonally centers nested items in flex*/
+
+    background: #ffffff;               /* Classic grey background */
+    border: 2px solid #000;            /* Strong black border */
+    border-radius: 0;                  /* Sharp corners */
+    box-shadow: 4px 4px 0 #808080,
+                -4px 4px 0 #808080;     /* Hard shadow for depth */
+    
+    padding: 12px;
+    margin: 4rem auto auto auto;
+    max-width: 560px;
+    width: 94%;                     
+    height: auto;
+
+    font-family: Arial, Helvetica, sans-serif; /* default front for nested components*/   
+}
+
+.checkout-order-summary-payment-header { /* section header */
+    width: 96%;
+    text-align: left;
+    font-size: 1.6rem;  
+    display: flex;
+    flex-grow: 1;
+}
+
+.checkout-order-summary-header { /* subheader title for order summary */
+    text-align: left;
+    width: 96%;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: #4b4b4b;
+}
+
+.checkout-order-summary {
+    width: 96%;
+    display: flex;
+    flex-direction: column;
+}
+
+.checkout-subtotal {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+
+    font-size: 1.6rem;
+}
+#checkout-subtotal-label {
     font-weight: bold;
 }
 
-/*
-@media screen and (max-width: 420px) { /* re-size font to make order summary fit in smaller screen//
-    #cart-page-order-summary-header { font-size: 1.1rem; }
-    .cart-page-order-summary .cart-page-label-and-value { font-size: 0.85rem; }
-} */

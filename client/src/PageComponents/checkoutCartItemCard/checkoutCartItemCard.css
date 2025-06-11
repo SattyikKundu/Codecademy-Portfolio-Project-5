@@ -15,7 +15,7 @@
     border: 1px solid rgba(34, 34, 34, 0.85);
     box-shadow: -3px 3px 0 #8f8f8f;     /* Hard shadow for depth */
     border-radius: 0px;
-    margin: 8px auto;
+    margin: 7px auto;
 
     background-color: rgb(230, 230, 230);
 }
@@ -41,7 +41,7 @@
 .checkout-cart-item-img-wrapper { /* image wrapper */
 
     width: auto; /* image wrapper shape and dimensions*/
-    max-width: 100px;
+    max-width: 80px;
     margin: auto 1% auto 1%;
     aspect-ratio: 1;
     
@@ -97,22 +97,22 @@
 
 #checkout-cart-item-name { /* cart item's name */
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 1.25rem;
+    font-size: 1rem;
     font-weight: bold;
     margin-bottom: 1.5%;
 }
 
 #checkout-cart-item-price-total { /* cart item's total price fur current quantitiy */
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     font-weight: bold;
     margin-bottom: 2%;
 }
 
 #checkout-cart-item-price-each { /* price for EACH cart item */
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 0.9rem;
-    color: grey;
+    font-size: 0.8rem;
+    color: rgb(107, 107, 107);
     margin-bottom: 2%;
 }
 
@@ -164,11 +164,11 @@
     
     border-radius: 25%; /* make button have a 'circle' border for circle button */
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 1.9rem;
+    font-size: 1.52rem;
     font-weight: bold;
 
-    width: 1.9rem; /* button dimensions */
-    height: 1.9rem;
+    width: 1.52rem; /* button dimensions */
+    height: 1.52rem;
     text-align: center; /* horizontally align buttons */
 
     cursor: pointer;
@@ -202,9 +202,9 @@
 
 .checkout-cart-item-quantity { /*current cart quantity */
     font-family: Arial, Helvetica, sans-serif;
-    width: 40px;
+    width: 34px;
     text-align: center;
-    font-size: 1.9rem;    
+    font-size: 1.52rem;    
 }
 
 @media screen and (max-width: 599px) {
@@ -229,12 +229,12 @@
 
 .checkout-cart-delete-item-button {
 
-    height: 2.5rem; /* button dimensions and shape */    
+    height: 2rem; /* button dimensions and shape */    
     aspect-ratio: 1;
     border-radius: 50%;
 
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 2rem; /* font styling */
+    font-size: 1.6rem; /* font styling */
 
     border: 1px solid #b90909e3; /* border, text, background, and shadow color */
     color: rgba(252, 242, 242, 0.849);
