@@ -1,8 +1,8 @@
 /*****************************************************************************/
-/********** Cart Page styling **********************************************/
+/************ Cart Page styling **********************************************/
 /*****************************************************************************/
 
-.cart-page-content { /* Holds main content of Cart slider */
+.cart-page-content { /* Holds main content of Cart Page */
 
     display: flex;      /* items in flex-column orientation */
     flex-direction: column;

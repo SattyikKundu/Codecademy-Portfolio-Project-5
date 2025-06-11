@@ -1,0 +1,95 @@
+/**************************************************************************************/
+/**************************************************************************************/
+/******************* 'Secure Checkout' Page Title *************************************/
+/**************************************************************************************/
+/**************************************************************************************/
+
+.empty-header{ /* "empty" text area to get background element to cover all the way to top */
+    background-color: #f1f1f1;
+    color: #00000000;
+    height: 0;
+}
+
+.page-title { /* Page header title 'SECURE CHECKOUT' Styling */
+    display: flex;
+    justify-self: center;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 3rem;
+    font-weight: bold;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+/**************************************************************************************/
+/**************************************************************************************/
+/******************* Dividers (used to divide content) styling ************************/
+/**************************************************************************************/
+/**************************************************************************************/
+
+.checkout-divider {
+    background-color: #505050;
+    height: 4px;
+    width: 96%;
+}
+
+#div1 { margin: 0.3rem auto 1rem auto; }
+#div2 { margin: 1rem auto; }
+
+/**************************************************************************************/
+/**************************************************************************************/
+/******************* Checkout Cart Container Styling **********************************/
+/**************************************************************************************/
+/**************************************************************************************/
+
+.checkout-cart-container { /* Main container holding all final 
+                         checkout procedured prior to purchase!*/
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* horiztonally centers nested items in flex*/
+
+    background: #ffffff;               /* Classic grey background */
+    border: 2px solid #000;            /* Strong black border */
+    border-radius: 0;                  /* Sharp corners */
+    box-shadow: 4px 4px 0 #808080,
+                -4px 4px 0 #808080;     /* Hard shadow for depth */
+    
+    padding: 16px;
+    margin: auto;
+    width: 90%;                     /* Example width */
+    max-width: 800px;
+    height: auto;
+
+    font-family: Arial, Helvetica, sans-serif; /* default front for nested components*/
+}
+
+.checkout-cart-header {
+    width: 96%;
+    text-align: left;
+    font-size: 2rem;
+}
+
+
+/************************************************************************/
+
+.checkout-cart-subtotal, 
+.checkout-cart-shipping {
+    display: flex;
+    flex-direction: row;
+    width: 96%;
+    justify-content: space-between;
+    margin-top: 1%;
+}
+
+.checkout-cart-subtotal { font-size: 2rem; }
+
+.checkout-cart-shipping { font-size: 1.5rem; }
+
+#checkout-cart-label{ /* field labels are bolded */
+    font-weight: bold;
+}
+
+/*
+@media screen and (max-width: 420px) { /* re-size font to make order summary fit in smaller screen//
+    #cart-page-order-summary-header { font-size: 1.1rem; }
+    .cart-page-order-summary .cart-page-label-and-value { font-size: 0.85rem; }
+} */

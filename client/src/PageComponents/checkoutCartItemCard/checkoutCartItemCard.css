@@ -1,0 +1,274 @@
+/***************************************************************/
+/**** Styling for checkout cart item wrapper and content *******/
+/***************************************************************/
+
+.checkout-cart-item-wrapper { /* wrapper for cart item */
+
+    display: flex; /* items in row orientation */
+    flex-direction: row;
+    justify-content: center;
+
+    width: 94%; /* cart item dimensions */
+    padding: 0.6rem 0 0.6rem 0;
+
+    /* border and margin stylings */
+    border: 1px solid rgba(34, 34, 34, 0.85);
+    box-shadow: -3px 3px 0 #8f8f8f;     /* Hard shadow for depth */
+    border-radius: 0px;
+    margin: 8px auto;
+
+    background-color: rgb(230, 230, 230);
+}
+
+.checkout-cart-item-content { /*content within wrapper*/
+    margin: 0px 1px 1px 1px; /* margin around content from wrapper's edge */
+    display: flex;
+    flex-direction: row;
+    width: 96%;
+}
+
+@media screen and (max-width: 480px) { /* update cart item dimensions for mobile screen sizes */
+    .checkout-cart-item-wrapper {
+        width: 96%; 
+        height: 140px;
+    }
+}
+
+/***************************************************************/
+/************ Styling for image and image wrapper **************/
+/***************************************************************/
+
+.checkout-cart-item-img-wrapper { /* image wrapper */
+
+    width: auto; /* image wrapper shape and dimensions*/
+    max-width: 100px;
+    margin: auto 1% auto 1%;
+    aspect-ratio: 1;
+    
+    border: 1px solid rgba(34, 34, 34, 0.85); /* border and margin stylings */
+    border-radius: 0px;
+
+    box-shadow: -2px 2px 0 #8f8f8f;     /* Hard shadow for depth */
+    border-radius: 0px;
+    overflow: hidden;
+}
+
+.checkout-cart-item-image { /* styling of image with respect to image wrapper container */
+    aspect-ratio: 1;
+    height: 100%;
+    width: auto;
+}
+
+@media screen and (max-width: 540px) { /* more space for image in smaller screens*/
+    .checkout-cart-item-img-wrapper { width: 50%; }
+}
+
+/***************************************************************/
+/************ Styling for info and buttons container ***********/
+/***************************************************************/
+
+.checkout-cart-item-info-buttons { /* wrapper holds cart item data AND buttons*/
+    display: flex;
+    flex-direction: row;
+    height: 80%;
+    width: 70%;
+    margin: auto 2% auto 2%;
+}
+
+.checkout-cart-item-info { /* wrapper for cart item info */
+    display: flex;
+    justify-content: center; /* vertically align text via flex */
+    flex-direction: column;
+    width: 55%;
+    gap: 4px;
+}
+
+@media screen and (max-width: 540px) { 
+    .checkout-cart-item-info-buttons { /* make column orientation to fit product info and quantity buttons */
+        flex-direction: column;
+    }
+    .checkout-cart-item-info { /* widen info field for visibility */
+        align-items: center; 
+        text-align: center;
+        width: 100%;
+    }
+}
+
+
+#checkout-cart-item-name { /* cart item's name */
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 1.5%;
+}
+
+#checkout-cart-item-price-total { /* cart item's total price fur current quantitiy */
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 2%;
+}
+
+#checkout-cart-item-price-each { /* price for EACH cart item */
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.9rem;
+    color: grey;
+    margin-bottom: 2%;
+}
+
+@media screen and (max-width: 610px) { /* Reduce font-size to fit cart-item 
+                                          data on table screen size*/
+    #checkout-cart-item-name { font-size: 1.05rem; }
+    #checkout-cart-item-price-total { font-size: 0.95rem; }
+    #checkout-cart-item-price-each{ font-size: 0.8rem; }
+}
+
+@media screen and (max-width: 360px) { /* Reduce font-size AGAIN to fit cart-item 
+                                          data on mobile screen size*/
+    #checkout-cart-item-name { font-size: 0.95rem; }
+    #checkout-cart-item-price-total { font-size: 0.85rem; }
+    #checkout-cart-item-price-each{ font-size: 0.8rem; }
+}
+
+/***************************************************************/
+/******* Styling for add and decrease quantity buttons *********/
+/***************************************************************/
+
+.checkout-cart-item-buttons { /* container for increase/decrease buttons 
+                        as well as current product quantitity */
+    display: flex;
+    flex-direction: row;
+
+    height: 100%;
+    width: 40%;
+    align-items: center; /* aligns buttons vertically */
+    justify-content: center;
+
+    user-select: none;         /* prevents (accidental) highlighting of text */
+    -webkit-user-select: none; /* For Safari */
+    -ms-user-select: none;     /* For IE10+ */
+}
+
+
+@media screen and (max-width: 540px) {
+    .checkout-cart-item-buttons {
+       width: 100%
+    }
+}
+
+.decrease-by-one, 
+.increase-by-one,
+.disable-decrease, 
+.disable-increase {  /* general styling for quantity increase and decrease
+                       buttons as well as for their disabled button counterparts */
+    
+    border-radius: 25%; /* make button have a 'circle' border for circle button */
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.9rem;
+    font-weight: bold;
+
+    width: 1.9rem; /* button dimensions */
+    height: 1.9rem;
+    text-align: center; /* horizontally align buttons */
+
+    cursor: pointer;
+}
+
+.decrease-by-one, 
+.increase-by-one { /* styling for increase/decrease quantity buttons when active */
+
+    color: rgb(0, 0, 0); /* button's text and color styling */
+    border: 1px solid rgb(80, 80, 80);
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 0px 4px rgba(119, 119, 119, 0.801);
+}
+
+.disable-decrease, 
+.disable-increase { /* styling for increase/decrease quantity 
+                       buttons when inactive (or disabled) */
+
+    color: rgb(255, 255, 255);
+    border: 1px solid rgb(46, 46, 46);
+    background-color: rgba(85, 85, 85, 0.74);
+    box-shadow: 0px 0px 4px rgba(119, 119, 119, 0.801);
+
+    pointer-events: none;
+}
+
+.decrease-by-one:active, 
+.increase-by-one:active { /*decrease size on press*/
+    transform: scale(0.9);
+}
+
+.checkout-cart-item-quantity { /*current cart quantity */
+    font-family: Arial, Helvetica, sans-serif;
+    width: 40px;
+    text-align: center;
+    font-size: 1.9rem;    
+}
+
+@media screen and (max-width: 599px) {
+    .decrease-by-one, 
+    .increase-by-one,
+    .disable-decrease, 
+    .disable-increase {
+        width: 1.1rem;
+        height: 1.1rem;
+        font-size: 1.1rem;
+    }
+
+    .checkout-cart-item-quantity  {
+        font-size: 1.1rem;
+    }
+}
+
+
+/***************************************************************/
+/******* Styling for button to delete item from cart ***********/
+/***************************************************************/
+
+.checkout-cart-delete-item-button {
+
+    height: 2.5rem; /* button dimensions and shape */    
+    aspect-ratio: 1;
+    border-radius: 50%;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2rem; /* font styling */
+
+    border: 1px solid #b90909e3; /* border, text, background, and shadow color */
+    color: rgba(252, 242, 242, 0.849);
+    background-color: #e01818;
+    box-shadow: 0px 0px 3px 2px rgba(255, 0, 0, 0.658);
+
+    display: flex; /* display and positioning styling */
+    margin: auto 3% auto 0;
+    justify-content: center; /* horizontally align text in flex*/
+    align-items: center;     /* vertically align text in flex*/
+
+    cursor: pointer;
+}
+
+.checkout-cart-delete-item-button:hover { /* highlight delete button on hover */
+    color: rgba(235, 235, 235, 0.932);
+    background-color: rgb(172, 8, 8);
+}
+
+.checkout-cart-delete-item-button:active { /* shrink button effect on press */
+    transform: scale(0.9);
+}
+
+@media screen and (max-width: 599px) { /* shrink delete button on smaller screen size*/
+    .checkout-cart-delete-item-button {
+        height: 2.1rem;
+        font-size: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 420px) { /* shrink delete button on smaller screen size*/
+    .checkout-cart-delete-item-button {
+        height: 1.6rem;
+        font-size: 1.2rem;
+    }
+}
+

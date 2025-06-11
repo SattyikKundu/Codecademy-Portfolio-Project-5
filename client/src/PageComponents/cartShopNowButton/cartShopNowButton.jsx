@@ -5,7 +5,7 @@ import {faStore} from '@fortawesome/free-solid-svg-icons';
 
 import './cartShopNowButton.css';
 
-const ShopNowButton = ({toggleCart}) => {
+const ShopNowButton = ({toggleCart, emptyCartMessage='Shop to add products...'}) => {
 
     const location = useLocation(); // initilize to find location
     const navigate = useNavigate(); // initalize to navigate to 'products/all' if needed
@@ -26,7 +26,7 @@ const ShopNowButton = ({toggleCart}) => {
 
     return ( // returns button component
         <div className="empty-cart-notice">
-            <div id='empty-cart-message'>Shop to add products...</div>
+            <div id='empty-cart-message'>{emptyCartMessage}</div>
             <div onClick={() => handleShopNowClick()} className="shop-now-button">
                 <FontAwesomeIcon icon={faStore} className="shop-now-icon" />
                 <div id='shop-now-text'>Shop Now</div>

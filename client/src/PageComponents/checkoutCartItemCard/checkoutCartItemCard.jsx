@@ -7,9 +7,9 @@ import axios from "axios"; // used to make HTTP request to backend
 import { throttle } from 'lodash'; // throttle and useMemo to prevent button rapid-clicking
 import { useMemo } from 'react';
 
-import './cartPageItemCard.css';
+import './CheckoutCartItemCard.css';
 
-const CartPageItemCard = ({product}) => {
+const CheckoutCartItemCard = ({product}) => {
 
     const {  // props needed for cartItem card
         productId,  
@@ -22,11 +22,10 @@ const CartPageItemCard = ({product}) => {
     } = product;
 
     const dispatch = useDispatch();  // initilize dispatch to use 'cart' reducer methods
-    
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated); // tracks if user is logged in
 
 
-    const throttleHandleItemIncrease = useMemo(() => { // throttles item increase to prevent rapid clicks
+    const throttleProductIncrease = useMemo(() => { // throttles item increase to prevent rapid clicks
 
       // Use useMemo() to ensure throttled function is only rendered/created once (retains internal state)
       // 'throttle' keeps internal timing; useMemo prevents re-creating it on each render (preserving behavior)
@@ -37,7 +36,7 @@ const CartPageItemCard = ({product}) => {
               await axios.patch(`http://localhost:5000/cart/${productId}/increase`, {}, {withCredentials: true});
             }
             catch(error) {
-              console.log('handleItemIncrease() error is: ', error);
+              console.log('throttleProductIncrease() error is: ', error);
             }
           }
         dispatch(increaseByOne({productId}));
@@ -45,12 +44,8 @@ const CartPageItemCard = ({product}) => {
       }, 250);  // 250ms throttle delay (regardless of being logged in or logged out ('guest' mode))
     },[dispatch]); // Only recreate if dispatch changes (a placeholder since dispatch never changes)
 
-    const handleItemIncrease = () => {
-      throttleHandleItemIncrease(quantity, quantityLimit, productId, isAuthenticated);
-    }
 
-
-    const throttleHandleItemDecrease = useMemo(() => { // throttles item increase to prevent rapid clicks
+    const throttleProductDecrease = useMemo(() => { // throttles item increase to prevent rapid clicks
 
       // Use useMemo() to ensure throttled function is only rendered/created once (retains internal state)
       // 'throttle' keeps internal timing; useMemo prevents re-creating it on each render (preserving behavior)
@@ -61,7 +56,7 @@ const CartPageItemCard = ({product}) => {
               await axios.patch(`http://localhost:5000/cart/${productId}/decrease`, {}, {withCredentials: true});
             }
             catch(error) {
-              console.log('handleItemDecrease() error is: ', error);
+              console.log('throttleProductDecrease() error is: ', error);
             }
           }
         dispatch(decreaseByOne({productId}));
@@ -69,72 +64,73 @@ const CartPageItemCard = ({product}) => {
       }, 250);  // 250ms throttle delay (regardless of being logged in or logged out ('guest' mode))
     },[dispatch]); // Only recreate if dispatch changes (a placeholder since dispatch never changes)
 
-    const handleItemDecrease = () => {
-      throttleHandleItemDecrease(quantity, productId, isAuthenticated);
+    const handleProductIncrease = () => {
+      throttleProductIncrease(quantity, quantityLimit, productId, isAuthenticated);
     }
 
-    const handleItemDelete = async() => { // useMemo() and throttle not needed here
+    const handleProductDecrease = () => {
+      throttleProductDecrease(quantity, productId, isAuthenticated);
+    }
+
+    const handleProductDelete = async() => { // useMemo() and throttle not needed here
       if (isAuthenticated) { // if logged in, cart item increased in backend database
         try {
           await axios.delete(`http://localhost:5000/cart/${productId}`,{withCredentials: true});
         }
         catch(error) {
-             console.log('handleItemDelete() error is: ',error);
+             console.log('handleProductDelete() error is: ',error);
         }
       }
       dispatch(deleteFromCart({productId})); 
     }
 
-
     return (
-        <>
-        <div className="cart-page-item-wrapper">
-            <div className="cart-page-item-content">
+      <>
+      <div className="checkout-cart-item-wrapper">
+        <div className="checkout-cart-item-content">
 
-                {/* Holds product image for visual reference */}
-                <div className='cart-page-item-img-wrapper'>
-                    <img src={`http://localhost:5000/images/${imageFileName}`} 
-                         alt={name} 
-                         className='cart-page-item-image' />   
-                </div>
+          {/* Holds product image for visual reference */}
+          <div className='checkout-cart-item-img-wrapper'>
+            <img src={`http://localhost:5000/images/${imageFileName}`} 
+                 alt={name} 
+                 className='checkout-cart-item-image' />   
+          </div>
 
-                {/* Hold cart item info as well as increase/decrease item quantity buttons */ }
-                <div className='cart-page-item-info-buttons'>
-                    <div className='cart-page-item-info'>
-                        <div id='cart-page-item-name'>{name}</div>
-                        <div id='cart-page-item-price-total'>${totalPrice}</div>
-                        <div id='cart-page-item-price-each'>${unitPrice}/item</div>
-                    </div>
-                    <div className='cart-page-item-buttons'>
-                        <div 
-                            className={(quantity <= 1) 
-                                        ? "disable-decrease" 
-                                        : "decrease-by-one" 
-                                      }
-                            onClick={()=>handleItemDecrease()}
-                        ><span>–</span></div>
-                        <div className='cart-page-quantity'>{quantity}</div>
-                        <div 
-                            className={(quantity >= quantityLimit) 
-                                        ? "disable-increase" 
-                                        : "increase-by-one" 
-                                      }
-                            onClick={()=>handleItemIncrease()}
-                        ><span>+</span></div>
-                    </div>
-                </div>
-
-                {/* button to delete item from cart */}
-                <div 
-                    className='cart-page-delete-item-button'
-                    onClick={()=>handleItemDelete()}
-                >
-                ✖
-                </div>
+          {/* Hold cart item info as well as increase/decrease item quantity buttons */ }
+          <div className='checkout-cart-item-info-buttons'>
+            <div className='checkout-cart-item-info'>
+              <div id='checkout-cart-item-name'>{name}</div>
+              <div id='checkout-cart-item-price-total'>${totalPrice}</div>
+              <div id='checkout-cart-item-price-each'>${unitPrice}/item</div>
             </div>
+            <div className='checkout-cart-item-buttons'>
+              <div 
+                className={(quantity <= 1) 
+                            ? "disable-decrease" 
+                            : "decrease-by-one" 
+                          }
+                          onClick={()=>handleProductDecrease()}
+                        >
+                <span>–</span>
+              </div>
+              <div className='checkout-cart-item-quantity'>{quantity}</div>
+              <div className={(quantity >= quantityLimit) 
+                              ? "disable-increase" 
+                              : "increase-by-one" 
+                             }
+                   onClick={()=>handleProductIncrease()}
+              >
+                <span>+</span>
+              </div>
+            </div>
+          </div>
+
+          {/* button to delete item from cart */}
+          <div className='checkout-cart-delete-item-button' onClick={()=>handleProductDelete()}>✖</div>
         </div>
-        </>
+      </div>
+      </>
     );
 }
 
-export default CartPageItemCard;
+export default CheckoutCartItemCard;

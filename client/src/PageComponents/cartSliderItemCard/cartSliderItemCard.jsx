@@ -44,7 +44,7 @@ const CartSliderItemCard = ({product}) => {
               await axios.patch(`http://localhost:5000/cart/${productId}/increase`, {}, {withCredentials: true});
             }
             catch(error) {
-              console.log('handleItemIncrease() error is: ', error);
+              console.log('throttleHandleIncrease() error is: ', error);
             }
           }
         dispatch(increaseByOne({productId}));
@@ -69,7 +69,7 @@ const CartSliderItemCard = ({product}) => {
               await axios.patch(`http://localhost:5000/cart/${productId}/decrease`, {}, {withCredentials: true});
             }
             catch(error) {
-              console.log('handleItemDecrease() error is: ', error);
+              console.log('throttleHandleDecrease() error is: ', error);
             }
           }
         dispatch(decreaseByOne({productId}));

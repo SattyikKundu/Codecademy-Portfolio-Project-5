@@ -1,6 +1,7 @@
 .checkout-body {
     width: 100%;
-    margin: 0;
+    
+    margin-top: 0;
     padding: 0 0 2rem 0; /* Due to bottom-most page components touching screen bottom,
                           * and with bottom-margin not working, 2rem bottom padding add some
                           * much needed bottom space. HOWEVER, it doesn't inherit any
@@ -8,7 +9,5 @@
                           */
 
     min-height: 100vh !important;        /* ✅ Ensures it stretches full viewport height */
-    box-sizing: border-box !important;   /* ✅ Includes padding in height calculation */
-
-    /*position: relative; /* Relative so Menu & Cart can 'float' via absolute positioning */
+    background-color: #ececec;
 }
