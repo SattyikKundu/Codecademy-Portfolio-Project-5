@@ -84,10 +84,10 @@ const CheckoutStateDropDown = ({ options, value, onSelect}) => {
           onClick={toggleDropdown}
           ref={selectorWidthRef}
         >
-          <span className="selected-dropdown-value">
+          <span className="selected-dropdown-state">
             {findLabel(selected) || "Select State"}
           </span>
-          <span className="arrow">{dropdownOpen ? "▲" : "▼"}</span>
+          <span className="open-close-arrow">{dropdownOpen ? "▲" : "▼"}</span>
         </div>
 
         {dropdownOpen && (
@@ -97,11 +97,11 @@ const CheckoutStateDropDown = ({ options, value, onSelect}) => {
           >
             {options.map((group) => (
               <div key={group.label} className="dropdown-options-group">
-                <div className="group-label">{group.label}</div>
+                <div className="grouped-label">{group.label}</div>
                 {group.options.map((option) => (
                   <div
                     key={option.value}
-                    className={`selected-dropdown-option ${
+                    className={`dropdown-options-state ${
                       option.value === selected ? "selected" : ""
                     }`}
                     onClick={() => handleSelect(option.value)}

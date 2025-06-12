@@ -4,7 +4,7 @@
 
 .checkout-dropdown-container-wrapper {
   flex: 1 1 0;
-  padding: 0.5rem 0;
+  padding: auto 0;
   border-radius: 12px;
   position: relative; /* allows dropdown list to be absolutely positioned */
 }
@@ -15,46 +15,54 @@
 
 .checkout-dropdown-container {
   width: auto;
-  max-width: 220px;
+  max-width: 300px;
+}
+
+@media screen and (max-width:450px) {
+  .checkout-dropdown-container {
+    max-width: 100%;  
+  }
 }
 
 /**************************************************************************************/
 /******************** Dropdown display (shows current selection) **********************/
 /**************************************************************************************/
 
-.checkout-dropdown-display {
+.checkout-dropdown-display { /* wrapper that holds current selection form dropdown*/
   display: flex;
   justify-content: space-between;
   align-items: center;
 
-  max-width: 220px;
+  max-width: 100%;
+  height: 28px;
+  box-sizing: border-box;
+
   background-color: rgb(230, 230, 230);
 
   border: 1px solid #ccc;
   border-radius: 4px;
-  padding: 0.37rem 0.1rem;
+  padding: 0.22rem 0.1rem;
 
-  font-size: 0.85rem;
+  font-size: 0.96rem;
   font-family: Arial, Helvetica, sans-serif;
 
   cursor: pointer;
 }
 
-.selected-dropdown-value {
-  flex: 1;
-  padding-left: 0.3rem;
+.selected-dropdown-state { /* current selection in display container */
+  padding-left: 0.4rem !important;
 }
 
-.arrow {
+.open-close-arrow { /* open and close arrow on right-end of dropdown box */
   margin-left: 4px;
-  font-size: 0.75rem;
+  font-size: 1rem;
 }
 
 /**************************************************************************************/
 /******************** Dropdown options list styling ***********************************/
 /**************************************************************************************/
 
-.checkout-dropdown-list {
+.checkout-dropdown-list { /* dropdown list after being opened */
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -63,30 +71,40 @@
   background: white;
 
   border: 1px solid #adadad;
-  border-radius: 0 0 6px 6px;
+  border-radius: 0 0 2px 2px;
   z-index: 100; /* ensures list overlays page elements */
 }
 
-.dropdown-options-group {
+.dropdown-options-group { /* padding around each labeled group 
+                             of states/territories */
   padding: 4px 6px 4px 4px;
 }
 
-.group-label {
+.grouped-label { /* label for each group of state selections */
   font-weight: bold;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 0.85rem;
+  font-size: 0.96rem;
   color: #666;
   padding: 2px 0px;
+  text-indent: 0.2rem;
 }
 
-.selected-dropdown-option {
+.dropdown-options-state { /* style for EACH option in dropdown menu */
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 0.8rem;
-  padding: 4px 0px;
+  font-size: 0.90rem;
+  padding: 3.5px 0px;
+
+  /* To get "2nd" line to 'indent' after wrapping,
+   * use padding-left to shift entire text to right and then
+   * use text-indent (-) to ensure 1st line is indented correctly.
+   */
+  padding-left: 2.5rem; 
+  text-indent: -2.3rem;
+
   cursor: pointer;
 }
 
-.selected-dropdown-option:hover {
+.dropdown-options-state:hover {
   background-color: #e6e6e6;
 }
 
@@ -111,26 +129,5 @@
   background-color: #f0f0f0;
 }
 
-/**************************************************************************************/
-/************ All responsive styling for smaller screens ******************************/
-/**************************************************************************************/
 
-@media screen and (max-width: 480px) {
-  .checkout-dropdown-display {
-    padding-left: 2px;
-    padding-right: 2px;
-    text-align: center;
-    font-size: 0.7rem;
-    justify-content: center;
-  }
 
-  .group-label {
-    font-size: 0.8rem;
-  }
-
-  .selected-dropdown-option {
-    font-size: 0.715rem;
-    text-indent: 0px;
-    padding-left: 7px;
-  }
-}

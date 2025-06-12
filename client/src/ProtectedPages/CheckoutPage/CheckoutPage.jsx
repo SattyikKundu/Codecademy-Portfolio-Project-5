@@ -1,13 +1,14 @@
-/** Checkout Page component **/
-
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {groupedStateOptions} from '../../utils/statesOfAmericaData';
 
-import './CheckoutPage.css'; // for stying
 
+/* Created Page components imported */
 import CheckoutCartFinal from '../../PageComponents/checkoutCartFinal/checkoutCartFinal';
 import CheckoutStateDropDown from '../../PageComponents/checkoutStateDropDown/checkoutStateDropDown';
+import CheckoutPaymentSection from '../../PageComponents/checkoutPaymentSection/checkoutPaymentSection';
+
+import './CheckoutPage.css'; // for stying
 
 const CheckoutPage = () => {
 
@@ -133,7 +134,7 @@ const CheckoutPage = () => {
         {/* using htmlFor connect label to input (can now click on label to toggle checkbox) */}
         <div className='update-profile-data'>
             <input type='checkbox' name='update-profile' id='updateProfileCheckbox'/>
-             <label htmlFor='updateProfileCheckbox'>Save Delivery/Home Address to Profile</label>
+             <label htmlFor='updateProfileCheckbox'>Save Delivery/Home Address to Your Profile</label>
         </div>
       </div>
 
@@ -161,7 +162,8 @@ const CheckoutPage = () => {
         </div>
       </div>
 
-      {/* Section 4: Payment method */}
+      {/* Section 4: Payment Method (imported component) */}
+      <CheckoutPaymentSection orderTotal={orderTotal} />
       </>
     );
 }

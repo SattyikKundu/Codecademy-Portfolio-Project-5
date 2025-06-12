@@ -130,7 +130,7 @@
                 -4px 4px 0 #808080;     /* Hard shadow for depth */
     
     padding: 12px;
-    margin: 4rem auto auto auto;
+    margin: 3rem auto auto auto;
     max-width: 560px;
     width: 84%;                     
     height: auto;
@@ -275,6 +275,7 @@
 
     .checkout-label {
         width: auto;
+        text-align: left;
     }
 }
 
@@ -295,13 +296,19 @@
 
 #state-dropdown-input { /* wrapper for state dropdown menu component */
     width: 300px;
-    height: 30px;
+    height: 28px;
 }
 
-@media screen and (max-width: 550px) {
-    #state-dropdown-input { 
-        width: 220px;
-    }
+@media screen and (max-width: 550px) { /* As width shrinks make room for 
+                                          label and field for row orientation
+                                          in checkoutStateDropDown.css */
+    #state-dropdown-input { width: 220px; }
+}
+
+@media screen and (max-width: 450px) { /* From checkoutStateDropDown.css during column 
+                                          orientation, make dropdown container max-width 
+                                          to fill empty space.*/
+    #state-dropdown-input { width: 100%; }
 }
 
 
@@ -312,13 +319,11 @@
     display: flex;
     gap: 7px;
 }
-
 .update-profile-data input {
     width: 0.96rem;
     height: 0.96rem;
     cursor: pointer;
 }
-
 .update-profile-data label {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
@@ -345,7 +350,7 @@
                 -4px 4px 0 #808080;     /* Hard shadow for depth */
     
     padding: 12px;
-    margin: 4rem auto auto auto;
+    margin: 3rem auto auto auto;
     max-width: 560px;
     width: 84%;                     
     height: auto;
@@ -359,8 +364,6 @@
     width: 96%;
     font-size: 1.6rem;
 }
-
-
 .checkout-order-summary { /* wrapper for order summary fields and values */
     width: 100%;
     display: flex;
@@ -368,6 +371,7 @@
     align-items: center;
     overflow: hidden;
 }
+
 
 .checkout-subtotal { /* Order summary subtotal and label */
     display: flex;
@@ -389,13 +393,11 @@
     margin-top: 1rem;
     font-size: 1.4rem;
 }
-
 #checkout-shipping-cost-label {
     font-weight: bold;
     display: flex;
     flex-direction: column;
 }
-
 #checkout-shipping-cost-label::after { /* Shipping cost description UNDER shipping cost label */
     content:'For overseas states and territories (Alaska, Hawaii, Guam, etc.), shipping is $15.00. Otherwise, shipping in all mainland states (California, Florida, Washington D.C., etc.) costs $8.00.';
     font-size: 0.95rem;
@@ -403,13 +405,13 @@
     font-weight: 400;
     width: 65%;
 }
-
 @media screen and (max-width:468px) {
     #checkout-shipping-cost-label::after { 
         width: 75%;
         font-size: 0.8rem;
     }
 }
+
 
 .checkout-sales-tax{ /* Order summary sales tax and label */
     display: flex;
@@ -419,13 +421,11 @@
     margin-top: 1rem;
     font-size: 1.4rem;
 }
-
 #checkout-sales-tax-label {
     font-weight: bold;
     display: flex;
     flex-direction: column;
 }
-
 #checkout-sales-tax-label::after { /* explanation of sales tax calculation */ 
     content:'Currently 6% tax for all sales.';
     font-size: 0.95rem;
@@ -433,8 +433,6 @@
     font-weight: 400;
     width: 100%;
 }
-
-
 @media screen and (max-width:468px) {
     #checkout-sales-tax-label::after { 
         width: 100%;
@@ -447,6 +445,7 @@
         font-size: 0.8rem;
     }
 }
+
 
 
 .checkout-order-total { /* Total/Final cost in order summary (and label) */
@@ -463,10 +462,10 @@
     color: #ffffff;
 
 }
-
 #checkout-order-total-label {
         font-weight: bold;
 }
+
 
 @media screen and (max-width: 400px) {
     .checkout-order-summary-header { 
@@ -479,16 +478,6 @@
     .checkout-order-total {
         font-size: clamp(0.9rem, 5.8vw, 1.4rem);
     }
-
-    /*
-    #checkout-shipping-cost-label::after,
-    #checkout-sales-tax-label::after { 
-        font-size: clamp(0.7rem, 5.8vw, 0.8rem);;
-    }*/
 }
 
-/*****************************************************************************************************************************/
-/*****************************************************************************************************************************/
-/*************************** (SECTION 4) Payment Method (VISA, etc.) and button **********************************************/
-/*****************************************************************************************************************************/
-/*****************************************************************************************************************************/
+

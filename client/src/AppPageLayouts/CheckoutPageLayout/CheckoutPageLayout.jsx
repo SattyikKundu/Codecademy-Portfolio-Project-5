@@ -8,6 +8,9 @@ import axios from "axios"; // sends HTTP client requests to backend
 import {useDispatch, useSelector} from "react-redux"; // used for dispatching redux actions and tracking redux data
 import {setUserFromToken, clearUser} from  '../../Slices/authSlice'; // redux action to track/update user state
 
+import { Elements } from '@stripe/react-stripe-js'; // imports for Stripe
+import { loadStripe } from '@stripe/stripe-js';
+
 import './CheckoutPageLayout.css';
 
 /* <CheckoutPageLayout> is a separate layout from the others
@@ -21,6 +24,10 @@ import './CheckoutPageLayout.css';
  */
 
 const CheckoutPageLayout = () => {
+
+    // import stripe public key found in .env file
+    const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
+
 
     /*************************************************************************************/
     /************************* Below handles toasts **************************************/
@@ -84,7 +91,10 @@ const CheckoutPageLayout = () => {
         <div className="checkout-body">
 
             {/* <Outlet/> where content is injected based on chosen route */}
-            <Outlet />
+            <Elements stripe={stripePromise}>
+                <Outlet />
+            </Elements>
+
 
             {/* Default <Toaster /> for toast messages */}
             {/*<Toaster position={'top-right'} containerStyle={{ top: 70, right: 10}} />*/} 
