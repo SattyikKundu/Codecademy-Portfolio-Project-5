@@ -123,7 +123,6 @@ const LoginPage = () => { // login component with default login header message
     }
 
     return (
-        <>
         <div className="login-form-box">
 
             {/* Login form header */}
@@ -183,8 +182,6 @@ const LoginPage = () => { // login component with default login header message
                     <p>(Google login not functional yet — backend config pending)</p> 
                 */}
         </div>
-
-        </>
     );
 }
 

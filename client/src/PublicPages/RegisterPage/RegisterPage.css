@@ -5,6 +5,10 @@
 .registration-form { /* Main container box holding for account registration form*/
 
   max-width: 400px; /* container dimensions */
+  width: 70vw;      /* Prevents login form box from touching viewport when form width >=320px and <400px.
+                     * Also, % isn't working, probably has to go with the fact that there's 
+                     * no 'parent' container (only a public page layout) 
+                     */
   margin: 100px auto;
   padding: 2rem;
 
@@ -19,6 +23,13 @@
 .registration-form h2 { /* styling of login box header */
   text-align: center;
   margin-bottom: 1.5rem;
+}
+
+@media screen and (max-width: 580px) { /* For mobile screen sizes, 
+                                          adjust <h2> header's font size*/
+  .registration-form h2 {
+    font-size: clamp(1.25rem, 5vw, 1.5rem);
+  }
 }
 
 .form-divider { /* 'divider to control space between fields*/

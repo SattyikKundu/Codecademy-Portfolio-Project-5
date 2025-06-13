@@ -7,7 +7,7 @@ import { useState,      // react hook for tracking local states
 
 import './checkoutStateDropDown.css'
 
-const CheckoutStateDropDown = ({ options, value, onSelect}) => {
+const CheckoutStateDropDown = ({ options, value, onSelect }) => {
 
   const [dropdownOpen,   setDropdownOpen] = useState(false); // tracks open/close state of dropdown menu
   const [dropDownWidth, setDropDownWidth] = useState(null);  // stores width of menu box to match dropdown selector

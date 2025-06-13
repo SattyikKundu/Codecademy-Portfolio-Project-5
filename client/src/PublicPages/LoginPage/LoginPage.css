@@ -4,7 +4,13 @@
 
 .login-form-box { /* Main container box holding for login form*/
 
+  display: flex;
+  flex-direction: column;
   max-width: 400px; /* container dimensions */
+  width: 70vw; /* Prevents login form box from touching viewport when form width >=320px and <400px.
+                * Also, % isn't working, probably has to go with the fact that there's 
+                * no 'parent' container (only a public page layout) 
+                */
   margin: 100px auto;
   padding: 2rem;
 
@@ -19,6 +25,13 @@
 .login-form-box h2 { /* styling of login box header */
   text-align: center;
   margin-bottom: 1.5rem;
+}
+
+@media screen and (max-width: 580px) { /* For mobile screen sizes, 
+                                          adjust <h2> header's font size*/
+  .login-form-box h2 {
+    font-size: clamp(1.25rem, 5vw, 1.5rem);
+  }
 }
 
 /**********************************************************************/

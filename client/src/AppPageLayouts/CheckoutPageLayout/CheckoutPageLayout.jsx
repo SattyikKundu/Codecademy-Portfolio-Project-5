@@ -25,8 +25,7 @@ import './CheckoutPageLayout.css';
 
 const CheckoutPageLayout = () => {
 
-    // import stripe public key found in .env file
-    const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
+    const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY); // import stripe public key in .env file
 
 
     /*************************************************************************************/
@@ -83,7 +82,13 @@ const CheckoutPageLayout = () => {
     }
 
     if(!isAuthenticated) { // If user is unauthorized, redirect to login page (since 'guests' cannot access checkout)
-        return (<Navigate to='/login' replace />); // Since user is unauthorized, 'replace' keyword prevents user from navigating back 
+        return (<Navigate 
+                    to='/login' 
+                    state={{ 
+                        loginErrorMsg: "Login Requried:", 
+                        loginHeader: "Please login (or register first) to access checkout."
+                    }} 
+                    replace />); // Since user is unauthorized, 'replace' keyword prevents user from navigating back 
                                                    // to a protected page after redirect (since unauthorized user shouldn't be allowed to access it)
     }
 

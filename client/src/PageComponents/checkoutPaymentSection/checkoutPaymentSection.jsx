@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 import './checkoutPaymentSection.css';
 
-const CheckoutPaymentSection = ({orderTotal}) => {
+const CheckoutPaymentSection = ({orderTotal, disableButton=false}) => {
 
   const [postalCode, setPostalCode] = useState('');
 
@@ -97,7 +97,7 @@ const CheckoutPaymentSection = ({orderTotal}) => {
       </div>
 
       <div className='checkout-payment-submit'>
-        <button type="button" disabled={false /* disable when loading later */}>
+        <button type="button" disabled={disableButton} >
           Pay ${orderTotal.toFixed(2)}
         </button>
       </div>

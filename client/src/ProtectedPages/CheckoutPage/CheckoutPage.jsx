@@ -1,6 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {groupedStateOptions} from '../../utils/statesOfAmericaData';
+
+import { useNavigate } from 'react-router-dom';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // used to import FontAwesomeIcons
+import {faCircleArrowLeft, faGripLinesVertical } from '@fortawesome/free-solid-svg-icons';
 
 
 /* Created Page components imported */
@@ -8,11 +13,14 @@ import CheckoutCartFinal from '../../PageComponents/checkoutCartFinal/checkoutCa
 import CheckoutStateDropDown from '../../PageComponents/checkoutStateDropDown/checkoutStateDropDown';
 import CheckoutPaymentSection from '../../PageComponents/checkoutPaymentSection/checkoutPaymentSection';
 
+import { lowShippingCostStates, highShippingCostStates } from '../../utils/statesOfAmericaData';
+
 import './CheckoutPage.css'; // for stying
 
 const CheckoutPage = () => {
 
-    const dispatch = useDispatch();
+    const navigate = useNavigate(); // used for navigation buttons
+
     const cartProducts = useSelector((state) => state.cart.products);
 
     const [cartQuantity,   setCartQuantity] = useState(null);
@@ -22,22 +30,33 @@ const CheckoutPage = () => {
     const [orderTotal,       setOrderTotal] = useState(0.00);
     const [selectedState, setSelectedState] = useState('');
 
-
-    useEffect(() => { // when selected state changes, update shipping cost calculation
-
-      const shippingCalc = (selectedState) => {
-        const highShippingCostStates = ['AK','HI','AS','GU','MP','PR','VI'];
-        if (highShippingCostStates.includes(selectedState)) {
-          setShippingCost(15.00);
-        }
-        else {
-          setShippingCost(8.00);
+    const navigateBack = () => { // navigate to previous page (or '/products' as fallback)
+      if (window.history.length > 1) {
+        navigate(-1);
+      } else {
+        navigate("/products");
       }
     }
-      shippingCalc(selectedState);     
 
+    const contShopping = () => { // navigate to '/products' for shopping
+      navigate("/products");
+    }
+
+
+    useEffect(() => { // when selected state changes, update shipping cost calculation   
+      const shippingCalc = (state) => {
+        if (highShippingCostStates.includes(state)) {
+            setShippingCost(15.00);
+        }
+        else if (lowShippingCostStates.includes(state)) {
+          setShippingCost(8.00);
+        }
+        else { // if null/empty choice, set shipping to 0.00
+          setShippingCost(0.00);
+        }
+      }
+      shippingCalc(selectedState);
     },[selectedState]);
-
 
     useEffect(()=> { // calculate sales tax in response to changing cart subtotal
       const salesTaxCalc = (subTotal) => {
@@ -59,8 +78,17 @@ const CheckoutPage = () => {
 
     return (
       <>
-      {/* Empty block to let background color/img stretch to top */}
-      <div className='empty-header'>empty-header-block</div>
+      {/* Empty header box to close up the blank/white-space on top */}
+      <div className='empty-header-box'>.</div>
+
+      {/* Header link to navigate back to previous page */}
+      <div className='prev-page-buttons-header'>
+        <div id='prev-page' onClick={navigateBack}>
+          <FontAwesomeIcon icon={faCircleArrowLeft} /> Previous Page 
+        </div> 
+        <FontAwesomeIcon icon={faGripLinesVertical} />
+        <div id='cont-shop' onClick={contShopping}>Continue Shopping?</div> 
+      </div>
 
       {/* Page title header */}
       <div className='page-title'>SECURE CHECKOUT</div>
@@ -163,7 +191,12 @@ const CheckoutPage = () => {
       </div>
 
       {/* Section 4: Payment Method (imported component) */}
-      <CheckoutPaymentSection orderTotal={orderTotal} />
+      <CheckoutPaymentSection 
+        orderTotal={orderTotal} 
+        disableButton={
+          ((shippingCost && shippingCost>0) && (cartSubTotal && cartSubTotal>0)) ? false: true
+        }
+        />
       </>
     );
 }

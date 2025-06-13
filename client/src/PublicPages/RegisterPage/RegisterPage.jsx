@@ -52,7 +52,7 @@ const RegisterPage = () => {
         }
         catch (error) { // Handle registration failure
 
-            // error messages come from registerUser() from 'authController.js' in /server backend
+            // error messages come from registerUser() from 'authController.js' in '/server' backend
             const errorMessage = error.response?.data?.error || 'Registration failed.'; 
 
             /* Below modifies header message to show error (NOTE: holding entire updated header 
