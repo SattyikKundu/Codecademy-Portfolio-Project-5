@@ -59,8 +59,7 @@ export const insertOrderItems = async (orderId, cartItems) => { // insert order 
       item.productId, 
       item.quantity, 
       item.priceEach
-    ]
-    );
+    ]);
   }
 };
 
