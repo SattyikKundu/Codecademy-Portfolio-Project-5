@@ -32,9 +32,12 @@ export const loginUser = async (req, res, next) => { // Local login controller
     } 
 
     const token = jwt.sign( //Otherwise, if login is successful, create JWT payload with user info (customizable)
-        { id: user.id, username: user.username },  // JWT payload: what to encode (without sensitive info)
-        process.env.JWT_SECRET,                    // JWT secret for signing (stored in .env) 
-        { expiresIn: '24h' }                       // Token expires in 24 hours
+        { id: user.id,                 // user id
+          username: user.username,     // username
+          email: user.email            // user's email (important at checkout) 
+        },                             // JWT payload: what to encode (without sensitive info)
+        process.env.JWT_SECRET,        // JWT secret for signing (stored in .env) 
+        { expiresIn: '24h' }           // Token expires in 24 hours
     );
 
     setAuthCookie(res, token);  // Store token in secure, httpOnly cookie

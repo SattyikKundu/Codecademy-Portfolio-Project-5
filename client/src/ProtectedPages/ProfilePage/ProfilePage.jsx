@@ -12,6 +12,7 @@ import { ErrorMessageToast, SuccessMessageToast } from "../../utils/utilityFunct
 
 import './ProfilePage.css';
 
+import { useSelector } from "react-redux";
 
 const ProfilePage = () => {
   
@@ -27,6 +28,11 @@ const ProfilePage = () => {
       setTimeout(function() {SuccessMessageToast('Successful Login!');}, 400);
     }
   }, [location.state]);
+
+  const user = useSelector((state) => state.auth.user);
+  useEffect(()=> {
+    console.log('state.auth.user: ',user);
+  },[]);
 
   const fetchProfile = async () => { // async function for fetching user's profile data
     setLoading(true);
