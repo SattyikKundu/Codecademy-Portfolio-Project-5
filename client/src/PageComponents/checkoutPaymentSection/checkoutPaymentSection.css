@@ -71,11 +71,6 @@
   border: 2px solid red !important;
   background-color: #fff0f0 !important;
 }
-.invalid-field-entered { 
-  border: 2px solid #ccc !important;
-  background-color: inherit !important;
-  color: red;
-}
 
 
 .checkout-payment-stripe-input input { /* styling for custom postal code input */

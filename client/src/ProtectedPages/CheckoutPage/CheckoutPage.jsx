@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import {groupedStateOptions, lowShippingCostStates, highShippingCostStates} from '../../utils/statesOfAmericaData';
 
 import { isValidUSPhone, 
@@ -24,19 +24,22 @@ import CheckoutCartFinal from '../../PageComponents/checkoutCartFinal/checkoutCa
 import CheckoutStateDropDown from '../../PageComponents/checkoutStateDropDown/checkoutStateDropDown';
 import CheckoutPaymentSection from '../../PageComponents/checkoutPaymentSection/checkoutPaymentSection';
 
+import { clearCart } from '../../Slices/cartSlice';
 
 import './CheckoutPage.css'; // for stying
 
 const CheckoutPage = () => {
 
   const navigate = useNavigate(); // used for navigation buttons
+  const dispatch = useDispatch();
 
   const stripe = useStripe(); // Needed to process 'fake' Stripe payment
   const elements = useElements();
 
-  const authUser = useSelector((state) => state.auth.user); // gets user's authentication to get email
+  const authUser     = useSelector((state) => state.auth.user); // gets user's authentication to get email
   const cartProducts = useSelector((state) => state.cart.products); // gets user's cart stored in redux
   const [cartQuantity,   setCartQuantity] = useState(null);        // track total quanitity of cart items
+  const [orderId, setOrderId] = useState(null);
 
   /* Tracks Order total (and its subcosts) */
   const [cartSubTotal,   setCartSubtotal] = useState(0.00); // tracks cart subtotal
@@ -201,10 +204,10 @@ const CheckoutPage = () => {
 
         const user = res.data.user;
          // Helper to set value + remove red border if input is valid
-        const setFieldAndClearError = (setFn, val, selector) => {
-          setFn(val);
-          const el = document.querySelector(selector);
-          if (el && val.trim()) el.classList.remove('invalid-field');
+        const setFieldAndClearError = (setFieldMethod, value, selector) => {
+          setFieldMethod(value);
+          const element = document.querySelector(selector);
+          if (element && value.trim()) element.classList.remove('invalid-field');
         };
 
         setFieldAndClearError(setEmail,        user.email         || '', 'input[name="email"]');
@@ -269,7 +272,7 @@ const CheckoutPage = () => {
       { withCredentials: true }
     );
 
-      console.log('client Secret: ', response.data.clientSecret);
+      //console.log('client Secret: ', response.data.clientSecret);
       return response.data.clientSecret;
     } 
     catch (error) {
@@ -282,11 +285,13 @@ const CheckoutPage = () => {
 
   const confirmStripePayment = async (clientSecret) => { // 'Stripe' payment function
 
-    if (!stripe || !elements) {
+    if (!stripe || !elements) { // throw error if Stripe not properly loaded
+      console.log('Stripe not properly loaded.');
       throw new Error("Stripe not properly loaded.");
     }
+    const cardElement = elements.getElement(CardNumberElement); // get Card Number element
 
-    const cardElement = elements.getElement(CardNumberElement);
+    // Then confirm payment. If cardElement invalid, they payment will fail..
     const result = await stripe.confirmCardPayment(clientSecret, {
       payment_method: {
         card: cardElement,
@@ -336,13 +341,17 @@ const CheckoutPage = () => {
         cardElement?.focus(); // Scrolls to card input
 
         ErrorMessageToast(`Payment Error: ${paymentResult.error.message}`);
+        console.log(`Payment Error: ${paymentResult.error.message}`);
       } 
       else if (paymentResult.paymentIntent.status === 'succeeded') {
+        dispatch(clearCart()); // removes products from cart state
+        console.log('Succesfully made it to payment status!!!');
         navigate('/profile'); // Navigate to profile for time being
       }
     } 
     catch (error) {
       setPaymentError("An error occurred during checkout: ", error);
+      console.log("An error occurred during checkout: ", error);
     } 
     finally {
       setFormSubmitting(false);

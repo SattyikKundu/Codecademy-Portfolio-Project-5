@@ -25,10 +25,14 @@ import './CheckoutPageLayout.css';
  * users, this page layout will have authentication handling.
  */
 
+
+// Import stripe public key in .env file. Needs to be OUTSIDE 
+// component so it can ONLY be called once globally.
+// This also prevents creating multiple Stripe instances that can lead 
+// to an error leading to a break between Stripe Elements and API calls.  
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY); 
+
 const CheckoutPageLayout = () => {
-
-    const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY); // import stripe public key in .env file
-
 
     /*************************************************************************************/
     /************************* Below handles toasts **************************************/
