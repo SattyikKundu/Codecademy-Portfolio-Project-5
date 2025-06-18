@@ -51,8 +51,8 @@ export const handleCheckout = async (req, res) => { // Controller to handle chec
     // 6. Clear the user's cart AFTER processing order
     await clearUserCart(userId);
 
-    // 7. Return client secret for frontend to confirm payment (if needed)
-    res.status(200).json({ message: 'Checkout successful.', clientSecret: paymentIntent.client_secret });
+    // 7. Return client secret for frontend to confirm payment AND orderId for success page
+    res.status(200).json({ message: 'Checkout successful.', clientSecret: paymentIntent.client_secret, orderId: orderId });
   } 
   catch (error) {
     console.error('Checkout error:', error);

@@ -46,36 +46,42 @@ export const insertOrder = async (userId, deliveryData, costData) => { // insert
 };
 
 
-
 export const insertOrderItems = async (orderId, cartItems) => { // insert order items into 'order_item' tables
 
   const query = `INSERT INTO order_items (order_id, product_id, quantity, price_each)
                  VALUES ($1, $2, $3, $4);`;
   
-  for (const item in cartItems) {
+  for (const item of cartItems) {
     await pool.query(query, [
       orderId, 
       item.productId, 
       item.quantity, 
-      item.priceEach
+      item.unitPrice // matches the label used in frontend. Also, due to ordering,
+                     // item.unitPrice matches price_each in query
     ]);
   }
 };
 
 export const updateUserProfileAddress = async (userId, delivery) => { // optionally update user info (address, phone, email, etc.)
 
+  //console.log(`Inside updating user profile [id: ${userId}] for: `, delivery);
+
   const query = `UPDATE users SET 
       email = $1,
-      phone_number = $2,
-      address_line1 = $3,
-      address_line2 = $4,
-      city = $5,
-      state = $6,
-      postal_code = $7
-      WHERE id = $8 AND email != $1`;
+      first_name = $2,
+      last_name = $3,
+      phone_number = $4,
+      address_line1 = $5,
+      address_line2 = $6,
+      city = $7,
+      state = $8,
+      postal_code = $9
+      WHERE id = $10`; // 'AND email != $1' only works if DIFFERNT email (too strict)!
 
   await pool.query(query, [
     delivery.email,
+    delivery.firstName,
+    delivery.lastName,
     delivery.phoneNumber,
     delivery.addressLine1,
     delivery.addressLine2 || null,
@@ -83,7 +89,8 @@ export const updateUserProfileAddress = async (userId, delivery) => { // optiona
     delivery.state,
     delivery.postalCode,
     userId
-  ]);
+  ]); 
+
 };
 
 
