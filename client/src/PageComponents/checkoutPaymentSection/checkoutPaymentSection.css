@@ -1,27 +1,8 @@
-/*****************************************************************************************************************************/
-/*****************************************************************************************************************************/
-/*************************** (SECTION 4) Payment Method (VISA, etc.) and button **********************************************/
-/*****************************************************************************************************************************/
-/*****************************************************************************************************************************/
+/* Below are the stylings for the (Section #4) 
+ * payment method's (VISA, etc.) field labels and inputs.
+ */
 
-.checkout-payment-container { /* Container for entire 'Payment Method' section */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 
-  background: #ffffff;             /* Classic grey background */
-  border: 2px solid #000;          /* Strong black border */
-  border-radius: 0;                  /* Sharp corners */
-  box-shadow: 4px 4px 0 #808080,
-             -4px 4px 0 #808080;   /* Hard shadow for depth */
-
-  padding: 12px;
-  margin: 3rem auto auto auto;
-
-  max-width: 560px;
-  width: 84%;                     
-  height: auto;
-}
 
 /****************************************************************************************************************/
 /********************* Payment section header text **************************************************************/
@@ -39,7 +20,6 @@
     font-size: clamp(1rem, 7.75vw, 1.6rem);
   }
 }
-
 
 /****************************************************************************************************************/
 /********************* Payment section field labels and inputs **************************************************/
@@ -69,22 +49,36 @@
   .checkout-payment-label { font-size: 0.8rem; }
 }
 
-.checkout-payment-stripe-input { /* wrapper used to create consistent 
+.checkout-payment-stripe-input{ /* wrapper used to create consistent 
                                     'Stripe' input box look*/
-  width: 300px;
-  height: 28px;
+
+  width: 296px;
+  height: 26px;
   box-sizing: border-box;
 
-  padding: 0.35rem 0.4rem;
+  padding: 0.2rem 0.4rem;
+  justify-content: center;
   border-radius: 6px;
-  border: 1px solid #ccc;
+  border: 2px solid #ccc;
 
   background-color: #f6f9fc;
 
   cursor: text;
 }
 
-.checkout-payment-stripe-input input { /* styling for custome postal code input */
+/* border red when Stripe field marked as invalid */
+.invalid-stripe-field { 
+  border: 2px solid red !important;
+  background-color: #fff0f0 !important;
+}
+.invalid-field-entered { 
+  border: 2px solid #ccc !important;
+  background-color: inherit !important;
+  color: red;
+}
+
+
+.checkout-payment-stripe-input input { /* styling for custom postal code input */
     font-family: Arial, Helvetica, sans-serif;
     background-color: inherit;
     color:#32325d;
@@ -94,47 +88,4 @@
 .checkout-payment-stripe-input input::placeholder { /*place holder styling */
     color: #aab7c4;
 }
-
-
-/****************************************************************************************************************/
-/********************* Payment section payment submit button ****************************************************/
-/****************************************************************************************************************/
-
-.checkout-payment-submit button { /* Payment button styling (and on hover)*/
-  
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-weight: bold;
-  font-size: 1.6rem;
-  color: white;
-
-  background-color: #d46b08;
-
-  border: none;
-  margin-top: 1.6rem;
-  padding: 0.8rem 1.2rem;
-  box-shadow: 2px  2px 0 #808080,
-              -2px 2px 0 #808080; 
-
-  cursor: pointer;
-}
-.checkout-payment-submit button:hover {
-  background-color:#8b400d; 
-}
-
-.checkout-payment-submit button:active {
-  transform: scale(0.9);
-}
-
-.checkout-payment-submit button:disabled { background-color: #a1a1a1; pointer-events: none; }
-.checkout-payment-submit button:disabled:hover { background-color: #a1a1a1; }
-.checkout-payment-submit button:disabled:active {transform:none};
-
-@media screen and (max-width: 508px) {
-  .checkout-payment-submit button {
-    font-size: clamp(1.2rem, 5vw, 1.6rem);
-    margin-top: clamp(1.2rem, 5vw, 1.6rem);
-    padding: clamp(0.5rem, 3vw, 0.8rem) clamp(0.8rem, 3vw, 1.2rem);
-  }
-}
-
 

@@ -2,6 +2,7 @@
 /**************** Utility Toast Success/Error functions *******************************/
 /**************************************************************************************/
 
+
 import toast from 'react-hot-toast';
 
 export const addedToCartToast = () => { // toast for successful adding of product to cart
@@ -53,6 +54,24 @@ export const ErrorMessageToast = (error, time=2000, place='top-center') => { // 
         position: place  // place in general top-center area
     });
 }
+
+/* NOTE: It's possible to create a custom toast with unique features like an 'x' button to   
+ *       manually delete the toast (if toast is persisting too long.). Consider creating a
+ *       custom toast with this feature later. Basic outline example:
+ * 
+ *       import React from 'react'; // if using react components in custom version
+ * 
+ *       export const functionName = (message, time, place) => {
+ *           toast.custom(
+ *              (t) => { // Custom React code and style for custom toast },
+ *                      { duration: time, position: place }
+ *           );
+ *       };        
+ */
+
+
+
+
 
 /* Converts a Unix timestamp in milliseconds (BIGINT) to a Month-Day-Year format.
  * Example output: "1-15-2012"

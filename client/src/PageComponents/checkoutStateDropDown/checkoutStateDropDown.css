@@ -9,6 +9,7 @@
   position: relative; /* allows dropdown list to be absolutely positioned */
 }
 
+
 /**************************************************************************************/
 /************** Main container (includes selection and dropdown) **********************/
 /**************************************************************************************/
@@ -51,11 +52,12 @@
 
 .selected-dropdown-state { /* current selection in display container */
   padding-left: 0.4rem !important;
+  font-size: 0.8rem; /* matches font-size set for address form <input> fields */
 }
 
 .open-close-arrow { /* open and close arrow on right-end of dropdown box */
   margin-left: 4px;
-  font-size: 1rem;
+  font-size: 0.9rem;
 }
 
 /**************************************************************************************/

@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react"; // import React library
-import { Toaster, toast, useToasterStore } from 'react-hot-toast'; // enable toast messaages to open in app page
+import { Toaster, toast, useToasterStore } from 'react-hot-toast'; // enable toast messaages to open in all app 
+                                                                   // routes within this layout. Without <Toaster />,
+                                                                   // toast messages will silently fail and won't show
 
 import Menu from "../../PageComponents/menu/menu";
 import CartSlider from "../../PageComponents/cartSlider/cartSlider";

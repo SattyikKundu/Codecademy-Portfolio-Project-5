@@ -7,12 +7,11 @@ import { useState,      // react hook for tracking local states
 
 import './checkoutStateDropDown.css'
 
-const CheckoutStateDropDown = ({ options, value, onSelect }) => {
+
+const CheckoutStateDropDown = ({ options, selectedOption, onSelect }) => {
 
   const [dropdownOpen,   setDropdownOpen] = useState(false); // tracks open/close state of dropdown menu
   const [dropDownWidth, setDropDownWidth] = useState(null);  // stores width of menu box to match dropdown selector
-
-  const [selected, setSelected] = useState(value || "");
 
   const dropdownRef = useRef(null); // Use to refer selected <div> object for manipulating DOM element.
                                     // specifically using it for clicking outside to close dropdown menu.
@@ -27,6 +26,15 @@ const CheckoutStateDropDown = ({ options, value, onSelect }) => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setDropdownOpen(false);
+
+        /* If dropdown has red border/background due to invalid or empty selection.
+         * remove red color when user closes/clicks outside the dropdown box
+         */
+        const dropdownBox = document.querySelector('#state-dropdown-menu-box');
+        if (dropdownBox?.classList.contains('invalid-field')) {
+          dropdownBox.classList.remove('invalid-field');
+        }
+
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -50,16 +58,19 @@ const CheckoutStateDropDown = ({ options, value, onSelect }) => {
   /********************* Essential Methods *************************************/
   /*****************************************************************************/
 
-
-
   const toggleDropdown = () => { // toggles dropdown menu
     setDropdownOpen((prev) => !prev);
   };
 
   const handleSelect = (value) => { // handles selection from open dropdown menu
-    setSelected(value);
     setDropdownOpen(false);
     onSelect(value); // to save saved value into parent component
+
+    // turns 'off' red background and border on select
+    const dropdownBox = document.querySelector('#state-dropdown-menu-box');
+    if (dropdownBox?.classList.contains('invalid-field')) {
+      dropdownBox.classList.remove('invalid-field');
+    }
   };
 
   const findLabel = (value) => { // retrieve display label for the current 'draft' value
@@ -81,11 +92,16 @@ const CheckoutStateDropDown = ({ options, value, onSelect }) => {
       <div className="checkout-dropdown-container" ref={dropdownRef}>
         <div
           className="checkout-dropdown-display"
+          id='state-dropdown-menu-box'
           onClick={toggleDropdown}
           ref={selectorWidthRef}
+          onChange={(event) => {
+            onSelect(event.target.value); 
+            event.target.classList.remove('invalid-field');
+          }}
         >
           <span className="selected-dropdown-state">
-            {findLabel(selected) || "Select State"}
+             {findLabel(selectedOption) || "Select state for shipping"}
           </span>
           <span className="open-close-arrow">{dropdownOpen ? "▲" : "▼"}</span>
         </div>
@@ -102,7 +118,7 @@ const CheckoutStateDropDown = ({ options, value, onSelect }) => {
                   <div
                     key={option.value}
                     className={`dropdown-options-state ${
-                      option.value === selected ? "selected" : ""
+                      option.value === selectedOption ? "selected" : ""
                     }`}
                     onClick={() => handleSelect(option.value)}
                   >

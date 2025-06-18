@@ -16,7 +16,7 @@ import {
 
 import axios from "axios"; // used to make HTTP request to backend
 
-import {addedToCartToast } from "../../utils/utilityFunctions.js";
+import {addedToCartToast } from "../../utils/utilityFunctions";
 
 import { useParams } from 'react-router-dom';
 

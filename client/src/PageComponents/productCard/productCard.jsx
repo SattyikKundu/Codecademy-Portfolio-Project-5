@@ -18,7 +18,7 @@ import {
         selectProductQuantityById   // selector method for finding product's current quantity in cart
        } from '../../Slices/cartSlice.jsx'; 
 
-import { addedToCartToast } from "../../utils/utilityFunctions.js"; // toast function when product added to cart
+import { addedToCartToast } from "../../utils/utilityFunctions"; // toast function when product added to cart
 
 import { throttle } from "lodash";
 import { useMemo } from "react";

@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import {Outlet, Navigate} from "react-router-dom"; // <Outlet> is used to render nested child routes
                                                    // Navigate programatically redirects routes
 
-import axios from "axios"; // sends HTTP client requests to backend
-import {useDispatch, useSelector} from "react-redux"; // used for dispatching redux actions and tracking redux data
+import axios from "axios";                                       // sends HTTP client requests to backend
+import {useDispatch, useSelector} from "react-redux";            // used for dispatching redux actions and tracking redux data
 import {setUserFromToken, clearUser} from '../Slices/authSlice'; // redux action to track/update user state
 
 import BasePageLayout from "./BasePageLayout/BasePageLayout"; // shared layout with header menu, cart slider, and toast messages

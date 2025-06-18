@@ -33,6 +33,7 @@ export const updateProfile = async (req, res) => { // controller function to upd
       return res.status(400).json({ error: "Email is required." });
     }
 
+    
     // Additional checks for other important fields being empty can be added here if needed...
     // For example: if (!phone_number || phone_number.trim() === "") {... }
 

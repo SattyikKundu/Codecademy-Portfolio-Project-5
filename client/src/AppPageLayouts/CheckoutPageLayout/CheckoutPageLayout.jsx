@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react"; // import React library
-import { Toaster, toast, useToasterStore } from 'react-hot-toast'; // enable toast messaages to open in app page
+import { Toaster, toast, useToasterStore } from 'react-hot-toast'; // enable toast messaages to open in all app 
+                                                                   // routes within this layout. Without <Toaster />,
+                                                                   // toast messages will silently fail and won't show
 
 import { Outlet, Navigate } from "react-router-dom"; // <Outlet> is used to render nested child routes
                                                      // Navigate programatically redirects routes
@@ -100,9 +102,8 @@ const CheckoutPageLayout = () => {
                 <Outlet />
             </Elements>
 
-
             {/* Default <Toaster /> for toast messages */}
-            {/*<Toaster position={'top-right'} containerStyle={{ top: 70, right: 10}} />*/} 
+            <Toaster position={'top-center'} containerStyle={{ top: 44 }} /> 
            
         </div>
     );

@@ -52,7 +52,6 @@ export const insertOrderItems = async (orderId, cartItems) => { // insert order 
   const query = `INSERT INTO order_items (order_id, product_id, quantity, price_each)
                  VALUES ($1, $2, $3, $4);`;
   
-
   for (const item in cartItems) {
     await pool.query(query, [
       orderId, 

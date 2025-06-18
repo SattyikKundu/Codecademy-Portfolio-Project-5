@@ -24,8 +24,12 @@ const ProfileFieldText = ({ label, value, original, onSave, propStyle={} }) => {
       setDraft(value); // revert to original if invalid
       return;
     }
-    if (value !== draft && draft.trim().length > 0) {
+    
+    if (value !== draft && draft.trim().length > 0) { // save value if different from original AND not null/empty
       onSave(draft);
+    }
+    else if (draft.trim().length === 0) {
+      ErrorMessageToast('You cannot save \n an empty value.');
     }
   };
 

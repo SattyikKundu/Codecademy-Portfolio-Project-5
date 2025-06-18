@@ -29,10 +29,10 @@ const ProfilePage = () => {
     }
   }, [location.state]);
 
-  const user = useSelector((state) => state.auth.user);
-  useEffect(()=> {
-    console.log('state.auth.user: ',user);
-  },[]);
+  // const user = useSelector((state) => state.auth.user);
+  // useEffect(()=> {
+  //   console.log('state.auth.user: ',user);
+  // },[]);
 
   const fetchProfile = async () => { // async function for fetching user's profile data
     setLoading(true);
