@@ -11,6 +11,12 @@ import {
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY); // Create Stripe instance using secret key
 
 
+/***************************************************************************************************/
+/***************************************************************************************************/
+/** Main Controller function for handling checkout when user clicks 'Pay' button in Checkout Page **/
+/***************************************************************************************************/
+/***************************************************************************************************/
+
 export const handleCheckout = async (req, res) => { // Controller to handle checkout process
 
   const userId = req.user.id;                         // Get authenticated user ID from JWT payload
@@ -59,3 +65,36 @@ export const handleCheckout = async (req, res) => { // Controller to handle chec
     res.status(500).json({ error: 'Something went wrong during checkout.' });
   }
 };
+
+/***************************************************************************************************/
+/***************************************************************************************************/
+/**** Supporting Controller function used to validate stock before checkout/purchase to prevent ****/
+/**** and handle any stock and cart quantity mismatch. **********************************************/
+/***************************************************************************************************/
+/***************************************************************************************************/
+
+// Returns updated cart if changes are needed (missing stock, reduced stock, etc.)
+export const validateAndAdjustCart = async (userId, cartItems) => {
+  const adjustedCart = [];
+  const conflictItems = [];
+
+  for (const item of cartItems) {
+    const query = `SELECT stock FROM products WHERE id=$1`;
+    const result = await pool.query(query, [item.productId]);
+    const stock = result.rows[0]?.stock || 0;
+
+    if (stock === 0) {
+      // Fully out of stock
+      conflictItems.push({ productId: item.productId, action: 'remove' });
+    } else if (item.quantity > stock) {
+      // Needs adjustment
+      conflictItems.push({ productId: item.productId, action: 'adjust', newQuantity: stock });
+      adjustedCart.push({ ...item, quantity: stock });
+    } else {
+      adjustedCart.push(item);
+    }
+  }
+
+  return { adjustedCart, conflictItems };
+};
+

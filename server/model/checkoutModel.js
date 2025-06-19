@@ -2,6 +2,11 @@
 import pool from "../database/database.js"; // import database connection pool to execute queries
 
 
+
+/***************************************************************************************************/
+/**** #1: Handles inserting new order into the 'orders' table when user submits durign checkout. ***/
+/***************************************************************************************************/
+
 export const insertOrder = async (userId, deliveryData, costData) => { // insert new order into 'orders' table
 
   const values = [ // contains all input data as 1 'values' array without destructuring
@@ -45,6 +50,9 @@ export const insertOrder = async (userId, deliveryData, costData) => { // insert
   return result.rows[0].id; // Return the newly created order ID (use for insertOrderItems() below)
 };
 
+/***************************************************************************************************/
+/*** #2: Inserts order's items and their quantity in 'order_items' table — referenced by orderId ***/
+/***************************************************************************************************/
 
 export const insertOrderItems = async (orderId, cartItems) => { // insert order items into 'order_item' tables
 
@@ -62,7 +70,12 @@ export const insertOrderItems = async (orderId, cartItems) => { // insert order 
   }
 };
 
-export const updateUserProfileAddress = async (userId, delivery) => { // optionally update user info (address, phone, email, etc.)
+
+/***************************************************************************************************/
+/************ #2: Allows user to update user profile's info during checkout (optional) *************/
+/***************************************************************************************************/
+
+export const updateUserProfileAddress = async (userId, delivery) => { 
 
   //console.log(`Inside updating user profile [id: ${userId}] for: `, delivery);
 
@@ -93,6 +106,10 @@ export const updateUserProfileAddress = async (userId, delivery) => { // optiona
 
 };
 
+
+/***************************************************************************************************/
+/************ #3: Empties user cart AFTER successful checkout **************************************/
+/***************************************************************************************************/
 
 export const clearUserCart = async (userId) => { // empty user cart AFTER successful checkout
 
