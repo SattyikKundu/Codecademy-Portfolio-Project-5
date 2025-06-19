@@ -33,13 +33,12 @@ const CheckoutPage = () => {
   const navigate = useNavigate(); // used for navigation buttons
   const dispatch = useDispatch();
 
-  const stripe = useStripe(); // Needed to process 'fake' Stripe payment
+  const stripe   = useStripe(); // Needed to process 'fake' Stripe payment
   const elements = useElements();
 
   const authUser     = useSelector((state) => state.auth.user); // gets user's authentication to get email
   const cartProducts = useSelector((state) => state.cart.products); // gets user's cart stored in redux
   const [cartQuantity,   setCartQuantity] = useState(null);        // track total quanitity of cart items
-  const [orderId, setOrderId] = useState(null);
 
   /* Tracks Order total (and its subcosts) */
   const [cartSubTotal,   setCartSubtotal] = useState(0.00); // tracks cart subtotal
@@ -60,9 +59,7 @@ const CheckoutPage = () => {
 
   const [profileUploading, setProfileUploading] = useState(false); // tracks loading state of user profile being uploaded to
 
-  /* Tracking for checkout validation and error handling */
   const [formSubmitting, setFormSubmitting] = useState(false); // tracks start/end of checkout submission
-  const [paymentError,     setPaymentError] = useState('');
 
   // Stripe field validation states
   const [cardHasError,     setCardHasError] = useState(false); // tracks if card number has error or not
@@ -341,7 +338,6 @@ const CheckoutPage = () => {
       const paymentResult = await confirmStripePayment(clientSecret);
 
       if (paymentResult.error) {
-        setPaymentError(paymentResult.error.message);
 
         const cardElement = elements.getElement(CardNumberElement);
         cardElement?.focus(); // Scrolls to card input
@@ -356,7 +352,6 @@ const CheckoutPage = () => {
       }
     } 
     catch (error) {
-      setPaymentError("An error occurred during checkout: ", error);
       console.log("An error occurred during checkout: ", error);
     } 
     finally {
@@ -589,8 +584,10 @@ const CheckoutPage = () => {
       <div className='checkout-payment-container'>
         <CheckoutPaymentSection props={props}/>
         <div className='checkout-payment-submit'>
-          <button type="submit" disabled={disableButton} >
-            Pay ${orderTotal.toFixed(2)}
+          <button type="submit" disabled={disableButton || formSubmitting} >
+            {
+              (!formSubmitting) ? `Pay ${orderTotal.toFixed(2)}` : 'Processing'
+            }
           </button>
         </div>
       </div>
