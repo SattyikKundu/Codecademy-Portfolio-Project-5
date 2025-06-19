@@ -24,7 +24,7 @@ import CheckoutCartFinal from '../../PageComponents/checkoutCartFinal/checkoutCa
 import CheckoutStateDropDown from '../../PageComponents/checkoutStateDropDown/checkoutStateDropDown';
 import CheckoutPaymentSection from '../../PageComponents/checkoutPaymentSection/checkoutPaymentSection';
 
-import { clearCart } from '../../Slices/cartSlice';
+import { clearCart, loadCartFromServer } from '../../Slices/cartSlice';
 
 import './CheckoutPage.css'; // for stying
 
@@ -63,7 +63,6 @@ const CheckoutPage = () => {
   /* Tracking for checkout validation and error handling */
   const [formSubmitting, setFormSubmitting] = useState(false); // tracks start/end of checkout submission
   const [paymentError,     setPaymentError] = useState('');
-  const [clientSecret,     setClientSecret] = useState(null);
 
   // Stripe field validation states
   const [cardHasError,     setCardHasError] = useState(false); // tracks if card number has error or not
@@ -248,32 +247,36 @@ const CheckoutPage = () => {
 
   const initiateCheckout = async () => { // execute checkout route in backend
     try {
-      const response = await axios.post('http://localhost:5000/checkout', {
-        cartItems: cartProducts, // save 'cartProducts' as 'cartItems'
-        deliveryInfo: {
-          email,
-          firstName,
-          lastName,
-          phoneNumber: normalizeUSPhone(phoneNumber),
-          addressLine1,
-          addressLine2,
-          city,
-          state: selectedState,
-          postalCode
-        },
-        cartTotals: {
-          subTotal: cartSubTotal,
-          shippingCost,
-          taxAmount: salesTax,
-          total: orderTotal
-        },
-        saveAddressToProfile: saveToProfile
-      }, 
-      { withCredentials: true }
-    );
+      const response = await axios.post('http://localhost:5000/checkout', 
+        {
+          cartItems: cartProducts, // save 'cartProducts' as 'cartItems'
+          deliveryInfo: {
+            email,
+            firstName,
+            lastName,
+            phoneNumber: normalizeUSPhone(phoneNumber),
+            addressLine1,
+            addressLine2,
+            city,
+            state: selectedState,
+            postalCode
+          },
+          cartTotals: {
+            subTotal: cartSubTotal,
+            shippingCost,
+            taxAmount: salesTax,
+            total: orderTotal
+          },
+          saveAddressToProfile: saveToProfile
+        }, 
+        { withCredentials: true }
+      );
 
-      //console.log('client Secret: ', response.data.clientSecret);
-      return response.data.clientSecret;
+      return {
+        success: true, 
+        clientSecret: response.data.clientSecret,
+        orderId: response.data.orderId
+      }
     } 
     catch (error) {
       console.error("Checkout initiation failed: ", error);
@@ -319,19 +322,22 @@ const CheckoutPage = () => {
     event.preventDefault(); // prevents page/component reload on submission
     setFormSubmitting(true);
 
-    if (!validateFormFields()) { // if invalid form fields, cancel submission
-      setFormSubmitting(false);
-      return;
-    }
-    if (!validateStripeFields()) { // if invalid stripe fields, cancel submission
+    if (!validateFormFields() || !validateStripeFields()) { // if invalid form OR stripe fields, cancel submission
       setFormSubmitting(false);
       return;
     }
 
     try {
-      const clientSecret = await initiateCheckout();
-      setClientSecret(clientSecret);
+      const result = await initiateCheckout();
 
+      if (!result.success) {
+        dispatch(loadCartFromServer(result.updatedCart));
+        ErrorMessageToast("Some items were adjusted/removed due to stock limitations. Please review your cart.");
+        setFormSubmitting(false);
+        return;
+      }
+      
+      const clientSecret = result.clientSecret;
       const paymentResult = await confirmStripePayment(clientSecret);
 
       if (paymentResult.error) {
@@ -345,7 +351,7 @@ const CheckoutPage = () => {
       } 
       else if (paymentResult.paymentIntent.status === 'succeeded') {
         dispatch(clearCart()); // removes products from cart state
-        console.log('Succesfully made it to payment status!!!');
+        //console.log('Succesfully made it to payment status!!!');
         navigate('/profile'); // Navigate to profile for time being
       }
     } 

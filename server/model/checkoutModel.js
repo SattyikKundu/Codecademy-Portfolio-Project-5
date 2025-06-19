@@ -1,7 +1,11 @@
 
 import pool from "../database/database.js"; // import database connection pool to execute queries
 
-
+import {getCartItem, 
+        updateCartItem, 
+        addCartItem, 
+        deleteCartItem} from './cartModel.js'; // needed for adjusting cart AFTER validating user cart against
+                                               // products' stock
 
 /***************************************************************************************************/
 /**** #1: Handles inserting new order into the 'orders' table when user submits durign checkout. ***/
@@ -106,13 +110,92 @@ export const updateUserProfileAddress = async (userId, delivery) => {
 
 };
 
-
 /***************************************************************************************************/
-/************ #3: Empties user cart AFTER successful checkout **************************************/
+/************ #3: Empties user's cart AFTER successful checkout ************************************/
 /***************************************************************************************************/
 
 export const clearUserCart = async (userId) => { // empty user cart AFTER successful checkout
-
   const query = `DELETE FROM cart_items WHERE user_id=$1`;
   await pool.query(query, [userId]);
 };
+
+/***************************************************************************************************/
+/******** #4: Updates cart if changes are needed (i.e. missing stock, reduced stock, etc.) *********/
+/***************************************************************************************************/
+
+export const validateAndAdjustCart = async (userId, cartItems) => { // validates cart items and adjusts as needed
+                                                            // 'userId' added in case of future use/modifications
+
+  const adjustedCart  = []; // stores final adjusted cart
+  const conflictItems = []; // tracks conflicted items (difference between cart quantity and current stock)
+
+  for (const item of cartItems) { // for each item, get it's current stock 
+
+    const query = `SELECT stock FROM products WHERE id=$1`; // SQL query to get product's stock
+    const result = await pool.query(query, [item.productId]);
+    const stock = result.rows[0]?.stock || 0;
+
+    if (stock === 0) { // if item out of stock, remove from cart (save 'action' identifier for later functions)
+      conflictItems.push({ productId: item.productId, action: 'remove' });
+    } 
+    else if (item.quantity > stock) { // if cart quantity exceeds stock, adjust current cart
+      conflictItems.push({ productId: item.productId, action: 'adjust', newQuantity: stock });
+      adjustedCart.push({ ...item, quantity: stock });
+    } 
+    else { // otherwise if no conflict, add same item and quantity as normal
+      adjustedCart.push(item);
+    }
+  }
+
+  return { adjustedCart, conflictItems }; // return adjusted cart and conflict items
+};
+
+
+/***************************************************************************************************/
+/******** #5: After cart validation (in above/pre function), update backend cart *******************/
+/***************************************************************************************************/
+
+export const updateBackendCart = async (userId, adjustedCart) => {
+
+  for (const item of adjustedCart) { // iterate each item in backend cart
+
+    const { productId, quantity } = item; // get adjusted item's id and quantity
+    const existing = await getCartItem(userId, productId); // get cart item IF it exists
+
+    if (existing) { // if item exists in cart, adjust quantity
+      await updateCartItem(userId, productId, quantity);
+    } 
+    else { // other, if item missing, add to cart
+      await addCartItem(userId, productId, quantity);
+    }
+  }
+};
+
+/***************************************************************************************************/
+/******** #6: After cart validation (in above/pre function), update backend cart *******************/
+/***************************************************************************************************/
+
+export const removeOutOfStockItemsFromCart = async (userId, conflictItems) => {
+  for (const item of conflictItems) {
+    if (item.action === 'remove') { // if item has 'remove' flag, remove item
+      await deleteCartItem(userId, item.productId);
+    }
+  }
+};
+
+/***************************************************************************************************/
+/**** #7: Upon valid order, deduct stock from inventory, used after validateAndAdjustCart() ********/
+/***************************************************************************************************/
+
+export const deductProductStock = async (cartItems) => {
+  const query = `
+    UPDATE products
+    SET stock = stock - $1
+    WHERE id = $2 AND stock >= $1`; // query to delete cart item quanitity from stock
+
+  for (const item of cartItems) { // iterate through cart items to deduct item's quanitity from stock
+    await pool.query(query, [item.quantity, item.productId]);
+  }
+};
+
+

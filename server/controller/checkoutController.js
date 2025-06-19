@@ -1,10 +1,17 @@
 
 import Stripe from 'stripe';  // Import Stripe SDK
+
+//import pool from '../database/database.js'; // use for 'rollback' transaction
+
 import {
         insertOrder,
         insertOrderItems,
         clearUserCart,
-        updateUserProfileAddress 
+        updateUserProfileAddress,
+        validateAndAdjustCart,
+        updateBackendCart,
+        removeOutOfStockItemsFromCart,
+        deductProductStock 
        } from '../model/checkoutModel.js'; // import functions from checkoutModel.js
 
 
@@ -29,12 +36,36 @@ export const handleCheckout = async (req, res) => { // Controller to handle chec
   } = req.body;             // destructure inputs from req.body
 
 
+  const { adjustedCart, 
+          conflictItems } = await validateAndAdjustCart(userId, cartItems); //get adjusted cart for frontend 
+                                                                            // and conflict items for backend
+
+  if (conflictItems.length > 0) { // If conflict items found, adjust backend cart to match 'adjustedCart'
+
+    await updateBackendCart(userId, adjustedCart); // update backend cart with new adjusted cart
+    await removeOutOfStockItemsFromCart(userId, conflictItems); // remove out of stock items
+
+    return res.status(400).json({ // If conflict, return error message and adjusted cart to checkout
+                                  // so user can see prior to attempting another checkout.
+      error: 'Some items in your cart were adjusted or removed due to stock limitations.',
+      conflictItems,
+      updatedCart: adjustedCart
+    });
+  }
+
+
   try {
      // 1. Validate ZIP code format server-side (basic regex)
     const zipRegex = /^\d{5}(-\d{4})?$/;
     if (!zipRegex.test(deliveryInfo.postalCode)) { 
       return res.status(400).json({ error: 'Invalid ZIP code format.' });
     }
+
+    /* NOTE: will revisit handling transaction and roll back on a later time.
+     *  would also have to refactor several functions in checkoutModel.js for compatibility.
+     */
+    //const client = await pool.connect(); // Get access to DB client for transaction recording
+    //await client.query('BEGIN'); // Begin transaction
 
     // 2. Create a Stripe PaymentIntent for the total amount 
     const paymentIntent = await stripe.paymentIntents.create({
@@ -49,52 +80,30 @@ export const handleCheckout = async (req, res) => { // Controller to handle chec
     // 4. Insert all order_items 
     await insertOrderItems(orderId, cartItems);
 
-    // 5. Optionally update user profile if requested
+    // 5. Deduct product stock from inventory
+    await deductProductStock(adjustedCart);
+
+    // 6. Optionally update user profile if requested
     if (saveAddressToProfile) {
       await updateUserProfileAddress(userId, deliveryInfo);
     }
 
-    // 6. Clear the user's cart AFTER processing order
+    // 7. Clear the user's cart AFTER processing order
     await clearUserCart(userId);
 
-    // 7. Return client secret for frontend to confirm payment AND orderId for success page
+    //await client.query('COMMIT'); // Success: commit transaction
+
+    // 8. Return client secret for frontend to confirm payment AND orderId for success page
     res.status(200).json({ message: 'Checkout successful.', clientSecret: paymentIntent.client_secret, orderId: orderId });
   } 
   catch (error) {
+    //await client.query('ROLLBACK'); // On error, rollback everything
+
     console.error('Checkout error:', error);
     res.status(500).json({ error: 'Something went wrong during checkout.' });
   }
-};
-
-/***************************************************************************************************/
-/***************************************************************************************************/
-/**** Supporting Controller function used to validate stock before checkout/purchase to prevent ****/
-/**** and handle any stock and cart quantity mismatch. **********************************************/
-/***************************************************************************************************/
-/***************************************************************************************************/
-
-// Returns updated cart if changes are needed (missing stock, reduced stock, etc.)
-export const validateAndAdjustCart = async (userId, cartItems) => {
-  const adjustedCart = [];
-  const conflictItems = [];
-
-  for (const item of cartItems) {
-    const query = `SELECT stock FROM products WHERE id=$1`;
-    const result = await pool.query(query, [item.productId]);
-    const stock = result.rows[0]?.stock || 0;
-
-    if (stock === 0) {
-      // Fully out of stock
-      conflictItems.push({ productId: item.productId, action: 'remove' });
-    } else if (item.quantity > stock) {
-      // Needs adjustment
-      conflictItems.push({ productId: item.productId, action: 'adjust', newQuantity: stock });
-      adjustedCart.push({ ...item, quantity: stock });
-    } else {
-      adjustedCart.push(item);
-    }
+  finally {
+    client.release(); // Always release connection at end of transaction
   }
-
-  return { adjustedCart, conflictItems };
 };
 
