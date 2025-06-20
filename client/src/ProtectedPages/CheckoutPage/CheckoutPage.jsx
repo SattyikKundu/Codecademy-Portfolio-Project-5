@@ -270,15 +270,24 @@ const CheckoutPage = () => {
       );
 
       return {
-        success: true, 
+        //success: true, 
         clientSecret: response.data.clientSecret,
         orderId: response.data.orderId
       }
     } 
     catch (error) {
-      console.error("Checkout initiation failed: ", error);
-      throw new Error("Checkout initiation failed.");
+      if (error.response?.status === 400 && error.response.data?.conflict) { // if conflict with item stock/quantity mismatch
+        return {
+          conflict:      error.response.data.conflict,
+          conflictItems: error.response.data.conflictItems,
+          updatedCart:   error.response.data.updatedCart,
+          errorMessage:  error.response.data.error
+        };
+      }
+      //console.error("Checkout initiation failed: ", error);
+      //throw new Error("Checkout initiation failed.");
     }
+    throw new Error('Checkout initiation failed.'); // other error (500, etc.)
   };
 
 
@@ -327,15 +336,17 @@ const CheckoutPage = () => {
     try {
       const result = await initiateCheckout();
 
-      if (!result.success) {
+      if (result.conflict) {
+        window.scrollTo({ top: 0, behavior: 'smooth' }); // scroll to top so user can see updated cart
+        ErrorMessageToast("Some items were adjusted/removed due to stock limitations. Please review your updated cart.", 3000);
         dispatch(loadCartFromServer(result.updatedCart));
-        ErrorMessageToast("Some items were adjusted/removed due to stock limitations. Please review your cart.");
         setFormSubmitting(false);
         return;
       }
       
       const clientSecret = result.clientSecret;
       const paymentResult = await confirmStripePayment(clientSecret);
+      const orderId = result.orderId;
 
       if (paymentResult.error) {
 
@@ -586,7 +597,7 @@ const CheckoutPage = () => {
         <div className='checkout-payment-submit'>
           <button type="submit" disabled={disableButton || formSubmitting} >
             {
-              (!formSubmitting) ? `Pay ${orderTotal.toFixed(2)}` : 'Processing'
+              (!formSubmitting) ? `Pay $${orderTotal.toFixed(2)}` : 'Processing'
             }
           </button>
         </div>

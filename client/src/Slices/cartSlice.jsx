@@ -82,7 +82,10 @@ const cartSlice = createSlice({
             }
         },
         loadCartFromServer(state, action) { // Used to load cart stored in backend and save it to this redux state
-            state.products = action.payload;
+            state.products = action.payload.map(product => ({
+                ...product,
+                totalPrice: (product.quantity * parseFloat(product.unitPrice)).toFixed(2), // update totalPrice on frontend
+            }));
         },
         clearCart(state) { // Clear cart state (used when user logs out). Since cart is empty by logout, 
                            // 'cartState' should be empty in localStroage after logout.

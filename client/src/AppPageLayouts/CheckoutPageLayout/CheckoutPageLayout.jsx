@@ -91,7 +91,7 @@ const CheckoutPageLayout = () => {
         return (<Navigate 
                     to='/login' 
                     state={{ 
-                        loginErrorMsg: "Login Requried:", 
+                        loginErrorMsg: "Login Required:", 
                         loginHeader: "Please login (or register first) to access checkout."
                     }} 
                     replace />); // Since user is unauthorized, 'replace' keyword prevents user from navigating back 

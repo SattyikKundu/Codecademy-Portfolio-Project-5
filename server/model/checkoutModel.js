@@ -140,7 +140,12 @@ export const validateAndAdjustCart = async (userId, cartItems) => { // validates
     } 
     else if (item.quantity > stock) { // if cart quantity exceeds stock, adjust current cart
       conflictItems.push({ productId: item.productId, action: 'adjust', newQuantity: stock });
-      adjustedCart.push({ ...item, quantity: stock });
+      adjustedCart.push({ 
+        ...item, 
+        quantity: stock, 
+        quantityLimit: stock,
+        totalPrice: (parseFloat(item.unitPrice) * stock).toFixed(2) // (fallback) update totalPrice via quantity change
+       });
     } 
     else { // otherwise if no conflict, add same item and quantity as normal
       adjustedCart.push(item);

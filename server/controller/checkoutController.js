@@ -47,9 +47,10 @@ export const handleCheckout = async (req, res) => { // Controller to handle chec
 
     return res.status(400).json({ // If conflict, return error message and adjusted cart to checkout
                                   // so user can see prior to attempting another checkout.
-      error: 'Some items in your cart were adjusted or removed due to stock limitations.',
-      conflictItems,
-      updatedCart: adjustedCart
+      conflict:      true,
+      error:         'Some items in your cart were adjusted or removed due to stock limitations.',
+      conflictItems: conflictItems,
+      updatedCart:   adjustedCart
     });
   }
 
@@ -102,8 +103,8 @@ export const handleCheckout = async (req, res) => { // Controller to handle chec
     console.error('Checkout error:', error);
     res.status(500).json({ error: 'Something went wrong during checkout.' });
   }
-  finally {
-    client.release(); // Always release connection at end of transaction
-  }
+  //finally {
+    //client.release(); // Always release connection at end of transaction
+  //}
 };
 
