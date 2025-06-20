@@ -16,7 +16,6 @@ const ProfileButton = () => { /* Button that toggles between default 'Login' but
 
     const user            = useSelector((state) => state.auth.user); // Get existing user from redux
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated); // checks if user is authenticated
-    const products        = useSelector((state) => state.cart.products); // extracts products from 'cart' state
 
     const dispatch = useDispatch(); // initialize dispatch of redux actions
     const navigate = useNavigate(); // initialize for route navigation
@@ -107,25 +106,26 @@ const ProfileButton = () => { /* Button that toggles between default 'Login' but
           {/* Dropdown menu that shows when use clicks on 'Profile' button */}
           <div className={`dropdown-menu ${showDropDown ? 'active' : ''}`}>
 
+            {/* #1: Display username handle when logged in */}
             <div className="dropdown-item" style={{color: '#7E7E7E'}}>@{user.username}</div>
 
             <div className="item-divider" />
 
-            <div 
-              className="dropdown-item" 
-              onClick={() => {
-                  setShowDropDown(false); 
-                  navigate("/profile");
-              }}
-            >
+            {/* #2: Link to user's profile */}
+            <div className="dropdown-item" onClick={() => { setShowDropDown(false); navigate("/profile"); }}>
               Profile
             </div>
 
             <div className="item-divider" />
 
-            <div 
-              className="dropdown-item" 
-              onClick={handleLogout}
+            {/* #3: Link to order history for user */}
+            <div className="dropdown-item" onClick={() => { setShowDropDown(false); navigate("/orders");}}>
+              Orders
+            </div>
+            <div className="item-divider" />
+
+            {/* #4: Link for logging out */}
+            <div className="dropdown-item" onClick={handleLogout}
               //style={{backgroundColor: `${loggingOut ? '#cfcfcf':'' }`}}  
             >
               <FontAwesomeIcon icon={faRightFromBracket} /> Logout
