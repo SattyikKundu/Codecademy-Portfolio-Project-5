@@ -12,7 +12,6 @@ import { ErrorMessageToast, SuccessMessageToast } from "../../utils/utilityFunct
 
 import './ProfilePage.css';
 
-import { useSelector } from "react-redux";
 
 const ProfilePage = () => {
   

@@ -92,4 +92,24 @@ export function formatTimestampToMDY(timestampMs) {
   return `${month}-${day}-${year}`;
 }
 
+/* Alternative function that converts a Unix timestamp in milliseconds (BIGINT) to a Month Day, Year format.
+ * Example output: "June 15, 2012"
+ *
+ * param   {number} timestampMs - The Unix timestamp in milliseconds.
+ * returns {string}             - The formatted date as "Month Day, Year".
+ */
+
+export function formatTimestampToLongDate(timestampMs) {
+  if (!timestampMs) return ""; // Handle undefined/null case
+
+  const date = new Date(Number(timestampMs));
+  // Example output: June 25, 2016
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+}
+
+
 

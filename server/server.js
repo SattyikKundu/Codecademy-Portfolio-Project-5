@@ -28,6 +28,8 @@ import cartRoutes from './routes/cartRoutes.js'; //  import default export 'rout
 import checkoutRoutes from './routes/checkoutRoutes.js'; // import default export 'router' as 'checkoutRoutes'
                                                          // where 
 
+import ordersRoutes from './routes/ordersRoutes.js';
+
 import dotenv from 'dotenv'; // loads .env variables into process.env 
                              // so they can be accessed anywhere in server code
 dotenv.config();
@@ -115,6 +117,8 @@ app.use('/', cartRoutes); /* Mount cart routes for handling cart
                            */
 
 app.use('/', checkoutRoutes);
+
+app.use('/', ordersRoutes);
 
 // Default route for any other requests (Optional, for catch-all error handling)
 //app.use('*', (req, res) => {

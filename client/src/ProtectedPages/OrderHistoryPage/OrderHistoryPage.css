@@ -1,0 +1,212 @@
+/*************************************************************************************/
+/*********************** Headers styling *********************************************/
+/*************************************************************************************/
+h1, h2 {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-bottom: 1rem;
+}
+
+/*************************************************************************************/
+/*********************** Main Order History Container ********************************/
+/*************************************************************************************/
+
+.order-history-page { /* order history main container*/
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 2rem 1.5rem;       /* padding around content*/
+
+  width: 84% !important;          /* container dimensions and centeiner */
+  max-width: 800px;    
+  margin: 125px auto auto auto;
+  
+  border-radius: 10px; /* border styling */
+  border: 1px solid rgba(0, 0, 0, 0.3); 
+  box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, 0.05),
+                0px 0px 3px 2px rgba(0, 0, 0, 0.05),
+                0px 0px 3px 2px rgba(0, 0, 0, 0.05),
+                0px 0px 3px 2px rgba(0, 0, 0, 0.05);
+  
+  font-family: Arial, Helvetica, sans-serif; /* font styling */
+}
+
+.order-history-wrapper { /* wrapper around table used to "add" a border 
+                            around the table so it will have rounded corners */
+    width: 100%;  
+    border: 1px solid rgba(0, 0, 0, 0.3);  
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.order-history-table { /* actual table <table> */
+  width: 100%;
+  border-collapse: collapse; /* remove spaces between cells */
+}
+
+/*************************************************************************************/
+/****************** Header Section of Order History Table ****************************/
+/*************************************************************************************/
+
+.order-history-table th { /* general style for table header cells*/
+  border: 1px solid #ccc; /* main border styling */
+  padding: 10px; 
+  text-align: left;
+  background-color: #f3f3f3;
+  cursor: pointer;
+}
+
+th:first-child { /* removes outer parts of general border to prevent 
+                    "double" border with 'order-history-wrapper'  */
+  border-top: none !important;
+  border-left: none !important;
+}
+th:last-child {
+  border-top: none !important;
+  border-right: none !important;
+}
+th:not(:first-child):not(:last-child) { /* If not first or last <th>, 
+                                           middle ones only low top borders.*/
+  border-top: none !important;
+}
+
+
+.sortable-header { /* class for <th>, styling for sortable header */
+  cursor: pointer;
+  white-space: nowrap;
+  align-items: center;
+}
+
+.no-sort .sort-icon { /* used to 'disable' sort for 'view' header */
+  display: none;
+}
+
+.sort-icon { /* styles sorting icon */
+  margin-left: 8px;
+  width: 16px;
+  display: inline-block;
+  text-align: center;
+}
+
+
+/*************************************************************************************/
+/**************** Styling of data and rows in Order History Table ********************/
+/*************************************************************************************/
+
+.order-history-table td { /* general style for each row */
+  padding: 8px; 
+  text-align: left;
+  cursor: default;
+  border: 1px solid #ccc;
+}
+
+/* Removed borders on td/tr childs at edges of table */
+td:first-child { border-left: none !important; }
+td:last-child { border-right: none !important; }
+tr:last-child > td { border-bottom: none !important; }
+
+tr { /* default height for each row/record */
+  height: 39px;
+}
+
+.empty-row td { /* grey styling for data in empty rows */
+  background-color: #f4f4f4;
+  border: none !important;
+}
+
+.view-link { /* style for blue 'view details' links */
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/*************************************************************************************/
+/************** Rows per page dropdown and prev/next page buttons ********************/
+/*************************************************************************************/
+
+.controls-container { /* styles the container that holds the controls*/
+  width: 96%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.table-controls #pagination-select { /* styles the <select> in table-controls */
+
+  outline: none; /* no bold black outline after selection */
+
+  width: 40px;  /* dimensions of dropdown box */
+  height: 20px; 
+
+  border-radius: 2px; /* border styling of dropdown box */
+  box-shadow: 0px 0px 1px 2px rgba(99, 99, 99, 0.1);
+}
+
+.pagination-controls button { /* styles prev/next buttons */
+  padding: 0.1rem 0.15rem;
+}
+
+#current-page-tracker { /* styles/position current page notice */
+  margin-left: 0.2rem;
+}
+
+
+/*************************************************************************************/
+/********* Styling for empty container when user's order history is empty ************/
+/*************************************************************************************/
+
+.order-history-empty { /* container for empty order history */
+  text-align: center;
+  margin-top: 100px;
+}
+
+.order-history-empty button { /* Shop button when order history is empty */
+  padding: 0.5rem 1.2rem;
+  font-size: 1rem;
+  margin-top: 1rem;
+}
+
+/*************************************************************************************/
+/**************** Styling tablet/mobile screen sizes *********************************/
+/*************************************************************************************/
+
+/* Tested to all work until minimum size of 320px width */
+
+@media screen and (max-width: 530px) { /* adjust for mobile screen sizes */
+
+  .order-history-page { /* gradually adjust/shrink padding in order history page */
+
+    margin-top: clamp(80px, 24vw, 125px);
+
+    padding-top:    clamp(1rem,    5.0vw, 2rem)   !important;
+    padding-right:  clamp(0.75rem, 5.0vw, 1.5rem) !important;
+    padding-bottom: clamp(1rem,    5.0vw, 2rem)   !important;
+    padding-left:   clamp(0.75rem, 5.0vw, 1.5rem) !important;
+    width: 84% !important;
+  }
+
+  .sort-icon { /* remove space left of icon */
+    margin-left: 0;
+  }
+
+  .sortable-header { /* shrink padding and font-size to fit header cells as screen shrinks */
+    font-size: clamp(0.6rem, 3vw, 2rem);
+    padding: clamp(2px, 2vw, 10px) !important;
+  }
+
+  td { /* shrink padding and font-size to fit data cells as screen shrinks */
+    font-size: clamp(0.65rem, 3vw, 1rem);
+    padding: clamp(2px, 2vw, 10px) !important;
+  }
+}
+
+@media screen and (max-width: 400px) { /* adjust orientation of table controls for mobile screen size*/
+  .controls-container{ 
+    align-items: center;
+    flex-direction: column-reverse;
+    gap: 16px;
+  }
+}
