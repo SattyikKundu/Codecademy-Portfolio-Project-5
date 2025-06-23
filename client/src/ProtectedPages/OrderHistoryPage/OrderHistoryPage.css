@@ -11,7 +11,7 @@ h1, h2 {
 /*********************** Main Order History Container ********************************/
 /*************************************************************************************/
 
-.order-history-page { /* order history main container*/
+.order-history-page{ /* order history main container*/
 
   display: flex;
   flex-direction: column;
@@ -159,15 +159,37 @@ tr { /* default height for each row/record */
 /*************************************************************************************/
 
 .order-history-empty { /* container for empty order history */
-  text-align: center;
-  margin-top: 100px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;   /* Vertically align items in flex container*/
+
+  padding: 2rem 1.5rem;  /* padding around content*/
+
+  width: 84% !important; /* container dimensions and centeiner */
+  max-width: 400px;    
+  margin: 125px auto auto auto;
+  
+  border-radius: 10px; /* container border styling */
+  border: 1px solid rgba(0, 0, 0, 0.3); 
+  box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, 0.05),
+                0px 0px 3px 2px rgba(0, 0, 0, 0.05),
+                0px 0px 3px 2px rgba(0, 0, 0, 0.05),
+                0px 0px 3px 2px rgba(0, 0, 0, 0.05);
+  
+  font-family: Arial, Helvetica, sans-serif; /* font styling */
+
 }
 
-.order-history-empty button { /* Shop button when order history is empty */
+/* Shop button when order history is empty */
+/*
+.order-history-empty button { 
   padding: 0.5rem 1.2rem;
   font-size: 1rem;
   margin-top: 1rem;
-}
+  cursor: pointer;
+  max-width: 100px;
+}*/
 
 /*************************************************************************************/
 /**************** Styling tablet/mobile screen sizes *********************************/

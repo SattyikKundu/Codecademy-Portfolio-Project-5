@@ -17,6 +17,8 @@ import { faSort } from '@fortawesome/free-solid-svg-icons';      // Default sort
 import { formatTimestampToMDY, 
          formatTimestampToLongDate } from '../../utils/utilityFunctions'; // custom date formatter(s)
 
+import ShopNowButton from '../../PageComponents/cartShopNowButton/cartShopNowButton';
+
 import './OrderHistoryPage.css'; // custom styling
 
 
@@ -156,8 +158,9 @@ const OrderHistoryPage = () => { //
   if (ordersLength === 0) {   // Case: no orders at all
     return (
       <div className="order-history-empty">
-        <h2>You’ve made no orders.</h2>
-        <button onClick={() => navigate("/products")}>Continue Shopping</button>
+        <h2>You’ve currently have no orders.</h2>
+        {/*<button onClick={() => navigate("/products")}>Continue Shopping</button>*/}
+        <ShopNowButton emptyCartMessage='Shop to Make an Order' />
       </div>
     );
   }

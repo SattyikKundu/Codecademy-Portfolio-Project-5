@@ -5,7 +5,10 @@
 .grouped-dropdown-field-wrapper { /* Main wrapper for entire field, value, and buttons  */
     display: flex;            /* Flex items in row*/
     flex-direction: row;
-    width: 100%;              /* matches parent element */
+    width: 100%;              /* Matches parent element */
+
+    min-height: 44.78px;      /* Ensures field value (or empty space) matches height when editing field value.
+                                 This prevents any visibly awkward height functuations. */
 }
 
 /**************************************************************************************/
@@ -16,7 +19,7 @@
 
     display: flex;
     flex-basis: 30%;     /* Fixed width for label with flex parent */
-    align-items: center; /*vertically center text in flex*/
+    align-items: center; /* vertically center text in flex*/
 
     padding: 0.75rem 0 0.75rem 1rem; /* background and container shape */
 
@@ -69,6 +72,7 @@
 /**************************************************************************************/
 
 .grouped-dropdown-container-wrapper { /* main dropdown container wrapper */
+
 
   min-width: 0%; /* enables <input> box to scale down 
                     past built-in default min-width*/
