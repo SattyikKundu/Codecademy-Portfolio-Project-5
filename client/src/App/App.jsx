@@ -22,69 +22,75 @@ import CheckoutPage     from '../ProtectedPages/CheckoutPage/CheckoutPage.jsx'; 
 import OrderHistoryPage from '../ProtectedPages/OrderHistoryPage/OrderHistoryPage.jsx'; // page lists user's order history 
 import OrderDetailsPage from '../ProtectedPages/OrderDetailsPage/OrderDetailsPage.jsx'; // page shows details for a specific order
 
+import ScrollToTop from '../utils/scrollToTop.jsx';
+
 
 const App = () => {
 
-    return (
-      <Router>
-        <Routes>
+  return (
+    <Router>
 
-          {/* Basepage layout that wraps ALL pages (both public and protected). '/' is start (and index) of all routes */}
-          <Route path='/'   element={<BasePageLayout/>} >
+    {/* Used to auto-scroll to TOP of each new page on mount */}
+    <ScrollToTop />
 
-            {/* All routes that are part of Public Page Layout */}
-            <Route element={<PublicPageLayout/>}>
+    <Routes>
 
-              {/* Redirect '/' and '/products' to '/products/all' */}
-              <Route index            element={<Navigate to='/products/all'/>} />
-              <Route path='/products' element={<Navigate to='/products/all'/>} />
+      {/* Basepage layout that wraps ALL pages (both public and protected) except Checkout page. '/' is start (and index) of all routes */}
+      <Route path='/'   element={<BasePageLayout/>} >
 
-              {/* Route for page with all */}
-              <Route path='/products/all'    element={< ProductsPage />}  />
+        {/* All routes that are part of Public Page Layout */}
+        <Route element={<PublicPageLayout/>}>
 
-              {/* Route returns all products for specified category */}
-              <Route path='/products/:category' element={<ProductsPage />} />
+          {/* Redirect '/' and '/products' to '/products/all' */}
+          <Route index            element={<Navigate to='/products/all'/>} />
+          <Route path='/products' element={<Navigate to='/products/all'/>} />
 
-              {/* Routes that show product details for a given product via id */}
-              <Route path='/products/:category/:id' element={<ProductDetailsPage />} />
-              {/*<Route path='/products/all/:id' element={<ProductDetails />} /> */}
+          {/* Route for page with all */}
+          <Route path='/products/all'    element={< ProductsPage />}  />
 
-              {/* Dedicated cart page (fallback route for the main 'Cart Slider' overlay) */}
-              <Route path='/cart' element={<CartPage />} />
+          {/* Route returns all products for specified category */}
+          <Route path='/products/:category' element={<ProductsPage />} />
 
-              {/* Dedicated User Login page */}
-              <Route path='/auth/login' element={<Navigate to='/login'/>} />
-              <Route path='/login' element={<LoginPage/>} />
+          {/* Routes that show product details for a given product via id */}
+          <Route path='/products/:category/:id' element={<ProductDetailsPage />} />
+          {/*<Route path='/products/all/:id' element={<ProductDetails />} /> */}
 
-              {/* Dedicated User account Registration page */}
-              <Route path='/auth/register' element={<Navigate to='/register'/>} />
-              <Route path='/register' element={<RegisterPage/>} />
-            </Route>
+          {/* Dedicated cart page (fallback route for the main 'Cart Slider' overlay) */}
+          <Route path='/cart' element={<CartPage />} />
 
-            {/* Protected Routes Layout */}
-            <Route element={<ProtectedPageLayout />}>
+          {/* Dedicated User Login page */}
+          <Route path='/auth/login' element={<Navigate to='/login'/>} />
+          <Route path='/login' element={<LoginPage/>} />
 
-              {/* Page shows user's profile information AND allows user to edit his/her profile information */}
-              <Route path='/profile' element={<ProfilePage />} />
+          {/* Dedicated User account Registration page */}
+          <Route path='/auth/register' element={<Navigate to='/register'/>} />
+          <Route path='/register' element={<RegisterPage/>} />
+         </Route>
 
-              {/* Page displays user's order history in table format (each row is a record for a past order) */}
-              <Route path='/orders' element={<OrderHistoryPage />} />
+          {/* Protected Routes Layout */}
+          <Route element={<ProtectedPageLayout />}>
 
-              {/* Page shows details for a specific order via link in order history page */}
-              <Route path='/orders/:orderId' element={<OrderDetailsPage />} />
+            {/* Page shows user's profile information AND allows user to edit his/her profile information */}
+            <Route path='/profile' element={<ProfilePage />} />
 
-            </Route>
+            {/* Page displays user's order history in table format (each row is a record for a past order) */}
+            <Route path='/orders' element={<OrderHistoryPage />} />
+
+            {/* Page shows details for a specific order via link in order history page */}
+            <Route path='/orders/:orderId' element={<OrderDetailsPage />} />
 
           </Route>
 
-          {/* Layout  for Checkout Process/Page(s) (also considered a PROTECTED page */}
-          <Route element={<CheckoutPageLayout />}>
-            <Route path='/checkout' element={<CheckoutPage />} />
-          </Route>
+        </Route>
 
-        </Routes>
-      </Router>
-    );
+        {/* Layout  for Checkout Process/Page(s) (also considered a PROTECTED page */}
+        <Route element={<CheckoutPageLayout />}>
+          <Route path='/checkout' element={<CheckoutPage />} />
+        </Route>
+
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;
