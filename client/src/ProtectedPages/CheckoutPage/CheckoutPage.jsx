@@ -346,7 +346,7 @@ const CheckoutPage = () => {
       
       const clientSecret = result.clientSecret;
       const paymentResult = await confirmStripePayment(clientSecret);
-      const orderId = result.orderId;
+      const newOrderId = result.orderId;
 
       if (paymentResult.error) {
 
@@ -359,7 +359,9 @@ const CheckoutPage = () => {
       else if (paymentResult.paymentIntent.status === 'succeeded') {
         dispatch(clearCart()); // removes products from cart state
         //console.log('Succesfully made it to payment status!!!');
-        navigate('/profile'); // Navigate to profile for time being
+        //navigate('/profile'); // Navigate to profile for time being
+        navigate(`/orders/${newOrderId}`, { state: { fromCheckoutSuccess: true } });
+
       }
     } 
     catch (error) {

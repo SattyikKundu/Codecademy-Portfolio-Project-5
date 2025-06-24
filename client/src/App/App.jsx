@@ -71,13 +71,13 @@ const App = () => {
               <Route path='/orders' element={<OrderHistoryPage />} />
 
               {/* Page shows details for a specific order via link in order history page */}
-              <Route path='/orders/:id' element={<OrderDetailsPage />} />
+              <Route path='/orders/:orderId' element={<OrderDetailsPage />} />
 
             </Route>
 
           </Route>
 
-          {/* Layout  for Checkout Process/Page(s) (considered a 'protected' page */}
+          {/* Layout  for Checkout Process/Page(s) (also considered a PROTECTED page */}
           <Route element={<CheckoutPageLayout />}>
             <Route path='/checkout' element={<CheckoutPage />} />
           </Route>

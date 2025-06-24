@@ -132,11 +132,18 @@ const OrderHistoryPage = () => { //
       header: 'Details',
       id: 'view_details', // use custom id instead of accessorKey for 'cell'
       enableSorting: false,
-      cell: ({ row }) => (
-        <span className="view-link" onClick={() => navigate(`/orders/${row.original.order_id}`)}>
-         View
-        </span>
-      )
+      cell: ({ row }) => {
+        //console.log("🛠 row object for View column:", row);
+        return (
+          <span 
+            className="view-link" 
+            //onClick={() => navigate(`/orders/${row.original.order_id}`)}
+            onClick={() => navigate(`/orders/${row.getValue('order_details')}`)}
+          >
+          View
+          </span>
+        );
+      }
     },
   ];
 

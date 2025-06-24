@@ -1,0 +1,318 @@
+/***********************************************************************************************/
+/************************* Main container for Order Details page *******************************/
+/***********************************************************************************************/
+
+.order-details-page {
+  display: flex;          /* flex display */
+  flex-direction: column;
+
+  padding: 2rem 1.5rem;  /* padding around content*/
+
+  max-width: 680px;      /* container dimensions and container */
+  width: 88% !important; 
+  margin: 100px auto auto auto;
+
+  border-radius: 10px; /* container border styling */
+  border: 1px solid rgba(0, 0, 0, 0.3); 
+  box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, 0.05),
+              0px 0px 3px 2px rgba(0, 0, 0, 0.05),
+              0px 0px 3px 2px rgba(0, 0, 0, 0.05),
+              0px 0px 3px 2px rgba(0, 0, 0, 0.05);  
+
+  font-family: Arial, Helvetica, sans-serif; /* font family and color styling */
+  color: #333; 
+}
+
+/***********************************************************************************************/
+/********* Order Success (if redirected from checkout) and Order Summary banner stylings *******/
+/***********************************************************************************************/
+
+.order-thankyou-banner {
+  background-color: #e6f4ea;
+  border-left: 6px solid #4CAF50;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 6px;
+
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+}
+
+.order-thankyou-banner h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.order-thankyou-banner div {
+  margin: 0.5rem 0 0 0;
+  font-size: 1rem;
+  color: #444;
+  text-align: center;
+}
+
+.order-viewing-banner {
+  background-color: #d0e0e7;
+  color: #333;
+  padding: 1.2rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+
+/***********************************************************************************************/
+/******************** Order meta details (order ID and order date) *****************************/
+/***********************************************************************************************/
+
+.order-meta { /* wrapper for order meta data */
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#order-id-span { /* styling for order Id field label */
+  font-weight: bold;
+}
+
+#order-date-span { /* styling for order date field label */
+  font-weight: bold;
+}
+
+/***********************************************************************************************/
+/******************** Order meta details (order ID and order date) *****************************/
+/***********************************************************************************************/
+
+.shipping-info > div { /* wrapper holding shipping address data*/
+  margin-bottom: 0.55rem;
+}
+
+.shipping-info h3 { /* sub-section header title for shipping address section */
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 0.25rem;
+  margin-bottom: 0.75rem;
+}
+
+#ship-info-name, 
+#ship-info-email, 
+#ship-info-phone, 
+#ship-info-address{ /* General text styling for the  Shipping address section (field values) */
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 1.05rem;
+}
+
+#ship-info-name    > span, 
+#ship-info-email   > span, 
+#ship-info-phone   > span, 
+#ship-info-address > span { /* Specific styling for the field labels */
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    
+}
+
+/* Custom margins for field data balues alignment*/
+#ship-info-name > span { margin-right: 21px;} 
+#ship-info-email >span {margin-right:  21px;}
+#ship-info-phone >span {margin-right:  14px;}
+
+
+#ship-info-address { /* Styling fro order address alignment and margins */
+    display: flex;
+    flex-direction: row;
+}
+#ship-info-address > span{ margin-right: 6px; }
+
+/***********************************************************************************************/
+/******************** Table header and cells deep styling **************************************/
+/***********************************************************************************************/
+
+.purchased-items h3 { /* header title for purchased items table*/
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 0.25rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.purchased-items table { /* table itself*/
+  width: 100%;
+  border-collapse: collapse; /* no space between cells */
+  margin-bottom: 1rem;
+}
+
+.purchased-items th,
+.purchased-items td { /* general styling of all header and data cells */
+  text-align: left;
+  padding: 0.75rem;
+  border-bottom: 1px solid #ddd;
+  font-size: 0.95rem;
+}
+
+.purchased-items th { /* background color of header area */
+  background-color: #f8f8f8;
+}
+
+/* centers quantity header and data values */
+.purchased-items #qty-header { text-align: center;}
+.purchased-items #table-quantity-data { text-align: center;}
+
+/* centers unit price header and data values */ 
+.purchased-items #unit-header { text-align: center; }
+.purchased-items #table-unit-price-data { text-align: center; }
+
+/* right-aligns total price header and data values */ 
+.purchased-items #total-header {text-align: right;}
+.purchased-items #table-item-total-data { text-align: right;}
+
+
+.product-thumb { /* styles container for product image thumbnail*/
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+/***********************************************************************************************/
+/*********************** Order summary styling section *****************************************/
+/***********************************************************************************************/
+
+.order-summary-details { /* order summary container basic styling */
+  font-size: 1rem;
+  width: 100%;
+  margin: 0 0 2rem 0;
+  padding: 0;
+}
+
+.order-summary-details h3 { /* sub-section header title for shipping address section */
+  border-bottom: 1px solid #ccc;
+  width: 100%;
+  padding-bottom: 0.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.order-summary-details div { /* Breakdown of costs in order */
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.375rem;
+}
+
+.order-summary-details div strong {
+    font-size: 1.05rem;
+}
+
+.order-summary-details hr { /* styling for separation bar */
+  margin: 0.5rem 0;
+  border: none;
+  border-top: 1px solid #ccc;
+}
+
+/***********************************************************************************************/
+/*************************** Order action buttons **********************************************/
+/***********************************************************************************************/
+
+.order-actions { /* order action buttons container */
+  display: flex;
+  justify-content: space-around;
+}
+
+@media screen and (max-width: 500px) { /* fit buttons for smaller screen */
+    .order-actions {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+}
+
+.order-actions button { /* general styling for order details buttons */
+
+  width: 200px; /* button dimensions */
+  padding: 0.65rem;
+
+  color: white; /* font color and styling */
+  font-weight: bold;
+  font-size: 1rem;
+
+  background-color: #2394e0; /* button color */
+
+  border-radius: 0.4rem; /* button border styling */
+  border: 1px solid #1d81c4;
+  box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, 0.070),
+              0px 0px 3px 2px rgba(0, 0, 0, 0.070),
+              0px 0px 3px 2px rgba(0, 0, 0, 0.070),
+              0px 0px 3px 2px rgba(0, 0, 0, 0.070);  
+
+  cursor: pointer;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10px;
+
+  transition: background-color 0.2s ease;
+}
+
+.order-actions button:hover { /* button styling on hover */
+  background-color: #136196;
+}
+
+.order-actions button:active {
+    transform: scale(0.9);
+}
+
+
+.order-details-loading,
+.order-details-error {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #666;
+  margin-top: 3rem;
+}
+
+/***********************************************************************************************/
+/***************** Styling adjustments for tablet/mobile screen sizes **************************/
+/***********************************************************************************************/
+
+@media screen and (max-width: 600px) { /* gradually shrinks order page padding */
+  .order-details-page {
+    padding: clamp(0.75rem, 6.25vw, 2rem) 
+             clamp(0.6rem,  3.5vw,  1.5rem);  /* padding around content*/
+  }
+}
+
+@media screen and (max-width: 480px) {
+
+  /* order meta data at mobile screen size*/
+  .order-meta {      flex-direction: column; }
+  #order-id-span {   margin-right: 22px;     }
+  #order-date-span { margin-right: 3px;      }
+
+
+  #ship-info-address{ /* Shipping info styling on mobile*/
+    flex-direction: column;    
+  }
+  #ship-info-address > div{
+    font-size: clamp(0.95rem, 3.8vw, 1.05rem);
+  }
+
+  .order-details-page { /* gradually shrinks top margin to 80px */
+    margin:clamp(80px, 20vw, 100px) auto auto auto;
+  }
+
+  .purchased-items th, .purchased-items td {
+    text-align: center;
+    padding: clamp(0.5rem, 3vw, 0.75rem);
+    border-bottom: 1px solid #ddd;
+    font-size: clamp(0.66rem, 3vw, 0.95rem);
+  }   
+}
+
+@media screen and (max-width: 340px) {
+  .product-thumb { /* styles container for product image thumbnail*/
+    width: clamp(50px, 17.5vw, 60px);
+    height: clamp(50px, 17.5vw, 60px);
+  }
+}

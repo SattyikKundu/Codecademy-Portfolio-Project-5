@@ -47,11 +47,10 @@ export const getOrderDetailsById = async (userId, orderId) => { // Fetch full or
       products.display_name,    -- product items' display name and image URL
       products.image_url
 
-    FROM orders
-    JOIN order_items ON orders.id = order_items.order_id
-    JOIN products ON order_items.product_id = products.id
-    WHERE orders.id = $1 AND orders.user_id = $2
-  `;
+    FROM  orders
+    JOIN  order_items  ON  orders.id=order_items.order_id
+    JOIN  products     ON  order_items.product_id=products.id
+    WHERE orders.id=$1 AND orders.user_id=$2`;
 
   const result = await pool.query(query, [orderId, userId]);
   const rows = result.rows; // extract 'rows' from result
@@ -75,17 +74,24 @@ export const getOrderDetailsById = async (userId, orderId) => { // Fetch full or
     shipping_cost:  rows[0].shipping_cost,
     total:          rows[0].total,
     items:          [], // stores items in order
+    quantity_total: 0   // total quantity of products
   };
 
 
   rows.forEach(row => {   // Loop over all order's items and PUSH into items [] array
+
+    const itemQuantity = parseInt(row.quantity); // ensures values are parsed as int
+    const itemPrice    = parseFloat(row.price_each);
+
     order.items.push({
       product_name: row.display_name,
       image_url:    row.image_url,
-      quantity:     row.quantity,
-      unit_price:   row.price_each,
+      quantity:     itemQuantity,
+      unit_price:   itemPrice,
       total:        parseFloat(row.quantity) * parseFloat(row.price_each),
     });
+
+    order.quantity_total += row.quantity; // accumulates to return total item quantity in order
   });
 
   return order;

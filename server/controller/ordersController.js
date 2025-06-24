@@ -21,8 +21,7 @@ export const fetchUserOrders = async (req, res) => { // fetch orders for specifi
 export const getOrderDetails = async (req, res) => { // fetches order details for  '/orders/:orderId'
 
   try {
-
-    const userId = req.user.id; // extract parameters from request body (user.id from auth cookie)
+    const userId  = req.user.id; // extract parameters from request body (user.id from auth cookie)
     const orderId = req.params.orderId;
 
     const orderDetails = await getOrderDetailsById(userId, orderId); // get order details
@@ -32,7 +31,7 @@ export const getOrderDetails = async (req, res) => { // fetches order details fo
     }
 
     res.status(200).json({orderDetails: orderDetails});
-    
+
   } 
   catch (error) {
     console.error('Failed to fetch order details: ', error);
