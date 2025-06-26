@@ -7,28 +7,69 @@ import React, {
 
 import { useNavigate } from "react-router-dom"; // used to programmatically navigate to a route (ex: via Javascript logic)
                                                 // In contrast, <Link> is like traditional href="" in React component form.
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom"; // use to track and get URL location data
 
 import { debounce } from 'lodash'; // debounce logic from 'lodash' used to delay execution between functions
                                    // for a fixed time; this reduces # of request over fast multi-clicking.
 
 import './menuCategories.css';
 
-const CategoryButtons = () => {
-
+const CategoryButtons = ({ clearSearchBar }) => {
 
     const location = useLocation();                  // used to get/track path vaues from the url route
     const navigate = useNavigate();                  // initalizes navigate function
     const [menuOpen, setMenuOpen] = useState(false); // tracks when dropdown menu is open or closed
     const [selected, setSelected] = useState(null);  // tracks selection choice from header menu (or dropdown menu for small screens)
 
-    // Category and path variables (stored nested in array)
-    const categories = [
+    const categories = [  // Category and path variables (stored nested in array), used to 'navigate' between categories
         {name: 'All',               path: '/products/all'               },
         {name: 'Fishes',            path: '/products/fishes'            },
         {name: 'Invertebrates',     path: '/products/invertebrates'     },
         {name: 'Corals & Anemones', path: '/products/corals_&_anemones' }
     ];
+
+    /* Colors of category buttons (when selected/unselected) for desktop screen sizes  */
+    const textColor         = '#fff';     // button text color (white)
+    const selectBttnColor   = '#136196';  // button color (or 'foreground color') when selected
+    const unSelectBttnColor = '#2394e0';  // button color when unselected
+
+
+    const dropDownRef= useRef(null); // used for reference to dropdown menu when detecting 
+                                     // clicks outside dropdown menu via useEffect()
+
+    /* Drop-down menu option styling colors (for mobile screen sizes) */ 
+    const selectedBG   = '#2394e0'; // background color of selected option 
+    const unSelectedBG = 'transparent'; // background color of unselected option
+    const selectedFG   = '#fff';        // text color (or 'foreground color') of selected option
+    const unSelectedFG = '#000';        // text color of unselected option
+
+
+    /**************************************************************************************************************/
+    /********************* All functions for component ************************************************************/
+    /**************************************************************************************************************/
+
+    /* Create custom debounced navigation function */
+    const debouncedNavigate = useMemo(() => // useMemo() ensures function is only created once and can be reused between renderss
+        debounce((category, path) => {      // create custom debounce function
+            setSelected(category);          // set current selected category
+            navigate(path);                 // route to navigate to
+        }, 250),                            // Delay of 250ms between function calls 
+    []);                                    // ensures that 'debouncedNavigate' is only mounted once
+
+
+    const handleClick = (category, path) => { // click for route naviagation
+        clearSearchBar();                     // execute passed clearSearchBar() method
+        debouncedNavigate(category, path);    // route parameters
+        setMenuOpen(false);                   // for mobile screen, closes drop-down menu if open
+    }
+
+    const openMenu = () => { // toggles opening/closing of dropdown menu
+        setMenuOpen(prev => !prev);
+    }
+
+    /**************************************************************************************************************/
+    /********************* All useEffect() for component **********************************************************/
+    /**************************************************************************************************************/
 
     useEffect(() => { // useEffect that determines current products' category from url params (and highlight appropriate button)
                       // If on another path like '/cart' instead of '/products/:catergory', NO buttons will be selected/highlighted
@@ -40,27 +81,6 @@ const CategoryButtons = () => {
         setSelected(match ? match.name : null);  // Finally, if match found, set selected (otherwise 'null') 
     }, [location.pathname]);                     // dependency is the url path.
 
-
-    const dropDownRef= useRef(null); // used for reference to dropdown menu when detecting 
-                                     // clicks outside dropdown menu via useEffect()
-
-
-    /* Create custom debounced navigation function */
-    const debouncedNavigate = useMemo(() => // useMemo() ensures function is only created once and can be reused between renderss
-        debounce((category, path) => {      // create custom debounce function
-            setSelected(category);          // set current selected category
-            navigate(path);                 // route to navigate to
-        }, 250),                            // Delay of 250ms between function calls 
-    []);                                    // ensures that 'debouncedNavigate' is only mounted once
-
-    const handleClick = (category, path) => { // click for route naviagation
-        debouncedNavigate(category, path);    // route parameters
-        setMenuOpen(false);                   // for mobile screen, closes drop-down menu if open
-    }
-
-    const openMenu = () => { // toggles opening/closing of dropdown menu
-        setMenuOpen(prev => !prev);
-    }
 
     useEffect(()=>{ // useEffect closes drop-down menu if clicked outside of drop-down menu while opened.
         const handleOutsideClick = (event) => {
@@ -80,16 +100,6 @@ const CategoryButtons = () => {
     },[]) // runs once on component mount
 
 
-    /* Drop-down menu option styling colors (for mobile screen sizes) */ 
-    const selectedBG   = '#2394e0'; // background color of selected option 
-    const unSelectedBG = 'transparent'; // background color of unselected option
-    const selectedFG   = '#fff';        // text color (or 'foreground color') of selected option
-    const unSelectedFG = '#000';        // text color of unselected option
-
-    /* Colors of category buttons (when selected/unselected) for desktop screen sizes  */
-    const textColor         = '#fff';     // button text color (white)
-    const selectBttnColor   = '#136196';  // button color (or 'foreground color') when selected
-    const unSelectBttnColor = '#2394e0';  // button color when unselected
 
     return (
        <>

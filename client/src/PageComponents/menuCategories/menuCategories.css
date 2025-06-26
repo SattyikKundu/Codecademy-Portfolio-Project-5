@@ -121,6 +121,8 @@
     height: fit-content;
     
     cursor: pointer;
+
+    outline: none; /* no dark outline on press/hold as result of Google browser */
 }
 
 .button:hover { /* button style on hover */

@@ -22,6 +22,7 @@ import CheckoutPage     from '../ProtectedPages/CheckoutPage/CheckoutPage.jsx'; 
 import OrderHistoryPage from '../ProtectedPages/OrderHistoryPage/OrderHistoryPage.jsx'; // page lists user's order history 
 import OrderDetailsPage from '../ProtectedPages/OrderDetailsPage/OrderDetailsPage.jsx'; // page shows details for a specific order
 
+// Util component to auto-scroll to top on each new page
 import ScrollToTop from '../utils/scrollToTop.jsx';
 
 

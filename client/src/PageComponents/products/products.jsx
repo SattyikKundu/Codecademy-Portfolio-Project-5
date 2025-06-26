@@ -8,7 +8,12 @@ const Products = ({products}) => { /* Presents products in grid format (like in 
         <div className="products-wrapper">
             <div className="products-grid">
                 {
-                products.map((product) => (<Product key={product.id} product={product} />))
+                products.map((product) => (
+                  <Product 
+                    key={product.id} 
+                    product={product} 
+                  />
+                ))
                 }
             </div>
         </div>

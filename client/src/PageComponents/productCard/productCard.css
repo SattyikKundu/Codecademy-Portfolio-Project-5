@@ -162,3 +162,14 @@
     margin: auto;
 }
 
+/******************************************************************************/
+/******* Styling of <mark> element so search query term is highlighted ********/
+/******************************************************************************/
+
+mark {
+  all: unset;           /* Reset browser default styles */
+  background-color: yellow;
+  padding: 0;
+}
+
+

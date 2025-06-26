@@ -1,8 +1,9 @@
 import {useEffect, useState} from "react";
 import axios from "axios"; // used to make HTTP request to backend
 
-import { useParams,    // extract parameter values from route's url
-         useNavigate   // used to handle url routes programatically
+import { useParams,      // extract parameter values from route's url
+         useNavigate,    // used to handle url routes programatically
+         useSearchParams // extract search param value from route's url
         } from "react-router-dom"; 
 
 import { 
@@ -121,12 +122,32 @@ const Product = ({product}) => {
         }
     }
 
+    
+    const highlightText = (text) => { // Highlight search term INSIDE product name when use searchs product in search bar
 
-   // useEffect(() => {
-   //     checkStockState();
-   // },[product, product.stock]); // function run on mount or when product (or product.stock) changes
+        const [searchParams] = useSearchParams(); // get search param from url
+        const searchQuery = searchParams.get("search")?.toLowerCase(); // lowercase the search term
 
-    useEffect(() => {
+        if (!searchQuery || !text.toLowerCase().includes(searchQuery)) { // If no search query, return text as is
+            return <span>{text}</span>;
+        } 
+
+        const index = text.toLowerCase().indexOf(searchQuery); // get starting index of search query term
+        const before = text.slice(0, index);                   // portion of text BEFORE hightlighted section of name
+        const match = text.slice(index, index + searchQuery.length); // highlighted section of name matching search term
+        const after = text.slice(index + searchQuery.length);        // text portion AFTER highlighted section of name
+
+        return ( // <span> ensures all text functions as ONE unit (no awkward broken sentence strings)
+            // <mark> is still inline, but nested correctly inside an inline container 
+            <div>
+                <span>{before}</span>
+                <mark>{match}</mark> 
+                <span>{after}</span>
+            </div>
+        );
+    };
+
+    useEffect(() => { // checks stock state and if product details link work on mount
         createProductDetailsLink();
         checkStockState();
     },[]);
@@ -139,7 +160,8 @@ const Product = ({product}) => {
                     <img src={imgPath} alt={product.display_name} className="product-image" />
                 </div>
                 <div className='product-name'>
-                    {product.display_name}
+                    {/* Ensures search term can be higlighted */}
+                    {highlightText(product.display_name)}
                 </div>
             </div>
             <div className="price-and-stock">

@@ -1,14 +1,20 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // used to import FontAwesomeIcons
 import { faFishFins } from '@fortawesome/free-solid-svg-icons';
 
+
 import CategoryButtons from "../menuCategories/menuCategories.jsx";
 import MenuSearch      from "../menuSearch/menuSearch.jsx";
 import ProfileButton   from "../menuUserProfile/menuUserProfile.jsx";
 import CartButton      from "../menuCartBttn/menuCartBttn.jsx";
 
+import { useState } from 'react';
+
 import './menu.css';
 
 const Menu = ({toggleCart}) => {
+
+    const [searchInput, setSearchInput] = useState(''); // tracks the local input from search bar
+
     return (
         <div className="header-menu">
           <div className="logo-container">
@@ -17,8 +23,14 @@ const Menu = ({toggleCart}) => {
             </div>
             <span id="store-name">Ocean</span>
           </div>
-          <CategoryButtons />
-          <MenuSearch />
+    
+          <CategoryButtons 
+            clearSearchBar={() => setSearchInput('')}  // 
+          />
+          <MenuSearch 
+            localInput={searchInput}        // passes stores searchInput as localInput for text in search bar
+            setLocalInput={setSearchInput}  // stores search input via typing (or resetting via resetSearch())
+          />
           <ProfileButton />
           <CartButton
             toggleCart={toggleCart}

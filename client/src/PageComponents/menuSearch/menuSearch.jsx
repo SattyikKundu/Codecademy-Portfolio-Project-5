@@ -5,11 +5,10 @@ import SearchTextBox from './menuSearchTextBox.jsx';
 
 import './menuSearch.css';
 
-const MenuSearch = () => { // component for handling all searches in menu
+const MenuSearch = ({ localInput, setLocalInput }) => { // component for handling all searches in menu
+ 
 
-  const [localInput, setLocalInput] = useState(''); // stores and handles text in search box
   const [overlayToggle, setOverlayToggle] = useState(false); // tracks when to toggle open/close overlay
-
 
   const toggleOverlay = () => { // togglesOverlay
     setOverlayToggle(prev => !prev);
@@ -44,7 +43,11 @@ const MenuSearch = () => { // component for handling all searches in menu
         (overlayToggle) && ( // if toggle is TRUE, show overlay
           <div className="search-overlay-background" >
             <div className="search-overlay-main">
-              <SearchTextBox localInput={localInput} setLocalInput={setLocalInput} />
+              <SearchTextBox 
+                localInput      ={localInput} 
+                setLocalInput   ={setLocalInput} 
+                setOverlayToggle={setOverlayToggle} // passes function so 'search' overlay can close on submitting search
+              />
               <button className='close-overlay' onClick={toggleOverlay}>🗙</button>
             </div>
           </div>
