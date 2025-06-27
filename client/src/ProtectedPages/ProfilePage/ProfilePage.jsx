@@ -9,6 +9,7 @@ import { formatTimestampToMDY } from "../../utils/utilityFunctions";
 import { groupedStateOptions } from "../../utils/statesOfAmericaData";
 
 import { ErrorMessageToast, SuccessMessageToast } from "../../utils/utilityFunctions";
+import FooterBottom from "../../PageComponents/footerBottom/footerBottom";
 
 import './ProfilePage.css';
 
@@ -28,10 +29,6 @@ const ProfilePage = () => {
     }
   }, [location.state]);
 
-  // const user = useSelector((state) => state.auth.user);
-  // useEffect(()=> {
-  //   console.log('state.auth.user: ',user);
-  // },[]);
 
   const fetchProfile = async () => { // async function for fetching user's profile data
     setLoading(true);
@@ -95,6 +92,8 @@ const ProfilePage = () => {
 
   if(!loading){
   return (
+    <>
+    <div className="profile-page-wrapper-full">
     <form className='profile-info-grid' onSubmit={handleSubmit}>
       <h2 id="profile-header-1">
         Profile Information
@@ -170,6 +169,9 @@ const ProfilePage = () => {
       <div />
       <button type="submit" id='profile-submit'>Save All Changes</button>
     </form>
+    </div>
+    <FooterBottom />
+    </>
   );
   }
 };

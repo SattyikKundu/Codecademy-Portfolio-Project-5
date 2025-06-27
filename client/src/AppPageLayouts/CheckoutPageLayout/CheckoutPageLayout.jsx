@@ -13,6 +13,8 @@ import {setUserFromToken, clearUser} from  '../../Slices/authSlice'; // redux ac
 import { Elements } from '@stripe/react-stripe-js'; // imports for Stripe
 import { loadStripe } from '@stripe/stripe-js';
 
+import FooterBottom from "../../PageComponents/footerBottom/footerBottom";
+
 import './CheckoutPageLayout.css';
 
 /* <CheckoutPageLayout> is a separate layout from the others
@@ -59,8 +61,10 @@ const CheckoutPageLayout = () => {
     const isAuthenticated = useSelector((state) =>  state.auth.isAuthenticated); // checks if user is authenticated
 
     const checkingUserAuth = async () => {
-      if(!isAuthenticated) { // If user already authenticated, skip this step
-        try { // verify is user is authenticated
+      try { // verify is user is authenticated (if user is already authenticated, "loading state" can still end)
+
+        if(!isAuthenticated) { // If user already authenticated, skip this step
+        
             const response = await axios.get( // Send GET request to '/auth/me' to verify JWT in cookie
                 'http://localhost:5000/auth/me',
                  { withCredentials: true } // Ensure cookie is sent with request
@@ -68,14 +72,16 @@ const CheckoutPageLayout = () => {
 
             if (response.data.user) {
                 dispatch(setUserFromToken(response.data.user)); // If successful, dispatch user data to Redux store
+            } else {
+                dispatch(clearUser());   
             }
         } 
-        catch(error) {  // If token fails (i.e. expired token), clear user from redux
-            dispatch(clearUser()); 
-        }
-        finally {
-            setCheckingAuth(false); // mark that checking authentication is finished
-        }
+      }
+      catch(error) {  // If token fails (i.e. expired token), clear user from redux
+        dispatch(clearUser()); 
+      }
+      finally {
+        setCheckingAuth(false); // mark that checking authentication is finished
       }
     }
     
@@ -83,8 +89,9 @@ const CheckoutPageLayout = () => {
         checkingUserAuth();
     },[dispatch])
 
-    if(checkingAuth) { // Set to 'Loading..' if user auth is being checked
-        return (<h1>Loading....</h1>);
+
+    if(checkingAuth) { // Set to "loading state" if user auth is being checked
+        return (<h1 style={{marginTop: '3rem'}}>Loading payment gateway...</h1>);
     }
 
     if(!isAuthenticated) { // If user is unauthorized, redirect to login page (since 'guests' cannot access checkout)
@@ -99,6 +106,7 @@ const CheckoutPageLayout = () => {
     }
 
     return (
+        <>
         <div className="checkout-body">
 
             {/* <Outlet/> where content is injected based on chosen route */}
@@ -110,6 +118,8 @@ const CheckoutPageLayout = () => {
             <Toaster position={'top-center'} containerStyle={{ top: 44 }} /> 
            
         </div>
+        <FooterBottom/>
+        </>
     );
 }
 

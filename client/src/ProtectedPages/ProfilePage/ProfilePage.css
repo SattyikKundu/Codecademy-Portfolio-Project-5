@@ -1,9 +1,16 @@
-.profile-info-grid {
+.profile-page-wrapper-full { /* wrapper to hold page content AND make bottom space for footer */
+  display: flex;
+  min-width: 100vw !important;
+  min-height : calc(100vh - var(--footer-height)) !important; /* subtracts footer height from visual height via variable */
+}
+
+.profile-info-grid { /* Main porfile <form> container */
     display: flex;
     flex-direction: column;
     align-items: center; /* vertically center items in flex */
 
-    margin: 100px auto auto auto;
+    margin: 100px auto 3rem auto; /* Avoids header menu, centers profile, and make bottom space from footer */
+
     width: 94%;
     max-width: 560px;
 
@@ -14,16 +21,16 @@
                 0px 0px 3px 2px rgba(0, 0, 0, 0.05),
                 0px 0px 3px 2px rgba(0, 0, 0, 0.05);
 
-    border: 1px solid rgba(0, 0, 0, 0.3); /**/
+    border: 1px solid rgba(0, 0, 0, 0.3); 
 }
 
-#profile-header-1 {
+#profile-header-1 { /* First profile section's header title */
     font-family: Arial, Helvetica, sans-serif;
     padding: 1rem 2rem;
     text-align: center;
 }
 
-#profile-header-2 {
+#profile-header-2 { /* Second profile section's header title */
     display: flex;
     flex-direction: column;
     font-family: Arial, Helvetica, sans-serif;
@@ -34,7 +41,7 @@
     white-space: normal;
 }
 
-#profile-header-2::after{
+#profile-header-2::after{ /* second text part of 2nd header title */
     content:' (products ONLY shipped within U.S. currently)';
     font-size: 1rem;
 }
@@ -58,12 +65,12 @@
     cursor: pointer;
 }
 
-#profile-submit:hover {
+#profile-submit:hover { /* form submit button on hover */
     background-color: rgb(94, 26, 158);
     border: 1px solid rgb(110, 29, 185); 
     box-shadow: 0px 0px 3px 2px rgba(155, 85, 221, 0.75);
 }
 
-#profile-submit:active{
+#profile-submit:active{ /* form submit button on active press */
     transform: scale(0.9);
 }

@@ -2,15 +2,22 @@
 /************************* Main container for Order Details page *******************************/
 /***********************************************************************************************/
 
+.order-details-page-wrapper { /* wrapper to hold page content AND make bottom space for footer */
+  display: flex;
+  min-width: 100vw !important;
+  min-height : calc(100vh - var(--footer-height)) !important; /* subtracts footer height from visual height via variable */
+}
+
+
 .order-details-page {
-  display: flex;          /* flex display */
+  display: flex;       /* flex display */
   flex-direction: column;
 
-  padding: 2rem 1.5rem;  /* padding around content*/
+  padding: 2rem 1.5rem; /* padding around content*/
 
-  max-width: 680px;      /* container dimensions and container */
+  max-width: 680px;     /* container dimensions and container */
   width: 88% !important; 
-  margin: 100px auto auto auto;
+  margin: 100px auto 3rem auto; /* 100px from top viewport AND 3rem from bottom footer */
 
   border-radius: 10px; /* container border styling */
   border: 1px solid rgba(0, 0, 0, 0.3); 
@@ -21,6 +28,11 @@
 
   font-family: Arial, Helvetica, sans-serif; /* font family and color styling */
   color: #333; 
+}
+
+.order-details-spacer { /* "spacer" block at bottom to make space under profile container  */
+    height: 3rem;
+    background-color: transparent;
 }
 
 /***********************************************************************************************/

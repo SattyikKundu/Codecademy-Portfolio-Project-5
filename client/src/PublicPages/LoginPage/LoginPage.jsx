@@ -7,6 +7,7 @@ import { ErrorMessageToast, SuccessMessageToast } from "../../utils/utilityFunct
 
 import { setUser } from "../../Slices/authSlice"; // redux action to store data
 import { loadCartFromServer } from "../../Slices/cartSlice";
+import FooterBottom from "../../PageComponents/footerBottom/footerBottom";
 
 import './LoginPage.css';
 
@@ -123,6 +124,8 @@ const LoginPage = () => { // login component with default login header message
     }
 
     return (
+      <>  
+      <div className="login-page-full">
         <div className="login-form-box">
 
             {/* Login form header */}
@@ -182,6 +185,9 @@ const LoginPage = () => { // login component with default login header message
                     <p>(Google login not functional yet — backend config pending)</p> 
                 */}
         </div>
+      </div>
+      <FooterBottom />
+      </>
     );
 }
 

@@ -9,7 +9,10 @@
     display: flex; /* Nested children in column orientation */
     flex-direction: column;
 
-    margin: 100px auto auto auto; /* 100px margin from top (accounts for (for space from menu) plus horizontal centering */
+    margin: 100px auto 3rem auto; /* 100px margin from top (accounts for (for space from menu),
+                                   * 3rem from bottom footer, and 
+                                   * plus horizontal centering 
+                                   */
 
     border-radius: 1.5rem; /* container border styling */
     border: 1px solid rgba(185, 185, 185, 0.781);

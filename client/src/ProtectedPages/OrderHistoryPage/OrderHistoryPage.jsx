@@ -18,6 +18,7 @@ import { formatTimestampToMDY,
          formatTimestampToLongDate } from '../../utils/utilityFunctions'; // custom date formatter(s)
 
 import ShopNowButton from '../../PageComponents/cartShopNowButton/cartShopNowButton';
+import FooterBottom from '../../PageComponents/footerBottom/footerBottom';
 
 import './OrderHistoryPage.css'; // custom styling
 
@@ -174,6 +175,8 @@ const OrderHistoryPage = () => { //
 
   if (ordersLength > 0) {   // Case: orders exist
     return (
+      <>
+      <div className='order-history-page-wrapper'>
       <div className="order-history-page">
 
         {/***** Section: Title *****/}
@@ -280,6 +283,9 @@ const OrderHistoryPage = () => { //
         </table>
         </div>
       </div>
+      </div>
+      <FooterBottom/>
+      </>
     );
   }
 };

@@ -2,13 +2,11 @@ import { useState, useEffect } from "react";
 
 import "./cartSlider.css";
 
-import { 
-         useDispatch, // hook used to dispatch a slice/reducer's actions
-         useSelector  // reads values from store states and subscribes states to updates
-        } from 'react-redux';
+import { useSelector } from 'react-redux';  // reads values from store states and subscribes states to updates
 
 import CartSilderItemCard from "../cartSliderItemCard/cartSliderItemCard";
-import ShopNowButton from "../cartShopNowButton/cartShopNowButton";
+import ShopNowButton      from "../cartShopNowButton/cartShopNowButton";
+import CartCheckOutButton from "../cartCheckoutButton/cartCheckoutButton";
 
 const CartSlider = ({cartSliderOpen, toggleCart}) => { // cart slider shows when user clicks on cart button
 
@@ -83,6 +81,7 @@ const CartSlider = ({cartSliderOpen, toggleCart}) => { // cart slider shows when
                 <div id='value'>Calculated at checkout</div>
               </div> 
             </div>
+            <CartCheckOutButton toggleCart={toggleCart}/>
           </div>
         </div>
 

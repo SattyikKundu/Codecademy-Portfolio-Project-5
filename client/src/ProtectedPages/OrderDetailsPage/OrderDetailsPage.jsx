@@ -5,10 +5,12 @@ import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';     // Icon renderer
 import { faScroll, faHouse } from '@fortawesome/free-solid-svg-icons';// Default sort icon (inactive column)
 
-import Confetti from 'react-confetti';
-import { useWindowSize } from '@react-hook/window-size';
+import Confetti from 'react-confetti';                  // use to 'pour' confetti on screen for celebratory purposes
+import { useWindowSize } from '@react-hook/window-size'; // gets window dimensions to determine area of confetti use
 
 import { formatTimestampToLongDate } from '../../utils/utilityFunctions';
+
+import FooterBottom from '../../PageComponents/footerBottom/footerBottom';
 
 import './OrderDetailsPage.css';
 
@@ -53,6 +55,8 @@ const OrderDetailsPage = () => {
   if (!order)  return <div className="order-details-error">Order not found.</div>;
 
   return (
+    <>
+    <div className='order-details-page-wrapper'>
     <div className="order-details-page">
       {showSuccessMessage  &&  // If true, confetti is visible
       <Confetti 
@@ -152,6 +156,9 @@ const OrderDetailsPage = () => {
         </button>
       </div>
     </div>
+    </div>
+    <FooterBottom />
+    </>
   );
 }
 

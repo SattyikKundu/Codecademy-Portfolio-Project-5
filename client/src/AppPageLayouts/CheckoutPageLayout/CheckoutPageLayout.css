@@ -1,14 +1,14 @@
 .checkout-body {
-    /*width: 100%; */
+
     min-width: 100vw !important;
+    min-height : calc(100vh - var(--footer-height)) !important; /* subtracts footer height from visual height via variable */
     
     margin-top: 0;
-    padding: 0 0 2rem 0; /* Due to bottom-most page components touching screen bottom,
-                          * and with bottom-margin not working, 2rem bottom padding add some
+    padding: 0 0 3rem 0; /* Due to bottom-most page components touching screen bottom,
+                          * and with bottom-margin not working, 3rem bottom padding add some
                           * much needed bottom space. HOWEVER, it doesn't inherit any
                           * background colors and this leaves white space below (revist issue later!!!!)      
                           */
 
-    min-height: 100vh !important;        /* ✅ Ensures it stretches full viewport height */
     background-color: #ececec;
 }

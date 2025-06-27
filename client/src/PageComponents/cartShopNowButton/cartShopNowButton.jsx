@@ -16,7 +16,8 @@ const ShopNowButton = ({toggleCart, emptyCartMessage='Shop to add products...'})
 
         if (isOnProductsPage) { // If already on a products page, just close slider (IF function passed)
             toggleCart?.();  
-        } else {
+        } 
+        else {
             navigate("/products/all"); // otherwise, redirect to default product listing 
                                        // (and close slider cart IF toggle function provided)
             toggleCart?.();            

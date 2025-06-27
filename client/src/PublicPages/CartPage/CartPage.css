@@ -2,6 +2,12 @@
 /************ Cart Page styling **********************************************/
 /*****************************************************************************/
 
+.cart-page-full { 
+  display: flex;
+  min-width: 100vw !important;
+  min-height : calc(100vh - var(--footer-height)) !important; /* subtracts footer height from visual height via variable */
+}
+
 .cart-page-content { /* Holds main content of Cart Page */
 
     display: flex;      /* items in flex-column orientation */
@@ -11,7 +17,7 @@
     width: 90%; /* size matches parent container */
     max-width: 800px;
 
-    margin: 90px auto auto auto;
+    margin: 90px auto 3rem auto;
 
     /*z-index: -1; /* NOTE: Originally, this was done to make layout 'under' the floating menu
                     *       However, this led to a 'layout isolation' problem the preveted

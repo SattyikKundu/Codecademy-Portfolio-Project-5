@@ -7,6 +7,8 @@ import { useParams, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import Products from "../../PageComponents/products/products";
 
+import FooterBottom from "../../PageComponents/footerBottom/footerBottom";
+
 import './ProductsPage.css';
 
 const ProductsPage = () => { // will modify later to handle various categories
@@ -139,6 +141,7 @@ const ProductsPage = () => { // will modify later to handle various categories
             </>
              )}
         </div>
+        <FooterBottom/>
         </>
     );
 };

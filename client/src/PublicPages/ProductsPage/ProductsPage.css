@@ -35,9 +35,13 @@
 
 .products-page { /* Main container of product page */
   padding-top: 4.5rem;
-  /*padding-bottom: 2rem; /* Need to revist the missing */
+  padding-bottom: 2rem; /* Need to revist the missing */
   text-align: center;
-  background-color: #f8f8f8;
+  background-color: #f8f8f8;/**/
+
+  min-height: calc(100vh - var(--footer-height)) !important;/* subtract height of footer*/
+
+  box-sizing: border-box !important;
 }
 
 @media screen and (max-width: 800px) {
@@ -98,3 +102,4 @@
   transition: 0.2s;
   transform: scale(0.90);
 }
+

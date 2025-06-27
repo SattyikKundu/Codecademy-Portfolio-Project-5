@@ -127,7 +127,7 @@ const CheckoutPage = () => {
   /********************* Checkout page's form validation methods ***********************************************/
   /*************************************************************************************************************/
 
-    const validateFormFields = () => { // programatically validates each address field in order from first to last
+  const validateFormFields = () => { // programatically validates each address field in order from first to last
 
     /* Will consider adding a validator for email at a later date */
     if (!validateField({ value: email, message: 'Email is required.', selector: 'input[name="email"]'})){
@@ -358,10 +358,7 @@ const CheckoutPage = () => {
       } 
       else if (paymentResult.paymentIntent.status === 'succeeded') {
         dispatch(clearCart()); // removes products from cart state
-        //console.log('Succesfully made it to payment status!!!');
-        //navigate('/profile'); // Navigate to profile for time being
         navigate(`/orders/${newOrderId}`, { state: { fromCheckoutSuccess: true } });
-
       }
     } 
     catch (error) {

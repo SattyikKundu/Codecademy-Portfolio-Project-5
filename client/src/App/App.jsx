@@ -84,7 +84,7 @@ const App = () => {
 
         </Route>
 
-        {/* Layout  for Checkout Process/Page(s) (also considered a PROTECTED page */}
+        {/* Layout  for Checkout Process/Page(s) (also considered a "PROTECTED" page */}
         <Route element={<CheckoutPageLayout />}>
           <Route path='/checkout' element={<CheckoutPage />} />
         </Route>

@@ -1,0 +1,17 @@
+
+
+footer {
+    display: flex; /* Flex display with text centered */
+    justify-content: center;
+    align-items: center;
+
+    height: var(--footer-height); /* footer dimensions (--footer-height global variable from index.html) */
+    min-width: 100vw !important;
+
+    background-color: rgba(0, 0, 0, 0.8); /* footer background color  */
+
+    color: white; /* text color and styling */
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: var(--footer-font-size);
+    font-weight: bold;
+}

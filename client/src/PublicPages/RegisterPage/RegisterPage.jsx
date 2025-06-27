@@ -2,8 +2,8 @@
 import {useState} from "react";      // track local states
 import axios from "axios";                      // used to send HTTP requests to backend
 import { useNavigate } from "react-router-dom"; // used to progammatically redirecting routes
-
 import { ErrorMessageToast } from "../../utils/utilityFunctions";
+import FooterBottom from "../../PageComponents/footerBottom/footerBottom";
 
 import './RegisterPage.css';
 
@@ -77,7 +77,8 @@ const RegisterPage = () => {
     }
 
     return (
-        <>
+      <>
+      <div className="registration-page-full">
         <div className="registration-form">
 
             {/* Register form header */}
@@ -144,7 +145,9 @@ const RegisterPage = () => {
                 </span>
             </p>
         </div>
-        </>
+      </div>
+      <FooterBottom />
+    </>
     );
 }
 

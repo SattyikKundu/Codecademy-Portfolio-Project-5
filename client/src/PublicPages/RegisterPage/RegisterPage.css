@@ -2,6 +2,16 @@
 /********* Register Account container general stylings ****************/
 /**********************************************************************/
 
+.registration-page-full {
+  display: flex;
+  width: 100vw !important;
+  min-height : calc(100vh - var(--footer-height)) !important; /* subtracts footer height*/
+}
+
+/**********************************************************************/
+/********* Register Account container general stylings ****************/
+/**********************************************************************/
+
 .registration-form { /* Main container box holding for account registration form*/
 
   max-width: 400px; /* container dimensions */
@@ -9,6 +19,7 @@
                      * Also, % isn't working, probably has to go with the fact that there's 
                      * no 'parent' container (only a public page layout) 
                      */
+  height: fit-content;
   margin: 100px auto;
   padding: 2rem;
 

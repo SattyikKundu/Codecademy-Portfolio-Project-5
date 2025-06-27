@@ -5,8 +5,11 @@ import { useSelector } from 'react-redux'; // reads values from store states and
 
 import './CartPage.css';
 
-import CartPageItemCard from "../../PageComponents/cartPageItemCard/cartPageItemCard.jsx";
-import ShopNowButton from "../../PageComponents/cartShopNowButton/cartShopNowButton.jsx";
+/* Imported Cart page components */
+import CartPageItemCard   from "../../PageComponents/cartPageItemCard/cartPageItemCard.jsx";
+import ShopNowButton      from "../../PageComponents/cartShopNowButton/cartShopNowButton.jsx";
+import CartCheckOutButton from "../../PageComponents/cartCheckoutButton/cartCheckoutButton.jsx";
+import FooterBottom       from "../../PageComponents/footerBottom/footerBottom.jsx";
 
 const CartPage = () => { /* Fallback Cart Page outside of main 'Slider Cart' */
 
@@ -39,7 +42,8 @@ const CartPage = () => { /* Fallback Cart Page outside of main 'Slider Cart' */
 
     return (
         <>
-        <div className="cart-page-content">
+        <div className="cart-page-full">
+          <div className="cart-page-content">
             {/* Add cart header */}
             <div className="cart-page-header">
               { (cartProducts && cartProducts.length>0) ?
@@ -76,7 +80,10 @@ const CartPage = () => { /* Fallback Cart Page outside of main 'Slider Cart' */
                 <div id='cart-page-value'>Calculated at checkout</div>
               </div> 
             </div>
-          </div>
+            <CartCheckOutButton />
+          </div>    
+        </div>
+        <FooterBottom />
         </>
     );
 }

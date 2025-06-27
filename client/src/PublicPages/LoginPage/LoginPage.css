@@ -1,5 +1,15 @@
 /**********************************************************************/
-/********** Login Container general stylings ***************************/
+/********** Login Page styling ****************************************/
+/**********************************************************************/
+
+.login-page-full {
+  display: flex;
+  width: 100vw !important;
+  height : calc(100vh - var(--footer-height)) !important; /**/
+}
+
+/**********************************************************************/
+/********** Login Container general stylings **************************/
 /**********************************************************************/
 
 .login-form-box { /* Main container box holding for login form*/
@@ -7,6 +17,7 @@
   display: flex;
   flex-direction: column;
   max-width: 400px; /* container dimensions */
+  height: fit-content; /* ensures header, field labels, field inputs, and buttons are visible */
   width: 70vw; /* Prevents login form box from touching viewport when form width >=320px and <400px.
                 * Also, % isn't working, probably has to go with the fact that there's 
                 * no 'parent' container (only a public page layout) 

@@ -37,6 +37,7 @@ const BasePageLayout = () => {
     }, [toasts]);
 
     return (
+        <>
         <div className="app-body">
 
             {/* Holds header menu component */}
@@ -49,9 +50,10 @@ const BasePageLayout = () => {
             <Outlet />
 
             {/* Default <Toaster /> for toast messages */}
-            <Toaster position={'top-right'} containerStyle={{ top: 70, right: 10}} 
-            />
+            <Toaster position={'top-right'} containerStyle={{ top: 70, right: 10}} />
+
         </div>
+        </>
     );
 }
 

@@ -4,6 +4,10 @@ import { useParams } from "react-router-dom";
 import axios from "axios"; // used to retrieve product data via express backend using '/:id'
 import ProductDetails from "../../PageComponents/productDetails/productDetails";
 
+import FooterBottom from "../../PageComponents/footerBottom/footerBottom";
+
+import './ProductDetailsPage.css';
+
 const ProductDetailsPage = () => { 
 
     const {id :rawId, category: rawCategory} = useParams(); // Extract product 'category' and 'id' from url params
@@ -106,20 +110,24 @@ const ProductDetailsPage = () => {
     }, [productData]); // triggers on productData change (especially for going from null)
 
     return (
-        <>
-        {error && <h1>{error}</h1>}
-        {/* Need conditions below to prevent page from prematurely failing (being blank) */}
-        {
-            (!loading && productData) && (
+      <>
+      {error && <h1>{error}</h1>}
+      {/* Need conditions below to prevent page from prematurely failing (being blank) */}
+      {
+        (!loading && productData) && (
+          <>
+          <div className="product-details-page-full">
             <ProductDetails 
-                //imagePath       ={imagePath}
-                imageFileName   ={imageFileName}
-                productData     ={productData} 
-                displayCategory ={displayCategory}
-                stockState      ={stockState} 
-                stockMessage    ={stockMessage}
+              imageFileName   ={imageFileName}
+              productData     ={productData} 
+              displayCategory ={displayCategory}
+              stockState      ={stockState} 
+              stockMessage    ={stockMessage}
             />
-            )
+          </div>
+          <FooterBottom />
+          </>
+        )
         }
         </>
     );

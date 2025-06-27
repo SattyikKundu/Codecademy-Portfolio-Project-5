@@ -11,6 +11,12 @@ h1, h2 {
 /*********************** Main Order History Container ********************************/
 /*************************************************************************************/
 
+.order-history-page-wrapper { /* wrapper to hold page content AND make bottom space for footer */
+  display: flex;
+  min-width: 100vw !important;
+  min-height : calc(100vh - var(--footer-height)) !important; /* subtracts footer height from visual height via variable */
+}
+
 .order-history-page{ /* order history main container*/
 
   display: flex;
@@ -18,9 +24,9 @@ h1, h2 {
 
   padding: 2rem 1.5rem;       /* padding around content*/
 
-  width: 84% !important;          /* container dimensions and centeiner */
+  width: 84% !important;      /* container dimensions and centeiner */
   max-width: 800px;    
-  margin: 125px auto auto auto;
+  margin: 125px auto 3rem auto; /* avoids header menu, centers table, and make bottom space above footer */
   
   border-radius: 10px; /* border styling */
   border: 1px solid rgba(0, 0, 0, 0.3); 
@@ -43,6 +49,12 @@ h1, h2 {
 .order-history-table { /* actual table <table> */
   width: 100%;
   border-collapse: collapse; /* remove spaces between cells */
+}
+
+.order-history-spacer { /* ensures 'space' under the order history table 
+                           (especially when table gets taller for 10 rows per page. */
+  height: 2rem;
+  background-color: transparent;
 }
 
 /*************************************************************************************/
