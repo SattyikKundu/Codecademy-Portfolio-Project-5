@@ -42,7 +42,7 @@ const CartPage = () => { /* Fallback Cart Page outside of main 'Slider Cart' */
 
     return (
         <>
-        <div className="cart-page-full">
+        <div className="cart-page-full" data-bg-var-repaint>
           <div className="cart-page-content">
             {/* Add cart header */}
             <div className="cart-page-header">
@@ -81,9 +81,9 @@ const CartPage = () => { /* Fallback Cart Page outside of main 'Slider Cart' */
               </div> 
             </div>
             <CartCheckOutButton />
-          </div>    
+          </div>
+        <FooterBottom />    
         </div>
-        <FooterBottom />
         </>
     );
 }

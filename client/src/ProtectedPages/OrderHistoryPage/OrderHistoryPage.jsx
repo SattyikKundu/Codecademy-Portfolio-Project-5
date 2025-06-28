@@ -176,7 +176,7 @@ const OrderHistoryPage = () => { //
   if (ordersLength > 0) {   // Case: orders exist
     return (
       <>
-      <div className='order-history-page-wrapper'>
+      <div className='order-history-page-wrapper' data-bg-var-repaint>
       <div className="order-history-page">
 
         {/***** Section: Title *****/}
@@ -283,8 +283,8 @@ const OrderHistoryPage = () => { //
         </table>
         </div>
       </div>
-      </div>
       <FooterBottom/>
+      </div>
       </>
     );
   }

@@ -31,7 +31,7 @@ const CartCheckOutButton = ({toggleCart}) => {
                                        // (and close slider cart IF toggle function provided)
                        
         }
-        ErrorMessageToast("You can't access checkout\nwith an empty cart!", 2500);
+        ErrorMessageToast("You can't access checkout\nwith an empty cart!", 2000);
     }
     else if (!isAuthenticated) { // If user isn't logged in, redirect to login page
         toggleCart?.();
@@ -46,7 +46,7 @@ const CartCheckOutButton = ({toggleCart}) => {
   }
 
   return (
-      <button id="checkout-page-bttn" onClick={() => handleNavigate()}>To Checkout</button>
+      <button id="checkout-page-bttn" onClick={() => handleNavigate()}>Proceed to Checkout</button>
   );
 }
 

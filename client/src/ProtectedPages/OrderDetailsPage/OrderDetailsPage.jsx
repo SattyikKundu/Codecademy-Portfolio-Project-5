@@ -56,7 +56,7 @@ const OrderDetailsPage = () => {
 
   return (
     <>
-    <div className='order-details-page-wrapper'>
+    <div className='order-details-page-wrapper' data-bg-var-repaint>
     <div className="order-details-page">
       {showSuccessMessage  &&  // If true, confetti is visible
       <Confetti 
@@ -156,8 +156,8 @@ const OrderDetailsPage = () => {
         </button>
       </div>
     </div>
-    </div>
     <FooterBottom />
+    </div>
     </>
   );
 }

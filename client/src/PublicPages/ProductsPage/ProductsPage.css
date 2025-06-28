@@ -35,13 +35,17 @@
 
 .products-page { /* Main container of product page */
   padding-top: 4.5rem;
-  padding-bottom: 2rem; /* Need to revist the missing */
+  padding-bottom: calc(2rem + var(--footer-height)); /* add footer height to bottom padding */
   text-align: center;
-  background-color: #f8f8f8;/**/
 
-  min-height: calc(100vh - var(--footer-height)) !important;/* subtract height of footer*/
+  /* Background image for all '/product' routes */
+  background-image: var(--background-image);
+  background-size: var(--background-img-size);
+ 
+  min-height: 100vh !important;
 
   box-sizing: border-box !important;
+  position:relative;
 }
 
 @media screen and (max-width: 800px) {

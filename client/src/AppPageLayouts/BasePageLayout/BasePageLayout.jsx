@@ -36,6 +36,27 @@ const BasePageLayout = () => {
             .forEach((currentToast) => toast.dismiss(currentToast.id)); // Dismiss
     }, [toasts]);
 
+
+
+    useEffect(() => {
+        // Step 1: Get computed styles of root element (which refers to :root{..} where
+        //         varaiables are defined (:root is a selector which point to top-most element(<html>))
+        const rootStyles = getComputedStyle(document.documentElement);
+
+        // Step 2: Retrieve the background image and size from CSS variables
+        const image = rootStyles.getPropertyValue('--background-image');
+        const size  = rootStyles.getPropertyValue('--background-img-size');
+
+        // Step 3: Select ALL DOM elements that are marked to repaint background styles
+        const elements = document.querySelectorAll('[data-bg-var-repaint]');
+
+        // Step 4: For each matching element, manually reapply the background image and size
+        elements.forEach((element) => {
+            element.style.backgroundImage = image;  // Re-apply the image (forces repaint)
+            element.style.backgroundSize  = size;   // Re=apply the size to ensure consistency
+        });
+    }, []);
+
     return (
         <>
         <div className="app-body">

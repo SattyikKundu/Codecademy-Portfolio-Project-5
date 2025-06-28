@@ -1,7 +1,14 @@
 .profile-page-wrapper-full { /* wrapper to hold page content AND make bottom space for footer */
   display: flex;
   min-width: 100vw !important;
-  min-height : calc(100vh - var(--footer-height)) !important; /* subtracts footer height from visual height via variable */
+  min-height: 100vh !important;
+
+  /* Use this since background from BasePageLayout not showing properly */
+  
+  background-image: var(--background-image);
+  background-size: var(--background-img-size);
+
+  position: relative;
 }
 
 .profile-info-grid { /* Main porfile <form> container */
@@ -9,19 +16,16 @@
     flex-direction: column;
     align-items: center; /* vertically center items in flex */
 
-    margin: 100px auto 3rem auto; /* Avoids header menu, centers profile, and make bottom space from footer */
+    background-color: white;
 
-    width: 94%;
+    margin: 100px auto calc(3rem + var(--footer-height)) auto; /* Avoids header menu, centers profile, and make bottom space from footer */
+
+    width: 94%; /* profile form dimensions */
     max-width: 560px;
 
-    border-radius: 10px;
-
-    box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, 0.05),
-                0px 0px 3px 2px rgba(0, 0, 0, 0.05),
-                0px 0px 3px 2px rgba(0, 0, 0, 0.05),
-                0px 0px 3px 2px rgba(0, 0, 0, 0.05);
-
-    border: 1px solid rgba(0, 0, 0, 0.3); 
+    border-radius: 10px; /* border styling */
+    border: 1px solid #368bda;
+    box-shadow: 0px 0px 6px 5px rgba(11, 101, 180, 0.7);
 }
 
 #profile-header-1 { /* First profile section's header title */

@@ -78,7 +78,7 @@ const RegisterPage = () => {
 
     return (
       <>
-      <div className="registration-page-full">
+      <div className="registration-page-full" data-bg-var-repaint>
         <div className="registration-form">
 
             {/* Register form header */}
@@ -145,8 +145,8 @@ const RegisterPage = () => {
                 </span>
             </p>
         </div>
-      </div>
       <FooterBottom />
+      </div>
     </>
     );
 }

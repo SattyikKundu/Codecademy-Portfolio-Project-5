@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import ProfileFieldText from "../../PageComponents/profileFieldText/profileFieldText";
@@ -22,12 +22,16 @@ const ProfilePage = () => {
   const [loading, setLoading] = useState(true); // tracks loading state
   
   const location = useLocation(); // initialize useLocation reference
+  const navigate = useNavigate(); // initialize na
 
   useEffect(() => { // returns login toast ONLY when user comes to Profile page upon succesful login
     if (location.state?.loginSuccess) {
-      setTimeout(function() {SuccessMessageToast('Successful Login!');}, 400);
+      setTimeout(function() {SuccessMessageToast('Successful Login!');}, 400); 
+
+      // Clear location state to prevent repeat toast when navigating backwards to this page
+      navigate(location.pathname, { replace: true, state: {} });
     }
-  }, [location.state]);
+  }, [location.state, location, navigate]);
 
 
   const fetchProfile = async () => { // async function for fetching user's profile data
@@ -93,7 +97,7 @@ const ProfilePage = () => {
   if(!loading){
   return (
     <>
-    <div className="profile-page-wrapper-full">
+    <div className="profile-page-wrapper-full" data-bg-var-repaint>
     <form className='profile-info-grid' onSubmit={handleSubmit}>
       <h2 id="profile-header-1">
         Profile Information
@@ -169,8 +173,9 @@ const ProfilePage = () => {
       <div />
       <button type="submit" id='profile-submit'>Save All Changes</button>
     </form>
-    </div>
+
     <FooterBottom />
+    </div>
     </>
   );
   }

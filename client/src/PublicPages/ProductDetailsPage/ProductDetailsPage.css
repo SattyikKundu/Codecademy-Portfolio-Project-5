@@ -1,5 +1,11 @@
 .product-details-page-full {
   display: flex;
   min-width: 100vw !important;
-  min-height : calc(100vh - var(--footer-height)) !important; /* subtracts footer height from visual height via variable */
+  min-height: 100vh !important;
+
+  /* Background image for entire app */
+  background-image: var(--background-image);
+  background-size: var(--background-img-size);
+
+  position: relative;
 }

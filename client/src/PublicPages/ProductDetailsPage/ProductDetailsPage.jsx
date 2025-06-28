@@ -116,7 +116,7 @@ const ProductDetailsPage = () => {
       {
         (!loading && productData) && (
           <>
-          <div className="product-details-page-full">
+          <div className="product-details-page-full" data-bg-var-repaint>
             <ProductDetails 
               imageFileName   ={imageFileName}
               productData     ={productData} 
@@ -124,8 +124,8 @@ const ProductDetailsPage = () => {
               stockState      ={stockState} 
               stockMessage    ={stockMessage}
             />
-          </div>
           <FooterBottom />
+          </div>
           </>
         )
         }

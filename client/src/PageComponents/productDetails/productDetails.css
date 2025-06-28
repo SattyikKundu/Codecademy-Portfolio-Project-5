@@ -9,13 +9,16 @@
     display: flex; /* Nested children in column orientation */
     flex-direction: column;
 
-    margin: 100px auto 3rem auto; /* 100px margin from top (accounts for (for space from menu),
+    background-color: #f8f8f8;
+
+    margin: 100px auto calc(3rem + var(--footer-height)) auto; /* 100px margin from top (accounts for (for space from menu),
                                    * 3rem from bottom footer, and 
                                    * plus horizontal centering 
                                    */
 
-    border-radius: 1.5rem; /* container border styling */
-    border: 1px solid rgba(185, 185, 185, 0.781);
+    border-radius: 8.5px; /* registration form box's border styling */
+    border: 1px solid #368bda;
+    box-shadow: 0px 0px 6px 5px rgba(11, 101, 180, 0.7);
 }
 
 @media screen and (max-width: 599px) { /* change top-margin and details width for table and smaller screen sizes */

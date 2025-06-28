@@ -125,7 +125,7 @@ const LoginPage = () => { // login component with default login header message
 
     return (
       <>  
-      <div className="login-page-full">
+      <div className="login-page-full" data-bg-var-repaint>
         <div className="login-form-box">
 
             {/* Login form header */}
@@ -185,8 +185,8 @@ const LoginPage = () => { // login component with default login header message
                     <p>(Google login not functional yet — backend config pending)</p> 
                 */}
         </div>
-      </div>
       <FooterBottom />
+      </div>
       </>
     );
 }

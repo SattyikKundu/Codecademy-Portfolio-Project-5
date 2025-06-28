@@ -5,7 +5,12 @@
 .registration-page-full {
   display: flex;
   width: 100vw !important;
-  min-height : calc(100vh - var(--footer-height)) !important; /* subtracts footer height*/
+  min-height: 100vh !important;
+
+  background-image: var(--background-image);
+  background-size: var(--background-img-size);
+
+  position: relative;
 }
 
 /**********************************************************************/
@@ -23,9 +28,9 @@
   margin: 100px auto;
   padding: 2rem;
 
-  border-radius: 8px; /* border styling */
-  border: 1px solid #ddd;
-  box-shadow: 0 0 5px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8.5px; /* registration form box's border styling */
+  border: 1px solid #368bda;
+  box-shadow: 0px 0px 6px 5px rgba(11, 101, 180, 0.7);
   
   background: #fff; /* background and front styling */
   font-family: Arial, sans-serif;

@@ -102,7 +102,7 @@ const ProductsPage = () => { // will modify later to handle various categories
 
     return (
         <>
-        <div className="products-page">
+        <div className="products-page" data-bg-var-repaint>
 
             {/* For debugging */}
             {/*loading && (<h1>Loading...</h1>)*/}
@@ -140,8 +140,8 @@ const ProductsPage = () => { // will modify later to handle various categories
             </div>
             </>
              )}
-        </div>
         <FooterBottom/>
+        </div>
         </>
     );
 };

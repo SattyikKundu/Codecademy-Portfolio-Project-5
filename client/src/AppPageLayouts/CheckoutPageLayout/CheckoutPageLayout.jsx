@@ -116,9 +116,9 @@ const CheckoutPageLayout = () => {
 
             {/* Default <Toaster /> for toast messages */}
             <Toaster position={'top-center'} containerStyle={{ top: 44 }} /> 
-           
-        </div>
+        
         <FooterBottom/>
+        </div>
         </>
     );
 }

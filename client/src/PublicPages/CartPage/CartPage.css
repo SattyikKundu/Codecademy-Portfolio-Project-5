@@ -5,7 +5,13 @@
 .cart-page-full { 
   display: flex;
   min-width: 100vw !important;
-  min-height : calc(100vh - var(--footer-height)) !important; /* subtracts footer height from visual height via variable */
+  min-height: 100vh !important;
+  height: fit-content;
+
+  background-image: var(--background-image);
+  background-size: var(--background-img-size);
+
+  position: relative;
 }
 
 .cart-page-content { /* Holds main content of Cart Page */
@@ -15,9 +21,12 @@
     position: relative; /* Needed for absolute positioning of 'close cart' button (and the cart header) */
 
     width: 90%; /* size matches parent container */
+    height: fit-content;
     max-width: 800px;
 
-    margin: 90px auto 3rem auto;
+    background-color: #f8f8f8;
+
+    margin: 90px auto calc(3rem + var(--footer-height) ) auto;
 
     /*z-index: -1; /* NOTE: Originally, this was done to make layout 'under' the floating menu
                     *       However, this led to a 'layout isolation' problem the preveted
@@ -25,9 +34,9 @@
                     *       increasing the z-index of the menu component. It seems to work now.
                     */
 
-    border: 1px solid grey;
-    border-radius: 5px;
-    box-shadow: 0px 0px 3px 2px rgba(129, 129, 129, 0.664);
+    border-radius: 8.5px; /* cart content container border */
+    border: 1px solid #368bda;
+    box-shadow: 0px 0px 6px 5px rgba(11, 101, 180, 0.7);
 }
 
 .cart-page-items-wrapper { /* holds the .cart-items container for cart-item cards*/

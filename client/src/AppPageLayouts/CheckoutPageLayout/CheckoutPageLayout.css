@@ -1,14 +1,22 @@
 .checkout-body {
 
     min-width: 100vw !important;
-    min-height : calc(100vh - var(--footer-height)) !important; /* subtracts footer height from visual height via variable */
-    
-    margin-top: 0;
-    padding: 0 0 3rem 0; /* Due to bottom-most page components touching screen bottom,
-                          * and with bottom-margin not working, 3rem bottom padding add some
-                          * much needed bottom space. HOWEVER, it doesn't inherit any
-                          * background colors and this leaves white space below (revist issue later!!!!)      
-                          */
+    /*min-height : calc(100vh - var(--footer-height)) !important; /* subtracts footer height from visual height via variable */
+    min-height: 100vh !important;
 
-    background-color: #ececec;
+    margin-top: 0;
+    padding: 0 0 calc(3rem + var(--footer-height)) 0; /* Due to bottom-most page components touching screen bottom,
+                                                       * and with bottom-margin not working, 3rem bottom padding add some
+                                                       * much needed bottom space. HOWEVER, it doesn't inherit any
+                                                       * background colors and this leaves white space below (revist issue later!!!!)      
+                                                       */
+
+    /* Checkout page BACKGROUND styling */
+    background-color:  #ececec;     /* base background color */
+    background-image:    url('/images/water_drops_seamless_transparent.png') !important; /* background image */
+    background-repeat:   repeat;      /* repeats seamless water drops patterns */   
+    background-position: top left;    /* starts pattern from top-left */
+    background-size:     600px;       /* background tile size */
+
+    position: relative; /* allows absolute positioning of footer at bottom */
 }
