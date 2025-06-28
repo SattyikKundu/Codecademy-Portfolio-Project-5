@@ -59,23 +59,24 @@
     width: 100%;    /* overlay covers entire screen's content */
     height: 100%;    
 
-    background: #afafaf83; /* grey background around overlay */
+    background: rgba(87, 87, 87, 0.6); /* grey background around overlay */
 
     display: flex;           /* Ensures that main nested overlay is centered */
     justify-content: center; /* Center horizontally */
-    align-items: center;     /* Center vertically */
 }
 
 .search-overlay-main { /* main overlay area where search box is*/
 
     background-color: beige; /* color of search box holder */
-    border-radius: 1rem;       /* rounded corners*/
+    border-radius: 18px;       /* rounded corners*/
 
     width: 80%;  /* main overlay area's width is 80% of parent, but won't grow past 380px */
     max-width: 380px; 
+    height: fit-content;
+    margin-top: 100px;
 
     padding: 2.5rem 0; /* padding to increase overlay area */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* box shadow around area for styling*/
+    box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.1); /* box shadow around area for styling*/
 
     display: flex;            /* Flex display to horizontally center search box */
     justify-content: center;  /* Center horizontally */
@@ -90,8 +91,8 @@
     color: rgba(120, 120, 120, 0.750);
     font-size: 1.5rem;
     background: transparent;
-    right: 3px;
-    top:   3px;
+    right: 6px;
+    top:   0px;
     cursor: pointer;
 }
 

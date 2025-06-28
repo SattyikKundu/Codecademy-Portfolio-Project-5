@@ -4,7 +4,6 @@
   min-height: 100vh !important;
 
   /* Use this since background from BasePageLayout not showing properly */
-  
   background-image: var(--background-image);
   background-size: var(--background-img-size);
 

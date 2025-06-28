@@ -2,11 +2,13 @@
 .search-box-area { /* Search Box container area styling */
     display: flex;
     flex-direction: row;
+
     margin: auto;
     height: 1.7rem;
 
     position:relative;
 }
+
 
 #reset-search { /* styling for reset '🗙' button */
 
@@ -60,4 +62,18 @@
 #search-bttn:hover { /* style on hover over search button */
     background-color: #a5a5a5;
     cursor: pointer;
+}
+
+@media screen and (max-width: 540px) {
+    .search-box-area {
+        height: 2rem;
+        width:fit-content;
+    }
+    #reset-search { 
+        margin-top: 0.35rem;
+    }
+    .search-input-box { 
+        font-size: 0.9rem;
+        width: 160px;
+    }
 }

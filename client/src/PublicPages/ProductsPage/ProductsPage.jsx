@@ -7,6 +7,9 @@ import { useParams, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import Products from "../../PageComponents/products/products";
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // used to import FontAwesomeIcons
+import { faBan } from '@fortawesome/free-solid-svg-icons';
+
 import FooterBottom from "../../PageComponents/footerBottom/footerBottom";
 
 import './ProductsPage.css';
@@ -45,6 +48,8 @@ const ProductsPage = () => { // will modify later to handle various categories
             setLoading(false);
         }
     };
+
+
 
     const filterByCategoryOrSearch  = () => { // filter by products by category
 
@@ -108,10 +113,17 @@ const ProductsPage = () => { // will modify later to handle various categories
             {/*loading && (<h1>Loading...</h1>)*/}
             {error && (<h1>{error}</h1>)}
 
-            {/* No products found in search notice */}
+            {/* "🚫 No products found" notice banner (with {' '} for empty space) */}
             {!loading && filtered.length === 0 && (
                 <div className="no-products-banner">
-                    <h2>🚫 No products found</h2>
+                    <h2><FontAwesomeIcon 
+                            icon={faBan} 
+                            style={{color:'red', 
+                                    border: '1.5px solid black', 
+                                    borderRadius: '50px'
+                                  }}
+                        />{' '}No products found
+                    </h2>
                     <p>Please try a different search term OR select a product category.</p>
                 </div>
             )}
@@ -129,8 +141,11 @@ const ProductsPage = () => { // will modify later to handle various categories
 
                     // Below is button created for each index (ex: If index=0, then index+1 means pageNumber=1)
                     <button 
-                        key={index + 1}                          // unique key value for pagination button
-                        onClick={() => setPageNumber(index + 1)} // On click, get pagination page (with selected products slice)
+                        key={index + 1}  // unique key value for pagination button
+                        onClick={() =>{ 
+                                setPageNumber(index + 1);     // On click, get pagination page (with selected products slice) 
+                                window.scrollTo({ top: 0, behavior: 'smooth' });  // smooth scroll to top of next page on click
+                        }} 
                         className={((index+1) === pageNumber) ? 'selected-button': 'unselected-button'}  // style pagination button if current
                     > 
                         {index + 1}

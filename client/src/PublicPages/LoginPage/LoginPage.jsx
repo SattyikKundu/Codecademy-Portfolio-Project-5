@@ -8,6 +8,7 @@ import { ErrorMessageToast, SuccessMessageToast } from "../../utils/utilityFunct
 import { setUser } from "../../Slices/authSlice"; // redux action to store data
 import { loadCartFromServer } from "../../Slices/cartSlice";
 import FooterBottom from "../../PageComponents/footerBottom/footerBottom";
+import PasswordInput from "../../PageComponents/loginRegisterPswdInput/passwordInput";
 
 import './LoginPage.css';
 
@@ -142,17 +143,16 @@ const LoginPage = () => { // login component with default login header message
                     required                       // mandatory field
                 />
             </label>
-            <br />
+            <br />   
             <label>
-                Password:
-                <input
-                    type='text'                  // set input type (needs to be 'password' in real-world apps to mask field!)
-                    value={password}             // set field value
-                    placeholder="Enter password" // instruction text
-                    onChange={(event) => setPassword(event.target.value)}  // change password value on typing
-                    required                     // makes field required
-                />
-            </label>            
+              Password:
+              <PasswordInput
+                value      ={password}                          // visible password in field as typed
+                onChange   ={(event) => setPassword(event.target.value)} // updates password as typed
+                name       ={"password"}                                 // input field name
+                placeholder={"Enter password"}                           // placeholder for dield
+              />
+            </label>      
             <br />
             <button
                 className="login-button"

@@ -28,7 +28,7 @@
                 * Also, % isn't working, probably has to go with the fact that there's 
                 * no 'parent' container (only a public page layout) 
                 */
-  margin: 100px auto;
+  margin: 100px auto calc(3rem + var(--footer-height)) auto; /* vertical spacing and horizontal centering of login form box*/
   padding: 2rem;
 
 

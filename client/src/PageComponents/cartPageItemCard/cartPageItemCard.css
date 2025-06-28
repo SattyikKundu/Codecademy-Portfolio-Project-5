@@ -226,12 +226,13 @@
 
 .cart-page-delete-item-button {
 
-    height: 2.5rem; /* button dimensions and shape */    
+    height: 2.2rem; /* button dimensions and shape */    
     aspect-ratio: 1;
     border-radius: 50%;
+    line-height: 0; /* Helps vertically center the cross 'x' */
 
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 2rem; /* font styling */
+    font-size: 1.85rem; /* font styling */
 
     border: 1px solid #b90909e3; /* border, text, background, and shadow color */
     color: rgba(252, 242, 242, 0.849);
@@ -257,7 +258,7 @@
 
 @media screen and (max-width: 599px) { /* shrink delete button on smaller screen size*/
     .cart-page-delete-item-button {
-        height: 2.1rem;
+        height: 1.9rem;
         font-size: 1.5rem;
     }
 }

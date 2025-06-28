@@ -186,27 +186,15 @@ tr { /* default height for each row/record */
   width: 84% !important; /* container dimensions and centeiner */
   max-width: 400px;    
   margin: 125px auto auto auto;
+
+  background-color: #f8f8f8;
   
   border-radius: 10px; /* container border styling */
-  border: 1px solid rgba(0, 0, 0, 0.3); 
-  box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, 0.05),
-                0px 0px 3px 2px rgba(0, 0, 0, 0.05),
-                0px 0px 3px 2px rgba(0, 0, 0, 0.05),
-                0px 0px 3px 2px rgba(0, 0, 0, 0.05);
+  border: 1px solid #368bda;
+  box-shadow: 0px 0px 6px 5px rgba(11, 101, 180, 0.7);
   
   font-family: Arial, Helvetica, sans-serif; /* font styling */
-
 }
-
-/* Shop button when order history is empty */
-/*
-.order-history-empty button { 
-  padding: 0.5rem 1.2rem;
-  font-size: 1rem;
-  margin-top: 1rem;
-  cursor: pointer;
-  max-width: 100px;
-}*/
 
 /*************************************************************************************/
 /**************** Styling tablet/mobile screen sizes *********************************/

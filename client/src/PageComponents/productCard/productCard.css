@@ -93,13 +93,33 @@
 .none{ color:red;}
 
 
-@media screen and (max-width: 1080px) { /* resize font due to changing from 4-col 
+@media screen and (max-width: 960px) { /* resize font due to changing from 4-col 
                                            to 3-col grid for products */
     .product-name {
-        font-size: clamp(0.5rem, 1.2rem, 1.5rem);
+        font-size: clamp(1rem, 2.2vw, 1.2rem);
     }
     #price, #stock {
-        font-size: clamp(0.5rem, 1.33rem, 1.5rem);
+        font-size: clamp(1rem, 2.2vw, 1.33rem);
+    }
+}
+
+@media screen and (max-width: 767px) { /* resize font due to changing from 4-col 
+                                           to 2-col grid for products */
+    .product-name {
+        font-size: clamp(1rem, 3vw, 1.35rem);
+    }
+    #price, #stock {
+        font-size: clamp(1rem, 3vw, 1.2rem);
+    }
+}
+
+@media screen and (max-width: 460px) { /* resize font due to changing from 4-col 
+                                           to 1-col grid for products */
+    .product-name {
+        font-size: clamp(1rem, 6vw, 1.7rem);
+    }
+    #price, #stock {
+        font-size: clamp(1rem, 6vw, 1.7rem);
     }
 }
 

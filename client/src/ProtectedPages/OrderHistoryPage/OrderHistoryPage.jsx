@@ -165,10 +165,11 @@ const OrderHistoryPage = () => { //
 
   if (ordersLength === 0) {   // Case: no orders at all
     return (
-      <div className="order-history-empty">
-        <h2>You’ve currently have no orders.</h2>
-        {/*<button onClick={() => navigate("/products")}>Continue Shopping</button>*/}
-        <ShopNowButton emptyCartMessage='Shop to Make an Order' />
+      <div className='order-history-page-wrapper' data-bg-var-repaint>
+        <div className="order-history-empty">
+          <h2>You’ve currently have no orders.</h2>
+          <ShopNowButton emptyCartMessage='Shop to Make an Order' />
+        </div>
       </div>
     );
   }

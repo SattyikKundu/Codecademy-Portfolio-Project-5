@@ -1,9 +1,11 @@
 
-import {useState} from "react";      // track local states
+import {useState} from "react";                 // track local states
 import axios from "axios";                      // used to send HTTP requests to backend
 import { useNavigate } from "react-router-dom"; // used to progammatically redirecting routes
 import { ErrorMessageToast } from "../../utils/utilityFunctions";
+
 import FooterBottom from "../../PageComponents/footerBottom/footerBottom";
+import PasswordInput from "../../PageComponents/loginRegisterPswdInput/passwordInput";
 
 import './RegisterPage.css';
 
@@ -13,8 +15,8 @@ const RegisterPage = () => {
 
     const [formData, setFormData] = useState({ // tracks form fields in 1 useState
         username: "",
-        email: "",
-        password:""
+        email:    "",
+        password: ""
     });
 
     const [registering, setRegistering] = useState(false);            // tracks if registering is ongoing
@@ -109,7 +111,7 @@ const RegisterPage = () => {
                 />
             </label>            
             <div className="form-divider"/>
-            <label>
+            {/*<label>
                 Password:
                 <input
                     type='text'                       // set input type
@@ -119,7 +121,16 @@ const RegisterPage = () => {
                     onChange={handleChange}           // change password value on typing
                     required                          // makes field required
                 />
-            </label>            
+            </label>*/} 
+            <label>
+              Password:
+              <PasswordInput
+                value      ={formData.password}     // visible password in field as typed
+                onChange   ={handleChange}          // updates password in local state as typed
+                name       ={"password"}            // input field name
+                placeholder={"Enter your password"} // placeholder for dield
+              />
+            </label>              
             <div className="form-divider"/>
             <button 
                 className="register-button"
