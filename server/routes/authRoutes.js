@@ -32,14 +32,21 @@ router.get('/auth/me',            // Define GET route at '/auth/me'
                                    * However, if token is invalid, the next() inside verifyJWT() 
                                    * won't be called. This prevents Express from proceeding to the callback function.
                                    */
-  (req, res) => {                 
-                                  // Callback function runs if token is valid
-                                  // At this point, verifyJWT has decoded the JWT and attached user data to req.user
+
+  (req, res) => {         // Callback function runs if token is valid  
+                          // At this point, verifyJWT has decoded the JWT and attached user data to req.user
+
+    res.set('Cache-Control', 'no-store'); 
+    /*  VERY IMPORTANT!!!: 
+     *  Prevents cache of this sensitive route. Prevents auth token data from 
+     *  a successful '/auth/me' route being stored in bfcache. Essentially, browser is always
+     *  forced to re-request '/auth/me' (which fails properly if cookie is missing and 'isAuthenticated' remains false)
+     *  This once caused a MAJOR issue where clicking back button 
+     *  from "/cart" page to "/login" (or "/register") caused a redirect
+     *  to "/profile" page instead due to auth token being stored in bfcache.     
+     */ 
     res.json({ user: req.user }); // Send the user info back to the frontend as JSON
   }
 );
-
-
-
 
 export default router;

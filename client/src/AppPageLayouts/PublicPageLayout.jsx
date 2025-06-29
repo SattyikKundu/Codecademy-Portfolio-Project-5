@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { setUser } from "../Slices/authSlice";
+import { setUser, clearUser } from "../Slices/authSlice";
 
 import { Outlet, useLocation, useNavigate } from "react-router-dom"; // <Outlet> injects content based on active route
 import BasePageLayout from './BasePageLayout/BasePageLayout'; // imports 'wrapper' layout for common page features
@@ -11,12 +11,15 @@ const PublicPageLayout = () => {
   const dispatch = useDispatch(); // initialize dispatch to use redux slices
   const navigate = useNavigate(); // initialize navigate to handle and route/redirects
   const location = useLocation(); // initialize location to track current url location/state
-  const isAuthenticated = useSelector(state => state.auth.isAuthenticated); // gets current authanticated by in 'user' store
-                                                                            // SHOULD be filled via checkUserSession() logic.
 
-  const [loading, setLoading] = useState(true); // tracks if checkUser session is done loading
+  const isAuthenticated = useSelector(state => state.auth.isAuthenticated); // gets user's current authanticated state 
+                                                                            // in 'user' store.SHOULD be filled via 
+                                                                            // checkUserSession() logic.
+
+  const [loading, setLoading] = useState(true); // tracks when checkUserSession() completes checking for auth token
 
   const checkUserSession = async () => { // function to check user session
+    setLoading(true);                    // Reset loading before rechecking
     try {
       const response = await axios.get(
         'http://localhost:5000/auth/me', // accesses route that verifies if user is 
@@ -24,15 +27,19 @@ const PublicPageLayout = () => {
         {withCredentials: true}          // ensures cookie is sent with request
       );
 
-      if(response.data.user) { // if user data found/obtained
+      if(response.data.user) {                 // if user data found/obtained
         dispatch(setUser(response.data.user)); // store user data onto redux
       }
+      else { // If invalid, remove defunct user data/token
+        dispatch(clearUser());
+      }
     }
-    catch(error) { // log error
-      console.log("User isn't logged in nor is there a valid cookie: ",error);
+    catch(error) { // catch and log error
+      console.log("In checkUserSession(), token invalid or missing: ", error);
+      dispatch(clearUser());
     }
     finally {
-      setLoading(false); // Important! Blocks rendering until auth check finishes
+      setLoading(false); // Blocks rendering until checking for existing user session finishes
     }
   }
 
@@ -44,29 +51,51 @@ const PublicPageLayout = () => {
                   // In practice, 'dispatch' never changes, but satisfies linting best practices.
                   // (Example: ESLint is a commonly used linting tool used to check for code issues,etc.)
 
-  
+
+  useEffect(() => { // used to checkUserSession() IF page is called from bfcache
+
+    const handlePageShow = (event) => { // function to handle pageshow being fired
+      if (event.persisted) { // If pageShow exists (restored from bfcache), execute user session check
+        checkUserSession(); //  This flip loading=false once done
+      }
+    };
+    window.addEventListener('pageshow', handlePageShow); // adds function to 'pageshow' event listener
+    return () => {window.removeEventListener('pageshow', handlePageShow);} // clean up function
+  }, []);
+
+
   useEffect(() => { // If logged in and visiting /login or /register, redirect to /profile
-    if (isAuthenticated && (location.pathname === "/login" || location.pathname === "/register")) {
+
+    if (loading) return; // block navigation logic UNTIL loading done
+
+    if (isAuthenticated && (location.pathname === "/login" || location.pathname === "/register")) { //
       navigate("/profile", { replace: true });
     }
-  }, [isAuthenticated,   // makes sure to run redirect check only after "auth" state is udpated (or 'changes')
+  }, [loading,           // changes in loading state triggers useEffect()
+      isAuthenticated,   // makes sure to run redirect check only after "auth" state is udpated (or 'changes')
       location.pathname, // effect triggers when URL changes; ensures effect reacts to changes in the path
       navigate]);        // stable and unchanging like [dispatch], but included for linting best practices.
 
 
+
   if (loading) { // Mainly used to PREVENT flickering/rendering of login/register page 
                  // (whilst user is logged in) until actual redirected page('/profile') is fully loaded.
-    return <div>Loading...</div>; // Show some placeholder(like loading spinner or blank) until done
+    return ( 
+      <div
+        style={{
+          fontSize: '2rem',
+          fontWeight: 'Bold',
+          margin: '100px auto auto auto'
+        }}
+      >
+        Loading...
+      </div>
+    ); // Show some placeholder(like loading spinner or blank) until done
   }
 
-
-  return ( 
-    /* <BasePageLayout> is the 'wrapper' that provided common page features for the <PublicPageLayout> */
+  return ( /* <BasePageLayout> is the 'wrapper' that provides common page features for <PublicPageLayout> */
     <BasePageLayout>
-        
-      {/* <Outlet /> is the page body setion where content changes based on current route! */}
-      <Outlet />
-
+      <Outlet /> {/* <Outlet /> is the page body setion where content changes based on current route! */}
     </BasePageLayout>
   );
 };

@@ -54,10 +54,26 @@ export const loginUser = async (req, res, next) => { // Local login controller
 
 
 export const logoutUser = (req, res) => { // Logout controller
-  res.clearCookie('token');               // remove JWT cookie from browser
-  req.logout(() => {                      // Passport logout/cleanup hook (used with sessions, but safe to include)
-    res.json({ message: 'Logged out successfully!' }); // Respond with Logout confirmation
+
+  /* NOTE: For logout to fully work, it needs to match/parallel the values set in the setAuthCookie.js.
+   *       Otherwise, the deletion of cookie may failif specified cookie to clear doesn't match 
+   *       existing cookie stored in browser. "res.clear('token');" is too simple and various Browsers, like
+   *       Chrome, may not accept a match.
+   */     
+
+  const isProduction = process.env.NODE_ENV === 'production'; // Detect environment mode
+  res.clearCookie('token', {                  
+    httpOnly: true,                             // MUST match how it was originally set
+    secure: isProduction,                       // set to true if using HTTPS in production
+    sameSite: isProduction ? 'strict' : 'lax',  // or 'Strict' is used in setAuthCookie
+    path: '/'                                   // MUST match path also set in setAuthCookie
   });
+
+  // res.clearCookie('token');               // remove JWT cookie from browser
+  // req.logout(() => {                      // Passport logout/cleanup hook (used with sessions, but safe to include)
+  //   res.json({ message: 'Logged out successfully!' }); // Respond with Logout confirmation
+  // });
+  return res.status(200).json({ success: true, message: "Logged out successfully!" });
 };
 
 
@@ -65,8 +81,8 @@ export const registerUser = async (req, res, next) => { // Registers a new user 
   try {
     const { username, email, password } = req.body; // extracts username, email, password from request body
 
-    // Check for empty or missing fields (trim to handle whitespace-only cases)
-    if (!username?.trim() || !email?.trim() || !password?.trim()) {
+    if (!username?.trim() || !email?.trim() || !password?.trim()) { // Check for empty/missing fields 
+                                                                    // (trim to handle whitespace-only cases)
       return res.status(400).json({ error: 'One or more fields are empty.' });
     }
 

@@ -16,30 +16,57 @@ const ProtectedPageLayout = () => {
     const isAuthenticated = useSelector((state) =>  state.auth.isAuthenticated); // checks if user is authenticated
 
     const checkUserAuth = async () => {
+        setCheckingAuth(true);
         try { // verify is user is authenticated
             const response = await axios.get( // Send GET request to '/auth/me' to verify JWT in cookie
                 'http://localhost:5000/auth/me',
                  { withCredentials: true } // Ensure cookie is sent with request
             );
 
-            if (response.data.user) {
+            if (response.data.user) {   // set user from token if valid response
                 dispatch(setUserFromToken(response.data.user)); // If successful, dispatch user data to Redux store
+            }
+            else {                      // If invalid, clear user from redux
+                dispatch(clearUser());     
             }
         } 
         catch(error) {  // If token fails (i.e. expired token), clear user from redux
+            console.log("[checkUserAuth] Token invalid or missing: ", error);
             dispatch(clearUser()); 
         }
         finally {
             setCheckingAuth(false); // mark that checking authentication is finished
         }
     }
-    
+
+    /* NOTE: Below 2 useEffects may not be needed (verify later) */
     useEffect(() => { // Run (and re-run) the checkUserAuth() on mount and when 'dispatch' changes
         checkUserAuth();
     },[dispatch])
 
+    useEffect(() => { // used to check if page is called from bfcache
+      const handlePageShow = (event) => {
+        if (event.persisted) {
+          checkUserAuth(); //If so, call function to verify actual user authentication state
+        }
+      }
+      window.addEventListener("pageshow", handlePageShow); 
+      return () => {window.removeEventListener('pageshow', handlePageShow);} 
+    }, []);
+    
+
+
     if(checkingAuth) { // Set to 'Loading..' if user auth is being checked
-        return (<h1>Loading....</h1>);
+        return (
+        <h1        
+          style={{
+            fontSize: '2rem',
+            fontWeight: 'Bold',
+            margin: '100px auto auto auto'
+          }}
+        >
+         Loading....
+        </h1>);
     }
 
     if(!isAuthenticated) { // If user is unauthorized, redirect to login page 

@@ -3,9 +3,10 @@ import jwt from 'jsonwebtoken'; // import JWT library for token verification.
 
 const verifyJWT = (req, res, next) => { // middleware to protect 'protected' routes by verifying
                                         // a valid JWT from cookie or header
-                                    
+                                        
     const token = req.cookies?.token ||                       // Try to get token either from 'token' cookie 
                   req.headers.authorization?.split(' ')[1];   // or from the 'Authorization' header
+
 
     if(!token) { // If no token found, deny access ith 401 (unauthorized)
         return res.status(401).json({error: 'Unauthorized access due to missing token.'});
