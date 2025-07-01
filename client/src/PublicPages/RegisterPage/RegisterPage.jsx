@@ -111,17 +111,6 @@ const RegisterPage = () => {
                 />
             </label>            
             <div className="form-divider"/>
-            {/*<label>
-                Password:
-                <input
-                    type='text'                       // set input type
-                    placeholder="Enter your password" // instruction text
-                    name='password'
-                    value={formData.password}         // holds 'password' value
-                    onChange={handleChange}           // change password value on typing
-                    required                          // makes field required
-                />
-            </label>*/} 
             <label>
               Password:
               <PasswordInput
@@ -141,8 +130,13 @@ const RegisterPage = () => {
                 {registering ? "Registering account..." : "Register"}
             </button>
 
-            {/* Google OAuth button placeholder (will update later!) */}
-            <div className="register-button">Register/Login with Google</div>
+            {/* Google OAuth register (and login) button */}
+            <button 
+                className="register-button"
+                onClick={() => window.location.href = "http://localhost:5000/auth/google"}   
+            >
+              Register/Login with Google
+            </button>
 
             {/* Link for users who already have an account */}
             <p style={{cursor:'default'}}>Already have an account? <span

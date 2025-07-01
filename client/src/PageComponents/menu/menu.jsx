@@ -4,6 +4,7 @@ import { faFishFins } from '@fortawesome/free-solid-svg-icons';
 
 import CategoryButtons from "../menuCategories/menuCategories.jsx";
 import MenuSearch      from "../menuSearch/menuSearch.jsx";
+import AboutPageButton from '../menuAbout/menuAbout.jsx';
 import ProfileButton   from "../menuUserProfile/menuUserProfile.jsx";
 import CartButton      from "../menuCartBttn/menuCartBttn.jsx";
 
@@ -21,7 +22,7 @@ const Menu = ({toggleCart}) => {
             <div className="icon-container">
               <FontAwesomeIcon icon={faFishFins} className="fish-icon" />
             </div>
-            <span id="store-name">Ocean</span>
+            <span id="store-name">Reef</span>
           </div>
     
           <CategoryButtons 
@@ -31,6 +32,9 @@ const Menu = ({toggleCart}) => {
             localInput={searchInput}        // passes stores searchInput as localInput for text in search bar
             setLocalInput={setSearchInput}  // stores search input via typing (or resetting via resetSearch())
           />
+          {/* About button */}
+          <AboutPageButton />
+
           <ProfileButton />
           <CartButton
             toggleCart={toggleCart}

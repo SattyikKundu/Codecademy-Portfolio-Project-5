@@ -70,7 +70,7 @@
     background-color: beige; /* color of search box holder */
     border-radius: 18px;       /* rounded corners*/
 
-    width: 80%;  /* main overlay area's width is 80% of parent, but won't grow past 380px */
+    width: 90%;  /* main overlay area's width is 80% of parent, but won't grow past 380px */
     max-width: 380px; 
     height: fit-content;
     margin-top: 100px;
@@ -100,15 +100,26 @@
 /*** Modifies visibility of toggle button and search bar based on screen width ****/ 
 /**********************************************************************************/ 
 
-@media screen and (max-width: 659px) { /* menu search bar is visible for >=579px. This is done on the wrapper since 
+@media screen and (max-width: 690px) { /* menu search bar is visible for >=690px. This is done on the wrapper since 
                                           the actual <SearchTextBox /> component MUST still be active on the overlay! */
     .text-box-wrapper {
         display: none;
     }
 }
 
-@media screen and (min-width: 660px) { /* search icon toggle is only visible for <580px */
+@media screen and (min-width: 691px) { /* search icon toggle is only visible for <690px */
     .search-toggle-container {
         display: none;
+    }
+}
+
+@media screen and (max-width: 389px) { /* shrink icon button in menu to fit mobile size */
+    .search-toggle-container { 
+        width: 2.0rem;      /* overall button dimensions */
+        height: 2.0rem;          
+    }
+    .search-icon { 
+        width:  1.3rem;      /* icon dimensions */
+        height: 1.3rem;
     }
 }

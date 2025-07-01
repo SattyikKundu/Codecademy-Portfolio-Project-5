@@ -106,7 +106,12 @@ const CategoryButtons = ({ clearSearchBar }) => {
         {/* Category selection drop-down menu for mobile screen sizes */}
         <div className="custom-dropdown" ref={dropDownRef}>
             <div className="dropdown-box" onClick={openMenu}>
+
+                {/* For screen widths of >=360px */}
                 <div className="current-selection">{selected ? selected : 'Shop Products'}</div>
+                {/* For screen widths of >=320px and <=359px */}
+                <div className="current-selection-mobile">{selected ? selected : 'Products'}</div>
+
                 <div className="toggle-arrow"> {menuOpen ? '▲' : '▼'} </div>
             </div>
             { menuOpen && (

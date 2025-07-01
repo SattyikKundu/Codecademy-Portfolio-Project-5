@@ -50,8 +50,8 @@ passport.use(new GoogleStrategy({
     clientID:     process.env.GOOGLE_CLIENT_ID,     // Google OAuth Client ID
     clientSecret: process.env.GOOGLE_CLIENT_SECRET, // Google OAuth Secret
     callbackURL:  '/auth/google/callback'           // Redirect URI/Route that handles OAuth response after Google authenticates the user
-}, 
-    async(accessToken, refreshToken, profile, done) => {
+  }, 
+  async(accessToken, refreshToken, profile, done) => {
     try {
         const res = await pool.query('SELECT * FROM users WHERE google_id = $1', [profile.id]); // Check if user already exists
                                                                                 // same as findUserByGoogleId() from authModel.js
@@ -71,7 +71,8 @@ passport.use(new GoogleStrategy({
     catch(error) {  // Handle database errors
         return done(error); 
     }
-}));
+  }
+));
 
 
 /* Session Serialization:

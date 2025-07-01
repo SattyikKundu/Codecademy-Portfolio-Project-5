@@ -89,8 +89,8 @@
     text-shadow: 0 0 0px rgba(0, 0, 0, 0.35); /* Slight shadow over text to darken/contrast background */
 }
 
-#store-name::after { /* Adds 'Buddies' after word 'Ocean' to get full store name*/
-    content: '\00a0 Buddies';
+#store-name::after { /* Adds 'Budz' after word 'Reef' to get full store name*/
+    content: '\00a0 Budz';
 }
 
 @media screen and (max-width: 1031px) { /* At <=1031px, put store name words in vertical column*/
@@ -100,12 +100,29 @@
         font-size: 1.8rem;
     }
     #store-name::after {
-        content: 'Buddies';
+        content: 'Budz';
     }
 }
 
-@media screen and (max-width: 500px) { /* at <=500px, remove store name to save space on mobile devices */
+@media screen and (max-width: 540px) { /* at <=540px, remove store name to save space on mobile devices */
     #store-name {
         display: none;
+    }
+}
+
+@media screen and (max-width: 389px) { /* Shrink logo a bit for smallest screen sizes*/ 
+ 
+    .icon-container { /* container (and border) style of icon */
+        display: flex;
+        border: 1px solid #62719ca6; /* border styling of container */
+        width:  2.2rem; /* Dimensions and styling of logo container */
+        height: 2.2rem;
+    }
+
+    .icon-container .fish-icon { /* styles and centers actual fish icon in parent container */
+        color: rgb(0, 87, 128);
+        width: 1.6rem;
+        height: 1.6rem;
+        margin: auto; 
     }
 }

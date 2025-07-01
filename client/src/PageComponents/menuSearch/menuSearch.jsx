@@ -14,14 +14,15 @@ const MenuSearch = ({ localInput, setLocalInput }) => { // component for handlin
     setOverlayToggle(prev => !prev);
   }
 
-  useEffect(() => { // useEffect to handle toggling off overlay is screen width exceeds 540px
+  useEffect(() => { // useEffect to handle toggling off overlay is screen width exceeds 690px
 
     const checkScreenWidth = () => {
-      if(window.innerWidth >= 540) { // check if window/viewport width is at least 540px...
-        setOverlayToggle(false); // On >=540px width, overlay becomes closed
+      if(window.innerWidth >= 690) { // check if window/viewport width is at least 690px...
+        setOverlayToggle(false); // On >=690px width, overlay becomes closed
       }
       /* NOTE: If I needed to check the height/width of a DOM object (<div>) instead of 
-               the screen window, I would need to use a useRef object */
+       *       the screen window, I would need to use a useRef object 
+       */
     }
 
     addEventListener('resize', checkScreenWidth); // Add listener event for when screen resizes

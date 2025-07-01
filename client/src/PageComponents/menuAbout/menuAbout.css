@@ -1,0 +1,58 @@
+
+.about-bttn-container, 
+.about-bttn-selected { /* general styling of container when selected/unselected */
+
+    display: flex; /* Flex display for easy centering */
+    align-self: center; /* vertical centering of flex bttn container */
+
+    margin: 0 auto;
+    border-radius: 30%;
+    overflow: hidden; /* container content styling */
+
+    width: 2.2rem; /* overall button dimensions*/
+    height: 2.2rem;
+
+    cursor: pointer;
+}
+
+.about-icon { /* icon color & size styling */
+    color: beige;
+    margin: auto;
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+
+.about-bttn-container { /* general colors of about button */
+    border: 1px solid #009966; /* button border styling*/
+    box-shadow: 0 0 5px rgba(0, 151, 101, 0.719);
+    background-color: #03c081;
+}
+
+.about-bttn-container:hover {  /* Profile button color change on hover (same as when selected*/
+    background-color: #009966; 
+    border: 1px solid #007c53;
+    box-shadow: 0 0 5px rgba(0, 126, 84, 0.719);
+}
+
+.about-bttn-container:active { /* Shrink button on press */
+    transform: scale(0.9);
+}
+
+.about-bttn-selected { /* colors of button when selected */
+    background-color: #009966; 
+    border: 1px solid #007c53;
+    box-shadow: 0 0 5px rgba(0, 126, 84, 0.719);
+}
+
+@media screen and (max-width: 389px) { /* shrink icon button in menu to fit mobile size */
+    .about-bttn-container, 
+    .about-bttn-selected {
+        width: 2.0rem;
+        height: 2.0rem;
+    }
+    .about-icon {
+        width: 1.3rem;
+        height: 1.3rem;
+    }
+}

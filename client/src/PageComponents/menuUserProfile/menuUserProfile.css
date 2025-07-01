@@ -143,3 +143,14 @@
   background-color: #cfcfcf;
     cursor: pointer;
 }
+
+@media screen and (max-width: 389px) { /* shrink icon button in menu to fit mobile size */
+  .profile-bttn-container {
+    height: 2.0rem;
+    width: 2.0rem; 
+  }
+  .user-icon { 
+    width: 1.3rem;
+    height: 1.3rem; 
+  }
+}

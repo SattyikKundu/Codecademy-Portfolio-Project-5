@@ -10,6 +10,7 @@ import ProtectedPageLayout from '../AppPageLayouts/ProtectedPageLayout.jsx';    
 import CheckoutPageLayout  from '../AppPageLayouts/CheckoutPageLayout/CheckoutPageLayout.jsx'; // specific layout for checkout process/page(s)
 
 // All public pages
+import AboutPage           from '../PublicPages/AboutPage/AboutPage.jsx';           // About page explaining E-commerce store and service(s)
 import ProductsPage        from '../PublicPages/ProductsPage/ProductsPage.jsx';     // 'home' page with all products
 import ProductDetailsPage  from '../PublicPages/ProductDetailsPage/ProductDetailsPage.jsx'; // give product details for specific product by id
 import CartPage            from '../PublicPages/CartPage/CartPage.jsx';             // dedicated cart page (fallback for slider cart, which is main)
@@ -56,6 +57,9 @@ const App = () => {
           <Route path='/products/:category/:id' element={<ProductDetailsPage />} />
           {/*<Route path='/products/all/:id' element={<ProductDetails />} /> */}
 
+          {/* Route for "About" page, which explains the fake E-commerce site's features and services */}
+          <Route path='/about' element={<AboutPage />} />
+
           {/* Dedicated cart page (fallback route for the main 'Cart Slider' overlay) */}
           <Route path='/cart' element={<CartPage />} />
 
@@ -66,30 +70,31 @@ const App = () => {
           {/* Dedicated User account Registration page */}
           <Route path='/auth/register' element={<Navigate to='/register'/>} />
           <Route path='/register' element={<RegisterPage/>} />
-         </Route>
-
-          {/* Protected Routes Layout */}
-          <Route element={<ProtectedPageLayout />}>
-
-            {/* Page shows user's profile information AND allows user to edit his/her profile information */}
-            <Route path='/profile' element={<ProfilePage />} />
-
-            {/* Page displays user's order history in table format (each row is a record for a past order) */}
-            <Route path='/orders' element={<OrderHistoryPage />} />
-
-            {/* Page shows details for a specific order via link in order history page */}
-            <Route path='/orders/:orderId' element={<OrderDetailsPage />} />
-
-          </Route>
 
         </Route>
 
-        {/* Layout  for Checkout Process/Page(s) (also considered a "PROTECTED" page */}
-        <Route element={<CheckoutPageLayout />}>
-          <Route path='/checkout' element={<CheckoutPage />} />
+        {/* Protected Routes Layout */}
+        <Route element={<ProtectedPageLayout />}>
+
+          {/* Page shows user's profile information AND allows user to edit his/her profile information */}
+          <Route path='/profile' element={<ProfilePage />} />
+
+          {/* Page displays user's order history in table format (each row is a record for a past order) */}
+          <Route path='/orders' element={<OrderHistoryPage />} />
+
+          {/* Page shows details for a specific order via link in order history page */}
+          <Route path='/orders/:orderId' element={<OrderDetailsPage />} />
+
         </Route>
 
-      </Routes>
+      </Route>
+
+      {/* Layout  for Checkout Process/Page(s) (also considered a "PROTECTED" page */}
+      <Route element={<CheckoutPageLayout />}>
+        <Route path='/checkout' element={<CheckoutPage />} />
+      </Route>
+
+    </Routes>
     </Router>
   );
 }

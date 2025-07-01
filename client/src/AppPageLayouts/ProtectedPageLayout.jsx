@@ -60,25 +60,29 @@ const ProtectedPageLayout = () => {
         return (
         <h1        
           style={{
-            fontSize: '2rem',
+            fontSize:   '2rem',
             fontWeight: 'Bold',
-            margin: '100px auto auto auto'
+            marginTop:  '100px',
+            textAlign:  'center'
           }}
         >
          Loading....
         </h1>);
     }
-
-    if(!isAuthenticated) { // If user is unauthorized, redirect to login page 
+    else { //otherwise...
+        
+      if(!isAuthenticated) { // If user is unauthorized, redirect to login page 
         return (<Navigate to='/login' replace />); // Since user is unauthorized, 'replace' keyword prevents user from navigating back 
                                                    // to a protected page after redirect (since unauthorized user shouldn't be allowed to access it)
-    }
-
-    return ( // If successfully authenticated, reder the layout + any nested protected routes
-        <BasePageLayout>
+      }
+      else if (isAuthenticated) {
+        return ( // If successfully authenticated, reder the layout + any nested protected routes
+          <BasePageLayout>
             <Outlet /> {/* Renders whichever protected route is matched inside <Routes> */}
-        </BasePageLayout>
-    );
+          </BasePageLayout>
+        );
+      }
+    }
 }
 
 export default ProtectedPageLayout; // Export the layout for use in routing

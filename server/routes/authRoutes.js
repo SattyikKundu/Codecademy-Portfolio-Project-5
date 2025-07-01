@@ -41,9 +41,9 @@ router.get('/auth/me',            // Define GET route at '/auth/me'
      *  Prevents cache of this sensitive route. Prevents auth token data from 
      *  a successful '/auth/me' route being stored in bfcache. Essentially, browser is always
      *  forced to re-request '/auth/me' (which fails properly if cookie is missing and 'isAuthenticated' remains false)
-     *  This once caused a MAJOR issue where clicking back button 
-     *  from "/cart" page to "/login" (or "/register") caused a redirect
-     *  to "/profile" page instead due to auth token being stored in bfcache.     
+     *  This once caused a MAJOR issue where clicking the browser back button 
+     *  from "/cart" page to "/login" (or "/register") page, despite being logged out, 
+     *  caused a redirect to "/profile" page instead due to auth token being stored in bfcache.     
      */ 
     res.json({ user: req.user }); // Send the user info back to the frontend as JSON
   }

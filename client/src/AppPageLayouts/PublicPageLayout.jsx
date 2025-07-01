@@ -78,26 +78,29 @@ const PublicPageLayout = () => {
 
 
 
+  
   if (loading) { // Mainly used to PREVENT flickering/rendering of login/register page 
                  // (whilst user is logged in) until actual redirected page('/profile') is fully loaded.
+                 // Will replace this with a proper loading screen/spinner later.
     return ( 
       <div
         style={{
           fontSize: '2rem',
           fontWeight: 'Bold',
-          margin: '100px auto auto auto'
+          textAlign: 'center'
         }}
       >
         Loading...
       </div>
     ); // Show some placeholder(like loading spinner or blank) until done
   }
-
-  return ( /* <BasePageLayout> is the 'wrapper' that provides common page features for <PublicPageLayout> */
-    <BasePageLayout>
-      <Outlet /> {/* <Outlet /> is the page body setion where content changes based on current route! */}
-    </BasePageLayout>
-  );
+  else {
+    return ( /* <BasePageLayout> is the 'wrapper' that provides common page features for <PublicPageLayout> */
+      <BasePageLayout>
+        <Outlet /> {/* <Outlet /> is the page body setion where content changes based on current route! */}
+      </BasePageLayout>
+    );
+  }
 };
 
 export default PublicPageLayout;

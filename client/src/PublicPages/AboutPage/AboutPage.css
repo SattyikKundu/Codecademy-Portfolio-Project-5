@@ -1,0 +1,248 @@
+/*****************************************************************************/
+/******************** About Page General styling *****************************/
+/*****************************************************************************/
+
+.about-page-full {  /* Container for ENTIRE PAGE*/
+  display: flex;
+  min-width: 100vw !important;
+  min-height: 100vh !important;
+  height: fit-content;
+
+  background-image: var(--background-image);
+  background-size: var(--background-img-size);
+
+  position: relative;
+}
+
+.about-container { /* Holds main content container of About Page */
+
+    display: flex;      /* items in flex-column orientation */
+    flex-direction: column;
+    position: relative; /* Needed for absolute positioning of 'close cart' button (and the cart header) */
+
+    width: 90%; /* size matches parent container */
+    height: fit-content;
+    max-width: 660px;
+
+    background-color: #f8f8f8;
+
+    margin: 90px auto calc(3rem + var(--footer-height) ) auto;
+
+    /*z-index: -1; /* NOTE: Originally, this was done to make layout 'under' the floating menu
+                    *       However, this led to a 'layout isolation' problem the preveted
+                    *       any kind of clicking or interaction. After removing this AND
+                    *       increasing the z-index of the menu component. It seems to work now.
+                    */
+
+    border-radius: 8.5px; /* cart content container border */
+    border: 1px solid #368bda;
+    box-shadow: 0px 0px 6px 5px rgba(11, 101, 180, 0.7);
+}
+
+/*****************************************************************************/
+/******************** Header styling *****************************************/
+/*****************************************************************************/
+
+#about-header { /* Header title style */
+    margin: 0.5rem auto;
+
+    font-size: 3rem; /* Store name styling */
+    font-weight: 600;
+    font-family: "Permanent Marker", sans-serif;
+    padding-right: 0.5rem; /* right padding to make extra room for name */
+
+    background: linear-gradient( /* Gradient color for text */
+        270deg,
+
+        /* Tropical color spectrum */
+        #0052D4,   /* deep ocean blue */
+        #4364F7,   /* reef blue */
+        #6FB1FC,   /* tropical cyan */
+        #00C9A7,   /* seafoam green */
+        #FDC830,   /* sun yellow */
+        #F37335    /* coral orange */
+    );
+ 
+    -webkit-background-clip: text;        /* contrains gradient to only text area (and not entire block) */
+    -webkit-text-fill-color: transparent; /* Needed for gradient to cover text */
+    text-shadow: 0 0 0px rgba(0, 0, 0, 0.4); /* Slight shadow over text to darken/contrast background */
+}
+
+/*****************************************************************************/
+/******************** Image styling ******************************************/
+/*****************************************************************************/
+
+.about-img-container-1,
+.about-img-container-2 { /* containers for image */
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 23, 99, 0.541);
+  overflow: hidden;
+  margin: 1rem;
+}
+
+.about-img-container-1 {  /* custom styling for image container */ 
+    max-width: 280px;
+    margin-right: 0; 
+}
+.about-img-container-2 { 
+    max-height: 180px;
+    width: auto; 
+    margin-left: 0;
+}
+
+
+.about-image { /*styling on <img> itself */
+    display: block; /* ensures that white space at bottom of container is gone*/
+    width: 100%;
+}
+
+/*****************************************************************************/
+/******************** Body Text styling **************************************/
+/*****************************************************************************/
+
+.about-body { /* Container for body text (which includes <img> and <p>) */
+    padding: 0rem 2rem 1rem 2rem;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.about-body-block-1, 
+.about-body-block-2, 
+.about-body-block-3 { /* Styling for 3 main text/img blocks */
+    display: flex; 
+    align-items: center;
+    font-size: 1.17rem;
+}
+
+.about-body-block-1 { /* Custom styling for about blocks 1 & 3 */
+    flex-direction: row-reverse;
+    height: fit-content;
+}
+.about-body-block-3 { 
+    flex-direction: row;
+    height: fit-content;
+}
+
+#about-store-name {  font-weight: bold; } /* bolding of store name in block 1 text */
+
+/*****************************************************************************/
+/************ Disclaimer Notice styling **************************************/
+/*****************************************************************************/
+
+.about-disclaimer{ /* main container for disclaimer notice */
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    margin: 0rem 2rem 2rem 2rem;
+
+    background-color: #e6f4ea;
+    border-left: 6px solid #4CAF50;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 6px;
+}
+
+.about-disclaimer h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.about-disclaimer div {
+  margin: 0.5rem 0 0 0;
+  font-size: 1rem;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  color: #444;
+  text-align: center;
+}
+
+.about-disclaimer > div > p {
+    margin: 0.5rem;
+}
+
+/*****************************************************************************/
+/************ Continue Shopping button styling *******************************/
+/*****************************************************************************/
+
+.about-continue-shopping-button {
+  width: 200px; /* button dimensions */
+  padding: 0.65rem;
+  margin: 0rem auto 1.5rem auto;
+
+  color: white; /* font color and styling */
+  font-weight: bold;
+  font-size: 1rem;
+
+  background-color: #2394e0; /* button color */
+
+  border-radius: 0.4rem; /* button border styling */
+  border: 1px solid #1d81c4;
+  box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, 0.070),
+              0px 0px 3px 2px rgba(0, 0, 0, 0.070),
+              0px 0px 3px 2px rgba(0, 0, 0, 0.070),
+              0px 0px 3px 2px rgba(0, 0, 0, 0.070);  
+
+  cursor: pointer;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10px;
+
+  transition: background-color 0.2s ease;
+}
+
+.about-continue-shopping-button:hover { background-color: #136196;}
+.about-continue-shopping-button:active { transform: scale(0.9);}
+
+/*****************************************************************************/
+/**************** Tablet and Mobile responsive styling ***********************/
+/*****************************************************************************/
+
+@media screen and (max-width: 709px) { /*Styling for tablet width size and below */
+
+    .about-body { /* About body updated content padding */
+        padding: clamp(1rem, 3.85vw, 2rem);
+        padding-top: 0;
+    }
+
+    .about-body-block-1, 
+    .about-body-block-2, 
+    .about-body-block-3 { /* Updated font and margin styling for about body blocks 1-3 */
+        font-size: clamp(0.75rem, 2.5vw,  1.17rem);
+    }
+    .about-img-container-1,
+    .about-img-container-2 {
+        margin: clamp(0.5rem, 2.5vw, 1rem);
+    }
+    .about-img-container-1 { margin-right: 0;}
+    .about-img-container-2 { margin-left: 0;}
+}
+
+
+@media screen and (max-width: 449px) { /* Adjusted styling for mobile screen sizes */
+
+    .about-body { /* updated padding for about body */
+        padding: 0.5rem 1.5rem;
+        padding-top: 0;
+    }
+
+    .about-body-block-1,
+    .about-body-block-2,
+    .about-body-block-3 { /* text styling in about blocks */
+        font-size: clamp(0.9rem, 3vw, 1rem);
+        text-align: center;
+    }
+
+    /*updated text/image orientation in about blocks */
+    .about-body-block-1 { flex-direction: column-reverse; }
+    .about-body-block-3 { flex-direction: column;}
+ 
+    .about-img-container-1,  
+    .about-img-container-2 {  /* updated iamge containers */
+       max-width: none;
+       max-height: none; 
+       width: 100%;
+       height: auto;
+       margin: 0.5rem 0;
+       border-radius: 10px; 
+    }
+}

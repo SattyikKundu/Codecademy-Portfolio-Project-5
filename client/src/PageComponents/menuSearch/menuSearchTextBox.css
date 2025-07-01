@@ -64,16 +64,21 @@
     cursor: pointer;
 }
 
-@media screen and (max-width: 540px) {
+@media screen and (max-width: 690px) {
     .search-box-area {
-        height: 2rem;
+        height: 2.25rem;
         width:fit-content;
     }
     #reset-search { 
-        margin-top: 0.35rem;
+        width:   1.5rem;   /* Fixed width */
+        height:  1.5rem;   /* Fixed height */
+        font-size: 1.175rem;
+        margin-top: 0.39rem;
     }
     .search-input-box { 
-        font-size: 0.9rem;
+        font-size: 1.05rem;
         width: 160px;
+        text-indent: 3px;
+        padding-top: 0.1rem; /* adds space on top to verically "center" text area */
     }
 }

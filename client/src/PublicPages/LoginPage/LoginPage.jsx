@@ -163,8 +163,13 @@ const LoginPage = () => { // login component with default login header message
                 {loading ? "Logging in..." : "Login"}
             </button>
 
-            {/* Google OAuth button placeholder (will update later!) */}
-            <div className="login-button">Login with Google</div>
+            {/* Google OAuth login (and/or register) button */}
+            <button 
+                className="login-button"
+                onClick={() => window.location.href = "http://localhost:5000/auth/google"}   
+            >
+              Login with Google
+            </button>
 
             {/* Link for new users who need to register for an account */}
             <p style={{cursor:'default'}}>New User? <span
@@ -177,13 +182,6 @@ const LoginPage = () => { // login component with default login header message
                 Sign Up here
                 </span>
             </p>
-
-                {/*     
-                    <button onClick={() => window.location.href = "http://localhost:5000/auth/google"}>
-                        Login with Google
-                    </button>
-                    <p>(Google login not functional yet — backend config pending)</p> 
-                */}
         </div>
       <FooterBottom />
       </div>
