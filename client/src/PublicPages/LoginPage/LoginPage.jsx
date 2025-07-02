@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";               // react hook to track form input
-import { useNavigate } from "react-router-dom"; // hook for redirecting user after login
-import { useDispatch } from "react-redux";      // Redux hook to update auth statement
-import { useLocation } from "react-router-dom"; // hook for managing location object properties
-import axios from 'axios';                      // for making HTTP requests to backend
+import { useState, useEffect } from "react";     // react hook to track form input
+import { useNavigate } from "react-router-dom";  // hook for redirecting user after login
+import { useDispatch } from "react-redux";       // Redux hook to update auth statement
+import { useLocation } from "react-router-dom";  // hook for managing location object properties
+import axios from 'axios';                       // for making HTTP requests to backend
 import { ErrorMessageToast, SuccessMessageToast } from "../../utils/utilityFunctions"; // toast when login fails/succeed
 
 import { setUser } from "../../Slices/authSlice"; // redux action to store data

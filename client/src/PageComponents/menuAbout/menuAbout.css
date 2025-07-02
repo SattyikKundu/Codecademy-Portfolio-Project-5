@@ -22,27 +22,23 @@
     height: 1.5rem;
 }
 
-
 .about-bttn-container { /* general colors of about button */
     border: 1px solid #009966; /* button border styling*/
     box-shadow: 0 0 5px rgba(0, 151, 101, 0.719);
     background-color: #03c081;
 }
 
-.about-bttn-container:hover {  /* Profile button color change on hover (same as when selected*/
+.about-bttn-container:hover,
+.about-bttn-selected { /* colors of button when hovered over or selected */
     background-color: #009966; 
     border: 1px solid #007c53;
     box-shadow: 0 0 5px rgba(0, 126, 84, 0.719);
 }
 
-.about-bttn-container:active { /* Shrink button on press */
+
+.about-bttn-container:active, 
+.about-bttn-selected:active { /* Shrink button on press (when both active/inactive) */
     transform: scale(0.9);
-}
-
-.about-bttn-selected { /* colors of button when selected */
-    background-color: #009966; 
-    border: 1px solid #007c53;
-    box-shadow: 0 0 5px rgba(0, 126, 84, 0.719);
 }
 
 @media screen and (max-width: 389px) { /* shrink icon button in menu to fit mobile size */

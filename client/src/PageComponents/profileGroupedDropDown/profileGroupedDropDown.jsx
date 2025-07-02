@@ -7,9 +7,10 @@ import { useState,      // react hook for tracking local states
 
 import "./profileGroupedDropDown.css";
 
-const ProfileGroupedDropDownMenu = ({ label, value, original, onSave, options, propStyle = {}}
-                                      ) => { // props for profile field-value
-                                              // component ('propsStyle' optional)
+const ProfileGroupedDropDownMenu = (
+  { label, value, original, onSave, exitEditMode, options, propStyle = {}}
+                                  ) => { // props for profile field-value
+                                         // component ('propsStyle' optional)
 
   const [editing,             setEditing] = useState(false); // tracks if field is in 'editing' mode or not
   const [draft,                 setDraft] = useState(value); // holds edited/selected value as 'draft'
@@ -28,6 +29,14 @@ const ProfileGroupedDropDownMenu = ({ label, value, original, onSave, options, p
   useEffect(() => { // ensures that edited changes and draft value syncs
     setDraft(value);
   }, [value]);
+
+  useEffect(() => { // close dropdown (if open) when user submit
+    if(exitEditMode){ // triggers closing of dropdown menu if 'editing' state when 'exitEditMode' is toggled
+      setEditing(false);
+      setDraft(value);
+      setDropdownOpen(false);
+    }
+  },[exitEditMode, value]);
 
   useEffect(() => { // Close dropdown when clicking outside
     const handleClickOutside = (event) => {

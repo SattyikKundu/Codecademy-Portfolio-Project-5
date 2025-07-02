@@ -3,15 +3,22 @@ import { useState, useEffect } from "react";
 import { ErrorMessageToast } from "../../utils/utilityFunctions";
 import './profileFieldText.css';
 
-const ProfileFieldText = ({ label, value, original, onSave, propStyle={} }) => { // props for profile field-value 
+const ProfileFieldText = ({ label, value, original, onSave, exitEditMode, propStyle={} }) => { // props for profile field-value 
                                                                                  // component ('propsStyle' optional)
 
   const [editing, setEditing] = useState(false); // tracks if field is in 'editing' mode or not
   const [draft, setDraft] = useState(value);     // holds edited value as 'draft'
 
-  useEffect(() => { // Keep 'draft' in sync with parent value (especially needed for )
+  useEffect(() => {  // Keep 'draft' in sync with parent value (especially needed for )
     setDraft(value);
   }, [value]);
+
+  useEffect(() => {    // used to close edit on submission
+    if(exitEditMode) { // triggers closing of dropdown menu if 'editing' state when 'exitEditMode' is toggled
+      setEditing(false);
+      setDraft(value);
+    }
+  }, [exitEditMode, value]);
 
   const handleRevert = () => { /* If value edited, can be reverted to original value from database */
     setDraft(original);

@@ -50,7 +50,12 @@ const AboutPage = () => {
             <p>To test the checkout, you can register a fake account and use Stripe's test cards from this <a href="https://docs.stripe.com/testing#cards" target="_blank" rel="noopener noreferrer"><em>link</em></a>.</p>
           </div>
         </div>
-        <button className='about-continue-shopping-button' onClick={() => navigate('/')}>Continue Shopping</button>
+        {/* NOTE: While '/' does lead to the products page, the acutal products page url is '/products/all'. 
+          *       Using '/' causes redirect to '/products/all' in App.jsx, and redirectss cause navigation history to wipe out;
+          *       this means the browser's 'back' button can't be used to go back to 'About' page from 'Products' page.
+          *       Hence, the actual url path, '/products/all', needs to be used to enable backwards navigation.
+          */}
+        <button className='about-continue-shopping-button' onClick={() => navigate('/products/all')}>Continue Shopping</button>
       </div>
       <FooterBottom />
     </div>

@@ -135,8 +135,13 @@ export const handleGoogleCallback = async (req, res) => { // Google OAuth callba
 
     setAuthCookie(res, token);  // Store token as secure httpOnly cookie
 
-    res.redirect(process.env.CLIENT_HOME_URL || '/'); // Redirect to frontend after login 
-                                                     // redirect customizable via .env
+   /* redirect to profile page after successful google oauth login
+    * NOTE: redirect url might change depending on CLIENT_HOME_URL in the .env file 
+    */
+    res.redirect(`${process.env.CLIENT_HOME_URL}/profile?loginSuccess=1`); 
+
+    //res.redirect(process.env.CLIENT_HOME_URL || '/'); // Redirect to frontend after login 
+                                                        // redirect customizable via .env
   } 
   catch (err) { // Error if OAuth failed
     res.status(500).json({ error: 'Google OAuth failed' });
