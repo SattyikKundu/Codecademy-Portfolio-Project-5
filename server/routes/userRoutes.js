@@ -7,10 +7,125 @@ import { getProfile,
 
 const router = express.Router();
 
+/**
+ * @swagger
+ * tags:
+ *   name: User
+ *   description: User profile operations (👤 MUST to be registered and logged-in to test ALL cart routes)
+ */
+
+
+
+
+/**
+ * @swagger
+ * /profile:
+ *   get:
+ *     summary: Get authenticated user's profile
+ *     tags: [User]
+ *     description: After user logs in, '/profile' returns all profile fields for the authenticated user.
+ *     security:
+ *       - bearerAuth: []  # Requires JWT token(user needs to be logged in)
+ *     responses:
+ *       200:
+ *         description: User profile data returned successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 user:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: integer
+ *                     first_name:
+ *                       type: string
+ *                     last_name:
+ *                       type: string
+ *                     username:
+ *                       type: string
+ *                     email:
+ *                       type: string
+ *                     phone_number:
+ *                       type: string
+ *                     created_at:
+ *                       type: string
+ *                       format: date-time
+ *                     address_line1:
+ *                       type: string
+ *                     address_line2:
+ *                       type: string
+ *                     city:
+ *                       type: string
+ *                     state:
+ *                       type: string
+ *                     postal_code:
+ *                       type: string
+ *       401:
+ *         description: Unauthorized – missing or invalid token
+ *       404:
+ *         description: User not found
+ *       500:
+ *         description: Server error fetching profile
+ */
+
 router.get('/profile', verifyJWT, getProfile); // GET '/profile' - Get authenticated user's profile data
                                                //                  Also use verifyJWT to get loggedin user's ID 
                                                //                  since this is a protected route.
 
+
+
+/**
+ * @swagger
+ * /profile:
+ *   patch:
+ *     summary: Update authenticated user's profile
+ *     tags: [User]
+ *     description: Update logged-in user's profile data using patch()
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               first_name:
+ *                 type: string
+ *               last_name:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *               phone_number:
+ *                 type: string
+ *               address_line1:
+ *                 type: string
+ *               address_line2:
+ *                 type: string
+ *               city:
+ *                 type: string
+ *               state:
+ *                 type: string
+ *               postal_code:
+ *                 type: string
+ *           example:
+ *             first_name: firstName
+ *             last_name: lastName
+ *             email: first.last@example.com    ## must be unique (no other account uses same email currently)
+ *             phone_number: "555-555-5555"
+ *             address_line1: "555 Some Ave."
+ *             address_line2: "Unit 1A"
+ *             city: Miami
+ *             state: FL
+ *             postal_code: "55555"
+ *     responses:
+ *       200:
+ *         description: Profile updated successfully
+ *       400:
+ *         description: Missing required fields
+ *       409:
+ *         description: Duplicate email or username
+ */
 router.patch('/profile', verifyJWT, updateProfile); // PATCH '/profile' - Update authenticated user's profile data
                                                     //                  Like earlier, use verifyJWT to get loggedin
                                                     //                  user's ID  since this is a protected route.

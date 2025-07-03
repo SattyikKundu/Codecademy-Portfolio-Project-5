@@ -1,3 +1,7 @@
+// ===================================================================================================
+// Express App Imports
+// ===================================================================================================
+
 import express from 'express'; // imported to help create express app (to use as backend server)
 
 import cors from 'cors';       // CORS middleware allows frontend (HTML/JS) to access server (backend) from a different origin
@@ -8,8 +12,16 @@ import cookieParser from 'cookie-parser'; // middleware import used to read cook
 import session from 'express-session';    // required by passport (even when JWT is used, Google OAuth needs session temporarily)
 import passport from 'passport';          // Core authentication framework
 
-//import csrf from 'csurf';               // middleware import for CSRF (Cross-Site Request Forgery) protection
+import swaggerUi from 'swagger-ui-express';   // Middleware to serve Swagger UI at a route like '/api-docs'
+import swaggerSpec from './swaggerConfig.js'; // Imports generated Swagger specification object (contains API metadata and route definitions)
+                                              // used by Swagger UI to present data to user
+
+//import csrf from 'csurf';      // middleware import for CSRF (Cross-Site Request Forgery) protection
 //import redis from 'redis';     // Used to cache 'products' data in order to reduce load and requests to database. 
+
+// ===================================================================================================
+// Routes Imports
+// ===================================================================================================
 
 import './auth/passportConfig.js';  // Loads and registers passport strategies globally (MUST come before routes!)
 
@@ -34,25 +46,30 @@ import dotenv from 'dotenv'; // loads .env variables into process.env
                              // so they can be accessed anywhere in server code
 dotenv.config();
 
-
-// ==============================================================================
+// ===================================================================================================
 // Create Express App
-// ==============================================================================
+// ===================================================================================================
+
 const app = express();                // Initialize Express application
 const port = 5000;                    // define back-end port
 
-/*
-// Set up Redis client
-const redisClient = redis.createClient({
-  host: 'locahost', // ensures that Redis runs locally (or change server configuration when needed)
-  port: '6379'      // default port for Redis
-});
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec)); // Swagger UI setup (must come after 'app' is defined)
 
-// Set up Redis connection
-redisClient.connect()
-  .then(() => console.log('Redis connected'))
-  .catch(error => console.log('Redis conneciton error: ', error));
-*/
+// ===================================================================================================
+// Redis for application caching for faster performance and scaling (will revisit later)
+// ===================================================================================================
+
+// // Set up Redis client
+// const redisClient = redis.createClient({
+//   host: 'locahost', // ensures that Redis runs locally (or change server configuration when needed)
+//   port: '6379'      // default port for Redis
+// });
+
+// // Set up Redis connection
+// redisClient.connect()
+//   .then(() => console.log('Redis connected'))
+//   .catch(error => console.log('Redis connection error: ', error));
+
 
 // ==============================================================================
 // Middleware Setup
@@ -81,7 +98,7 @@ app.use(passport.initialize());  // Initialize Passport middleware
 app.use(passport.session());     // Allow persistent login sessions (required for Google OAuth login)
 
 // ==============================================================================
-// CSRF Protection (Optional but Recommended)
+// CSRF Protection (Optional but Recommended — may add/update later)
 // ==============================================================================
 //const csrfProtection = csrf({ cookie: true }); // Enable/Disable if CSRF is needed
 //app.use(csrfProtection);

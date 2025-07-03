@@ -36,7 +36,7 @@ const getProductById = async(req, res) => { // controller function for getting a
         if (product.length === 1) { // there should ONLY be 1 product for the id
             res.json(product); // converts product data into JSON response
         }
-        else if (!product) {
+        else if (!product || product.length===0) {
             return res.status(404).json({ error: 'Product not found in database.'});
         }
         else if (product.length>1) {
