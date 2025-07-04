@@ -73,7 +73,7 @@ router.get('/products/all', productController.getProducts);
  *         required: true
  *         schema:
  *           type: string
- *         description: 'Product category (Options(without quotes): "all", "fishes", "invertebrates", "corals & anemeones").'
+ *         description: 'The following product category options can be inserted for "Try it now" (without quotes): "all", "fishes", "invertebrates", and "corals_&_anemeones").'
  *     responses:
  *       200:
  *         description: Filtered list of products by category

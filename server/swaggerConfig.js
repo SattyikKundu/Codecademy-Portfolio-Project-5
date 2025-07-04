@@ -9,7 +9,7 @@ const options = { // Define Swagger configuration options
     info: {
       title: 'Saltwater Reef E-commerce API', // Title that appears at the top of Swagger UI
       version: '1.0.0',                       // Version of your API documentation
-      description: 'API documentation for the saltwater reef creature e-commerce store.', // Description shown under the title
+      description: "API documentation for 'Reef Budz' (saltwater reef creatures) e-commerce store. Some routes are (🔒) NOT testable in Swagger UI and others are only accessible IF (👤) user has registered ('/auth/register') and logged-in ('/auth/login') first using routes under 'Auth' section below.", // Description shown under the title
     },
 
     servers: [ // Defines one or more environments where the API is hosted (here: localhost)

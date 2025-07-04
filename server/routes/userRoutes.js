@@ -11,7 +11,7 @@ const router = express.Router();
  * @swagger
  * tags:
  *   name: User
- *   description: User profile operations (👤 MUST to be registered and logged-in to test ALL cart routes)
+ *   description: User profile operations (👤 MUST to be registered and logged-in to test ALL user/profile routes)
  */
 
 
@@ -69,7 +69,6 @@ const router = express.Router();
  *       500:
  *         description: Server error fetching profile
  */
-
 router.get('/profile', verifyJWT, getProfile); // GET '/profile' - Get authenticated user's profile data
                                                //                  Also use verifyJWT to get loggedin user's ID 
                                                //                  since this is a protected route.
@@ -82,7 +81,14 @@ router.get('/profile', verifyJWT, getProfile); // GET '/profile' - Get authentic
  *   patch:
  *     summary: Update authenticated user's profile
  *     tags: [User]
- *     description: Update logged-in user's profile data using patch()
+ *     description: |
+ *              Update logged-in user's profile data using patch(). For this to work on 'try it out', these are the main rules for patch():
+ *              [#1]: User Needs to be logged-in.
+ *              [#2]: ALL fields need to be filled (no empty strings) for patch to work.
+ *              [#3]: To preserve/reuse old values, they need to be re-inserted as part of patch() data; you can use GET '/profile' route to retrieve current profile values.
+ *              [#4]: Lastly, phone number (NNN-NNN-NNNN) and state initials (2 letters) need to be in correct format.
+ *     security:
+ *       - bearerAuth: []  # Requires JWT token(user needs to be logged in)
  *     requestBody:
  *       required: true
  *       content:
@@ -112,12 +118,12 @@ router.get('/profile', verifyJWT, getProfile); // GET '/profile' - Get authentic
  *             first_name: firstName
  *             last_name: lastName
  *             email: first.last@example.com    ## must be unique (no other account uses same email currently)
- *             phone_number: "555-555-5555"
- *             address_line1: "555 Some Ave."
- *             address_line2: "Unit 1A"
- *             city: Miami
- *             state: FL
- *             postal_code: "55555"
+ *             phone_number:    "555-555-5555"
+ *             address_line1:   "555 Some Ave."
+ *             address_line2:   "Unit 1A"
+ *             city:            "Miami"
+ *             state:           "FL"
+ *             postal_code:     "55555"
  *     responses:
  *       200:
  *         description: Profile updated successfully
