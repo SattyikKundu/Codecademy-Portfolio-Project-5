@@ -70,7 +70,7 @@ const Product = ({product}) => {
         if (isAuthenticated) { // if logged in, add product to backend cart
           try {
             await axios.post(//`http://localhost:5000/cart/${productId}/add`, 
-            `${process.env.VITE_API_BASE_URL}/cart/${productId}/add`, 
+            `${import.meta.env.VITE_API_BASE_URL}/cart/${productId}/add`, 
             {}, {withCredentials:true});
           } 
           catch (error) {
