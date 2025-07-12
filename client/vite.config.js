@@ -5,6 +5,7 @@ import react from '@vitejs/plugin-react'; // Imported to enable React for vite (
 
 export default defineConfig({
   plugins: [react()], // register vite plugins here (only 'react' needed right now)
+  base: '/',          // needed for Render and production paths
   server: {
     port: 3000,         // frontend server port for localhost
     open: true          // (optional) auto-opens browser when server starts
