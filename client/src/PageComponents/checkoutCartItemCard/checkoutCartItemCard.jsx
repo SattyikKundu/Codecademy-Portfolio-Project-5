@@ -7,7 +7,7 @@ import axios from "axios"; // used to make HTTP request to backend
 import { throttle } from 'lodash'; // throttle and useMemo to prevent button rapid-clicking
 import { useMemo } from 'react';
 
-import './CheckoutCartItemCard.css';
+import './checkoutCartItemCard.css';
 
 const CheckoutCartItemCard = ({product}) => {
 
