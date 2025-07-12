@@ -41,8 +41,8 @@ const Product = ({product}) => {
     const category = rawCategory || 'all';         // if rawCategory is undefined, set to 'all' (which is supported in backend)
 
     // create file path to access product's image
-    const imgPath = `http://localhost:5000/images/${product.image_url}`; // file path for product image (must match port in server.js file)
-
+    //const imgPath = `http://localhost:5000/images/${product.image_url}`; // file path for product image (must match port in server.js file)
+    const imgPath = `${process.env.VITE_API_BASE_URL}/images/${product.image_url}`;
 
     const dispatch = useDispatch();  // initilize dispatch to use 'cart' reducer methods
 
@@ -69,7 +69,9 @@ const Product = ({product}) => {
       return throttle(async (productId, itemToAdd, isAuthenticated) => { 
         if (isAuthenticated) { // if logged in, add product to backend cart
           try {
-            await axios.post(`http://localhost:5000/cart/${productId}/add`, {}, {withCredentials:true});
+            await axios.post(//`http://localhost:5000/cart/${productId}/add`, 
+            `${process.env.VITE_API_BASE_URL}/cart/${productId}/add`, 
+            {}, {withCredentials:true});
           } 
           catch (error) {
             console.error('handleAddToCart() error:', error);

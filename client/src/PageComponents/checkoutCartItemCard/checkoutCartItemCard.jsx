@@ -33,7 +33,10 @@ const CheckoutCartItemCard = ({product}) => {
         if(quantity < quantityLimit) {
           if (isAuthenticated) { // if logged in, cart item increased in backend database
             try {
-              await axios.patch(`http://localhost:5000/cart/${productId}/increase`, {}, {withCredentials: true});
+              await axios.patch(
+                //`http://localhost:5000/cart/${productId}/increase`, 
+                `${process.env.VITE_API_BASE_URL}/cart/${productId}/increase`, 
+                {}, {withCredentials: true});
             }
             catch(error) {
               console.log('throttleProductIncrease() error is: ', error);

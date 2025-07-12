@@ -22,7 +22,8 @@ const PublicPageLayout = () => {
     setLoading(true);                    // Reset loading before rechecking
     try {
       const response = await axios.get(
-        'http://localhost:5000/auth/me', // accesses route that verifies if user is 
+        `${process.env.VITE_API_BASE_URL}/auth/me`,
+        //'http://localhost:5000/auth/me', // accesses route that verifies if user is 
                                          // logged in (via checking for httpOnly cookie with JWT token)
         {withCredentials: true}          // ensures cookie is sent with request
       );

@@ -66,7 +66,8 @@ const CheckoutPageLayout = () => {
         if(!isAuthenticated) { // If user already authenticated, skip this step
         
             const response = await axios.get( // Send GET request to '/auth/me' to verify JWT in cookie
-                'http://localhost:5000/auth/me',
+                //'http://localhost:5000/auth/me',
+                `${process.env.VITE_API_BASE_URL}/auth/me`,
                  { withCredentials: true } // Ensure cookie is sent with request
             );
 

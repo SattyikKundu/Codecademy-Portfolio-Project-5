@@ -52,7 +52,11 @@ const ProfilePage = () => {
   const fetchProfile = async () => { // async function for fetching user's profile data
     setLoading(true);
     try {
-      const response = await axios.get('http://localhost:5000/profile', { withCredentials: true });
+      const response = await axios.get(
+        //'http://localhost:5000/profile', 
+        `${process.env.VITE_API_BASE_URL}/profile`,
+        { withCredentials: true }
+      );
 
       setProfile(response.data.user);         // store initial user data (prior to editing)
       setOriginalProfile(response.data.user); // Set snapshot for comparison
@@ -89,7 +93,8 @@ const ProfilePage = () => {
 
     try {
       const response = await axios.patch( // use patch() to send updated profile values to backend
-        'http://localhost:5000/profile',  
+        //'http://localhost:5000/profile',  
+        `${process.env.VITE_API_BASE_URL}/profile`,
         profile,                          // 'profile' contains final profile values array to update in database
         { withCredentials: true }         // Checks for and extracts JWT token in httpOnly cookie. Then token
                                           // is added to HTTP/HTTPS request header to backend. This allows backend

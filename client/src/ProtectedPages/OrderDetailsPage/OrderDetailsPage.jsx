@@ -35,7 +35,10 @@ const OrderDetailsPage = () => {
   useEffect(() => {
     const fetchOrderDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/orders/${orderId}`, { withCredentials: true });
+        const response = await axios.get(
+          //`http://localhost:5000/orders/${orderId}`, 
+          `${process.env.VITE_API_BASE_URL}/orders/${orderId}`, 
+          { withCredentials: true });
         setOrder(response.data.orderDetails);
       } 
       catch (error) {
@@ -122,7 +125,8 @@ const OrderDetailsPage = () => {
               <tr key={index}>
                 <td id='table-img-path-data'>
                     <img 
-                        src={`http://localhost:5000/images/${item.image_url}`} 
+                        //src={`http://localhost:5000/images/${item.image_url}`} 
+                        src={`${process.env.VITE_API_BASE_URL}/images/${item.image_url}`}
                         alt={item.product_name} className="product-thumb" 
                     />
                 </td>

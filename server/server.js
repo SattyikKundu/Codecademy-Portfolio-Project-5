@@ -76,7 +76,8 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec)); // Swagger 
 // ==============================================================================
 
 app.use(cors({    // mount and enable CORS middleware onto express app
-  origin: 'http://localhost:3000',          // Allow requests from frontend (5173 or 3000?)
+  //origin: 'http://localhost:3000',          // Allow requests from frontend (5173 or 3000?)
+  origin: process.env.DATABASE_URL,
   credentials: true                         // Allow cookies/credentials to be sent from front-end     
 }));
 

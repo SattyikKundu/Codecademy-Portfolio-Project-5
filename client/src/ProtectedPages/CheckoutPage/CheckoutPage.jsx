@@ -196,7 +196,10 @@ const CheckoutPage = () => {
                                         // to section #2 address/delivery form
     setProfileUploading(true);
     try {
-        const res = await axios.get('http://localhost:5000/profile', { withCredentials: true});
+        const res = await axios.get(
+          //'http://localhost:5000/profile', 
+          `${process.env.VITE_API_BASE_URL}/profile`,
+          { withCredentials: true});
 
         const user = res.data.user;
          // Helper to set value + remove red border if input is valid
@@ -244,7 +247,7 @@ const CheckoutPage = () => {
 
   const initiateCheckout = async () => { // execute checkout route in backend
     try {
-      const response = await axios.post('http://localhost:5000/checkout', 
+      const response = await axios.post(`${process.env.VITE_API_BASE_URL}/checkout`,//'http://localhost:5000/checkout', 
         {
           cartItems: cartProducts, // save 'cartProducts' as 'cartItems'
           deliveryInfo: {

@@ -62,7 +62,9 @@ const ProductDetails = ({ imageFileName, productData, displayCategory, stockStat
       return throttle(async (productId, itemToAdd, isAuthenticated) => {
         if (isAuthenticated) { // if logged in, add product to backend cart
           try {
-            await axios.post(`http://localhost:5000/cart/${productId}/add`, {}, {withCredentials:true});
+            await axios.post(//`http://localhost:5000/cart/${productId}/add`, 
+            `${process.env.VITE_API_BASE_URL}/cart/${productId}/add`, 
+            {}, {withCredentials:true});
           } 
           catch (error) {
             console.error('handleAddToCart() error:', error);
@@ -82,7 +84,8 @@ const ProductDetails = ({ imageFileName, productData, displayCategory, stockStat
             <div className="image-and-part-1-data-wrapper">
                 <div className="product-image-wrapper">
                     <img 
-                        src={`http://localhost:5000/images/${imageFileName}`} 
+                        //src={`http://localhost:5000/images/${imageFileName}`} 
+                        src={`${process.env.VITE_API_BASE_URL}/images/${imageFileName}`}
                         alt={productData.display_name} 
                         className="product-image" 
                     />

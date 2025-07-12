@@ -67,7 +67,8 @@ const LoginPage = () => { // login component with default login header message
 
         try {
             const response = await axios.post(
-                'http://localhost:5000/auth/login', // login endpoint (POST method)
+                //'http://localhost:5000/auth/login', // login endpoint (POST method)
+                `${process.env.VITE_API_BASE_URL}/auth/login`,
                 {username, password},               // post username and passport to '/auth/login' in authRoutes.js,
                                                     // which sends {username, passport} = req.body to userlogin() in authController.js
 
@@ -84,7 +85,8 @@ const LoginPage = () => { // login component with default login header message
             const localCart = JSON.parse(localStorage.getItem('cartState')) || { products: [] }; // get local Cart (or use 
                                                                                                  // placeholder if local cart empty)
             await axios.post( 
-                'http://localhost:5000/cart/sync',
+                //'http://localhost:5000/cart/sync',
+                `${process.env.VITE_API_BASE_URL}/cart/sync`,
                 localCart.products, // Sends localCart's 'products' array as part of req.body to backend.
                                     // Hence, the 'products' array is used as part of syncCartWithReduxState() in route.
                 { withCredentials: true } // if cookie found in browser(frontend), it gets send to backend to be handled
@@ -93,7 +95,8 @@ const LoginPage = () => { // login component with default login header message
             localStorage.removeItem('cartState'); // clear 'cartState' from localStorage after syncing
 
             const cartResponse = await axios.get( // Now retrieve updated cart from database for logged in user
-                'http://localhost:5000/cart',
+                //'http://localhost:5000/cart',
+                `${process.env.VITE_API_BASE_URL}/cart`,
                 { withCredentials: true }
             );
             const backendCart = cartResponse.data.cartState.products;
@@ -166,7 +169,8 @@ const LoginPage = () => { // login component with default login header message
             {/* Google OAuth login (and/or register) button */}
             <button 
                 className="login-button"
-                onClick={() => window.location.href = "http://localhost:5000/auth/google"}   
+                //onClick={() => window.location.href = "http://localhost:5000/auth/google"}   
+                onClick={() => window.location.href = `${process.env.VITE_API_BASE_URL}/auth/google`}
             >
               Login with Google
             </button>
