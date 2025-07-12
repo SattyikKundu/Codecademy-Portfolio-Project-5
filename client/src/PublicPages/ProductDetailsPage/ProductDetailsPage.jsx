@@ -34,7 +34,7 @@ const ProductDetailsPage = () => {
                  * should trigger the associated controller function (see '/server/routes/productRoutes.js file).
                  */
                 //const response = await axios.get(`http://localhost:5000/products/${category}/${productid}`); 
-                const response = await axios.get(`${process.env.VITE_API_BASE_URL}/products/${category}/${productid}`); 
+                const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/products/${category}/${productid}`); 
                 setProductData(response.data[0]); 
                 //NOTE: Something like console.log('Data:',response.data[0]); wont work here because
                 //      since state changes DO NOT happen immediately.
