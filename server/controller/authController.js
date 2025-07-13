@@ -65,7 +65,8 @@ export const logoutUser = (req, res) => { // Logout controller
   res.clearCookie('token', {                  
     httpOnly: true,                             // MUST match how it was originally set
     secure: isProduction,                       // set to true if using HTTPS in production
-    sameSite: isProduction ? 'strict' : 'lax',  // or 'Strict' is used in setAuthCookie
+    sameSite: isProduction ? 'none' : 'lax',    // 'none' ensures that cookies aren't blocked on cross-site requests
+    //sameSite: isProduction ? 'strict' : 'lax',  // or 'Strict' is used in setAuthCookie
     path: '/'                                   // MUST match path also set in setAuthCookie
   });
 
