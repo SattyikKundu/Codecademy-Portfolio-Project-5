@@ -84,8 +84,7 @@ const LoginPage = () => { // login component with default login header message
             const localCart = JSON.parse(localStorage.getItem('cartState')) || { products: [] }; // get local Cart (or use 
                                                                                                  // placeholder if local cart empty)
             await axios.post( 
-                //'http://localhost:5000/cart/sync',
-                `${process.env.VITE_API_BASE_URL}/cart/sync`,
+                `${import.meta.env.VITE_API_BASE_URL}/cart/sync`,
                 localCart.products, // Sends localCart's 'products' array as part of req.body to backend.
                                     // Hence, the 'products' array is used as part of syncCartWithReduxState() in route.
                 { withCredentials: true } // if cookie found in browser(frontend), it gets send to backend to be handled
@@ -94,8 +93,7 @@ const LoginPage = () => { // login component with default login header message
             localStorage.removeItem('cartState'); // clear 'cartState' from localStorage after syncing
 
             const cartResponse = await axios.get( // Now retrieve updated cart from database for logged in user
-                //'http://localhost:5000/cart',
-                `${process.env.VITE_API_BASE_URL}/cart`,
+                `${import.meta.env.VITE_API_BASE_URL}/cart`,
                 { withCredentials: true }
             );
             const backendCart = cartResponse.data.cartState.products;
