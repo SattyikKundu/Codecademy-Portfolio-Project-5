@@ -7,6 +7,8 @@ const verifyJWT = (req, res, next) => { // middleware to protect 'protected' rou
     const token = req.cookies?.token ||                       // Try to get token either from 'token' cookie 
                   req.headers.authorization?.split(' ')[1];   // or from the 'Authorization' header
 
+    console.log('[JWT] Cookies:', req.cookies);
+    console.log('[JWT] Authorization header:', req.headers.authorization);
 
     if(!token) { // If no token found, deny access ith 401 (unauthorized)
         return res.status(401).json({error: 'Unauthorized access due to missing token.'});

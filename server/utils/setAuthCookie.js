@@ -1,5 +1,8 @@
 export const setAuthCookie = (res, token) => { 
   const isProduction = process.env.NODE_ENV === 'production'; // Detect environment mode
+
+  console.log('[COOKIE] Setting token cookie. isProduction:', isProduction);
+
   res.cookie('token', token, {               // Set cookie named 'token' with the JWT (JSON web token), which is the 2nd arg.
     httpOnly: true,                          // Prevents JavaScript access (protects from XSS).
     secure: isProduction,                    // Only transmit over HTTPS in production (meaning when isProduction = true).  
@@ -12,4 +15,13 @@ export const setAuthCookie = (res, token) => {
     path: '/',  
     maxAge: 1000 * 60 * 60 * 24                 // 24 hour expiration in milliseconds
   });
+
+  console.log('[COOKIE] Sent cookie config:', {
+    httpOnly: true,
+    secure: isProduction,
+    sameSite: isProduction ? 'none' : 'lax',
+    path: '/',
+    maxAge: 1000 * 60 * 60 * 24
+  });
+
 };
