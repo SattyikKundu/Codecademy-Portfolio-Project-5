@@ -29,8 +29,7 @@ const ProfileButton = () => { /* Button that toggles between default 'Login' but
       try {
 
         await axios.get( 
-          //'http://localhost:5000/auth/logout', // logout endpoint (get)
-          `${process.env.VITE_API_BASE_URL}/auth/logout`,
+          `${import.meta.env.VITE_API_BASE_URL}/auth/logout`, // logout endpoint (get)
           {withCredentials: true} // tell browser that if there's a cookie (httpOnly cookie with JWT),
                                   // add to request header when sending any HTTP request to backend.
         );

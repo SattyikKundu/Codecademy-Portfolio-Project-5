@@ -34,8 +34,7 @@ const CheckoutCartItemCard = ({product}) => {
           if (isAuthenticated) { // if logged in, cart item increased in backend database
             try {
               await axios.patch(
-                //`http://localhost:5000/cart/${productId}/increase`, 
-                `${process.env.VITE_API_BASE_URL}/cart/${productId}/increase`, 
+                `${import.meta.env.VITE_API_BASE_URL}/cart/${productId}/increase`, 
                 {}, {withCredentials: true});
             }
             catch(error) {
@@ -56,7 +55,7 @@ const CheckoutCartItemCard = ({product}) => {
         if(quantity > 1) {
           if (isAuthenticated) { // if logged in, cart item increased in backend database
             try {
-              await axios.patch(`http://localhost:5000/cart/${productId}/decrease`, {}, {withCredentials: true});
+              await axios.patch(`${import.meta.env.VITE_API_BASE_URL}/cart/${productId}/decrease`, {}, {withCredentials: true});
             }
             catch(error) {
               console.log('throttleProductDecrease() error is: ', error);
@@ -78,7 +77,7 @@ const CheckoutCartItemCard = ({product}) => {
     const handleProductDelete = async() => { // useMemo() and throttle not needed here
       if (isAuthenticated) { // if logged in, cart item increased in backend database
         try {
-          await axios.delete(`http://localhost:5000/cart/${productId}`,{withCredentials: true});
+          await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/cart/${productId}`,{withCredentials: true});
         }
         catch(error) {
              console.log('handleProductDelete() error is: ',error);
@@ -94,7 +93,7 @@ const CheckoutCartItemCard = ({product}) => {
 
           {/* Holds product image for visual reference */}
           <div className='checkout-cart-item-img-wrapper'>
-            <img src={`http://localhost:5000/images/${imageFileName}`} 
+            <img src={`${import.meta.env.VITE_API_BASE_URL}/images/${imageFileName}`} 
                  alt={name} 
                  className='checkout-cart-item-image' />   
           </div>

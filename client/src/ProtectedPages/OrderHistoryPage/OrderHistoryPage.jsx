@@ -95,8 +95,7 @@ const OrderHistoryPage = () => { //
     const fetchOrderHistory = async () => {
         try {
             const response = await axios.get(
-              //'http://localhost:5000/orders', 
-              `${process.env.VITE_API_BASE_URL}/orders`,
+              `${import.meta.env.VITE_API_BASE_URL}/orders`,
               { withCredentials: true });
             console.log('User Id: ', response.data.userId);
             setOrdersLength(response.data.orders.length); // Track length of orders for conditional UI

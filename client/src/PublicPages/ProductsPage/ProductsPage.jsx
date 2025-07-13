@@ -37,7 +37,6 @@ const ProductsPage = () => { // will modify later to handle various categories
         //if (products.length) return; // prevent re-fetch
         setLoading(true);
         try {
-            //const response = await axios.get("http://localhost:5000/products");
             const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/products`);
             setProducts(response.data); // Store products
             setFiltered(response.data); // initially store all products as fallback

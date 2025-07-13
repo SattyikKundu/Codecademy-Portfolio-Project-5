@@ -197,8 +197,7 @@ const CheckoutPage = () => {
     setProfileUploading(true);
     try {
         const res = await axios.get(
-          //'http://localhost:5000/profile', 
-          `${process.env.VITE_API_BASE_URL}/profile`,
+          `${import.meta.env.VITE_API_BASE_URL}/profile`,
           { withCredentials: true});
 
         const user = res.data.user;
@@ -247,7 +246,7 @@ const CheckoutPage = () => {
 
   const initiateCheckout = async () => { // execute checkout route in backend
     try {
-      const response = await axios.post(`${process.env.VITE_API_BASE_URL}/checkout`,//'http://localhost:5000/checkout', 
+      const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/checkout`,
         {
           cartItems: cartProducts, // save 'cartProducts' as 'cartItems'
           deliveryInfo: {

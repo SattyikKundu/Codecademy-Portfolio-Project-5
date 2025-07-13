@@ -36,8 +36,7 @@ const OrderDetailsPage = () => {
     const fetchOrderDetails = async () => {
       try {
         const response = await axios.get(
-          //`http://localhost:5000/orders/${orderId}`, 
-          `${process.env.VITE_API_BASE_URL}/orders/${orderId}`, 
+          `${import.meta.env.VITE_API_BASE_URL}/orders/${orderId}`, 
           { withCredentials: true });
         setOrder(response.data.orderDetails);
       } 

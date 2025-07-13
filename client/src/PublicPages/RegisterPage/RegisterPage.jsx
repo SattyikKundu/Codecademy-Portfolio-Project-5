@@ -37,8 +37,7 @@ const RegisterPage = () => {
 
         try {
             const response = await axios.post(
-                //'http://localhost:5000/auth/register', // register route path
-                `${process.env.VITE_API_BASE_URL}/auth/register`,
+                `${import.meta.env.VITE_API_BASE_URL}/auth/register`, // register route path
                 formData,                              // form data sent to '/auth/register/' route in backend
                 {
                     withCredentials: true,                // if httpOnly cookie (with JWT) exists, send to backend
@@ -134,8 +133,7 @@ const RegisterPage = () => {
             {/* Google OAuth register (and login) button */}
             <button 
                 className="register-button"
-                //onClick={() => window.location.href = "http://localhost:5000/auth/google"}   
-                onClick={() => window.location.href = `${process.env.VITE_API_BASE_URL}/auth/google`}   
+                onClick={() => window.location.href = `${import.meta.env.VITE_API_BASE_URL}/auth/google`}   
             >
               Register/Login with Google
             </button>

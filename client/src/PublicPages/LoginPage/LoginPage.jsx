@@ -67,8 +67,7 @@ const LoginPage = () => { // login component with default login header message
 
         try {
             const response = await axios.post(
-                //'http://localhost:5000/auth/login', // login endpoint (POST method)
-                `${process.env.VITE_API_BASE_URL}/auth/login`,
+                `${import.meta.env.VITE_API_BASE_URL}/auth/login`, // login endpoint (POST method)
                 {username, password},               // post username and passport to '/auth/login' in authRoutes.js,
                                                     // which sends {username, passport} = req.body to userlogin() in authController.js
 

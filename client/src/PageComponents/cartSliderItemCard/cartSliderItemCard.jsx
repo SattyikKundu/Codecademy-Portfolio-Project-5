@@ -42,8 +42,7 @@ const CartSliderItemCard = ({product}) => {
           if (isAuthenticated) { // if logged in, cart item increased in backend database
             try {
               await axios.patch(
-                //`http://localhost:5000/cart/${productId}/increase`, 
-                `${process.env.VITE_API_BASE_URL}/cart/${productId}/increase`, 
+                `${import.meta.env.VITE_API_BASE_URL}/cart/${productId}/increase`, 
                 {}, {withCredentials: true});
             }
             catch(error) {
@@ -70,8 +69,7 @@ const CartSliderItemCard = ({product}) => {
           if (isAuthenticated) { // if logged in, cart item increased in backend database
             try {
               await axios.patch(
-                //`http://localhost:5000/cart/${productId}/decrease`, 
-                `${process.env.VITE_API_BASE_URL}/cart/${productId}/decrease`, 
+                `${import.meta.env.VITE_API_BASE_URL}/cart/${productId}/decrease`, 
                 {}, {withCredentials: true});
             }
             catch(error) {
@@ -93,8 +91,7 @@ const CartSliderItemCard = ({product}) => {
       if (isAuthenticated) { // if logged in, cart item increased in backend database
         try {
           await axios.delete(
-            //`http://localhost:5000/cart/${productId}`,
-            `${process.env.VITE_API_BASE_URL}/cart/${productId}`,
+            `${import.meta.env.VITE_API_BASE_URL}/cart/${productId}`,
             {withCredentials: true}
           );
         }
@@ -112,8 +109,8 @@ const CartSliderItemCard = ({product}) => {
 
                 {/* Holds product image for visual reference */}
                 <div className='cart-slider-item-img-wrapper'>
-                    <img //src={`http://localhost:5000/images/${imageFileName}`} 
-                         src={`${process.env.VITE_API_BASE_URL}/images/${imageFileName}`}
+                    <img 
+                         src={`${import.meta.env.VITE_API_BASE_URL}/images/${imageFileName}`}
                          alt={name} 
                          className='cart-slider-item-image' />
                 </div>
