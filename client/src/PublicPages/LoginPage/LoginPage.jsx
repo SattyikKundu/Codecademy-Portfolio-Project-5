@@ -77,8 +77,9 @@ const LoginPage = () => { // login component with default login header message
                                                // letting the backend verify the JWT in httpOnly cookie from frontend.
             );
 
-            dispatch(setUser(response.data.user)); // On success, dispatch user info to redux
+            console.log("Login Response Headers:", response.headers);
 
+            dispatch(setUser(response.data.user)); // On success, dispatch user info to redux
 
             /****** sync cart on localStorage with the logged in user's cart in database ******/
             const localCart = JSON.parse(localStorage.getItem('cartState')) || { products: [] }; // get local Cart (or use 
@@ -167,7 +168,7 @@ const LoginPage = () => { // login component with default login header message
             <button 
                 className="login-button"
                 //onClick={() => window.location.href = "http://localhost:5000/auth/google"}   
-                onClick={() => window.location.href = `${process.env.VITE_API_BASE_URL}/auth/google`}
+                onClick={() => window.location.href = `${import.meta.env.VITE_API_BASE_URL}/auth/google`}
             >
               Login with Google
             </button>
