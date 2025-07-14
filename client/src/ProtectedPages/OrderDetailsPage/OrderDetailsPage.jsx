@@ -125,8 +125,9 @@ const OrderDetailsPage = () => {
                 <td id='table-img-path-data'>
                     <img 
                         //src={`http://localhost:5000/images/${item.image_url}`} 
-                        src={`${process.env.VITE_API_BASE_URL}/images/${item.image_url}`}
-                        alt={item.product_name} className="product-thumb" 
+                        src={`${import.meta.env.VITE_API_BASE_URL}/images/${item.image_url}`}
+                        alt={item.product_name} 
+                        className="product-thumb" 
                     />
                 </td>
                 <td id='table-item-name-data' >{item.product_name}</td>
