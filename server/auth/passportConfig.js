@@ -46,10 +46,13 @@ passport.use(new LocalStrategy(async (username, password, done) => {
     }
 }));
 
-passport.use(new GoogleStrategy({
+
+passport.use(
+  new GoogleStrategy({
     clientID:     process.env.GOOGLE_CLIENT_ID,     // Google OAuth Client ID
     clientSecret: process.env.GOOGLE_CLIENT_SECRET, // Google OAuth Secret
-    callbackURL:  '/auth/google/callback'           // Redirect URI/Route that handles OAuth response after Google authenticates the user
+    //callbackURL:  '/auth/google/callback'           // Redirect URI/Route that handles OAuth response after Google authenticates the user
+    callbackURL:  process.env.GOOGLE_CALLBACK_URL,
   }, 
   async(accessToken, refreshToken, profile, done) => {
     try {
