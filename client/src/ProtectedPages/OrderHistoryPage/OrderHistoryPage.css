@@ -204,7 +204,7 @@ tr { /* default height for each row/record */
 
 @media screen and (max-width: 530px) { /* adjust for mobile screen sizes */
 
-  .order-history-page, .order-history-empty { /* gradually adjust/shrink padding in order history page */
+  .order-history-page { /* gradually adjust/shrink padding in order history page */
 
     margin-top: clamp(80px, 24vw, 125px);
 
@@ -213,6 +213,12 @@ tr { /* default height for each row/record */
     padding-bottom: clamp(1rem,    5.0vw, 2rem)   !important;
     padding-left:   clamp(0.75rem, 5.0vw, 1.5rem) !important;
     width: 84% !important;
+  }
+
+  .order-history-empty { /* adjusted padding for empty order history notice for mobile screen */
+      padding-right:  clamp(0.4rem, 5.0vw, 1.5rem) !important;
+      padding-left:   clamp(0.4rem, 5.0vw, 1.5rem) !important;
+      width: 84% !important;
   }
 
   .sort-icon { /* remove space left of icon */
