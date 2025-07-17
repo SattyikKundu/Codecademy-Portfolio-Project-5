@@ -1,5 +1,3 @@
-﻿# Ecommerce Project
-...Ecommerece PERN app in process of building/completion. Will update later...
 # PERN-Ecommerce-Store-project
 This is **Portfolio Project #5** for my Full-stack web development course on Codecademy. This app is an Ecommerce store, names ***Reef Budz***,  where aquarists can browse and purchase saltwater creatures and coral fragments for their own saltwater reef tanks. Built using PERN (*PostgreSQL*, *Express*, *React*, *Node*) stack, this web app is a fully-functioning Ecommerce store with features common in most real-world Ecommerce stores.
 
@@ -74,7 +72,7 @@ This is **Portfolio Project #5** for my Full-stack web development course on Cod
 | `passport-google-oauth20`| Passport strategy for authenticating users via Google OAuth 2.0, enabling Google login.                     |
 | `passport-local`         | Passport strategy for authenticating users with a username and password (local login).                      |
 | `pg`                     | Node.js library for interfacing with PostgreSQL, enabling database queries and operations.                  |
-| `stripe`                 | Enables backend integration with ***Stripe** payment gateway for processing payments and transactions.      |
+| `stripe`                 | Enables backend integration with ***Stripe*** payment gateway for processing payments and transactions.      |
 | `swagger-jsdoc`          | Generates Swagger (OpenAPI) documentation from JSDoc comments in your codebase.                             |
 | `swagger-ui-express`     | Serves the Swagger UI so user and others can interactively explore and test the API endpoints.              |
 
@@ -82,4 +80,43 @@ This is **Portfolio Project #5** for my Full-stack web development course on Cod
 
 ## III. Live Site Demo Walkthrough & Screenshots
 
---- 🔗 **Live Site:** [https://store.bpwisdom.com/](https://store.bpwisdom.com/)
+🔗 **Live Site:** [store.bpwisdom.com](https://store.livedemoapp.com/)
+
+<ins>**NOTE**</ins>: The above site link's domain may change, but the workflow and url routes should stay the same.
+
+### 1. Home Page 
+The homepage—*whose url routes end with '../products/all'*—is the default page for the app. Here the user can browse through a variety of products. On the top, there's a header menu with several buttons and a search bar. The buttons left of the search bar are ***category*** buttons that display products based on selected category—*button highlighted dark blue*—when selected; only the ***all*** button shows all products. At the bottom of the products display is the pagination page button(s) which is used to browse products.
+<img src="https://github.com/user-attachments/assets/de1219da-ea33-47e4-866c-811f9d4b0a71" width="800" alt="image-of-home-page"/>
+
+### 2. Product Details Page
+Wheneven a user clicks on a product card, a product details page opens explains the clicked-on product in-depth.  Also, like in the product card, the user can click to add to cart as well as see the product stock and price. The below screenshot (partly zoomed out) is an example of a product details page.  
+<img src="https://github.com/user-attachments/assets/6f4aed3c-58d2-4d9c-a1ae-6b4977f8b9aa" width="800" alt="example-image-of-product-details-page"/>
+
+### 3. Product Search Bar
+...........
+
+### 4. Cart Slider
+When ever the user clicks on an **Add to Cart** button on a product card, a product of the quanity of one is added to the cart Slider. The user can click on the cart button on the top-right to open the Cart Slider; then the user can click the **Close** button to close the slider. When a product has been added to the cart, a cart item card is created for that product; the user can adjust the cart item quantity—*up to 10 or less if product is stocked under 10*—as well as view the total and subtotal of costs. The user can even drop products from cart via 'X' button.
+
+Lastly, the **Proceed to Checkout** button leads the user to the checkout page, but the checkout page is only accessible if user is logged in AND has at least 1 product in cart. Here's a screen shot of the cart slider (opened):
+<img src="https://github.com/user-attachments/assets/b9ca2868-c385-4d92-9d9e-509fae9d846b" width="800" alt="image-of-cart-slider"/>
+
+### 5. Login (and Register) Pages
+When the user needs to login, the user can click on the header menu button with the login icon; this leads to the login page as shown in below screenshot. If the user needs to register first, the user needs to click on the **"New User? Sign Up here"** link to access the Registration page to fill out. <ins>Here's what the Login page looks like</ins>:  
+<img src="https://github.com/user-attachments/assets/23be8e60-a813-45a3-bbb0-21e72dd913a9" width="800"  alt="image-of-login-page" />
+
+<ins>Here's what the Account Registration page looks like (with a link to the Login page as well)</ins>:
+<img src="https://github.com/user-attachments/assets/002b43c5-b102-4058-b4d4-ea854b9a61f4" width="800" alt="image-of-register-page" />
+
+
+### 6. Profile Page
+After logging in, the user gets redirected to their account profile page. On the header menu, it should visible that the ***login icon*** button is now replaced with a ***profile icon*** to indicate that the user has been logged in. Also, the user can click on the Profile icon to show a small menu that shows the user's *username* as well as links to the Profile and Order History pages and even a Logout button. 
+
+Regarding the Profile page itself (seen below), the user can edit their profile fields by clicking the **'edit'** button next to each field and then click the changs using the **Save All Changes** button. These profile field values can later be called to help *"auto-fill"* the checkout page. 
+<img src="https://github.com/user-attachments/assets/d1ebd2b2-f600-4a70-982f-97a478933719" width="800" alt="image-of-profile-page" />
+
+### 7. Checkout Page
+After logging in and adding at least 1 item to cart Slider (see **#4. Cart Slider** section from earlier), the user can the click on the **Proceed to Checkout** button to redirect to the checkout page. The checkout page is a single page with 4 sections. Each of the sections are explained below:
+
+
+
