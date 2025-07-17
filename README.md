@@ -83,7 +83,7 @@ This is **Portfolio Project #5** for my Full-stack web development course on Cod
 
 🔗 **Live Site:** [store.bpwisdom.com](https://store.livedemoapp.com/)
 
-<ins>**NOTE**</ins>: The above site link's domain may change, but the workflow and url routes should stay the same.
+<ins>**NOTE**</ins>: The above site link's domain may change, but the workflow and url routes should stay the same. I'll go over the app's main pages in the order users would typically see in a workflow. 
 
 ### 1. Home Page 
 The homepage—*whose url routes end with '../products/all'*—is the default page for the app. Here the user can browse through a variety of products. On the top, there's a header menu with several buttons and a search bar. The buttons left of the search bar are ***category*** buttons that display products based on selected category—*button highlighted dark blue*—when selected; only the ***all*** button shows all products. At the bottom of the products display is the pagination page button(s) which is used to browse products.
@@ -97,13 +97,17 @@ Wheneven a user clicks on a product card, a product details page opens explains 
 Besides filtering products via **"Category"** buttons, products can also be filtered via search box in header menu. The user can type a search query and then click on the "Magnifying glass" icon to submit search (or press ENTER). Then the filtered products will be returned, OR a message will be returned stating that no matching products exist. Also, when filtered products are returned, the matching text portion of the Product titles will be highlighted **yellow** to match the search query for visual user friendliness (see screenshot below). Finally, the cross **✕** in the search bar can be click on to clear the search and return all products. 
 <img src="https://github.com/user-attachments/assets/f969da19-f56e-44d5-b47f-4f6236baa284" width="800" alt="image-of-search-results" />
 
-### 4. Cart Slider
+### 4. About Page
+To help complete the feel of the fake E-commerce, I've included an ***About*** page explaining what the fake store is about. This ***About*** page can be accessed by clicking the green button—*with the "info" icon*—on the header menu.
+<img src="https://github.com/user-attachments/assets/b30db503-7859-4374-b3ac-b5a7efbd9b2f" width="800" alt="image-of-about-page" />
+
+### 5. Cart Slider
 When ever the user clicks on an **Add to Cart** button on a product card, a product of the quanity of one is added to the cart Slider. The user can click on the cart button on the top-right to open the Cart Slider; then the user can click the **Close** button to close the slider. When a product has been added to the cart, a cart item card is created for that product; the user can adjust the cart item quantity—*up to 10 or less if product is stocked under 10*—as well as view the total and subtotal of costs. The user can even drop products from cart via 'X' button.
 
 Lastly, the **Proceed to Checkout** button leads the user to the checkout page, but the checkout page is only accessible if user is logged in AND has at least 1 product in cart. Here's a screen shot of the cart slider (opened):
 <img src="https://github.com/user-attachments/assets/b9ca2868-c385-4d92-9d9e-509fae9d846b" width="800" alt="image-of-cart-slider"/>
 
-### 5. Login (and Register) Pages
+### 6. Login (and Register) Pages
 When the user needs to login, the user can click on the header menu button with the login icon; this leads to the login page as shown in below screenshot. If the user needs to register first, the user needs to click on the **"New User? Sign Up here"** link to access the Registration page to fill out. <ins>Here's what the Login page looks like</ins>:  
 <img src="https://github.com/user-attachments/assets/23be8e60-a813-45a3-bbb0-21e72dd913a9" width="800"  alt="image-of-login-page" />
 
@@ -111,19 +115,36 @@ When the user needs to login, the user can click on the header menu button with 
 <img src="https://github.com/user-attachments/assets/002b43c5-b102-4058-b4d4-ea854b9a61f4" width="800" alt="image-of-register-page" />
 
 
-### 6. Profile Page
+### 7. Profile Page
 After logging in, the user gets redirected to their account profile page. On the header menu, it should visible that the ***login icon*** button is now replaced with a ***profile icon*** to indicate that the user has been logged in. Also, the user can click on the Profile icon to show a small menu that shows the user's *username* as well as links to the Profile and Order History pages and even a Logout button. 
 
 Regarding the Profile page itself (seen below), the user can edit their profile fields by clicking the **'edit'** button next to each field and then click the changs using the **Save All Changes** button. These profile field values can later be called to help *"auto-fill"* the checkout page. 
 <img src="https://github.com/user-attachments/assets/d1ebd2b2-f600-4a70-982f-97a478933719" width="800" alt="image-of-profile-page" />
 
-### 7. Checkout Page
-After logging in and adding at least 1 item to cart Slider (see **#4. Cart Slider** section from earlier), the user can the click on the **Proceed to Checkout** button to redirect to the checkout page. The checkout page is a single page with 4 sections. Each of the sections are explained below:
+### 8. Checkout Page
+After logging in and adding at least 1 item to cart Slider (see **#4. Cart Slider** section from earlier), the user can the click on the **Proceed to Checkout** button to redirect to the checkout page. The checkout page is a single page with 4 sections. Each of the sections are shown and explained below:
 
-### 8. Order Details Page
+#### 8.1: Final Cart in Checkout
+This is where the user sees the final cart at checkout checkout. Whilst users can't add new products at this point, they can drop products and adjust item quantity. However, if user drops all items, the **Pay** button at bottom of the checkout page is disabled since there's nothing to buy:
+<img src="https://github.com/user-attachments/assets/5655de9a-eb52-453c-923c-d8adc29b90cb" width="800" alt="checkout-page-final-cart"/>
+
+#### 8.2 Delivery Address Form in Checkout
+This form is where users type in their order information including user identity and address data. Mentioned earlier, the same field data can also be found in the Profile page if the user has filled that out. User can either fill out the form data themselves **OR** click the **"Upload Existing Data from Profile"** button to upload existing Profile data to form for convenience. Also, if the user wants to save the form data to their **Profile page**, they can click the checkbox at bottom of this form to update their Profile with the filled-in form field data.   
+<img src="https://github.com/user-attachments/assets/15425b68-0a1d-45dd-8d10-8c993ccb3c0c" width="800" alt="checkout-page-delivery-info-form" />
+
+#### 8.3 Order Summary and Payment Method
+The order summary section shows the total costs of the ongoing order. This includes the subTotal (total cost of products and quantity), shipping costs (defined by which U.S. state and territory is selected in Delivery address form), and a fixed sales tax rate of 8.0%. Finally, there's payment method form where user can type in credit card number and other related data for the ***Stripe*** payment processing. However, since no real money is processed—*since associated **Stripe** payment gateway account is in testing/development mode*—you can safely test the payment processing using ***Stripe's*** provided test card number at this link (https://docs.stripe.com/testing#cards): 
+<img src="https://github.com/user-attachments/assets/9c298ac3-4916-4fb2-a07a-4fe01cb813c3" width="800" alt="checkout-page-order-summary-payment" />
+
+### 9. Order Details Page
+After clicking the **Pay** button in the bottom of the Checkout Page, *after filling out all Checkout Page's forms*, the user gets redirected to an Order Details Page listing all details for their latest order. For a nice touch, *after user completes their purchase*, "confetti" is poured from the top of the page to congratulate user for their purchase! Later on, the user can revisit the same Order's Details via Order History Page in the Profile icon's menu.  
+<img src="https://github.com/user-attachments/assets/e3850420-4450-44f1-84fd-c44ad1c79ba5" width="800" alt="image-of-order-details-page" />
+
+### 10. Order History Page
+Finally, The last major page is the Order History Page where the user can browse the Order Details of all past and completed Orders. This page is accessed aftering logging in and clicking the "Orders" link in the small menu after clicking the Profile icon button in header menu. Features of this page include: *pagination buttons to browse order*, *up/down toggle arrows in table columns for row ordering*, and a *drop-down menu to show number of rows rendered per order 'page' in* **Your Order history** *container*.
+<img src="https://github.com/user-attachments/assets/6085a316-6024-4f94-9c64-7063e42c7e58" width="800" alt="image-of-order-history-page" />
 
 
-### 9. Order History Page
 
 ---
 ## IV. Limitations of App
@@ -131,8 +152,12 @@ After logging in and adding at least 1 item to cart Slider (see **#4. Cart Slide
 - On the order history page, I haven't added any type of order tracking for the orders. Due to this being a demo E-commerce store, there's no actual business infrastructure available to constantly keep track of orders; hence order tracking is irrelevant here.
 ---
 ## V. Steps to use App locally
+To Be Added Later...
 ---
-## VI. Future Improvements and Considerations
+## VI. Features to be Added Later
+- Due to the moderately slow performance speed of the app in the demo link, a dedicated hosting will later be added for faster performance speed.
+- Currently, the Profile Page and the Checkout Page only accepts U.S. addresses. I'll consider later expanding so the App can handle and accept international address outside the U.S.
+- Besides later updating the App to accept international addresses, I'll also update the app to handle non-dollar currencies used in internationl deliveries (<ins>For example</ins>: *yen* for delivery address to Japan).
 ---
 ## VII. Image Attributions
 Numerous images were obtained during the creation of this fake E-commerce store app. Listed below are all the images obtained and used so far and with proper attribution practices.
