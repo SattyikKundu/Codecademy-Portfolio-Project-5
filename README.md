@@ -39,6 +39,7 @@ This is **Portfolio Project #5** for my Full-stack web development course on Cod
 - **PostgreSQL**      — Database of choice for app. Used to store product data, user accounts, and order history and details of users.
 - **Render.com**      — Cloud platform used to host the **React** frontend/client-side as well as the **Node**/**Express** backend.
 - **Neon.com**        — Cloud platform used to host web app's ***PostgreSQL*** database. Database interfaces with the app hosted on **Render.com**.
+- **Hostinger.com**   — Hosting site used to obtain a domain name since authnetication cookies won't properly be sent from app to browser otherwise.
 - **CSS**             — used for styling purposes.
 - **React packages**  — imported packages for both frontend/client-side (**React**) as well as backend/server-side (**Node**/**Express**):
 
@@ -93,7 +94,8 @@ Wheneven a user clicks on a product card, a product details page opens explains 
 <img src="https://github.com/user-attachments/assets/6f4aed3c-58d2-4d9c-a1ae-6b4977f8b9aa" width="800" alt="example-image-of-product-details-page"/>
 
 ### 3. Product Search Bar
-...........
+Besides filtering products via **"Category"** buttons, products can also be filtered via search box in header menu. The user can type a search query and then click on the "Magnifying glass" icon to submit search (or press ENTER). Then the filtered products will be returned, OR a message will be returned stating that no matching products exist. Also, when filtered products are returned, the matching text portion of the Product titles will be highlighted **yellow** to match the search query for visual user friendliness (see screenshot below). Finally, the cross **✕** in the search bar can be click on to clear the search and return all products. 
+<img src="https://github.com/user-attachments/assets/f969da19-f56e-44d5-b47f-4f6236baa284" width="800" alt="image-of-search-results" />
 
 ### 4. Cart Slider
 When ever the user clicks on an **Add to Cart** button on a product card, a product of the quanity of one is added to the cart Slider. The user can click on the cart button on the top-right to open the Cart Slider; then the user can click the **Close** button to close the slider. When a product has been added to the cart, a cart item card is created for that product; the user can adjust the cart item quantity—*up to 10 or less if product is stocked under 10*—as well as view the total and subtotal of costs. The user can even drop products from cart via 'X' button.
@@ -118,5 +120,55 @@ Regarding the Profile page itself (seen below), the user can edit their profile 
 ### 7. Checkout Page
 After logging in and adding at least 1 item to cart Slider (see **#4. Cart Slider** section from earlier), the user can the click on the **Proceed to Checkout** button to redirect to the checkout page. The checkout page is a single page with 4 sections. Each of the sections are explained below:
 
+### 8. Order Details Page
 
 
+### 9. Order History Page
+
+---
+## IV. Limitations of App
+- Due to using free hosting for the app on ***Render.com*** and the database on ***Neon.com***, the app from the live demo link (https://store.livedemoapp.com/) might have slow performance. Initially, you might have to wait 15-20 seconds for a page to fully render. After page caching takes place, the app should run notable faster. *In the future*, I'll consider dedicated hosting options to speed up performance.
+- On the order history page, I haven't added any type of order tracking for the orders. Due to this being a demo E-commerce store, there's no actual business infrastructure available to constantly keep track of orders; hence order tracking is irrelevant here.
+---
+## V. Steps to use App locally
+---
+## VI. Future Improvements and Considerations
+---
+## VII. Image Attributions
+Numerous images were obtained during the creation of this fake E-commerce store app. Listed below are all the images obtained and used so far and with proper attribution practices.
+<details>
+  <summary>Image Attributions List</summary>
+  <li>App Background Image: ...</li>
+  <li>About Page images
+    <ul>
+      <li>Item Z1</li>
+      <li>Item Z2</li>
+    </ul>
+  </li>
+  <ul>
+    <li>"Fishes" product card images
+        <ul>
+          <li>Item A1.1</li>
+          <li>Item A1.2</li>
+        </ul>
+    </li>
+    <li>"Invertebrates" product card images
+      <ul>
+        <li>Item B1</li>
+        <li>Item B2</li>
+      </ul>
+    </li>
+    <li>"Corals & Anemones" product card images
+      <ul>
+        <li>Item B1</li>
+        <li>Item B2</li>
+      </ul>
+    </li>
+  </ul>
+  <li>Checkout Page images
+    <ul>
+      <li>Item X1</li>
+      <li>Item X2</li>
+    </ul>
+  </li>
+</details>
