@@ -256,7 +256,7 @@ npm start</pre>
 ## VI. Features to be Added Later
 
 <details>
-  <summary><strong>Future Features/Updated List (Click to Expand): <strong></summary>
+  <summary><strong>Future Features/Updated List (Click to Expand): </strong></summary>
   <ul>
     <li>Due to slower app performance from using free cloud hosting on Render.com, a dedicated(paid) hosting will later be added for faster performance speed.</li>
     <li>Currently, the <strong>"Profile"</strong> and <strong>"Checkout"</strong> pages only accept U.S. addresses. This will later be expand so international addresses (outside the U.S.) can be processed.</li>
