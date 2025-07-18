@@ -45,7 +45,7 @@ This is **Portfolio Project #5** for my Full-stack web development course on Cod
 - **React packages**  — imported packages for both frontend/client-side (**React**) as well as backend/server-side (**Node**/**Express**):
 
 <details>
-<summary><ins>Main <strong>'/Client'<strong> packages for frontend/client-side <em>package.json</em> file:</ins></summary>
+<summary><ins>Main <strong>'/Client'</strong> packages for frontend/client-side <em>package.json</em> file:</ins></summary>
 
 | Package | Description |
 | --- | --- |
