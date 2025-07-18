@@ -37,6 +37,7 @@ This is **Portfolio Project #5** for my Full-stack web development course on Cod
 - **Node**            — Provides a JavaScript runtime environment to run server-side scripts on backend.
 - **Express**         — Backend framework used to define API endpoints that interact with database. Also used to setup a web server for handling HTTP/HTTPS request from React frontend/client-side.
 - **PostgreSQL**      — Database of choice for app. Used to store product data, user accounts, and order history and details of users.
+- **Canva.com**       — Used for image editing, espcially for the product card and background images throughout the app.
 - **Render.com**      — Cloud platform used to host the **React** frontend/client-side as well as the **Node**/**Express** backend.
 - **Neon.com**        — Cloud platform used to host web app's ***PostgreSQL*** database. Database interfaces with the app hosted on **Render.com**.
 - **Hostinger.com**   — Hosting site used to obtain a domain name since authnetication cookies won't properly be sent from app to browser otherwise.
@@ -144,56 +145,132 @@ After clicking the **Pay** button in the bottom of the Checkout Page, *after fil
 Finally, The last major page is the Order History Page where the user can browse the Order Details of all past and completed Orders. This page is accessed aftering logging in and clicking the "Orders" link in the small menu after clicking the Profile icon button in header menu. Features of this page include: *pagination buttons to browse order*, *up/down toggle arrows in table columns for row ordering*, and a *drop-down menu to show number of rows rendered per order 'page' in* **Your Order history** *container*.
 <img src="https://github.com/user-attachments/assets/6085a316-6024-4f94-9c64-7063e42c7e58" width="800" alt="image-of-order-history-page" />
 
-
-
 ---
+
 ## IV. Limitations of App
-- Due to using free hosting for the app on ***Render.com*** and the database on ***Neon.com***, the app from the live demo link (https://store.livedemoapp.com/) might have slow performance. Initially, you might have to wait 15-20 seconds for a page to fully render. After page caching takes place, the app should run notable faster. *In the future*, I'll consider dedicated hosting options to speed up performance.
-- On the order history page, I haven't added any type of order tracking for the orders. Due to this being a demo E-commerce store, there's no actual business infrastructure available to constantly keep track of orders; hence order tracking is irrelevant here.
+<details>
+  <summary>App Limitations</summary>
+  <ul>
+    <li>Due to using free hosting for the app on <strong><ins>Render.com</ins></strong> and the database on <strong><ins>Neon.com</ins></strong>, the app from the live demo link (https://store.livedemoapp.com/) might have slow performance. Initially, you might have to wait 15-20 seconds for a page to fully render. After page caching takes place, the app should run notable faster. *In the future*, I'll consider dedicated hosting options to speed up performance.</li>
+    <li>On the order history page, I haven't added any type of order tracking for the orders. Due to this being a demo E-commerce store, there's no actual business infrastructure available to constantly keep track of orders; hence order tracking is irrelevant here.</li>
+  </ul>
+</details>
+
 ---
+
 ## V. Steps to use App locally
-To Be Added Later...
+
+...to be added..
+
 ---
 ## VI. Features to be Added Later
-- Due to the moderately slow performance speed of the app in the demo link, a dedicated hosting will later be added for faster performance speed.
-- Currently, the Profile Page and the Checkout Page only accepts U.S. addresses. I'll consider later expanding so the App can handle and accept international address outside the U.S.
-- Besides later updating the App to accept international addresses, I'll also update the app to handle non-dollar currencies used in internationl deliveries (<ins>For example</ins>: *yen* for delivery address to Japan).
+
+<details>
+  <summary>Future Features/Updated List </summary>
+  <ul>
+    <li>Due to slower app performance from using free cloud hosting on Render.com, a dedicated(paid) hosting will later be added for faster performance speed.</li>
+    <li>Currently, the <strong>"Profile"</strong> and <strong>"Checkout"</strong> pages only accept U.S. addresses. This will later be expand so international addresses (outside the U.S.) can be processed.</li>
+    <li>Together with updating the App to accept international addresses, the app will also later handle non-dollar currencies used in international deliveries (<ins>Example</ins>: <em>yen</em> for Japanese addresses).</li>
+    <li>Besides the 15 products I currently have in my store's products display, I plan to slowly add more products over time. </li>
+  </ul>
+</details>
+
 ---
+
 ## VII. Image Attributions
-Numerous images were obtained during the creation of this fake E-commerce store app. Listed below are all the images obtained and used so far and with proper attribution practices.
+Many images were obtained during the creation of this fake E-commerce store app. Also, *several* of these obtained images have been modified on Canva.com—*mostly to adjust images' contrast and brightness*—to better improve visuals on Final App. Click on below to toggle open/close image attribution links.
+
 <details>
   <summary>Image Attributions List</summary>
-  <li>App Background Image: ...</li>
-  <li>About Page images
-    <ul>
-      <li>Item Z1</li>
-      <li>Item Z2</li>
-    </ul>
-  </li>
   <ul>
-    <li>"Fishes" product card images
-        <ul>
-          <li>Item A1.1</li>
-          <li>Item A1.2</li>
-        </ul>
+    <li><strong><ins>App Background Image:</ins></strong> “Churaumi Aquarium, Okinawa” by yuka71 via Pixabay — 
+      <a href="https://creativecommons.org/public-domain/cc0/">[CC0]</a>: 
+      <a href="https://pixabay.com/photos/churaumi-aquarium-aquarium-okinawa-2407812/">Source</a>
     </li>
-    <li>"Invertebrates" product card images
+    <li><strong><ins>About Page Images:</ins></strong>
       <ul>
-        <li>Item B1</li>
-        <li>Item B2</li>
+        <li>“Fish tank – At Exotic Life in Chatsworth” — 
+          <a href="https://creativecommons.org/licenses/by-nc/2.0/deed.en">[CC BY-NC 2.0]</a>: 
+          <a href="https://www.flickr.com/photos/kkanouse/2950084525">Source</a>
+        </li>
+        <li>“Reef Tank at Monterey Bay Aquarium” — 
+          <a href="https://creativecommons.org/licenses/by-nc-nd/2.0/deed.en">[CC BY-NC-ND 2.0]</a>: 
+          <a href="https://www.flickr.com/photos/calwhiz/2124674644">Source</a>
+        </li>
       </ul>
     </li>
-    <li>"Corals & Anemones" product card images
+    <li><strong><ins>"Fishes" Product Card Images:</ins></strong>
       <ul>
-        <li>Item B1</li>
-        <li>Item B2</li>
+        <li><strong>Bicolor Blenny</strong>: “Bicolor Blenny (Ecsenius bicolor)” by <em>christa.rohrbach</em> via Flickr — 
+          <a href="https://creativecommons.org/licenses/by-nc-sa/2.0/">[CC BY-NC-SA 2.0]</a>: 
+          <a href="https://www.flickr.com/photos/megaptera/12179192543/">Source</a>
+        </li>
+        <li><strong>Carpenter Flasher Wrasse</strong>: “Flasher wrasse” by <em>PacificKlaus</em> via Flickr — 
+          <a href="https://creativecommons.org/licenses/by-nc/2.0/">[CC BY-NC 2.0]</a>: 
+          <a href="https://www.flickr.com/photos/pacificklaus/33717046103/">Source</a>
+        </li>
+        <li><strong>Diamond Watchman Goby</strong>: “Orange-dashed Goby - Valenciennea puella” by <em>François Libert</em> via Flickr — 
+          <a href="https://creativecommons.org/licenses/by-nc-sa/2.0/">[CC BY-NC-SA 2.0]</a>: 
+          <a href="https://www.flickr.com/photos/zsispeo/50102999473/">Source</a>
+        </li>
+        <li><strong>Firefish Goby</strong>: “Fire dartfish (Nemateleotris magnifica)” by <em>krokodiver</em> via Flickr — 
+          <a href="https://creativecommons.org/licenses/by/2.0/">[CC BY 2.0]</a>: 
+          <a href="https://www.flickr.com/photos/krokodiver/43372442502/">Source</a>
+        </li>
+        <li><strong>Flame Angelfish</strong>: “Already Grilled” by <em>San Diego Shooter</em> via Flickr — 
+          <a href="https://creativecommons.org/licenses/by-nc-nd/2.0/">[CC BY-NC-ND 2.0]</a>: 
+          <a href="https://www.flickr.com/photos/nathaninsandiego/4108718790/">Source</a>
+        </li>
       </ul>
     </li>
+    <li><strong><ins>"Invertebrates" Product Card Images:</ins></strong>
+      <ul>
+        <li><strong>Emerald Crab</strong>: “roatan 23 PB120106a Emerald or Green Cli” by <em>Pauline Walsh Jacobson</em> via Flickr — 
+          <a href="https://creativecommons.org/licenses/by-nc/2.0/">[CC BY-NC 2.0]</a>: 
+          <a href="https://www.flickr.com/photos/coralreefdreams/53382502643/">Source</a>
+        </li>
+        <li><strong>Scarlet Hermit Crab</strong>: “DSCN7340_16zu9” by <em>Andreas März</em> via Flickr — 
+          <a href="https://creativecommons.org/licenses/by/2.0">[CC BY 2.0]</a>: 
+          <a href="https://www.flickr.com/photos/andreas63/4460902720/">Source</a>
+        </li>
+        <li><strong>Electric Blue Hermit Crab</strong>: “Calcinus elegans 01” by <em>Fafner</em> via Wikimedia Commons — 
+          <a href="https://creativecommons.org/licenses/by-sa/3.0/legalcode">[CC BY-SA 3.0]</a>: 
+          <a href="https://commons.wikimedia.org/wiki/File:Calcinus_elegans_01.jpg">Source</a>
+        </li>
+        <li><strong>Halloween Hermit Crab</strong>: “Ciliopagurus strigatus” by <em>jeanmarie.gradot</em> via Flickr — 
+          <a href="https://creativecommons.org/licenses/by-nc/2.0/">[CC BY-NC 2.0]</a>: 
+          <a href="https://www.flickr.com/photos/129108168@N08/51710781630">Source</a>
+        </li>
+        <li><strong>Skunk Cleaner Shrimp</strong>: “清潔蝦” by <em>powapo</em> via Flickr — 
+          <a href="https://creativecommons.org/licenses/by-nc-nd/2.0/">[CC BY-NC-ND 2.0]</a>: 
+          <a href="https://www.flickr.com/photos/116039404@N04/16567238516/">Source</a>
+        </li>
+      </ul>
+    </li>
+    <li><strong><ins>"Corals & Anemones" Product Card Images:</ins></strong>
+      <ul>
+        <li><strong>Green Star Polyps</strong>: “Green Star Polyps” by <em>JustinBurger</em> via Flickr — 
+          <a href="https://creativecommons.org/licenses/by-nc-nd/2.0/">[CC BY-NC-ND 2.0]</a>: 
+          <a href="https://www.flickr.com/photos/justinburger/2680107601/">Source</a>
+        </li>
+        <li><strong>Pulsing Xenia</strong>: “Sick Xenia?” by <em>edanley</em> via Flickr — 
+          <a href="https://creativecommons.org/licenses/by/2.0/">[CC BY 2.0]</a>: 
+          <a href="https://www.flickr.com/photos/edanley/4933017600/">Source</a>
+        </li>
+        <li><strong>Toadstool Leather</strong>: “toadstool leather” by <em>bdeseattle</em> via Flickr — 
+          <a href="https://creativecommons.org/licenses/by-nc/2.0/">[CC BY-NC 2.0]</a>: 
+          <a href="https://www.flickr.com/photos/bdeseattle/136709129/">Source</a>
+        </li>
+        <li><strong>Kenya Tree Coral</strong>: “Kenya Tree coral” by <em>Brian Daniel Eisenberg</em> via Flickr — 
+          <a href="https://creativecommons.org/licenses/by-nc/2.0/">[CC BY-NC 2.0]</a>: 
+          <a href="https://www.flickr.com/photos/pplpwrd/782403645/">Source</a>
+        </li>
+        <li><strong>Branching Hammerhead Coral</strong>: “Hammer coral (Euphyllia paraancora)” by <em>Adam Balzer</em> via Flickr — 
+          <a href="https://creativecommons.org/licenses/by-nc-nd/2.0/">[CC BY-NC-ND 2.0]</a>: 
+          <a href="https://www.flickr.com/photos/99579779@N05/25821914928/">Source</a>
+        </li>
+      </ul>
+    </li>
+    <li><strong><ins>Checkout Page Background Pattern:</ins></strong> "Water drops background" created and modified in Canva via Pro (paid) account. </li>
   </ul>
-  <li>Checkout Page images
-    <ul>
-      <li>Item X1</li>
-      <li>Item X2</li>
-    </ul>
-  </li>
 </details>
