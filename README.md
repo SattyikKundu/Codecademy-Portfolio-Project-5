@@ -160,7 +160,7 @@ Finally, The last major page is the Order History Page where the user can browse
 <details>
   <summary><strong>App Limitations (Click to Expand):</strong></summary>
   <ul>
-    <li>Due to using free hosting for the app on <strong><ins>Render.com</ins></strong> and the database on <strong><ins>Neon.com</ins></strong>, the app from the live demo link (https://store.livedemoapp.com/) might have slow performance. Initially, you might have to wait 15-20 seconds for a page to fully render. After page caching takes place, the app should run notable faster. *In the future*, I'll consider dedicated hosting options to speed up performance.</li>
+    <li>Due to using free hosting for the app on <strong><ins>Render.com</ins></strong> and the database on <strong><ins>Neon.com</ins></strong>, the app from the live demo link (https://store.livedemoapp.com/) might have slow performance. Initially, you might have to wait 15-20 seconds for a page to fully render. After page caching takes place, the app should run notable faster. <em>In the future</em>, I'll consider dedicated hosting options to speed up performance.</li>
     <li>On the order history page, I haven't added any type of order tracking for the orders. Due to this being a demo E-commerce store, there's no actual business infrastructure available to constantly keep track of orders; hence order tracking is irrelevant here.</li>
   </ul>
 </details>
@@ -185,10 +185,10 @@ Finally, The last major page is the Order History Page where the user can browse
 
   <li><strong><ins>Clone (or download) repository locally</ins>:</strong>
     <ul>
-      <li>Run the Git clone command:
+      <li><ins>Run the Git clone command</ins>:
         <pre><code>git clone https://github.com/SattyikKundu/Codecademy-Portfolio-Project-5.git</code></pre>
       </li>
-      <li>Change into the project folder:
+      <li><ins>Change into the project folder</ins>:
         <pre>cd repository-folder-name</pre>
       </li>
     </ul>
@@ -197,7 +197,7 @@ Finally, The last major page is the Order History Page where the user can browse
   <li><strong><ins>Setup PostgreSQL Database</ins>:</strong>
     <ul>
       <li>Import the <code>PERN-Ecommerce-app-database.sql</code> file into PostgreSQL using <ins>pgAdmin4</ins> or <ins>Postbird</ins>.</li>
-      <li>Or use the command line:
+      <li><ins>Or use the command line</ins>:
         <pre><code>psql -U your_username -d your_database -f path/to/PERN-Ecommerce-app-database.sql</code></pre>
       </li>
     </ul>
@@ -206,7 +206,7 @@ Finally, The last major page is the Order History Page where the user can browse
   <li><strong><ins>Import packages using <code>npm</code> command</ins>:</strong>
     <ul>
       <li>Each folder (<code>/client</code> and <code>/server</code>) has its own <code>package.json</code>.</li>
-      <li>Install dependencies:
+      <li><ins>Install dependencies</ins>:
         <pre>cd client
 npm install
 cd server
@@ -217,13 +217,13 @@ npm install</pre>
 
   <li><strong><ins>Edit Environment Variable (.env) files</ins>:</strong>
     <ul>
-      <li>In both <code>/client</code> and <code>/server</code> folders:
+      <li><ins>In both <code>/client</code> and <code>/server</code> folders</ins>:
         <ul>
           <li>Rename <code>.env.example</code> → <code>.env</code></li>
           <li>Edit values as instructed in the comments</li>
         </ul>
       </li>
-      <li>Ensure:
+      <li><ins>Ensure</ins>:
         <ul>
           <li>Correct <code>localhost</code> and port numbers are used so client and server communicate</li>
           <li>Google OAuth app is configured via <a href="https://console.cloud.google.com/">Google Console</a> for login</li>
@@ -235,16 +235,16 @@ npm install</pre>
 
   <li><strong><ins>Run the app locally</ins>:</strong>
     <ul>
-      <li>Open two terminals (or terminal tabs in VS Code) at the project's folder: <code>C:\...\...\...\project--folder-name></code></li>
-      <li>In terminal 1:
+      <li>Open two terminals (or terminal tabs in VS Code) at the project's folder: <code>C:\...\...\...\project-folder-name></code></li>
+      <li><ins>In terminal 1</ins>:
         <pre>cd client
 npm start</pre>
       </li>
-      <li>In terminal 2:
+      <li><ins>In terminal 2</ins>:
         <pre>cd server
 npm start</pre>
       </li>
-      <li>The app should open in your browser (usually at <code>http://localhost:5173</code>, but can vary).</li>
+      <li>The app should then open in your browser (usually at <code>http://localhost:5173</code>, but can vary).</li>
     </ul>
   </li>
 </ol>
