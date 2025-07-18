@@ -44,7 +44,9 @@ This is **Portfolio Project #5** for my Full-stack web development course on Cod
 - **CSS**             — used for styling purposes.
 - **React packages**  — imported packages for both frontend/client-side (**React**) as well as backend/server-side (**Node**/**Express**):
 
-<ins>Main **'/Client'** packages for frontend/client-side *package.json* file:</ins>
+<details>
+<summary><ins>Main <strong>'/Client'<strong> packages for frontend/client-side <em>package.json</em> file:</ins></summary>
+
 | Package | Description |
 | --- | --- |
 | `vite`                  | Frontend build tool with a faster development server with hot module/code replacement.                      |
@@ -60,7 +62,12 @@ This is **Portfolio Project #5** for my Full-stack web development course on Cod
 | `react-redux`           | Connects React components to the Redux store using `useSelector`, `useDispatch`, etc.                       |
 | `react-router-dom`      | Manages navigation and routing in the app using `Routes`, `BrowserRouter`, and `Link`.                      |
 
-<ins>Main **'/Server'** packages for backend/server-side *package.json* file:</ins>
+</details>
+
+
+<details>
+<summary><ins>Main <strong>'/Server'</strong> packages for backend/server-side <em>package.json</em> file:</ins></summary>
+
 | Package | Description |
 | --- | --- |
 | `bcrypt`                 | Used to securely hash and compare user passwords for authentication.                                        |
@@ -77,6 +84,8 @@ This is **Portfolio Project #5** for my Full-stack web development course on Cod
 | `stripe`                 | Enables backend integration with ***Stripe*** payment gateway for processing payments and transactions.      |
 | `swagger-jsdoc`          | Generates Swagger (OpenAPI) documentation from JSDoc comments in your codebase.                             |
 | `swagger-ui-express`     | Serves the Swagger UI so user and others can interactively explore and test the API endpoints.              |
+
+</details>
 
 ---
 
