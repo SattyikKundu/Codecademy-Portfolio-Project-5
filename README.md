@@ -158,7 +158,7 @@ Finally, The last major page is the Order History Page where the user can browse
 
 ## IV. Limitations of App
 <details>
-  <summary><strong>App Limitations (Click to Expand): <strong></summary>
+  <summary><strong>App Limitations (Click to Expand):</strong></summary>
   <ul>
     <li>Due to using free hosting for the app on <strong><ins>Render.com</ins></strong> and the database on <strong><ins>Neon.com</ins></strong>, the app from the live demo link (https://store.livedemoapp.com/) might have slow performance. Initially, you might have to wait 15-20 seconds for a page to fully render. After page caching takes place, the app should run notable faster. *In the future*, I'll consider dedicated hosting options to speed up performance.</li>
     <li>On the order history page, I haven't added any type of order tracking for the orders. Due to this being a demo E-commerce store, there's no actual business infrastructure available to constantly keep track of orders; hence order tracking is irrelevant here.</li>
@@ -244,7 +244,7 @@ npm start</pre>
         <pre>cd server
 npm start</pre>
       </li>
-      <li>The app should open in your browser (usually at <code>http://localhost:5173</code>)</li>
+      <li>The app should open in your browser (usually at <code>http://localhost:5173</code>, but can vary).</li>
     </ul>
   </li>
 </ol>
