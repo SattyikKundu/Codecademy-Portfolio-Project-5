@@ -158,7 +158,7 @@ Finally, The last major page is the Order History Page where the user can browse
 
 ## IV. Limitations of App
 <details>
-  <summary>App Limitations</summary>
+  <summary><strong>App Limitations (Click to Expand): <strong></summary>
   <ul>
     <li>Due to using free hosting for the app on <strong><ins>Render.com</ins></strong> and the database on <strong><ins>Neon.com</ins></strong>, the app from the live demo link (https://store.livedemoapp.com/) might have slow performance. Initially, you might have to wait 15-20 seconds for a page to fully render. After page caching takes place, the app should run notable faster. *In the future*, I'll consider dedicated hosting options to speed up performance.</li>
     <li>On the order history page, I haven't added any type of order tracking for the orders. Due to this being a demo E-commerce store, there's no actual business infrastructure available to constantly keep track of orders; hence order tracking is irrelevant here.</li>
@@ -169,13 +169,94 @@ Finally, The last major page is the Order History Page where the user can browse
 
 ## V. Steps to use App locally
 
-...to be added..
+<details>
+  <summary><strong>Steps to Setup App Locally (Click to Expand):</strong></summary>
+
+<ol>
+  <li><strong><ins>Ensure these pre-requisites are installed or setup first</ins>:</strong>
+    <ul>
+      <li><a href="https://nodejs.org/en">Node.js</a> (v20+ recommended)</li>
+      <li><a href="https://www.postgresql.org/">PostgreSQL</a></li>
+      <li><ins>Optional</ins>: Have an active GitHub account to fork code into a local repository.</li>
+      <li><ins>Optional</ins>: Use a PostgreSQL GUI tool like <a href="https://github.com/Paxa/postbird">Postbird</a> or <a href="https://www.pgadmin.org/download/pgadmin-4-windows/">pgAdmin4</a>.</li>
+      <li><ins>Optional</ins>: Use an IDE like <a href="https://code.visualstudio.com/">Visual Studio Code</a> (recommended).</li>
+    </ul>
+  </li>
+
+  <li><strong><ins>Clone (or download) repository locally</ins>:</strong>
+    <ul>
+      <li>Run the Git clone command:
+        <pre><code>git clone https://github.com/SattyikKundu/Codecademy-Portfolio-Project-5.git</code></pre>
+      </li>
+      <li>Change into the project folder:
+        <pre>cd repository-folder-name</pre>
+      </li>
+    </ul>
+  </li>
+
+  <li><strong><ins>Setup PostgreSQL Database</ins>:</strong>
+    <ul>
+      <li>Import the <code>PERN-Ecommerce-app-database.sql</code> file into PostgreSQL using <ins>pgAdmin4</ins> or <ins>Postbird</ins>.</li>
+      <li>Or use the command line:
+        <pre><code>psql -U your_username -d your_database -f path/to/PERN-Ecommerce-app-database.sql</code></pre>
+      </li>
+    </ul>
+  </li>
+
+  <li><strong><ins>Import packages using <code>npm</code> command</ins>:</strong>
+    <ul>
+      <li>Each folder (<code>/client</code> and <code>/server</code>) has its own <code>package.json</code>.</li>
+      <li>Install dependencies:
+        <pre>cd client
+npm install
+cd server
+npm install</pre>
+      </li>
+    </ul>
+  </li>
+
+  <li><strong><ins>Edit Environment Variable (.env) files</ins>:</strong>
+    <ul>
+      <li>In both <code>/client</code> and <code>/server</code> folders:
+        <ul>
+          <li>Rename <code>.env.example</code> → <code>.env</code></li>
+          <li>Edit values as instructed in the comments</li>
+        </ul>
+      </li>
+      <li>Ensure:
+        <ul>
+          <li>Correct <code>localhost</code> and port numbers are used so client and server communicate</li>
+          <li>Google OAuth app is configured via <a href="https://console.cloud.google.com/">Google Console</a> for login</li>
+          <li><code>vite.config.js</code> is updated (if needed)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+
+  <li><strong><ins>Run the app locally</ins>:</strong>
+    <ul>
+      <li>Open two terminals (or terminal tabs in VS Code) at the project's folder: <code>C:\...\...\...\project--folder-name></code></li>
+      <li>In terminal 1:
+        <pre>cd client
+npm start</pre>
+      </li>
+      <li>In terminal 2:
+        <pre>cd server
+npm start</pre>
+      </li>
+      <li>The app should open in your browser (usually at <code>http://localhost:5173</code>)</li>
+    </ul>
+  </li>
+</ol>
+
+</details>
 
 ---
+
 ## VI. Features to be Added Later
 
 <details>
-  <summary>Future Features/Updated List </summary>
+  <summary><strong>Future Features/Updated List (Click to Expand): <strong></summary>
   <ul>
     <li>Due to slower app performance from using free cloud hosting on Render.com, a dedicated(paid) hosting will later be added for faster performance speed.</li>
     <li>Currently, the <strong>"Profile"</strong> and <strong>"Checkout"</strong> pages only accept U.S. addresses. This will later be expand so international addresses (outside the U.S.) can be processed.</li>
@@ -190,7 +271,7 @@ Finally, The last major page is the Order History Page where the user can browse
 Many images were obtained during the creation of this fake E-commerce store app. Also, *several* of these obtained images have been modified on Canva.com—*mostly to adjust images' contrast and brightness*—to better improve visuals on Final App. Click on below to toggle open/close image attribution links.
 
 <details>
-  <summary>Image Attributions List</summary>
+  <summary><strong>Image Attributions List (Click to Expand):</strong></summary>
   <ul>
     <li><strong><ins>App Background Image:</ins></strong> “Churaumi Aquarium, Okinawa” by yuka71 via Pixabay — 
       <a href="https://creativecommons.org/public-domain/cc0/">[CC0]</a>: 
