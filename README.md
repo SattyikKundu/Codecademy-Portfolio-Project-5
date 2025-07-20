@@ -91,9 +91,9 @@ This is **Portfolio Project #5** for my Full-stack web development course on Cod
 
 ## III. Live Site Demo Walkthrough & Screenshots
 
-🔗 **Live Site:** [store.bpwisdom.com](https://store.livedemoapp.com/)
+🔗 **Live Site:** [https://store.livedemoapp.com](https://store.livedemoapp.com)
 
-<ins>**NOTE**</ins>: The above site link's domain may change, but the workflow and url routes should stay the same. I'll go over the app's main pages in the order users would typically see in a workflow. 
+<ins>**NOTE**</ins>: The above site link's domain may change, but the workflow and url routes should stay the same. I'll go over the app's main pages in the order users would typically see in an E-commerce lifecycle workflow. 
 
 ### 1. Home Page 
 The homepage—*whose url routes end with '../products/all'*—is the default page for the app. Here the user can browse through a variety of products. On the top, there's a header menu with several buttons and a search bar. The buttons left of the search bar are ***category*** buttons that display products based on selected category—*button highlighted dark blue*—when selected; only the ***all*** button shows all products. At the bottom of the products display is the pagination page button(s) which is used to browse products.
@@ -196,7 +196,7 @@ Finally, The last major page is the Order History Page where the user can browse
 
   <li><strong><ins>Setup PostgreSQL Database</ins>:</strong>
     <ul>
-      <li>Import the <code>PERN-Ecommerce-app-database.sql</code> file into PostgreSQL using <ins>pgAdmin4</ins> or <ins>Postbird</ins>.</li>
+      <li>Import the <code>PERN-Ecommerce-app-database.sql</code> file from the project repository (see at top) and into PostgreSQL using <ins><a href="https://www.pgadmin.org/download/pgadmin-4-windows/">pgAdmin4</a></ins> or <ins><a href="https://github.com/Paxa/postbird">Postbird</a></ins>.</li>
       <li><ins>Or use the command line</ins>:
         <pre><code>psql -U your_username -d your_database -f path/to/PERN-Ecommerce-app-database.sql</code></pre>
       </li>

@@ -1,0 +1,18 @@
+# Enforce LF (Unix-style) line endings for code and SQL files.
+# This prevents Git from converting LF to CRLF on Windows systems,
+# ensuring consistent line endings across all operating systems
+# (Linux, macOS, and Windows).
+
+# Tip for contributors:
+# - You usually do NOT need to change this.
+# - Only change `eol=lf` to `eol=crlf` if:
+#   → you're working exclusively on Windows, and
+#   → your tooling **requires** CRLF (rare for modern projects).
+# - Most tools (VS Code, PostgreSQL, linters, etc.) work best with LF.
+*.js     text eol=lf
+*.jsx    text eol=lf
+*.ts     text eol=lf
+*.json   text eol=lf
+*.css    text eol=lf
+*.html   text eol=lf
+*.sql    text eol=lf
