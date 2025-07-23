@@ -91,7 +91,7 @@ This is **Portfolio Project #5** for my Full-stack web development course on Cod
 
 ## III. Live Site Demo Walkthrough & Screenshots
 
-🔗 **Live Site:** [https://store.livedemoapp.com](https://store.livedemoapp.com)
+🔗 **Live Site:** <a href="https://store.livedemoapp.com" target="_blank" rel="noopener noreferrer">https://store.livedemoapp.com</a>
 
 <ins>**NOTE**</ins>: The above site link's domain may change, but the workflow and url routes should stay the same. I'll go over the app's main pages in the order users would typically see in an E-commerce lifecycle workflow. 
 
