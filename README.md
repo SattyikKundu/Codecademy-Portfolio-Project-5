@@ -1,5 +1,5 @@
 # PERN-Ecommerce-Store-project
-This is **Portfolio Project #5** for my Full-stack web development course on Codecademy. This app is an Ecommerce store, names ***Reef Budz***,  where aquarists can browse and purchase saltwater creatures and coral fragments for their own saltwater reef tanks. Built using PERN (*PostgreSQL*, *Express*, *React*, *Node*) stack, this web app is a fully-functioning Ecommerce store with features common in most real-world Ecommerce stores.
+This is **Portfolio Project #5** for my Full-stack web development course on Codecademy. This app is an Ecommerce store, named ***Reef Budz***,  where aquarists can browse and purchase saltwater creatures and coral fragments for their own saltwater reef tanks. Built using PERN (*PostgreSQL*, *Express*, *React*, *Node*) stack, this web app is a fully-functioning Ecommerce store with features common in most real-world Ecommerce stores.
 
 **Read more to learn the technology behind the app, the app's features, and how the app operates via simulated workflow example!**
 
@@ -91,7 +91,8 @@ This is **Portfolio Project #5** for my Full-stack web development course on Cod
 
 ## III. Live Site Demo Walkthrough & Screenshots
 
-🔗 **Live Site:** <a href="https://store.livedemoapp.com" target="_blank" rel="noopener noreferrer">https://store.livedemoapp.com</a>
+🔗 **Live Site:** [store.livedemoapp.com](https://store.livedemoapp.com) *(Right-click to open in new tab for best experience)*
+
 
 <ins>**NOTE**</ins>: The above site link's domain may change, but the workflow and url routes should stay the same. I'll go over the app's main pages in the order users would typically see in an E-commerce lifecycle workflow. 
 
