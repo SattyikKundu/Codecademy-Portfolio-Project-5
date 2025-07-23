@@ -46,8 +46,6 @@ const ProfilePage = () => {
     }
   }, [location.state, location, navigate, searchParams, loginSuccessFromQuery]);
 
-//  location, navigate, searchParams, setSearchParams, loginSuccessFromQuery
-
 
   const fetchProfile = async () => { // async function for fetching user's profile data
     setLoading(true);

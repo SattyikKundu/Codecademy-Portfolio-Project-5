@@ -7,9 +7,12 @@ import { useParams, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import Products from "../../PageComponents/products/products";
 
+import { PulseLoader } from "react-spinners";
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // used to import FontAwesomeIcons
 import { faBan } from '@fortawesome/free-solid-svg-icons';
 
+import PageLoadingNotice from "../../PageComponents/pageLoadingNotice/pageLoadingNotice";
 import FooterBottom from "../../PageComponents/footerBottom/footerBottom";
 
 import './ProductsPage.css';
@@ -34,7 +37,9 @@ const ProductsPage = () => { // will modify later to handle various categories
     const [loading,     setLoading] = useState(true);  // Track if data is being loaded
 
     const fetchAllProducts = async () => { // fetches all products from backend
-        //if (products.length) return; // prevent re-fetch
+
+        if (products.length && products.length > 0) return; // prevent re-fetch
+
         setLoading(true);
         try {
             const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/products`);
@@ -46,6 +51,7 @@ const ProductsPage = () => { // will modify later to handle various categories
         } 
         finally {
             setLoading(false);
+            //setLoading(true); // used to test loading notice (above one is main)
         }
     };
 
@@ -105,13 +111,18 @@ const ProductsPage = () => { // will modify later to handle various categories
      *                                             In practice, with 7 products left, its indices are 8-14.
      */
 
+
     return (
         <>
         <div className="products-page" data-bg-var-repaint>
 
             {/* For debugging */}
-            {/*loading && (<h1>Loading...</h1>)*/}
             {error && (<h1>{error}</h1>)}
+
+            {/* Loading notice for page */}
+            { loading && (
+              <PageLoadingNotice loadingText={'Fetching Products...'} />  
+            )}
 
             {/* "🚫 No products found" notice banner (with {' '} for empty space) */}
             {!loading && filtered.length === 0 && (

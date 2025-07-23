@@ -1,0 +1,46 @@
+
+.products-loading-notice { /* Notice when products are loading (contains 'pulse' loader)*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    margin: 4.5rem auto auto auto;
+
+    width: 80%; /* container dimensions/shape */
+    max-width: 480px;
+    height: 200px;
+    padding: 1.75rem 0.75rem;
+
+    background-color:#f8f8f8;
+
+    border-radius: 10px; /* border styling */
+    border: 1px solid #bbbbbb;
+    box-shadow: 0px 0px 6px 5px rgba(77, 79, 80, 0.7);
+}
+
+#loading-notice-text { /* Styling of text inside 'loading' notice */
+    font-family: "Roboto",Arial, Helvetica, sans-serif;
+    font-size: 2.25rem;
+    font-weight: bold;
+}
+
+
+@media screen and (max-width: 767px) {
+  .products-loading-notice{ /* margin-top adjusted to padding-top of .products-page 
+                             * of the css for ProductsPage.jsx (for <=767px). 
+                             */
+    margin-top: 4.5rem;
+  }
+}
+
+@media screen and (max-width: 460px) {
+  .products-loading-notice{ /* margin-top adjusted to padding-top of .products-page 
+                             * of the css for ProductsPage.jsx (for <=460px). 
+                             */
+    margin-top: 5rem;
+  }
+  #loading-notice-text { /* Shrink loading text for mobile screen */
+    font-size: clamp(1.5rem, 8vw, 2.25rem);
+  }
+}
