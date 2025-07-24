@@ -97,7 +97,7 @@ const OrderHistoryPage = () => { //
             const response = await axios.get(
               `${import.meta.env.VITE_API_BASE_URL}/orders`,
               { withCredentials: true });
-            console.log('User Id: ', response.data.userId);
+            //console.log('User Id: ', response.data.userId);
             setOrdersLength(response.data.orders.length); // Track length of orders for conditional UI
             setOrders(response.data.orders);              // Set data for table
         }

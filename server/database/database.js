@@ -6,7 +6,11 @@ import dotenv from 'dotenv'; // loads .env variables into process.env
                              // so they can be accessed anywhere in server code
 dotenv.config();
 
-// Create pool of database connections for PostgreSQL (later move this in an .env file, like in realworld App)
+// Created pool of database connections for PostgreSQL (later move this in an .env file, like in realworld App)
+// NOTE: This below pool is commented out since this only works for the PostgreSQL on my localhost machine.
+//       The next 'pool' is used in a *production* setting where web app on Render.com accesses the database
+//       store in Neon.com.
+
 /*
 const pool = new Pool({
     user:     process.env.DB_USER,        // your postgre database's username

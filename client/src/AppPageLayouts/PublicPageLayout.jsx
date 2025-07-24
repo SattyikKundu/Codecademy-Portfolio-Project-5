@@ -35,7 +35,7 @@ const PublicPageLayout = () => {
       }
     }
     catch(error) { // catch and log error
-      console.log("In checkUserSession(), token invalid or missing: ", error);
+      //console.log("In checkUserSession(), token invalid or missing: ", error);
       dispatch(clearUser());
     }
     finally {

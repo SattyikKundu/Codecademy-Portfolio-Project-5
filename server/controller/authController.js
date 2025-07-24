@@ -14,7 +14,7 @@ export const loginUser = async (req, res, next) => { // Local login controller
   try {
     const { username, password } = req.body; // get username + password when user logs in (via req.body)
 
-    console.log('[LOGIN] Received login attempt:', req.body);
+    //console.log('[LOGIN] Received login attempt:', req.body);
 
     if (!username?.trim() || !password?.trim()) { // Check for empty/missing fields (trim() for whitespace-only cases)
       return res.status(400).json({ error: 'One or both fields are empty.' });
@@ -42,7 +42,7 @@ export const loginUser = async (req, res, next) => { // Local login controller
         { expiresIn: '24h' }           // Token expires in 24 hours
     );
 
-    console.log('[LOGIN] Created token:', token);
+    //console.log('[LOGIN] Created token:', token);
 
     setAuthCookie(res, token);  // Store token in secure, httpOnly cookie
 
