@@ -5,7 +5,7 @@
 -- Dumped from database version 17.4
 -- Dumped by pg_dump version 17.4
 
--- Started on 2025-07-12 14:01:57
+-- Started on 2025-07-24 00:16:26
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -354,8 +354,6 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 -- Data for Name: cart_items; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO public.cart_items (id, user_id, product_id, quantity, created_at) VALUES (246, 25, 6, 1, '2025-06-27 22:44:31.340722');
-INSERT INTO public.cart_items (id, user_id, product_id, quantity, created_at) VALUES (247, 25, 4, 1, '2025-06-27 22:45:59.106334');
 INSERT INTO public.cart_items (id, user_id, product_id, quantity, created_at) VALUES (256, 1, 5, 1, '2025-07-12 08:23:09.152315');
 
 
@@ -477,8 +475,6 @@ INSERT INTO public.products (id, display_name, other_names, sci_name, category, 
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO public.users (id, first_name, last_name, username, email, phone_number, created_at, password_hash, google_id, address_line1, address_line2, city, state, postal_code) VALUES (25, NULL, NULL, 'qwerty3', 'qwerty3@gmail.com', NULL, 1751077149081, '$2b$10$kYDszswbmLX45m79Zf7FDOvpqOt5RyL/mpkGLKcl5iEZ9pPys5Xau', NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO public.users (id, first_name, last_name, username, email, phone_number, created_at, password_hash, google_id, address_line1, address_line2, city, state, postal_code) VALUES (26, 'Sattyik', 'Kundu', 'BlackJack', 'sk24751@gmail.com', NULL, 1751410792580, NULL, '117066736802735439126', '20574 Coppersmith Drive', NULL, NULL, NULL, NULL);
 INSERT INTO public.users (id, first_name, last_name, username, email, phone_number, created_at, password_hash, google_id, address_line1, address_line2, city, state, postal_code) VALUES (1, 'Zachary', 'Taylor', 'dinky64', 'dinky64@gmail.com', '1-800-234-9999', 1748877664064, '$2b$10$g6LvWTjXCnT5XpEqkP5BPuzAkPP84J8jGwdGrFKEqiF3FUoIqMpvO', NULL, '30303 America Ave.', 'Liberty Stone apartment mailbox #313', 'Detriot', 'MI', '20999');
 
 
@@ -644,7 +640,7 @@ ALTER TABLE ONLY public.orders
     ADD CONSTRAINT orders_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id) ON DELETE SET NULL;
 
 
--- Completed on 2025-07-12 14:02:01
+-- Completed on 2025-07-24 00:16:32
 
 --
 -- PostgreSQL database dump complete
